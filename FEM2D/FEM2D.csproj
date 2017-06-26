@@ -45,6 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Elements\IElement.cs" />
+    <Compile Include="Elements\IElement2D.cs" />
+    <Compile Include="Elements\ITriangleElement.cs" />
+    <Compile Include="Elements\TriangleElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
