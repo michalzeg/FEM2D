@@ -48,13 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elements\IElement.cs" />
-    <Compile Include="Elements\IElement2D.cs" />
     <Compile Include="Elements\ITriangleElement.cs" />
     <Compile Include="Elements\TriangleElement.cs" />
+    <Compile Include="Loads\NodalLoad.cs" />
     <Compile Include="Materials\Material.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Restraints\Restraint.cs" />
+    <Compile Include="Structures\Structure.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -64,6 +65,9 @@
       <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Solver\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FEM2D.Elements
+namespace FEM2D.Restraints
 {
-    internal interface IElement2D
+    public enum Restraint
     {
+        Free,
+        FixedX,
+        FixedY
     }
 }

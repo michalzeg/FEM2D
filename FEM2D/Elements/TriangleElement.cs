@@ -9,12 +9,11 @@ using System.Threading.Tasks;
 using CuttingEdge;
 using FEM2D.Nodes;
 using FEM2D.Materials;
-using FEM2D.TriangleMatrces;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace FEM2D.Elements
 {
-    internal class TriangleElement
+    internal class TriangleElement : ITriangleElement
     {
         private static int counter = 1;
 
@@ -30,19 +29,13 @@ namespace FEM2D.Elements
 
         public TriangleElement(Node p1, Node p2, Node p3,Material material,double thickness)
         {
-            Condition.Requires(p1).IsNotNull().Evaluate(p => p != p2 && p != p3);
-            Condition.Requires(p2).IsNotNull().Evaluate(p => p != p1 && p != p3);
-            Condition.Requires(p3).IsNotNull().Evaluate(p => p != p1 && p != p2);
             this.Nodes = new[] { p1, p2, p3 };
-
-            Condition.Requires(material).IsNotNull();
             this.Material = material;
-
-            Condition.Requires(thickness).IsGreaterThan(0);
             this.Thickness = thickness;
-
             this.Number = counter;
             counter++;
+
+            calculateArea();
         }
 
         public Matrix<double> GetD()
@@ -62,7 +55,6 @@ namespace FEM2D.Elements
             }
             return this.D;
         }
-
         public Matrix<double> GetB()
         {
             if (this.B == null)
@@ -95,7 +87,6 @@ namespace FEM2D.Elements
             }
             return this.B;
         }
-
         public Matrix<double> GetK()
         {
             if (this.K == null)
@@ -105,5 +96,14 @@ namespace FEM2D.Elements
             return this.K;
         }
 
+
+        private void calculateArea()
+        {
+            var p1 = this.Nodes[0].Coordinates;
+            var p2 = this.Nodes[1].Coordinates;
+            var p3 = this.Nodes[2].Coordinates;
+
+            this.Area = 0.5 * Math.Abs(p1.X * p2.Y - p1.X * p3.Y + p2.X * p3.Y - p2.X * p1.Y + p3.X * p1.Y - p3.X * p2.Y);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Common.Point;
 using CuttingEdge.Conditions;
+using FEM2D.Restraints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,24 +9,30 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Nodes
 {
-    internal class Node : IEquatable<Node>
+    public class Node : IEquatable<Node>
     {
         private static int counter = 1;
 
         public int Number { get; private set; }
         public PointD Coordinates { get; private set; }
+        public Restraint Restraint { get; private set; }
 
-        public Node( PointD coordinates)
+        public Node(PointD coordinates,Restraint restraint = Restraint.Free)
         {
             Condition.Requires(coordinates);
 
             this.Number = counter;
             counter++;
             this.Coordinates = coordinates;
+            this.Restraint = restraint;
             
         }
 
-
+        public int[] GetDOF()
+        {
+            var result = new[] { Number * 2 - 1, Number * 2 };
+            return result;
+        }
 
         public override bool Equals(object obj)
         {
