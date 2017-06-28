@@ -10,8 +10,8 @@ namespace FEM2D.Loads
     public class NodalLoad
     {
         public Node Node { get; set; }
-        public double Value { get; set; }
-
+        public double ValueX { get; set; }
+        public double ValueY { get; set; }
 
     }
 }

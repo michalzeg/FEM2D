@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Restraints
 {
+    
+
+    [Flags]
     public enum Restraint
     {
-        Free,
-        FixedX,
-        FixedY
+        Free =0,
+        FixedX = 2,
+        FixedY = 4,
+        Fixed = FixedX | FixedY,
     }
 }

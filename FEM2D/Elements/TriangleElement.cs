@@ -13,7 +13,7 @@ using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace FEM2D.Elements
 {
-    internal class TriangleElement : ITriangleElement
+    public class TriangleElement : ITriangleElement
     {
         private static int counter = 1;
 
@@ -22,6 +22,9 @@ namespace FEM2D.Elements
         public Node[] Nodes { get; private set; }
         public Material Material { get; private set; }
         public double Thickness { get; private set; }
+        public int NumberOfDOFs { get; private set; }
+
+       
 
         private Matrix<double> B;
         private Matrix<double> D;
@@ -32,6 +35,7 @@ namespace FEM2D.Elements
             this.Nodes = new[] { p1, p2, p3 };
             this.Material = material;
             this.Thickness = thickness;
+            this.NumberOfDOFs = 6;
             this.Number = counter;
             counter++;
 
@@ -96,6 +100,14 @@ namespace FEM2D.Elements
             return this.K;
         }
 
+        public int[] GetDOFs()
+        {
+            var node1DOFs = this.Nodes[0].GetDOF();
+            var node2DOFs = this.Nodes[1].GetDOF();
+            var node3DOFs = this.Nodes[2].GetDOF();
+            var result = node1DOFs.Concat(node2DOFs).Concat(node3DOFs).ToArray();
+            return result;
+        }
 
         private void calculateArea()
         {
