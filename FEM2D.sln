@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2D", "FEM2D\FEM2D.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C361E3EA-5F2A-4078-B18E-E68F442066EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTests", "FEM2DTests\FEM2DTests.csproj", "{2480F71C-C188-4267-B0BC-B77CB9259D05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2480F71C-C188-4267-B0BC-B77CB9259D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2480F71C-C188-4267-B0BC-B77CB9259D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2480F71C-C188-4267-B0BC-B77CB9259D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2480F71C-C188-4267-B0BC-B77CB9259D05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2480F71C-C188-4267-B0BC-B77CB9259D05} = {C361E3EA-5F2A-4078-B18E-E68F442066EF}
 	EndGlobalSection
 EndGlobal

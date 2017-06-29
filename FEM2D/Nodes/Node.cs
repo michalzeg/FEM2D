@@ -27,10 +27,15 @@ namespace FEM2D.Nodes
             this.Restraint = restraint;
             
         }
+        public Node(double x, double y,Restraint restraint = Restraint.Free)
+            :this(new PointD(x,y),restraint)
+        {
+            
+        }
 
         public int[] GetDOF()
         {
-            var result = new[] { Number * 2 - 1, Number * 2 };
+            var result = new[] { Number * 2, Number * 2 +1};
             return result;
         }
 
