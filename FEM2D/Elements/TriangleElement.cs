@@ -27,8 +27,6 @@ namespace FEM2D.Elements
         public double Thickness { get; private set; }
         public int NumberOfDOFs { get; private set; }
 
-       
-
         private Matrix<double> B;
         private Matrix<double> D;
         private Matrix<double> K;

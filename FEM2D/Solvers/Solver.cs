@@ -13,13 +13,13 @@ namespace FEM2D.Solvers
     {
         private readonly MatrixAggregator matrixAggregator;
         private readonly LoadAggregator loadAggregator;
-        private readonly BoundaryProvider boundaryProvider;
+        private readonly BoundaryMatrix boundaryProvider;
 
         public Solver()
         {
             this.matrixAggregator = new MatrixAggregator();
             this.loadAggregator = new LoadAggregator();
-            this.boundaryProvider = new BoundaryProvider();
+            this.boundaryProvider = new BoundaryMatrix();
         }
 
         public void Solve(IEnumerable<ITriangleElement> elements, IEnumerable<Node> nodes, IEnumerable<NodalLoad> loads)

@@ -1,6 +1,7 @@
 ﻿using FEM2D.Nodes;
 using FEM2D.Restraints;
 using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,30 +10,44 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
-    public class BoundaryProvider
+    public class BoundaryVector
     {
+        private readonly IEnumerable<Node> nodes;
+        private readonly int dofNumber;
 
-        public void Cross(Matrix<double> stiffnessMatrix, Vector<double> loadVector, IEnumerable<Node> nodes)
+        private Vector<double> bundaryVector;
+
+        public BoundaryVector(IEnumerable<Node> nodes, int dofNumber)
         {
-            var fixedNodes = nodes.Where(e => e.Restraint != Restraint.Free);
+            this.nodes = nodes;
+            this.dofNumber = dofNumber;
+        }
 
-            foreach (var node in nodes)
+        public Vector<double> GetVector()
+        {
+            if (this.bundaryVector == null)
             {
-                var dofs = node.GetDOF();
-                if (node.Restraint.HasFlag(Restraint.FixedX))
+                this.bundaryVector = Vector.Build.Sparse(dofNumber,1);
+
+                var fixedNodes = nodes.Where(e => e.Restraint != Restraint.Free);
+
+                foreach (var node in nodes)
                 {
-                    var dof = dofs[0];
-                    this.CrossVector(loadVector, dof);
-                    this.CrossMatrix(stiffnessMatrix, dof);
+                    var dofs = node.GetDOF();
+                    
+                    if (node.Restraint.HasFlag(Restraint.FixedX))
+                    {
+                        var dof = dofs[0];
+                        this.bundaryVector[dof] = 0;
+                    }
+                    if (node.Restraint.HasFlag(Restraint.FixedY))
+                    {
+                        var dof = dofs[1];
+                        this.bundaryVector[dof] = 0;
+                    }
                 }
-                if (node.Restraint.HasFlag(Restraint.FixedY))
-                {
-                    var dof = dofs[1];
-                    this.CrossVector(loadVector, dof);
-                    this.CrossMatrix(stiffnessMatrix, dof);
-                }
-               
             }
+            return this.bundaryVector;
         }
 
         private void CrossMatrix(Matrix<double> stiffnessMatrix,int dof)
