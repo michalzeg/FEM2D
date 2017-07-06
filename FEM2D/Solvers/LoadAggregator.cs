@@ -13,7 +13,6 @@ namespace FEM2D.Solvers
 {
     public class LoadAggregator
     {
-        
         public Vector<double> Aggregate(IEnumerable<NodalLoad> loads, int dofNumber )
         {
             var aggregatedLoad = Vector.Build.Sparse(dofNumber, 0d);

@@ -66,6 +66,7 @@
     <Compile Include="Matrix\MatrixCalculatorTest.cs" />
     <Compile Include="Nodes\NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solvers\Solver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -83,7 +84,6 @@
   <ItemGroup>
     <Folder Include="Loads\" />
     <Folder Include="Materials\" />
-    <Folder Include="Solvers\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

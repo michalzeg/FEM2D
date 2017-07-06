@@ -35,7 +35,7 @@ namespace FEM2D.Nodes
 
         public int[] GetDOF()
         {
-            var result = new[] { Number * 2, Number * 2 +1};
+            var result = new[] { 2*Number - 2, 2*Number -1};
             return result;
         }
 

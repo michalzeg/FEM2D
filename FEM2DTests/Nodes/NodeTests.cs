@@ -19,7 +19,7 @@ namespace FEM2DTests.Nodes
             var node = new Node(p);
             var number = node.Number;
 
-            var expectedDOFs = new[] { number * 2, number * 2 +1};
+            var expectedDOFs = new[] { number * 2-2, number * 2 -1};
             var actualDOFs = node.GetDOF();
 
             Assert.That(actualDOFs, Is.EquivalentTo(expectedDOFs));

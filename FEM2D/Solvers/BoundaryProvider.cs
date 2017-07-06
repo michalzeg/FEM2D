@@ -12,22 +12,19 @@ namespace FEM2D.Solvers
 {
     public class BoundaryVector
     {
-        private readonly IEnumerable<Node> nodes;
-        private readonly int dofNumber;
 
-        private Vector<double> bundaryVector;
+        public Vector<double> BundaryVector { get; private set; }
 
-        public BoundaryVector(IEnumerable<Node> nodes, int dofNumber)
+        public BoundaryVector()
         {
-            this.nodes = nodes;
-            this.dofNumber = dofNumber;
+
         }
 
-        public Vector<double> GetVector()
+        public void CreateVector(IEnumerable<Node> nodes, int dofNumber)
         {
-            if (this.bundaryVector == null)
+            if (this.BundaryVector == null)
             {
-                this.bundaryVector = Vector.Build.Sparse(dofNumber,1);
+                this.BundaryVector = Vector.Build.Sparse(dofNumber,1);
 
                 var fixedNodes = nodes.Where(e => e.Restraint != Restraint.Free);
 
@@ -38,30 +35,37 @@ namespace FEM2D.Solvers
                     if (node.Restraint.HasFlag(Restraint.FixedX))
                     {
                         var dof = dofs[0];
-                        this.bundaryVector[dof] = 0;
+                        this.BundaryVector[dof] = 0;
                     }
                     if (node.Restraint.HasFlag(Restraint.FixedY))
                     {
                         var dof = dofs[1];
-                        this.bundaryVector[dof] = 0;
+                        this.BundaryVector[dof] = 0;
                     }
                 }
             }
-            return this.bundaryVector;
         }
 
-        private void CrossMatrix(Matrix<double> stiffnessMatrix,int dof)
+        public void Reduce(Matrix<double> matrix,Vector<double> vector)
         {
-                stiffnessMatrix.ClearColumn(dof);
-  
-                stiffnessMatrix.ClearRow(dof);
 
-                stiffnessMatrix[dof, dof] = 1;
+            var dofsToReduce = this.BundaryVector
+                .Select((e, i) => new { value = e, index = i })
+                .Where(e => e.value == 0)
+                .Select(e => e.index);
 
+            foreach (var dof in dofsToReduce)
+            {
+                matrix.ClearColumn(dof);
+
+                matrix.ClearRow(dof);
+
+                matrix[dof, dof] = 1;
+
+                vector[dof] = 0;
+            }
         }
-        private void CrossVector(Vector<double> loadVector, int dof)
-        {
-            loadVector[dof] = 0;
-        }
+
+
     }
 }

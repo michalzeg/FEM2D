@@ -4,6 +4,7 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,6 @@ namespace FEM2D.Solvers
 {
     public class MatrixAggregator
     {
-
         public Matrix<double> Aggregate(IEnumerable<ITriangleElement> elements, int dofNumber)
         {
             var aggregatedMatrix = SparseMatrix.Create(dofNumber, dofNumber, 0d);

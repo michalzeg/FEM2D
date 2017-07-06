@@ -3,6 +3,7 @@ using FEM2D.Loads;
 using FEM2D.Nodes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,13 +14,13 @@ namespace FEM2D.Solvers
     {
         private readonly MatrixAggregator matrixAggregator;
         private readonly LoadAggregator loadAggregator;
-        private readonly BoundaryMatrix boundaryProvider;
+        private readonly BoundaryVector boundaryProvider;
 
         public Solver()
         {
             this.matrixAggregator = new MatrixAggregator();
             this.loadAggregator = new LoadAggregator();
-            this.boundaryProvider = new BoundaryMatrix();
+            this.boundaryProvider = new BoundaryVector();
         }
 
         public void Solve(IEnumerable<ITriangleElement> elements, IEnumerable<Node> nodes, IEnumerable<NodalLoad> loads)
@@ -27,9 +28,13 @@ namespace FEM2D.Solvers
             var dofNumber = nodes.Count() * 2;
             var stiffnessMatrix = matrixAggregator.Aggregate(elements, dofNumber);
             var loadVector = loadAggregator.Aggregate(loads, dofNumber);
-            this.boundaryProvider.Cross(stiffnessMatrix, loadVector, nodes);
 
-            var displacements = stiffnessMatrix.Inverse() * loadVector;
+            var reducedStiffnessMatrix = stiffnessMatrix.Clone();
+            var reducedLoadVector = loadVector.Clone();
+            this.boundaryProvider.CreateVector(nodes, dofNumber);
+            this.boundaryProvider.Reduce(reducedStiffnessMatrix, reducedLoadVector);
+
+            var displacements = reducedStiffnessMatrix.Inverse() *reducedLoadVector;
         }
     }
 }

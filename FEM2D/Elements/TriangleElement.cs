@@ -41,6 +41,8 @@ namespace FEM2D.Elements
             counter++;
 
             calculateArea();
+
+            this.matrixCalculator = new MatrixCalculator();
         }
 
         public Matrix<double> GetD()
@@ -65,6 +67,8 @@ namespace FEM2D.Elements
         {
             if (this.K == null)
             {
+                GetB();
+                GetD();
                 this.K = this.matrixCalculator.GetK(this.Thickness, this.Area, this.B, this.D);
             }
             return this.K;
