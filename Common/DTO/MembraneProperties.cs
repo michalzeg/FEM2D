@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FEM2D.Materials
+namespace Common.DTO
 {
-    public class Material
+    public class MembraneProperties
     {
         public double ModulusOfElasticity { get; set; }
         public double PoissonsRation { get; set; }
+        public double Thickness { get; set; }
     }
 }

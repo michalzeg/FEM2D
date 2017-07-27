@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FEM2D.Matrix;
-using FEM2D.Materials;
 using Common.Extensions;
 using FEM2D.Nodes;
+using Common.DTO;
 
 namespace FEM2DTests.MatrixTest
 {
@@ -23,7 +23,7 @@ namespace FEM2DTests.MatrixTest
 
             var E = 200;
             var v = 0.5;
-            var material = new Material
+            var material = new MembraneProperties
             {
                 ModulusOfElasticity = E,
                 PoissonsRation = v

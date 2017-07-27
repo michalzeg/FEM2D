@@ -8,58 +8,57 @@ using TriangleNet.Smoothing;
 using TriangleNet.Algorithm;
 using TriangleNet;
 using TriangleNet.Data;
+using Common.DTO;
+using Triangulation.Extensions;
 
 namespace Triangulation
 {
     public class MeshCreator
     {
-
-        public IEnumerable<Triangle> Create()
+        public IEnumerable<TriangleGeometry> CreateMesh(MembraneData membraneData)
         {
-            var numPoints = 6;
+            var geometry = GetGeometry(membraneData);
+            
+            var mesh = GetMesh();
 
-            var geometry = new InputGeometry(numPoints);
-            geometry.AddPoint(0, 0);
-            //geometry.AddPoint(5, 0);
+            mesh.Triangulate(geometry);
+            //mesh.Smooth();
+            //mesh.Refine();
 
-            geometry.AddPoint(10, 0);
-            //geometry.AddPoint(10, 5);
+            var triangles = mesh.Triangles.Select(e => e.ToTriangleGeometry());
 
-            geometry.AddPoint(10, 5);
-            //geometry.AddPoint(5, 10);
-            geometry.AddPoint(15, 5);
-            geometry.AddPoint(15, 10);
-            geometry.AddPoint(0, 10);
-            //geometry.AddPoint(0, 5);
+            return triangles;
 
-            for (int i = 0; i < numPoints-1; i++)
+        }
+
+        private static InputGeometry GetGeometry(MembraneData membraneGeometry)
+        {
+            var vertexCount = membraneGeometry.Vertices.Count;
+
+            var geometry = new InputGeometry(vertexCount);
+
+            for (int i = 0; i < vertexCount; i++)
+            {
+                var vertex = membraneGeometry.Vertices[i];
+                geometry.AddPoint(vertex.X, vertex.Y);
+            }
+
+            for (int i = 0; i < vertexCount - 1; i++)
             {
                 geometry.AddSegment(i, i + 1, 1);
             }
+            geometry.AddSegment(vertexCount - 1, 0);
+            return geometry;
+        }
 
-            geometry.AddSegment(numPoints - 1, 0);
-
-            geometry.AddSegment(0, 1,1);
-            geometry.AddSegment(1, 2,1);
-            geometry.AddSegment(2, 3,1);
-            geometry.AddSegment(3, 4,1);
-            geometry.AddSegment(4, 5, 1);
-            geometry.AddSegment(5, 6, 1);
-            geometry.AddSegment(6, 7, 1);
-            geometry.AddSegment(7, 0, 1);
-
-            
+        private static Mesh GetMesh()
+        {
             Mesh mesh = new Mesh();
             mesh.Behavior.Quality = true;
-            mesh.Behavior.MaxArea = 0.1;
-            //mesh.Behavior.MaxAngle = 60;
-            //mesh.Behavior.MinAngle = 30;
+            mesh.Behavior.MaxArea = 0.5;
+
             mesh.Behavior.ConformingDelaunay = true;
-            mesh.Triangulate(geometry);
-            mesh.Smooth();
-            mesh.Refine();
-            return mesh.Triangles;
- 
+            return mesh;
         }
     }
 }

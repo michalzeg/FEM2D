@@ -44,8 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\Edge.cs" />
+    <Compile Include="DTO\MembraneProperties.cs" />
+    <Compile Include="DTO\MembraneData.cs" />
+    <Compile Include="DTO\TriangleGeometry.cs" />
+    <Compile Include="DTO\Vertex.cs" />
     <Compile Include="Extensions\Double.cs" />
     <Compile Include="Extensions\Matrix.cs" />
+    <Compile Include="Extensions\Vector.cs" />
     <Compile Include="Point\PointD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

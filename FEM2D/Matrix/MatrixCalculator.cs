@@ -1,4 +1,4 @@
-﻿using FEM2D.Materials;
+﻿using Common.DTO;
 using FEM2D.Nodes;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
@@ -13,10 +13,10 @@ namespace FEM2D.Matrix
 {
     public class MatrixCalculator
     {
-        public Matrix<double> GetD(Material material)
+        public Matrix<double> GetD(MembraneProperties properties)
         {
-            var E = material.ModulusOfElasticity;
-            var v = material.PoissonsRation;
+            var E = properties.ModulusOfElasticity;
+            var v = properties.PoissonsRation;
 
             var D = DenseMatrix.OfArray(new double[,]
             {

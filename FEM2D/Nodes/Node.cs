@@ -15,7 +15,7 @@ namespace FEM2D.Nodes
 
         public int Number { get; private set; }
         public PointD Coordinates { get; private set; }
-        public Restraint Restraint { get; private set; }
+        public Restraint Restraint { get; internal set; }
 
         public Node(PointD coordinates,Restraint restraint = Restraint.Free)
         {
@@ -37,6 +37,14 @@ namespace FEM2D.Nodes
         {
             var result = new[] { 2*Number - 2, 2*Number -1};
             return result;
+        }
+
+        public double DistanceTo(Node node)
+        {
+            var dx = this.Coordinates.X - node.Coordinates.X;
+            var dy = this.Coordinates.Y = node.Coordinates.Y;
+            var distance = Math.Sqrt(dx * dx + dy * dy);
+            return distance;
         }
 
         public override bool Equals(object obj)

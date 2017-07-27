@@ -9,6 +9,7 @@ using FEM2D.Elements;
 using MathNet.Numerics.LinearAlgebra.Double;
 using FEM2D.Nodes;
 using Common.Point;
+using Common.DTO;
 
 namespace FEM2DTests.Elements
 {
@@ -22,7 +23,12 @@ namespace FEM2DTests.Elements
             var node2 = new Node(new PointD(10, 0));
             var node3 = new Node(new PointD(20, 30));
 
-            var element = new TriangleElement(node1, node2, node3, null, 10);
+            var membraneProperties = new MembraneProperties
+            {
+                Thickness = 10,
+            };
+
+            var element = new TriangleElement(node1, node2, node3, membraneProperties);
 
             var expectedArea = 0.5 * 10 * 30;
             var actualArea = element.Area;

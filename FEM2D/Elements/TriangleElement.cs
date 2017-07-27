@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using CuttingEdge;
 using FEM2D.Nodes;
-using FEM2D.Materials;
 using MathNet.Numerics.LinearAlgebra.Double;
 using FEM2D.Matrix;
+using Common.DTO;
 
 namespace FEM2D.Elements
 {
@@ -23,19 +23,17 @@ namespace FEM2D.Elements
         public int Number { get; private set; }
         public double Area { get; private set; }
         public Node[] Nodes { get; private set; }
-        public Material Material { get; private set; }
-        public double Thickness { get; private set; }
+        public MembraneProperties Properties { get; private set; }
         public int NumberOfDOFs { get; private set; }
 
         private Matrix<double> B;
         private Matrix<double> D;
         private Matrix<double> K;
 
-        public TriangleElement(Node p1, Node p2, Node p3,Material material,double thickness)
+        public TriangleElement(Node p1, Node p2, Node p3,MembraneProperties properties)
         {
             this.Nodes = new[] { p1, p2, p3 };
-            this.Material = material;
-            this.Thickness = thickness;
+            this.Properties = properties;
             this.NumberOfDOFs = 6;
             this.Number = counter;
             counter++;
@@ -49,7 +47,7 @@ namespace FEM2D.Elements
         {
             if (this.D == null)
             {
-                this.D = this.matrixCalculator.GetD(this.Material);
+                this.D = this.matrixCalculator.GetD(this.Properties);
             }
             return this.D;
         }
@@ -69,7 +67,7 @@ namespace FEM2D.Elements
             {
                 GetB();
                 GetD();
-                this.K = this.matrixCalculator.GetK(this.Thickness, this.Area, this.B, this.D);
+                this.K = this.matrixCalculator.GetK(this.Properties.Thickness, this.Area, this.B, this.D);
             }
             return this.K;
         }
