@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.DTO
 {
-    public class MembraneData
+    public class MembraneInputData
     {
-        public IList<Vertex> Vertices { get; set; }
+        public IList<VertexInput> Vertices { get; set; }
         public IList<Edge> Edges { get; set; }
 
         public MembraneProperties Properties { get; set; }

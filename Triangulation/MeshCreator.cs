@@ -15,7 +15,7 @@ namespace Triangulation
 {
     public class MeshCreator
     {
-        public IEnumerable<TriangleGeometry> CreateMesh(MembraneData membraneData)
+        public IEnumerable<TriangleGeometry> CreateMesh(MembraneInputData membraneData)
         {
             var geometry = GetGeometry(membraneData);
             
@@ -31,7 +31,7 @@ namespace Triangulation
 
         }
 
-        private static InputGeometry GetGeometry(MembraneData membraneGeometry)
+        private static InputGeometry GetGeometry(MembraneInputData membraneGeometry)
         {
             var vertexCount = membraneGeometry.Vertices.Count;
 

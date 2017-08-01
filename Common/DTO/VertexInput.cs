@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common.DTO
 {
-    public class Vertex
+    public class VertexInput
     {
         public int Number { get; set; }
 

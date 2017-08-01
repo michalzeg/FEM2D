@@ -19,7 +19,7 @@ namespace FEM2D.Structures
         public IList<NodalLoad> NodalLoads { get; private set; }
 
         private IEnumerable<TriangleGeometry> triangles;
-        private MembraneData membraneData;
+        private MembraneInputData membraneData;
 
         private Dictionary<PointD, Node> vertexNodeMap;
 
@@ -30,7 +30,7 @@ namespace FEM2D.Structures
             this.Nodes = new List<Node>();
         }
 
-        public void CreateGeometry(IEnumerable<TriangleGeometry> triangles, MembraneData membraneData)
+        public void CreateGeometry(IEnumerable<TriangleGeometry> triangles, MembraneInputData membraneData)
         {
             this.triangles = triangles;
             this.membraneData = membraneData;

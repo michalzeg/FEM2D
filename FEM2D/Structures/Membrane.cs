@@ -28,7 +28,7 @@ namespace FEM2D.Structures
             this.solver = new Solver();
         }
 
-        public void Solve(MembraneData membraneData)
+        public void Solve(MembraneInputData membraneData)
         {
             var triangles = this.meshCreator.CreateMesh(membraneData);
             this.Geometry.CreateGeometry(triangles, membraneData);

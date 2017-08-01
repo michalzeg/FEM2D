@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="netDxf, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\netDXF.2.0.2\lib\net45\netDxf.dll</HintPath>
       <Private>True</Private>
@@ -69,6 +73,10 @@
     <ProjectReference Include="..\FEM2D\FEM2D.csproj">
       <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
       <Name>FEM2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Output\Output.csproj">
+      <Project>{599fbf44-d588-4a46-a73f-b8fca5373707}</Project>
+      <Name>Output</Name>
     </ProjectReference>
     <ProjectReference Include="..\Triangulation\Triangulation.csproj">
       <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>

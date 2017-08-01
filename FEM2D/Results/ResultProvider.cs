@@ -14,13 +14,14 @@ namespace FEM2D.Results
     {
         private Dictionary<int, double> globalDisplacements;
         private Dictionary<Node, ITriangleElement[]> nodeElementsMap;
-        private Dictionary<ITriangleElement, TriangleElementResult> triangleResultMap;
+        private Dictionary<ITriangleElement, TriangleResult> triangleResultMap;
+        private Dictionary<Node, NodeResult> nodeResultMap;
 
         private readonly IEnumerable<Node> nodes;
         private readonly IEnumerable<ITriangleElement> elements;
 
         public IList<NodeResult> NodeResults { get; private set; }
-        public IList<TriangleElementResult> TriangleResult { get; private set; }
+        public IList<TriangleResult> TriangleResult { get; private set; }
 
         public ResultProvider(Vector<double> displacements, IEnumerable<Node> nodes, IEnumerable<ITriangleElement> elements)
         {
@@ -32,8 +33,13 @@ namespace FEM2D.Results
 
             CreateNodeElementMap();
 
-            GetTriangleElementsResults();
-            GetNodesResults();
+            CalculateTriangleElementsResults();
+            CalculateNodesResults();
+            CreateNodeResultMap();
+        }
+        private void CreateNodeResultMap()
+        {
+            this.nodeResultMap = this.NodeResults.ToDictionary(e => e.Node, f => f);
         }
 
         private void CreateGlobalDisplacements(Vector<double> displacements)
@@ -60,7 +66,7 @@ namespace FEM2D.Results
                 .ToDictionary(e => e.Key, f => f.ToArray());
         }
 
-        private NodeResult GetNodeResult(Node node)
+        private NodeResult CalcualteNodeResult(Node node)
         {
             var dofs = node.GetDOF();
 
@@ -91,18 +97,17 @@ namespace FEM2D.Results
             return result;
         }
 
-        private void GetNodesResults()
+        private void CalculateNodesResults()
         {
             this.NodeResults = new List<NodeResult>();
             foreach (var node in this.nodes)
             {
-                var nodeResult = this.GetNodeResult(node);
+                var nodeResult = this.CalcualteNodeResult(node);
                 this.NodeResults.Add(nodeResult);
             }
         }
 
-
-        private TriangleElementResult GetTriangleElementResult(ITriangleElement element)
+        private TriangleResult CalculateTriangleElementResult(ITriangleElement element)
         {
             var dofs = element.GetDOFs();
 
@@ -117,7 +122,7 @@ namespace FEM2D.Results
 
             var sigma = element.GetD() * element.GetB() * displacementVector;
 
-            var result = new TriangleElementResult
+            var result = new TriangleResult
             {
                 Element = element,
                 SigmaX = sigma[0],
@@ -127,17 +132,25 @@ namespace FEM2D.Results
             return result;
         }
 
-        private void GetTriangleElementsResults()
+        private void CalculateTriangleElementsResults()
         {
-            this.TriangleResult = new List<TriangleElementResult>();
-            this.triangleResultMap = new Dictionary<ITriangleElement, TriangleElementResult>();
+            this.TriangleResult = new List<TriangleResult>();
+            this.triangleResultMap = new Dictionary<ITriangleElement, TriangleResult>();
             foreach (var element in this.elements)
             {
-                var elementResult = this.GetTriangleElementResult(element);
+                var elementResult = this.CalculateTriangleElementResult(element);
                 this.TriangleResult.Add(elementResult);
                 this.triangleResultMap.Add(element, elementResult);
             }
 
         }
+
+        public NodeResult GetNodeResult(Node node)
+        {
+            var result = this.nodeResultMap[node];
+            return result;
+        }
+
+        
     }
 }
