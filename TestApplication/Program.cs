@@ -23,8 +23,8 @@ namespace TestApplication
         static void Main(string[] args)
         {
             //ResultsToJSon();
-            //ResultsToDxfCantilever();
-            ResultsToDxfMembrane();
+            ResultsToDxfCantilever();
+            //ResultsToDxfMembrane();
 
         }
 

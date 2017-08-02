@@ -77,39 +77,22 @@ namespace Output.OutputCreator
 
             foreach (var triangleResult in this.results.TriangleResult)
             {
-                var node0Result = this.results.GetNodeResult(triangleResult.Element.Nodes[0]);
-                var node1Result = this.results.GetNodeResult(triangleResult.Element.Nodes[1]);
-                var node2Result = this.results.GetNodeResult(triangleResult.Element.Nodes[2]);
+                //var node0Result = this.results.GetNodeResult(triangleResult.Element.Nodes[0]);
+               // var node1Result = this.results.GetNodeResult(triangleResult.Element.Nodes[1]);
+                //var node2Result = this.results.GetNodeResult(triangleResult.Element.Nodes[2]);
+
+                var nodeResults = this.results.GetNodeResult(triangleResult.Element.Nodes);
+
+                var nodeDetails = nodeResults.Select(n => n.ConvertToOutputDetailed());
 
                 var triangleOutput = new TriangleOutput
                 {
                     Number = triangleResult.Element.Number,
-                    Node0Number = triangleResult.Element.Nodes[0].Number,
-                    Node1Number = triangleResult.Element.Nodes[1].Number,
-                    Node2Number = triangleResult.Element.Nodes[2].Number,
-
-                    Node0X = triangleResult.Element.Nodes[0].Coordinates.X,
-                    Node0Y = triangleResult.Element.Nodes[0].Coordinates.Y,
-                    Node1X = triangleResult.Element.Nodes[1].Coordinates.X,
-                    Node1Y = triangleResult.Element.Nodes[1].Coordinates.Y,
-                    Node2X = triangleResult.Element.Nodes[2].Coordinates.X,
-                    Node2Y = triangleResult.Element.Nodes[2].Coordinates.Y,
-
+                    
+                    Nodes = nodeDetails,
                     Sxx = triangleResult.SigmaX,
                     Syy = triangleResult.SigmaY,
                     Txy = triangleResult.TauXY,
-
-                    AvgSxx0 = node0Result.AverageSigmaXX,
-                    AvgSyy0 = node0Result.AverageSigmaYY,
-                    AvgTxy0 = node0Result.AverageTauXY,
-
-                    AvgSxx1 = node1Result.AverageSigmaXX,
-                    AvgSyy1 = node1Result.AverageSigmaYY,
-                    AvgTxy1 = node1Result.AverageTauXY,
-
-                    AvgSxx2 = node2Result.AverageSigmaXX,
-                    AvgSyy2 = node2Result.AverageSigmaYY,
-                    AvgTxy2 = node2Result.AverageTauXY
                 };
 
                 this.triangles.Add(triangleOutput);

@@ -11,8 +11,6 @@ namespace Output.OutputCreator
 {
     public static class Converters
     {
-
-
         public static NodeOutput ConvertToOutput(this NodeResult nodeResult)
         {
             var result = new NodeOutput
@@ -26,6 +24,21 @@ namespace Output.OutputCreator
             return result;
         }
 
+        public static NodeOutputDetailed ConvertToOutputDetailed(this NodeResult nodeResult)
+        {
+            var result = new NodeOutputDetailed
+            {
+                Number = nodeResult.Node.Number,
+                X = nodeResult.Node.Coordinates.X,
+                Y = nodeResult.Node.Coordinates.Y,
+                Ux = nodeResult.UX,
+                Uy = nodeResult.UY,
+                AvgSxx = nodeResult.AverageSigmaXX,
+                AvgSyy = nodeResult.AverageSigmaYY,
+                AvgTxy = nodeResult.AverageTauXY
+            };
+            return result;
+        }
         
     }
 }

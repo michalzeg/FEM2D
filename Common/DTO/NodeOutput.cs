@@ -15,4 +15,11 @@ namespace Common.DTO
         public double Ux { get; set; }
         public double Uy { get; set; }
     }
+
+    public class NodeOutputDetailed : NodeOutput
+    {
+        public double AvgSxx { get; set; }
+        public double AvgSyy { get; set; }
+        public double AvgTxy { get; set; }     
+    }
 }

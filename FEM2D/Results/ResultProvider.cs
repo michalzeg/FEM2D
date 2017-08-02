@@ -151,6 +151,16 @@ namespace FEM2D.Results
             return result;
         }
 
+        public IEnumerable<NodeResult> GetNodeResult(IEnumerable<Node> nodes)
+        {
+            var results = new List<NodeResult>();
+            foreach (var node in nodes)
+            {
+                var result = this.nodeResultMap[node];
+                results.Add(result);
+            }
+            return results;
+        }
         
     }
 }
