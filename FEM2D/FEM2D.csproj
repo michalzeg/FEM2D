@@ -55,6 +55,7 @@
     <Compile Include="Elements\TriangleElement.cs" />
     <Compile Include="Loads\NodalLoad.cs" />
     <Compile Include="Loads\TriangleEdgeLoad.cs" />
+    <Compile Include="Matrix\HashMatrix.cs" />
     <Compile Include="Matrix\MatrixCalculator.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,18 +70,20 @@
     <Compile Include="Solvers\Solver.cs" />
     <Compile Include="Structures\Membrane.cs" />
     <Compile Include="Structures\MembraneGeometry.cs" />
+    <Compile Include="Utils\CantorHashFunction.cs" />
+    <Compile Include="Utils\IHashFunction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\FEM2DCommon.csproj">
       <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
-      <Name>Common</Name>
+      <Name>FEM2DCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Triangulation\Triangulation.csproj">
+    <ProjectReference Include="..\Triangulation\FEM2DTriangulation.csproj">
       <Project>{19986DDB-F154-4C40-8F9C-09EF37D6FE9E}</Project>
-      <Name>Triangulation</Name>
+      <Name>FEM2DTriangulation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

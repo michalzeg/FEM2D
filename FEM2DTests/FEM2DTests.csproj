@@ -74,9 +74,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\FEM2DCommon.csproj">
       <Project>{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}</Project>
-      <Name>Common</Name>
+      <Name>FEM2DCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\FEM2D\FEM2D.csproj">
       <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>

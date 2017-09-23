@@ -9,6 +9,8 @@ namespace Common.DTO
     //To be moved to web api
     public class MembraneOutputData
     {
+        public MembraneInputData InputData { get; set; }
+
         public IEnumerable<NodeOutput> Nodes { get; set; }
         public IEnumerable<TriangleOutput> Triangles { get; set; }
 

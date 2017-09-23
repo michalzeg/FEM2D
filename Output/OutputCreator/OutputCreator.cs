@@ -16,14 +16,15 @@ namespace Output.OutputCreator
         private const int percentileMax = 95;
 
         private readonly ResultProvider results;
+        private readonly MembraneInputData inputData;
 
         private IList<NodeOutput> nodes;
         private IList<TriangleOutput> triangles;
 
-        public OutputCreator(ResultProvider results)
+        public OutputCreator(ResultProvider results, MembraneInputData inputData = null)
         {
             this.results = results;
-            
+            this.inputData = inputData;
         }
 
         public MembraneOutputData CreateOutput()
@@ -59,6 +60,7 @@ namespace Output.OutputCreator
                 TxyPercentile005 = txy.Percentile(percentileMin),
                 TxyPercentile095 = txy.Percentile(percentileMax),
 
+                InputData = this.inputData,
             };
 
             return membraneOutput;

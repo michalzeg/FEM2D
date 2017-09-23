@@ -15,16 +15,18 @@ namespace Triangulation
 {
     public class MeshCreator
     {
+        private const double areaFactor = 0.01;
+
         public IEnumerable<TriangleGeometry> CreateMesh(MembraneInputData membraneData)
         {
             var geometry = GetGeometry(membraneData);
-            
-            var mesh = GetMesh();
+            var area = GetArea(geometry);
+            var mesh = GetMesh(area);
 
             mesh.Triangulate(geometry);
-            //mesh.Smooth();
-            //mesh.Refine();
-
+            mesh.Smooth();
+            mesh.Refine();
+            
             var triangles = mesh.Triangles.Select(e => e.ToTriangleGeometry());
 
             return triangles;
@@ -51,14 +53,21 @@ namespace Triangulation
             return geometry;
         }
 
-        private static Mesh GetMesh()
+        private static Mesh GetMesh(double area)
         {
             Mesh mesh = new Mesh();
             mesh.Behavior.Quality = true;
-            mesh.Behavior.MaxArea = 0.5;
+            mesh.Behavior.MaxArea = area*areaFactor;
 
             mesh.Behavior.ConformingDelaunay = true;
             return mesh;
+        }
+
+        private static double GetArea(InputGeometry geoemtry)
+        {
+            var boundingBox = geoemtry.Bounds;
+            var area = boundingBox.Height * boundingBox.Width;
+            return area;
         }
     }
 }

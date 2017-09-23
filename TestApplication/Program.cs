@@ -16,6 +16,8 @@ using FEM2D.Solvers;
 using Output.OutputCreator;
 using Newtonsoft.Json;
 using MathNet.Numerics.Statistics;
+using System.Diagnostics;
+
 namespace TestApplication
 {
     class Program
@@ -23,8 +25,10 @@ namespace TestApplication
         static void Main(string[] args)
         {
             //ResultsToJSon();
-            ResultsToDxfCantilever();
+            //ResultsToDxfCantilever();
             //ResultsToDxfMembrane();
+            //ResultsToDxfMembrane1x1();
+            AppTest();
 
         }
 
@@ -127,6 +131,8 @@ namespace TestApplication
                     Thickness = 0.5
                 },
             };
+            var time = new Stopwatch();
+            time.Start();
 
             var membrane = new Membrane();
             membrane.Solve(membraneData);
@@ -136,8 +142,11 @@ namespace TestApplication
 
             var result = membrane.Results;
 
-            var outputCrator = new OutputCreator(result);
+            var outputCrator = new OutputCreator(result,membraneData);
             var output = outputCrator.CreateOutput();
+
+            time.Stop();
+            var e = time.Elapsed;
 
             var js = JsonConvert.SerializeObject(output);
 
@@ -214,6 +223,7 @@ namespace TestApplication
                 Number = 3,
                 X = 20,
                 Y = 30,
+                LoadX = 500,
                 
             };
             var vertex4 = new VertexInput
@@ -221,7 +231,7 @@ namespace TestApplication
                 Number = 4,
                 X = 10,
                 Y = 30,
-                LoadY = -1000000,
+                LoadY = -1000,
 
             };
             var vertex5 = new VertexInput
@@ -286,7 +296,7 @@ namespace TestApplication
 
             var result = membrane.Results;
 
-            var outputCrator = new OutputCreator(result);
+            var outputCrator = new OutputCreator(result,membraneData);
             var output = outputCrator.CreateOutput();
 
             var js = JsonConvert.SerializeObject(output);
@@ -327,6 +337,308 @@ namespace TestApplication
                 var t = string.Format("N1:{0} N2:{1} N3:{2}", node1, node2, node3);
 
                 Face3d face = new Face3d(new Vector2(x1, y1),
+                    new Vector2(x2, y2),
+                    new Vector2(x3, y3));
+                var text = new Text(t, new Vector2(xc, yc), 0.05);
+                document.AddEntity(text);
+                document.AddEntity(face);
+            }
+
+            document.Save(filePath);
+        }
+
+        private static void ResultsToDxfMembrane1x1()
+        {
+            var filePath = @"D:\test.dxf";
+
+            var document = new DxfDocument();
+
+            var vertex1 = new VertexInput
+            {
+                Number = 1,
+                X = 0,
+                Y = 0,
+                SupportX = true,
+                SupportY = true,
+            };
+            var vertex2 = new VertexInput
+            {
+                Number = 2,
+                X = 1,
+                Y = 0,
+                
+            };
+            var vertex3 = new VertexInput
+            {
+                Number = 3,
+                X = 1,
+                Y = 1,
+                LoadY=-100000,
+            };
+            var vertex4 = new VertexInput
+            {
+                Number = 4,
+                X = 0,
+                Y = 1,
+                SupportX = true,
+                SupportY = true,
+            };
+            
+
+            var edge1 = new Edge
+            {
+                Number = 1,
+                Start = vertex1,
+                End = vertex2,
+            };
+            var edge2 = new Edge
+            {
+                Number = 2,
+                Start = vertex2,
+                End = vertex3,
+            };
+            var edge3 = new Edge
+            {
+                Number = 3,
+                Start = vertex3,
+                End = vertex4,
+
+            };
+            var edge4 = new Edge
+            {
+                Number = 3,
+                Start = vertex4,
+                End = vertex1,
+
+            };
+            
+
+            var membraneData = new MembraneInputData
+            {
+                Vertices = new[] { vertex1, vertex2, vertex3, vertex4 },
+                Edges = new[] { edge1, edge2, edge3, edge4 },
+                Properties = new MembraneProperties
+                {
+                    ModulusOfElasticity = 200000000,
+                    PoissonsRation = 0.25,
+                    Thickness = 0.5
+                },
+            };
+
+            var membrane = new Membrane();
+            membrane.Solve(membraneData);
+
+            var nodes = membrane.Geometry.Nodes;
+            var elements = membrane.Geometry.Elements;
+
+            var result = membrane.Results;
+
+            var outputCrator = new OutputCreator(result,membraneData);
+            var output = outputCrator.CreateOutput();
+
+            var js = JsonConvert.SerializeObject(output);
+
+            foreach (var node in nodes)
+            {
+                var x = node.Coordinates.X;
+                var y = node.Coordinates.Y;
+                var z = 0;
+
+                var point = new Point(x, y, z);
+                document.AddEntity(point);
+                var text = new Text(node.Number.ToString(), new Vector3(x, y, z), 0.1);
+                text.Color = AciColor.Red;
+                document.AddEntity(text);
+            }
+
+            foreach (var triangle in elements)
+            {
+
+
+                var x1 = triangle.Nodes[0].Coordinates.X;
+                var y1 = triangle.Nodes[0].Coordinates.Y;
+
+                var x2 = triangle.Nodes[1].Coordinates.X;
+                var y2 = triangle.Nodes[1].Coordinates.Y;
+
+                var x3 = triangle.Nodes[2].Coordinates.X;
+                var y3 = triangle.Nodes[2].Coordinates.Y;
+
+                var xc = (x1 + x2 + x3) / 3;
+                var yc = (y1 + y2 + y3) / 3;
+
+
+                var node1 = triangle.Nodes[0].Number;
+                var node2 = triangle.Nodes[1].Number;
+                var node3 = triangle.Nodes[2].Number;
+                var t = string.Format("N1:{0} N2:{1} N3:{2}", node1, node2, node3);
+
+                Face3d face = new Face3d(new Vector2(x1, y1),
+                    new Vector2(x2, y2),
+                    new Vector2(x3, y3));
+                var text = new Text(t, new Vector2(xc, yc), 0.05);
+                document.AddEntity(text);
+                document.AddEntity(face);
+            }
+
+            document.Save(filePath);
+        }
+
+        private static void AppTest()
+        {
+            var filePath = @"D:\test.dxf";
+
+            var document = new DxfDocument();
+
+            var vertex1 = new VertexInput
+            {
+                Number = 1,
+                X = 0,
+                Y = 2000,
+                SupportX = false,
+                SupportY = false,
+                LoadX = 500,
+                LoadY = 1000,
+            };
+            var vertex2 = new VertexInput
+            {
+                Number = 2,
+                X = 500,
+                Y = 0,
+                SupportX = false,
+                SupportY = false,
+                LoadX = 0,
+                LoadY = 0,
+
+            };
+            var vertex3 = new VertexInput
+            {
+                Number = 3,
+                X = 1500,
+                Y = 0,
+                SupportX = false,
+                SupportY = false,
+                LoadX = 0,
+                LoadY = 0,
+            };
+            var vertex4 = new VertexInput
+            {
+                Number = 4,
+                X = 2000,
+                Y = 2000,
+                SupportX = false,
+                SupportY = false,
+                LoadX = -500,
+                LoadY = 1000,
+            };
+            var vertex5 = new VertexInput
+            {
+                Number = 5,
+                X = 1000,
+                Y = 2000,
+                SupportX = false,
+                SupportY = false,
+                LoadX = 0,
+                LoadY = -2000,
+            };
+
+            var edge1 = new Edge
+            {
+                Number = 1,
+                Start = vertex1,
+                End = vertex2,
+            };
+            var edge2 = new Edge
+            {
+                Number = 2,
+                Start = vertex2,
+                End = vertex3,
+            };
+            var edge3 = new Edge
+            {
+                Number = 3,
+                Start = vertex3,
+                End = vertex4,
+
+            };
+            var edge4 = new Edge
+            {
+                Number = 3,
+                Start = vertex4,
+                End = vertex5,
+
+            };
+            var edge5 = new Edge
+            {
+                Number = 5,
+                Start = vertex5,
+                End = vertex1,
+
+            };
+
+            var membraneData = new MembraneInputData
+            {
+                Vertices = new[] { vertex1, vertex2, vertex3, vertex4,vertex5 },
+                Edges = new[] { edge1, edge2, edge3, edge4,edge5 },
+                Properties = new MembraneProperties
+                {
+                    ModulusOfElasticity = 200000000,
+                    PoissonsRation = 0.25,
+                    Thickness = 200
+                },
+            };
+
+            var membrane = new Membrane();
+            membrane.Solve(membraneData);
+
+            var nodes = membrane.Geometry.Nodes;
+            var elements = membrane.Geometry.Elements;
+
+            var result = membrane.Results;
+
+            var outputCrator = new OutputCreator(result, membraneData);
+            var output = outputCrator.CreateOutput();
+
+            var js = JsonConvert.SerializeObject(output);
+
+            foreach (var node in nodes)
+            {
+                var x = node.Coordinates.X;
+                var y = node.Coordinates.Y;
+                var z = 0;
+
+                var point = new Point(x, y, z);
+                document.AddEntity(point);
+                var text = new Text(node.Number.ToString(), new Vector3(x, y, z), 0.1)
+                {
+                    Color = AciColor.Red
+                };
+                document.AddEntity(text);
+            }
+
+            foreach (var triangle in elements)
+            {
+
+
+                var x1 = triangle.Nodes[0].Coordinates.X;
+                var y1 = triangle.Nodes[0].Coordinates.Y;
+
+                var x2 = triangle.Nodes[1].Coordinates.X;
+                var y2 = triangle.Nodes[1].Coordinates.Y;
+
+                var x3 = triangle.Nodes[2].Coordinates.X;
+                var y3 = triangle.Nodes[2].Coordinates.Y;
+
+                var xc = (x1 + x2 + x3) / 3;
+                var yc = (y1 + y2 + y3) / 3;
+
+
+                var node1 = triangle.Nodes[0].Number;
+                var node2 = triangle.Nodes[1].Number;
+                var node3 = triangle.Nodes[2].Number;
+                var t = string.Format("N1:{0} N2:{1} N3:{2}", node1, node2, node3);
+
+                var face = new Face3d(new Vector2(x1, y1),
                     new Vector2(x2, y2),
                     new Vector2(x3, y3));
                 var text = new Text(t, new Vector2(xc, yc), 0.05);

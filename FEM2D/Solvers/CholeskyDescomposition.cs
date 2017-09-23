@@ -1,4 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using FEM2D.Matrix;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,7 @@ namespace FEM2D.Solvers
         {
             this.dofCount = this.P.Count;
             this.LL = Matrix<double>.Build.Sparse(dofCount, dofCount, 0d);
+            var tempLL = this.LL; //new HashMatrix<double>(dofCount, dofCount);
             for (int i = 0; i < dofCount; i++)
             {
                 for (int j = 0; j <= i; j++)
@@ -51,20 +53,21 @@ namespace FEM2D.Solvers
                     {
                         for (int n = 0; n <= j -1; n++)
                         {
-                            v = v + Math.Pow(LL[j, n], 2);
+                            v = v + Math.Pow(tempLL[j, n], 2);
                         }
-                        LL[j, j] = Math.Sqrt(K[j, j] - v);
+                        tempLL[j, j] = Math.Sqrt(K[j, j] - v);
                     }
                     else
                     {
                         for (int n = 0; n <= j-1; n++)
                         {
-                            v = v + LL[i, n] * LL[j, n];
+                            v = v + tempLL[i, n] * tempLL[j, n];
                         }
-                        LL[i, j] = (K[i, j] - v) / LL[j, j];
+                        tempLL[i, j] = (K[i, j] - v) / tempLL[j, j];
                     }
                 }
             }
+            //this.LL = tempLL.GetMatrix();
         }
 
         private void CalculateY()
