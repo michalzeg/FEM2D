@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
-    public class LoadAggregator
+    public class LoadAggregator : ILoadAggregator
     {
         public Vector<double> Aggregate(IEnumerable<NodalLoad> loads, int dofNumber )
         {

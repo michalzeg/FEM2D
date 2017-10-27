@@ -11,7 +11,7 @@ namespace FEM2D.Solvers
     /// <summary>
     /// Solves equation k*u = p
     /// </summary>
-    public class CholeskyDescomposition
+    public class CholeskyDescomposition : IMatrixSolver
     {
 
         private Matrix<double> K;

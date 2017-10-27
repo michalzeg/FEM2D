@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
-    public class BoundaryVector
+    public class BoundaryProvider : IBoundaryProvider
     {
 
         public Vector<double> BundaryVector { get; private set; }
 
-        public BoundaryVector()
+        public BoundaryProvider()
         {
 
         }

@@ -14,9 +14,10 @@ namespace FEM2D.Solvers
 {
     public class Solver
     {
-        private readonly MatrixAggregator matrixAggregator;
-        private readonly LoadAggregator loadAggregator;
-        private readonly BoundaryVector boundaryProvider;
+        private readonly IMatrixAggregator matrixAggregator;
+        private readonly ILoadAggregator loadAggregator;
+        private readonly IBoundaryProvider boundaryProvider;
+        private readonly IMatrixSolver matrixSolver;
 
         public ResultProvider Results { get; private set; }
 
@@ -24,7 +25,8 @@ namespace FEM2D.Solvers
         {
             this.matrixAggregator = new MatrixAggregator();
             this.loadAggregator = new LoadAggregator();
-            this.boundaryProvider = new BoundaryVector();
+            this.boundaryProvider = new BoundaryProvider();
+            this.matrixSolver = new CholeskyDescomposition();
         }
 
         public void Solve(MembraneGeometry membraneGeometry)
@@ -43,9 +45,7 @@ namespace FEM2D.Solvers
             this.boundaryProvider.CreateVector(nodes, dofNumber);
             this.boundaryProvider.Reduce(reducedStiffnessMatrix, reducedLoadVector);
 
-            var cholesky = new CholeskyDescomposition();
-            //var displacements2 = reducedStiffnessMatrix.Inverse() *reducedLoadVector;
-            var displacements = cholesky.Solve(reducedStiffnessMatrix, reducedLoadVector);
+            var displacements = this.matrixSolver.Solve(reducedStiffnessMatrix, reducedLoadVector);
             this.Results = new ResultProvider(displacements, nodes, elements);
         }
     }

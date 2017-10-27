@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
-    public class MatrixAggregator
+    public class MatrixAggregator : IMatrixAggregator
     {
         public Matrix<double> Aggregate(IEnumerable<ITriangleElement> elements, int dofNumber)
         {
