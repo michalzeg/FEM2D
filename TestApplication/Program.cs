@@ -64,7 +64,7 @@ namespace TestApplication
 
 
             var solver = new Solver();
-            solver.Solve(elements.GetMembraneElements(), nodes, loads);
+            solver.Solve(elements, nodes, loads);
             var results = solver.Results;
 
             var outputCrator = new OutputCreator(results);

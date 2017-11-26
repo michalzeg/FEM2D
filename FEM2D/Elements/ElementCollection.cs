@@ -32,6 +32,11 @@ namespace FEM2D.Elements
             return element;
         }
 
+        public IEnumerable<IElement> GetAll()
+        {
+            return this.elements;
+        }
+
         public IEnumerable<IBeamElement> GetBeamElements()
         {
             var result = this.elements.OfType<IBeamElement>();
