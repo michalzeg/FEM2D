@@ -20,33 +20,31 @@ namespace FEM2D.Solvers
 
         }
 
-        public void CreateVector(IEnumerable<Node> nodes, int dofNumber)
+        public void CreateVector(IEnumerable<Node> nodes, int dofCount)
         {
-            if (this.BundaryVector == null)
+            this.BundaryVector = Vector.Build.Sparse(dofCount, 1);
+
+            var fixedNodes = nodes.Where(e => e.Restraint != Restraint.Free);
+
+            foreach (var node in nodes)
             {
-                this.BundaryVector = Vector.Build.Sparse(dofNumber,1);
+                var dofs = node.GetDOF();
 
-                var fixedNodes = nodes.Where(e => e.Restraint != Restraint.Free);
-
-                foreach (var node in nodes)
+                if (node.Restraint.HasFlag(Restraint.FixedX))
                 {
-                    var dofs = node.GetDOF();
-                    
-                    if (node.Restraint.HasFlag(Restraint.FixedX))
-                    {
-                        var dof = dofs[0];
-                        this.BundaryVector[dof] = 0;
-                    }
-                    if (node.Restraint.HasFlag(Restraint.FixedY))
-                    {
-                        var dof = dofs[1];
-                        this.BundaryVector[dof] = 0;
-                    }
+                    var dof = dofs[0];
+                    this.BundaryVector[dof] = 0;
+                }
+                if (node.Restraint.HasFlag(Restraint.FixedY))
+                {
+                    var dof = dofs[1];
+                    this.BundaryVector[dof] = 0;
                 }
             }
+
         }
 
-        public void Reduce(Matrix<double> matrix,Vector<double> vector)
+        public void Reduce(Matrix<double> matrix, Vector<double> vector)
         {
 
             var dofsToReduce = this.BundaryVector

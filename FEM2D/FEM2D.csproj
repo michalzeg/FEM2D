@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\IElement.cs" />
     <Compile Include="Elements\Triangle\ITriangleElement.cs" />
     <Compile Include="Elements\Triangle\TriangleElement.cs" />
     <Compile Include="Loads\NodalLoad.cs" />
@@ -91,7 +92,9 @@
       <Name>FEM2DTriangulation</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Elements\Beam\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
