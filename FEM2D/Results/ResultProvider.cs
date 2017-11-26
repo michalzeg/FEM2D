@@ -23,11 +23,11 @@ namespace FEM2D.Results
         public IList<MembraneNodeResult> MembraneNodeResults { get; private set; }
         public IList<TriangleResult> TriangleResult { get; private set; }
 
-        public ResultProvider(Vector<double> displacements, IEnumerable<Node> nodes, IEnumerable<ITriangleElement> elements)
+        public ResultProvider(Vector<double> displacements, IEnumerable<Node> nodes, IEnumerable<IElement> elements)
         {
 
             this.nodes = nodes;
-            this.elements = elements;
+            this.elements = elements.Cast<ITriangleElement>();
 
             CreateGlobalDisplacements(displacements);
 

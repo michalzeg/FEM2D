@@ -34,7 +34,7 @@ namespace FEM2D.Solvers
             this.Solve(membraneGeometry.Elements, membraneGeometry.Nodes, membraneGeometry.NodalLoads);
         }
 
-        public void Solve(IEnumerable<ITriangleElement> elements, IEnumerable<Node> nodes, IEnumerable<NodalLoad> loads)
+        public void Solve(IEnumerable<IElement> elements, IEnumerable<Node> nodes, IEnumerable<NodalLoad> loads)
         {
             var dofNumber = nodes.Count() * 2;
             var stiffnessMatrix = matrixAggregator.Aggregate(elements, dofNumber);

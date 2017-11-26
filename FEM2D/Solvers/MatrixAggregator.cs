@@ -13,7 +13,7 @@ namespace FEM2D.Solvers
 {
     public class MatrixAggregator : IMatrixAggregator
     {
-        public Matrix<double> Aggregate(IEnumerable<ITriangleElement> elements, int dofNumber)
+        public Matrix<double> Aggregate(IEnumerable<IElement> elements, int dofNumber)
         {
             var aggregatedMatrix = SparseMatrix.Create(dofNumber, dofNumber, 0d);
 
