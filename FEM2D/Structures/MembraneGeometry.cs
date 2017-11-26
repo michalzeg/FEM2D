@@ -47,7 +47,7 @@ namespace FEM2D.Structures
             var vertices = triangles.Select(e => new[] { e.Vertex1, e.Vertex2, e.Vertex3 })
                 .SelectMany(e => e).Distinct();
 
-            this.Nodes = vertices.Select(vertex => new Node(vertex)).ToList();
+            this.Nodes = vertices.Select((vertex,index) => new Node(vertex,index+1)).ToList();
             this.vertexNodeMap = this.Nodes.ToDictionary(e => e.Coordinates, f => f);
         }
 

@@ -11,24 +11,22 @@ namespace FEM2D.Nodes
 {
     public class Node : IEquatable<Node>
     {
-        private static int counter = 1;
-
         public int Number { get; private set; }
         public PointD Coordinates { get; private set; }
         public Restraint Restraint { get; internal set; }
 
-        public Node(PointD coordinates,Restraint restraint = Restraint.Free)
+        public Node(PointD coordinates,int number,Restraint restraint = Restraint.Free)
         {
             Condition.Requires(coordinates);
 
-            this.Number = counter;
-            counter++;
+            this.Number = number;
+
             this.Coordinates = coordinates;
             this.Restraint = restraint;
             
         }
-        public Node(double x, double y,Restraint restraint = Restraint.Free)
-            :this(new PointD(x,y),restraint)
+        public Node(double x, double y,int number,Restraint restraint = Restraint.Free)
+            :this(new PointD(x,y),number,restraint)
         {
             
         }

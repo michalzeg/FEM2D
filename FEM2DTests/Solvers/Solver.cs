@@ -26,10 +26,10 @@ namespace FEM2DTests.Solvers
                 Thickness = 0.5
             };
 
-            var node1 = new Node(3, 0,Restraint.FixedY);
-            var node2 = new Node(3, 2);
-            var node3 = new Node(0, 2, Restraint.Fixed);
-            var node4 = new Node(0, 0, Restraint.Fixed);
+            var node1 = new Node(3, 0,1,Restraint.FixedY);
+            var node2 = new Node(3, 2,2);
+            var node3 = new Node(0, 2,3, Restraint.Fixed);
+            var node4 = new Node(0, 0,4, Restraint.Fixed);
             var nodes = new[] { node1, node2, node3, node4 };
 
             var nodeLoad = new NodalLoad

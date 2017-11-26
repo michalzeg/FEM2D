@@ -43,9 +43,9 @@ namespace FEM2DTests.MatrixTest
         [Test]
         public void MatrixCalculator_GetB()
         {
-            var node1 = new Node(3, 0);
-            var node2 = new Node(3, 2);
-            var node3 = new Node(0, 0);
+            var node1 = new Node(3, 0,1);
+            var node2 = new Node(3, 2,2);
+            var node3 = new Node(0, 0,3);
 
             var nodes = new[] { node1, node2, node3 };
 
