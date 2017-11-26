@@ -62,7 +62,7 @@ namespace TestApplication
 
 
             var solver = new Solver();
-            solver.Solve(elements, nodes.GetAll(), loads);
+            solver.Solve(elements, nodes, loads);
             var results = solver.Results;
 
             var outputCrator = new OutputCreator(results);
