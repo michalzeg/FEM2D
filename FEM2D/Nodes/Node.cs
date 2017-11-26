@@ -42,7 +42,7 @@ namespace FEM2D.Nodes
         public double DistanceTo(Node node)
         {
             var dx = this.Coordinates.X - node.Coordinates.X;
-            var dy = this.Coordinates.Y = node.Coordinates.Y;
+            var dy = this.Coordinates.Y - node.Coordinates.Y;
             var distance = Math.Sqrt(dx * dx + dy * dy);
             return distance;
         }

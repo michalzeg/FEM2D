@@ -28,15 +28,6 @@ namespace FEM2D.Matrix
             get
             {
                 var hash = this.hashFunction.Hash(i, j);
-                T result;
-                //if (this.container.TryGetValue(hash,out result))
-                //{
-                //    return result;
-                //}
-                //else
-                //{
-                //    return default(T);
-                //}
                 return this.container[hash];
             }
             set

@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Restraints
 {
-    public class Support
-    {
-        public Node Node { get; set; }
-        public Restraint Restraint { get; set; }
-    }
-
+    
     [Flags]
     public enum Restraint
     {

@@ -15,12 +15,12 @@ namespace FEM2D.Results
         private Dictionary<int, double> globalDisplacements;
         private Dictionary<Node, ITriangleElement[]> nodeElementsMap;
         private Dictionary<ITriangleElement, TriangleResult> triangleResultMap;
-        private Dictionary<Node, NodeResult> nodeResultMap;
+        private Dictionary<Node, MembraneNodeResult> nodeResultMap;
 
         private readonly IEnumerable<Node> nodes;
         private readonly IEnumerable<ITriangleElement> elements;
 
-        public IList<NodeResult> NodeResults { get; private set; }
+        public IList<MembraneNodeResult> MembraneNodeResults { get; private set; }
         public IList<TriangleResult> TriangleResult { get; private set; }
 
         public ResultProvider(Vector<double> displacements, IEnumerable<Node> nodes, IEnumerable<ITriangleElement> elements)
@@ -39,7 +39,7 @@ namespace FEM2D.Results
         }
         private void CreateNodeResultMap()
         {
-            this.nodeResultMap = this.NodeResults.ToDictionary(e => e.Node, f => f);
+            this.nodeResultMap = this.MembraneNodeResults.ToDictionary(e => e.Node, f => f);
         }
 
         private void CreateGlobalDisplacements(Vector<double> displacements)
@@ -66,7 +66,7 @@ namespace FEM2D.Results
                 .ToDictionary(e => e.Key, f => f.ToArray());
         }
 
-        private NodeResult CalcualteNodeResult(Node node)
+        private MembraneNodeResult CalcualteNodeResult(Node node)
         {
             var dofs = node.GetDOF();
 
@@ -84,7 +84,7 @@ namespace FEM2D.Results
             var averageSyy = nodeElementsResults.Average(e => e.SigmaY);
             var averageTxy = nodeElementsResults.Average(e => e.TauXY);
 
-            var result = new NodeResult
+            var result = new MembraneNodeResult
             {
                 Node = node,
                 UX = uX,
@@ -99,11 +99,11 @@ namespace FEM2D.Results
 
         private void CalculateNodesResults()
         {
-            this.NodeResults = new List<NodeResult>();
+            this.MembraneNodeResults = new List<MembraneNodeResult>();
             foreach (var node in this.nodes)
             {
                 var nodeResult = this.CalcualteNodeResult(node);
-                this.NodeResults.Add(nodeResult);
+                this.MembraneNodeResults.Add(nodeResult);
             }
         }
 
@@ -145,15 +145,15 @@ namespace FEM2D.Results
 
         }
 
-        public NodeResult GetNodeResult(Node node)
+        public MembraneNodeResult GetNodeResult(Node node)
         {
             var result = this.nodeResultMap[node];
             return result;
         }
 
-        public IEnumerable<NodeResult> GetNodeResult(IEnumerable<Node> nodes)
+        public IEnumerable<MembraneNodeResult> GetNodeResult(IEnumerable<Node> nodes)
         {
-            var results = new List<NodeResult>();
+            var results = new List<MembraneNodeResult>();
             foreach (var node in nodes)
             {
                 var result = this.nodeResultMap[node];

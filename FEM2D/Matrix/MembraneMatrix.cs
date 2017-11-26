@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Matrix
 {
-    public class MatrixCalculator
+    public class MembraneMatrix
     {
         public Matrix<double> GetD(MembraneProperties properties)
         {

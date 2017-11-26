@@ -19,7 +19,7 @@ namespace FEM2DTests.MatrixTest
         [Test]
         public void MatrixCalculator_GetD()
         {
-            var calculator = new MatrixCalculator();
+            var calculator = new MembraneMatrix();
 
             var E = 200;
             var v = 0.5;
@@ -57,7 +57,7 @@ namespace FEM2DTests.MatrixTest
                 {-3,2,3,0,0,-2 }
             }) * 1 / 6;
 
-            var calculator = new MatrixCalculator();
+            var calculator = new MembraneMatrix();
             var actualB = calculator.GetB(nodes);
 
             Assert.That(actualB.IsApproximatelyEqualTo(expectedB));
@@ -95,7 +95,7 @@ namespace FEM2DTests.MatrixTest
                 {36,-24,-36,0,0,24 }
             });
 
-            var calculator = new MatrixCalculator();
+            var calculator = new MembraneMatrix();
             var actualK = calculator.GetK(t, A, B, D);
 
             Assert.That(actualK.IsApproximatelyEqualTo(expectedK));

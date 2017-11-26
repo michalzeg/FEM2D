@@ -48,8 +48,8 @@ namespace Output.OutputCreator
                 MinSyy = syy.Min(),
                 MinTxy = txy.Min(),
 
-                MaxUx = this.results.NodeResults.Max(e => Math.Abs(e.UX)),
-                MaxUy = this.results.NodeResults.Max(e => Math.Abs(e.UY)),
+                MaxUx = this.results.MembraneNodeResults.Max(e => Math.Abs(e.UX)),
+                MaxUy = this.results.MembraneNodeResults.Max(e => Math.Abs(e.UY)),
 
                 SxxPercentile005 = sxx.Percentile(percentileMin),
                 SxxPercentile095 = sxx.Percentile(percentileMax),
@@ -68,7 +68,7 @@ namespace Output.OutputCreator
 
         private void CreateNodeOutput()
         {
-            this.nodes = this.results.NodeResults
+            this.nodes = this.results.MembraneNodeResults
                         .Select(n => n.ConvertToOutput())
                         .ToList();
         }

@@ -18,7 +18,7 @@ namespace FEM2D.Elements
     {
         private static int counter = 1;
 
-        private readonly MatrixCalculator matrixCalculator;
+        private readonly MembraneMatrix matrixCalculator;
 
         public int Number { get; private set; }
         public double Area { get; private set; }
@@ -40,7 +40,7 @@ namespace FEM2D.Elements
 
             calculateArea();
 
-            this.matrixCalculator = new MatrixCalculator();
+            this.matrixCalculator = new MembraneMatrix();
         }
 
         public Matrix<double> GetD()
