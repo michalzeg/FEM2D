@@ -39,8 +39,8 @@ namespace FEM2DTests.Solvers
             };
             var loads = new[] { nodeLoad };
 
-            var element1 = new TriangleElement(node1, node2, node4, material);
-            var element2 = new TriangleElement(node3, node4, node2, material);
+            var element1 = new TriangleElement(node1, node2, node4, material,1);
+            var element2 = new TriangleElement(node3, node4, node2, material,2);
             var elements = new[] { element1, element2 };
 
 
@@ -48,7 +48,16 @@ namespace FEM2DTests.Solvers
             solver.Solve(elements, nodes, loads);
             var results = solver.Results;
 
+            Assert.Multiple(() =>
+            {
+                Assert.That(results.TriangleResult[0].SigmaX, Is.EqualTo(-93d).Within(1d));
+                Assert.That(results.TriangleResult[0].SigmaY, Is.EqualTo(-1136d).Within(1d));
+                Assert.That(results.TriangleResult[0].TauXY, Is.EqualTo(-62d).Within(1d));
 
+                Assert.That(results.TriangleResult[1].SigmaX, Is.EqualTo(93d).Within(1d));
+                Assert.That(results.TriangleResult[1].SigmaY, Is.EqualTo(23d).Within(1d));
+                Assert.That(results.TriangleResult[1].TauXY, Is.EqualTo(-297d).Within(1d));
+            });
         }
     }
 }

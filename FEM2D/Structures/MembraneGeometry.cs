@@ -54,12 +54,14 @@ namespace FEM2D.Structures
         private void CreateTriangleElements()
         {
             var triangleElements = new List<TriangleElement>();
+            var counter = 1;
             foreach (var triangle in this.triangles)
             {
                 var node1 = this.vertexNodeMap[triangle.Vertex1];
                 var node2 = this.vertexNodeMap[triangle.Vertex2];
                 var node3 = this.vertexNodeMap[triangle.Vertex3];
-                var triangleElement = new TriangleElement(node1, node2, node3, this.membraneData.Properties);
+                var triangleElement = new TriangleElement(node1, node2, node3, this.membraneData.Properties,counter);
+                counter++;
                 triangleElements.Add(triangleElement);
             }
             this.Elements = triangleElements;

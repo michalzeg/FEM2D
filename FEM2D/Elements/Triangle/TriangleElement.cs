@@ -16,7 +16,6 @@ namespace FEM2D.Elements
 {
     public class TriangleElement : ITriangleElement
     {
-        private static int counter = 1;
 
         private readonly MembraneMatrix matrixCalculator;
 
@@ -30,13 +29,12 @@ namespace FEM2D.Elements
         private Matrix<double> D;
         private Matrix<double> K;
 
-        public TriangleElement(Node p1, Node p2, Node p3,MembraneProperties properties)
+        public TriangleElement(Node p1, Node p2, Node p3,MembraneProperties properties,int number)
         {
             this.Nodes = new[] { p1, p2, p3 };
             this.Properties = properties;
             this.NumberOfDOFs = 6;
-            this.Number = counter;
-            counter++;
+            this.Number = number;
 
             calculateArea();
 

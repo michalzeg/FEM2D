@@ -28,7 +28,7 @@ namespace FEM2DTests.Elements
                 Thickness = 10,
             };
 
-            var element = new TriangleElement(node1, node2, node3, membraneProperties);
+            var element = new TriangleElement(node1, node2, node3, membraneProperties,1);
 
             var expectedArea = 0.5 * 10 * 30;
             var actualArea = element.Area;
