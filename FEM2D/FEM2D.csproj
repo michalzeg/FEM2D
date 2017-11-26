@@ -58,6 +58,7 @@
     <Compile Include="Matrix\HashMatrix.cs" />
     <Compile Include="Matrix\MembraneMatrix.cs" />
     <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\Nodes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restraints\Restraint.cs" />
     <Compile Include="Results\Nodes\MembraneNodeResult.cs" />

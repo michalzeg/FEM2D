@@ -16,7 +16,8 @@ namespace FEM2DTests.Nodes
         public void Node_ReturnsDOFs()
         {
             var p = new PointD(10, 20);
-            var node = new Node(p,1);
+            var nodes = new NodeCollection();
+            var node = nodes.Create(p);
             var number = node.Number;
 
             var expectedDOFs = new[] { number * 2-2, number * 2 -1};

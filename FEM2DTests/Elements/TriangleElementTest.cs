@@ -19,9 +19,10 @@ namespace FEM2DTests.Elements
         [Test]
         public void TriangleElement_GetArea()
         {
-            var node1 = new Node(new PointD(0, 0),1);
-            var node2 = new Node(new PointD(10, 0),2);
-            var node3 = new Node(new PointD(20, 30),3);
+            var nodes = new NodeCollection();
+            var node1 = nodes.Create(new PointD(0, 0));
+            var node2 = nodes.Create(new PointD(10, 0));
+            var node3 = nodes.Create(new PointD(20, 30));
 
             var membraneProperties = new MembraneProperties
             {

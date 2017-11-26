@@ -11,11 +11,11 @@ namespace FEM2D.Nodes
 {
     public class Node : IEquatable<Node>
     {
-        public int Number { get; private set; }
+        public int Number { get; internal set; }
         public PointD Coordinates { get; private set; }
         public Restraint Restraint { get; internal set; }
 
-        public Node(PointD coordinates,int number,Restraint restraint = Restraint.Free)
+        internal Node(PointD coordinates,int number,Restraint restraint = Restraint.Free)
         {
             Condition.Requires(coordinates);
 
@@ -25,7 +25,7 @@ namespace FEM2D.Nodes
             this.Restraint = restraint;
             
         }
-        public Node(double x, double y,int number,Restraint restraint = Restraint.Free)
+        internal Node(double x, double y,int number,Restraint restraint = Restraint.Free)
             :this(new PointD(x,y),number,restraint)
         {
             
@@ -54,12 +54,11 @@ namespace FEM2D.Nodes
         }
         public override int GetHashCode()
         {
-            return this.Number.GetHashCode() ^ this.Coordinates.GetHashCode();
+            return this.Coordinates.GetHashCode();
         }
         public bool Equals(Node other)
         {
-            return (this.Number == other.Number
-                && this.Coordinates == other.Coordinates);
+            return this.Coordinates == other.Coordinates;
         }
         public static bool operator ==(Node node1, Node node2)
         {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FEM2D.Matrix;
+using FEM2D.Nodes;
 using Common.Extensions;
 using FEM2D.Nodes;
 using Common.DTO;
@@ -43,11 +44,12 @@ namespace FEM2DTests.MatrixTest
         [Test]
         public void MatrixCalculator_GetB()
         {
-            var node1 = new Node(3, 0,1);
-            var node2 = new Node(3, 2,2);
-            var node3 = new Node(0, 0,3);
+            var nodes = new NodeCollection();
+            var node1 = nodes.Create(3, 0);
+            var node2 = nodes.Create(3, 2);
+            var node3 = nodes.Create(0, 0);
 
-            var nodes = new[] { node1, node2, node3 };
+           
 
             //taken from book
             var expectedB = DenseMatrix.OfArray(new double[,]
@@ -58,7 +60,7 @@ namespace FEM2DTests.MatrixTest
             }) * 1 / 6;
 
             var calculator = new MembraneMatrix();
-            var actualB = calculator.GetB(nodes);
+            var actualB = calculator.GetB(nodes.GetAll());
 
             Assert.That(actualB.IsApproximatelyEqualTo(expectedB));
         }
@@ -66,9 +68,6 @@ namespace FEM2DTests.MatrixTest
         [Test]
         public void MatrixCalculator_GetK()
         {
-
-
-
             var t = 2;
             var A = 3;
 
