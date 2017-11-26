@@ -51,8 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elements\ITriangleElement.cs" />
-    <Compile Include="Elements\TriangleElement.cs" />
+    <Compile Include="Elements\Triangle\ITriangleElement.cs" />
+    <Compile Include="Elements\Triangle\TriangleElement.cs" />
     <Compile Include="Loads\NodalLoad.cs" />
     <Compile Include="Loads\TriangleEdgeLoad.cs" />
     <Compile Include="Matrix\HashMatrix.cs" />
