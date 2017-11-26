@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\BeamProperties.cs" />
     <Compile Include="DTO\Edge.cs" />
     <Compile Include="DTO\MembraneOutputData.cs" />
     <Compile Include="DTO\MembraneProperties.cs" />

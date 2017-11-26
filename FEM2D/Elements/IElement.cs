@@ -11,9 +11,8 @@ namespace FEM2D.Elements
     public interface IElement
     {
         Node[] Nodes { get; }
-        Matrix<double> GetK();
+        Matrix<double> GetStiffnessMatrix();
         int[] GetDOFs();
         int Number { get; }
-        int NumberOfDOFs { get; }
     }
 }

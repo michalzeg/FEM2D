@@ -41,5 +41,15 @@ namespace FEM2D.Nodes
         {
             return this.coordinatesNodeMap.Select(n => n.Value).ToList();
         }
+
+        public void GetNodeCount()
+        {
+
+        }
+
+        public void GetDOFsCount()
+        {
+
+        }
     }
 }

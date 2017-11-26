@@ -1,0 +1,47 @@
+﻿using Common.DTO;
+using FEM2D.Elements.Beam;
+using FEM2D.Nodes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FEM2D.Elements
+{
+    public class ElementCollection
+    {
+        private readonly IList<IElement> elements;
+        private int freeNumber = 1;
+
+        public ElementCollection()
+        {
+            this.elements = new List<IElement>();
+        }
+
+        public IBeamElement CreateBeam(Node node1, Node node2, BeamProperties beamProperties)
+        {
+            return null;
+        }
+
+        public ITriangleElement CreateTriangle(Node node1, Node node2, Node node3, MembraneProperties membraneProperties)
+        {
+            var element = new TriangleElement(node1, node2, node3, membraneProperties, this.freeNumber);
+            this.elements.Add(element);
+            freeNumber++;
+            return element;
+        }
+
+        public IEnumerable<IBeamElement> GetBeamElements()
+        {
+            var result = this.elements.OfType<IBeamElement>();
+            return result;
+        }
+
+        public IEnumerable<ITriangleElement> GetMembraneElements()
+        {
+            var result = this.elements.OfType<ITriangleElement>();
+            return result;
+        }
+    }
+}

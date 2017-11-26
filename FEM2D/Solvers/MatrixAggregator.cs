@@ -20,7 +20,7 @@ namespace FEM2D.Solvers
             foreach (var element in elements)
             {
                 var dofs = element.GetDOFs();
-                var k = element.GetK();
+                var k = element.GetStiffnessMatrix();
                 for (int i = 0; i < k.ColumnCount; i++)
                 {
                     for (int j = 0; j < k.RowCount; j++)

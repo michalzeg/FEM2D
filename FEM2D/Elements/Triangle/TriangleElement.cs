@@ -23,17 +23,15 @@ namespace FEM2D.Elements
         public double Area { get; private set; }
         public Node[] Nodes { get; private set; }
         public MembraneProperties Properties { get; private set; }
-        public int NumberOfDOFs { get; private set; }
 
         private Matrix<double> B;
         private Matrix<double> D;
         private Matrix<double> K;
 
-        public TriangleElement(Node p1, Node p2, Node p3,MembraneProperties properties,int number)
+        internal TriangleElement(Node p1, Node p2, Node p3,MembraneProperties properties,int number)
         {
             this.Nodes = new[] { p1, p2, p3 };
             this.Properties = properties;
-            this.NumberOfDOFs = 6;
             this.Number = number;
 
             calculateArea();
@@ -59,7 +57,7 @@ namespace FEM2D.Elements
             return this.B;
         }
 
-        public Matrix<double> GetK()
+        public Matrix<double> GetStiffnessMatrix()
         {
             if (this.K == null)
             {
