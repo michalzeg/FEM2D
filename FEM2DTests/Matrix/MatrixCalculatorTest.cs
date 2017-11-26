@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using FEM2D.Matrix;
 using FEM2D.Nodes;
 using Common.Extensions;
-using FEM2D.Nodes;
 using Common.DTO;
 
 namespace FEM2DTests.MatrixTest
