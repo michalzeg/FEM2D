@@ -81,7 +81,7 @@
     <Compile Include="Solvers\MatrixAggregator.cs" />
     <Compile Include="Solvers\Solver.cs" />
     <Compile Include="Structures\Structure.cs" />
-    <Compile Include="Structures\MembraneCreator.cs" />
+    <Compile Include="Geometries\MembraneCreator.cs" />
     <Compile Include="Utils\CantorHashFunction.cs" />
     <Compile Include="Utils\IHashFunction.cs" />
   </ItemGroup>

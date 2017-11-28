@@ -16,35 +16,32 @@ namespace FEM2D.Structures
     public class Structure
     {
         private readonly Solver solver;
-        private readonly MeshCreator meshCreator;
-        private IList<NodalLoad> loads;
+        
+        private IList<NodalLoad> nodalLoads;
 
-
-        public MembraneCreator Geometry { get; private set; }
         public NodeFactory NodeFactory { get; private set; }
         public ElementFactory ElementFactory { get; private set; }
         public ResultProvider Results { get; private set; }
 
         public Structure()
         {
-            this.meshCreator = new MeshCreator();
-            this.Geometry = new MembraneCreator();
             this.solver = new Solver();
             this.NodeFactory = new NodeFactory();
             this.ElementFactory = new ElementFactory();
+            this.nodalLoads = new List<NodalLoad>();
         }
 
         public void Solve()
         {
-            this.solver.Solve(this.ElementFactory, this.NodeFactory, this.loads);
+            this.solver.Solve(this.ElementFactory, this.NodeFactory, this.nodalLoads);
             this.Results = this.solver.Results;
         }
 
         public void AddMembraneGeometry(MembraneInputData membraneData)
         {
-            var triangles = this.meshCreator.CreateMesh(membraneData);
-            this.Geometry.CreateGeometry(triangles, membraneData);
-            this.loads = this.Geometry.NodalLoads;
+            var membraneCreator = new MembraneCreator(this.NodeFactory,this.ElementFactory);
+            membraneCreator.CreateGeometry(membraneData);
+            this.nodalLoads.Concat(membraneCreator.NodalLoads);
         }
        
     }

@@ -9,11 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Triangulation;
 
 namespace FEM2D.Structures
 {
     public class MembraneCreator
     {
+        private readonly MeshCreator meshCreator;
+
         public IList<NodalLoad> NodalLoads { get; private set; }
 
         private IEnumerable<TriangleGeometry> triangles;
@@ -23,17 +26,18 @@ namespace FEM2D.Structures
 
         private Dictionary<PointD, Node> vertexNodeMap;
 
-        public MembraneCreator()
+        public MembraneCreator(NodeFactory nodeFactory, ElementFactory elementFactory)
         {
+            this.meshCreator = new MeshCreator();
             this.NodalLoads = new List<NodalLoad>();
 
-            this.nodeFactory = new NodeFactory();
-            this.elementFactory = new ElementFactory();
+            this.nodeFactory = nodeFactory;
+            this.elementFactory = elementFactory;
         }
 
-        public void CreateGeometry(IEnumerable<TriangleGeometry> triangles, MembraneInputData membraneData)
+        public void CreateGeometry(MembraneInputData membraneData)
         {
-            this.triangles = triangles;
+            this.triangles = this.meshCreator.CreateMesh(membraneData);
             this.membraneData = membraneData;
 
             this.CreateNodes();
@@ -45,7 +49,7 @@ namespace FEM2D.Structures
 
         private void CreateNodes()
         {
-            var vertices = triangles.Select(e => new[] { e.Vertex1, e.Vertex2, e.Vertex3 })
+            var vertices = this.triangles.Select(e => new[] { e.Vertex1, e.Vertex2, e.Vertex3 })
                 .SelectMany(e => e).Distinct();
 
             var nodes = vertices.Select(vertex => this.nodeFactory.Create(vertex)).ToList();
