@@ -64,12 +64,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Elements\TriangleElementTest.cs" />
+    <Compile Include="Integration\Membrane_Integration.cs" />
     <Compile Include="Matrix\MatrixCalculatorTest.cs" />
     <Compile Include="Nodes\Dofs\DofTests.cs" />
     <Compile Include="Nodes\NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\CholeskyDescompositionTests.cs" />
-    <Compile Include="Solvers\Solver.cs" />
+    <Compile Include="Integration\Solver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
