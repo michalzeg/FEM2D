@@ -21,7 +21,7 @@ namespace FEM2D.Elements
 
         public IBeamElement CreateBeam(Node node1, Node node2, BeamProperties beamProperties)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         public ITriangleElement CreateTriangle(Node node1, Node node2, Node node3, MembraneProperties membraneProperties)
