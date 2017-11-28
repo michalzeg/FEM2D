@@ -76,6 +76,24 @@ namespace FEM2DTests.Nodes
         }
 
         [Test]
+        public void Node_ReturnsAppropriateNumbers()
+        {
+            var node1 = nodeFactory.Create(p1);
+            var node2 = nodeFactory.Create(p2);
+            var node3 = nodeFactory.Create(p3);
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(node1.Number, Is.EqualTo(1));
+                Assert.That(node2.Number, Is.EqualTo(2));
+                Assert.That(node3.Number, Is.EqualTo(3));
+            });
+
+            
+
+        }
+
+        [Test]
         public void Node_ReturnsDistanceToOtherNode()
         {
             var node1 = nodeFactory.Create(p1);
