@@ -15,13 +15,13 @@ namespace Output.OutputCreator
         private const int percentileMin = 5;
         private const int percentileMax = 95;
 
-        private readonly ResultProvider results;
+        private readonly ResultFactory results;
         private readonly MembraneInputData inputData;
 
         private IList<NodeOutput> nodes;
         private IList<TriangleOutput> triangles;
 
-        public OutputCreator(ResultProvider results, MembraneInputData inputData = null)
+        public OutputCreator(ResultFactory results, MembraneInputData inputData = null)
         {
             this.results = results;
             this.inputData = inputData;

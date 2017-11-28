@@ -13,7 +13,7 @@ namespace FEM2DTests.Integration
     [TestFixture]
     public class MembraneIntegrationTests
     {
-        private ResultProvider result;
+        private ResultFactory result;
         private MembraneInputData membraneData;
         private Structure structure;
 

@@ -19,7 +19,7 @@ namespace FEM2D.Solvers
         private readonly IBoundaryProvider boundaryProvider;
         private readonly IMatrixSolver matrixSolver;
 
-        public ResultProvider Results { get; private set; }
+        public ResultFactory Results { get; private set; }
 
         public Solver()
         {
@@ -45,7 +45,7 @@ namespace FEM2D.Solvers
             this.boundaryProvider.Reduce(reducedStiffnessMatrix, reducedLoadVector);
 
             var displacements = this.matrixSolver.Solve(reducedStiffnessMatrix, reducedLoadVector);
-            this.Results = new ResultProvider(displacements, nodes, elements);
+            this.Results = new ResultFactory(displacements, nodes, elements);
         }
     }
 }

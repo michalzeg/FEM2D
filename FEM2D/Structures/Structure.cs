@@ -21,7 +21,7 @@ namespace FEM2D.Structures
 
         public NodeFactory NodeFactory { get; private set; }
         public ElementFactory ElementFactory { get; private set; }
-        public ResultProvider Results { get; private set; }
+        public ResultFactory Results { get; private set; }
 
         public Structure()
         {

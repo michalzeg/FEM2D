@@ -69,7 +69,7 @@
     <Compile Include="Restraints\Restraint.cs" />
     <Compile Include="Results\Nodes\MembraneNodeResult.cs" />
     <Compile Include="Results\Nodes\NodeResult.cs" />
-    <Compile Include="Results\ResultProvider.cs" />
+    <Compile Include="Results\ResultFactory.cs" />
     <Compile Include="Results\TriangleElementResult.cs" />
     <Compile Include="Solvers\BoundaryProvider.cs" />
     <Compile Include="Solvers\CholeskyDescomposition.cs" />

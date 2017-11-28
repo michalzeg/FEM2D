@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Results
 {
-    public class ResultProvider
+    public class ResultFactory
     {
         private Dictionary<int, double> globalDisplacements;
         private Dictionary<Node, ITriangleElement[]> nodeElementsMap;
@@ -23,7 +23,7 @@ namespace FEM2D.Results
         public IList<MembraneNodeResult> MembraneNodeResults { get; private set; }
         public IList<TriangleResult> TriangleResult { get; private set; }
 
-        public ResultProvider(Vector<double> displacements, IEnumerable<Node> nodes, IEnumerable<IElement> elements)
+        public ResultFactory(Vector<double> displacements, IEnumerable<Node> nodes, IEnumerable<IElement> elements)
         {
 
             this.nodes = nodes;
