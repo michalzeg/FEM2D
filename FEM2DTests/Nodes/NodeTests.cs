@@ -14,22 +14,37 @@ namespace FEM2DTests.Nodes
     [TestFixture]
     public class NodeTests
     {
+        NodeFactory nodeFactory;
+        ElementFactory elementFactory;
+        MembraneProperties membraneProperties;
+        BeamProperties beamProperties;
+
+        PointD p1;
+        PointD p2;
+        PointD p3;
+
+        [SetUp]
+        public void Setup()
+        {
+            nodeFactory = new NodeFactory();
+            elementFactory = new ElementFactory();
+            membraneProperties = MembraneProperties.Default;
+            beamProperties = BeamProperties.Default;
+
+            p1 = new PointD(10, 20);
+            p2 = new PointD(20, 20);
+            p3 = new PointD(20, 30);
+        }
+
         [Test]
         public void Node_ReturnsMembraneDOFs()
         {
-            var nodes = new NodeFactory();
-            var elements = new ElementFactory();
-            var properties = MembraneProperties.Default;
+            
+            var node1 = nodeFactory.Create(p1);
+            var node2 = nodeFactory.Create(p2);
+            var node3 = nodeFactory.Create(p3);
 
-            var p1 = new PointD(10, 20);
-            var p2 = new PointD(20, 20);
-            var p3 = new PointD(20, 30);
-
-            var node1 = nodes.Create(p1);
-            var node2 = nodes.Create(p2);
-            var node3 = nodes.Create(p3);
-
-            var element = elements.CreateTriangle(node1, node2, node3, properties);
+            var element = elementFactory.CreateTriangle(node1, node2, node3, membraneProperties);
 
             var expectedDOFs1 = new[] { 0, 1 };
             var expectedDOFs2 = new[] { 2, 3 };
@@ -51,6 +66,12 @@ namespace FEM2DTests.Nodes
         [Test]
         [Ignore("To be implemented")]
         public void Node_ReturnsBeamDOFs()
+        {
+        }
+
+        [Test]
+        [Ignore("To be implemented")]
+        public void Node_ReturnsBeamAndMembraneDOFs()
         {
         }
     }
