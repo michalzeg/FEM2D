@@ -41,7 +41,7 @@ namespace FEM2D.Structures
         {
             var membraneCreator = new MembraneCreator(this.NodeFactory,this.ElementFactory);
             membraneCreator.CreateGeometry(membraneData);
-            this.nodalLoads.Concat(membraneCreator.NodalLoads);
+            this.nodalLoads = this.nodalLoads.Concat(membraneCreator.NodalLoads).ToList();
         }
        
     }

@@ -25,10 +25,10 @@ namespace TestApplication
         static void Main(string[] args)
         {
             //ResultsToJSon();
-            //ResultsToDxfCantilever();
+            ResultsToDxfCantilever();
             //ResultsToDxfMembrane();
             //ResultsToDxfMembrane1x1();
-            AppTest();
+            //AppTest();
 
         }
 
@@ -512,8 +512,8 @@ namespace TestApplication
                 Number = 2,
                 X = 500,
                 Y = 0,
-                SupportX = false,
-                SupportY = false,
+                SupportX = true,
+                SupportY = true,
                 LoadX = 0,
                 LoadY = 0,
 
@@ -523,8 +523,8 @@ namespace TestApplication
                 Number = 3,
                 X = 1500,
                 Y = 0,
-                SupportX = false,
-                SupportY = false,
+                SupportX = true,
+                SupportY = true,
                 LoadX = 0,
                 LoadY = 0,
             };
@@ -580,6 +580,7 @@ namespace TestApplication
                 Number = 5,
                 Start = vertex5,
                 End = vertex1,
+
 
             };
 
