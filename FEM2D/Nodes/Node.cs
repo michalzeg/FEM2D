@@ -11,13 +11,17 @@ namespace FEM2D.Nodes
 {
     public class Node : IEquatable<Node>
     {
+        private Dof dof;
+
         public int Number { get; internal set; }
         public PointD Coordinates { get; private set; }
         public Restraint Restraint { get; internal set; }
 
-        internal Node(PointD coordinates,int number,Restraint restraint = Restraint.Free)
+        internal Node(PointD coordinates,int number,IDofNumberCalculator dofCalculator, Restraint restraint = Restraint.Free)
         {
             Condition.Requires(coordinates);
+
+            this.dof = new Dof(dofCalculator);
 
             this.Number = number;
 
@@ -25,17 +29,31 @@ namespace FEM2D.Nodes
             this.Restraint = restraint;
             
         }
-        internal Node(double x, double y,int number,Restraint restraint = Restraint.Free)
-            :this(new PointD(x,y),number,restraint)
+        internal Node(double x, double y,int number,IDofNumberCalculator dofCalculator, Restraint restraint = Restraint.Free)
+            :this(new PointD(x,y),number,dofCalculator,restraint)
         {
             
         }
 
+        public void SetMembraneDofs()
+        {
+            this.dof.SetUxDof();
+            this.dof.SetUyDof();
+
+        }
+        public void SetBeamDofs()
+        {
+            this.SetMembraneDofs();
+            this.dof.SetRzDof();
+        }
+
         public int[] GetDOF()
         {
+            //return this.dof.GetDofs();
             var result = new[] { 2*Number - 2, 2*Number -1};
             return result;
         }
+
 
         public double DistanceTo(Node node)
         {

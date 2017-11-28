@@ -16,7 +16,7 @@ namespace FEM2DTests.Nodes
         public void Node_ReturnsDOFs()
         {
             var p = new PointD(10, 20);
-            var nodes = new NodeCollection();
+            var nodes = new NodeFactory();
             var node = nodes.Create(p);
             var number = node.Number;
 

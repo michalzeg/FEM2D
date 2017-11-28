@@ -20,6 +20,8 @@ namespace FEM2D.Structures
 
         private IEnumerable<TriangleGeometry> triangles;
         private MembraneInputData membraneData;
+        private NodeFactory nodeFactory;
+
 
         private Dictionary<PointD, Node> vertexNodeMap;
 
@@ -28,6 +30,8 @@ namespace FEM2D.Structures
             this.NodalLoads = new List<NodalLoad>();
             this.Elements = new List<ITriangleElement>();
             this.Nodes = new List<Node>();
+
+            this.nodeFactory = new NodeFactory();
         }
 
         public void CreateGeometry(IEnumerable<TriangleGeometry> triangles, MembraneInputData membraneData)
@@ -47,7 +51,7 @@ namespace FEM2D.Structures
             var vertices = triangles.Select(e => new[] { e.Vertex1, e.Vertex2, e.Vertex3 })
                 .SelectMany(e => e).Distinct();
 
-            this.Nodes = vertices.Select((vertex,index) => new Node(vertex,index+1)).ToList();
+            this.Nodes = vertices.Select(vertex => this.nodeFactory.Create(vertex)).ToList();
             this.vertexNodeMap = this.Nodes.ToDictionary(e => e.Coordinates, f => f);
         }
 

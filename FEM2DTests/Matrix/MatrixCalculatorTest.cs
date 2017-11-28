@@ -43,7 +43,7 @@ namespace FEM2DTests.MatrixTest
         [Test]
         public void MatrixCalculator_GetB()
         {
-            var nodes = new NodeCollection();
+            var nodes = new NodeFactory();
             var node1 = nodes.Create(3, 0);
             var node2 = nodes.Create(3, 2);
             var node3 = nodes.Create(0, 0);

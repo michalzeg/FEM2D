@@ -19,7 +19,7 @@ namespace FEM2DTests.Elements
         [Test]
         public void TriangleElement_GetArea()
         {
-            var nodes = new NodeCollection();
+            var nodes = new NodeFactory();
             var node1 = nodes.Create(new PointD(0, 0));
             var node2 = nodes.Create(new PointD(10, 0));
             var node3 = nodes.Create(new PointD(20, 30));
@@ -28,7 +28,7 @@ namespace FEM2DTests.Elements
             {
                 Thickness = 10,
             };
-            var elements = new ElementCollection();
+            var elements = new ElementFactory();
             var element = elements.CreateTriangle(node1, node2, node3, membraneProperties);
 
             var expectedArea = 0.5 * 10 * 30;

@@ -34,7 +34,7 @@ namespace FEM2D.Solvers
           //  this.Solve(membraneGeometry.Elements, membraneGeometry.Nodes, membraneGeometry.NodalLoads);
         }
 
-        public void Solve(ElementCollection elementCollection, NodeCollection nodeCollection, IEnumerable<NodalLoad> loads)
+        public void Solve(ElementFactory elementCollection, NodeFactory nodeCollection, IEnumerable<NodalLoad> loads)
         {
             var nodes = nodeCollection.GetAll();
             var elements = elementCollection.GetAll();

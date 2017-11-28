@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Elements
 {
-    public class ElementCollection
+    public class ElementFactory
     {
         private readonly IList<IElement> elements;
         private int freeNumber = 1;
 
-        public ElementCollection()
+        public ElementFactory()
         {
             this.elements = new List<IElement>();
         }

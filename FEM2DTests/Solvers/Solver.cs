@@ -26,7 +26,7 @@ namespace FEM2DTests.Solvers
                 Thickness = 0.5
             };
 
-            var nodes = new NodeCollection();
+            var nodes = new NodeFactory();
 
             var node1 = nodes.Create(3, 0,Restraint.FixedY);
             var node2 = nodes.Create(3, 2);
@@ -41,7 +41,7 @@ namespace FEM2DTests.Solvers
             };
             var loads = new[] { nodeLoad };
 
-            var elements = new ElementCollection();
+            var elements = new ElementFactory();
             var element1 = elements.CreateTriangle(node1, node2, node4, material);
             var element2 = elements.CreateTriangle(node3, node4, node2, material);
 

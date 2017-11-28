@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Nodes
 {
-    public class NodeCollection
+    public class NodeFactory
     {
         private readonly IDictionary<PointD, Node> coordinatesNodeMap;
+        private readonly IDofNumberCalculator dofCalculator;
 
         private int freeNumber = 1;
 
-        public NodeCollection()
+        public NodeFactory()
         {
+            this.dofCalculator = new DofNumberCalculator();
             this.coordinatesNodeMap = new Dictionary<PointD, Node>();
         }
 
@@ -26,7 +28,7 @@ namespace FEM2D.Nodes
             {
                 return this.coordinatesNodeMap[coordinates];
             }
-            var node = new Node(coordinates, this.freeNumber, restraint);
+            var node = new Node(coordinates, this.freeNumber,this.dofCalculator, restraint);
             this.coordinatesNodeMap.Add(coordinates, node);
             this.freeNumber++;
             return node;
@@ -42,9 +44,9 @@ namespace FEM2D.Nodes
             return this.coordinatesNodeMap.Select(n => n.Value).ToList();
         }
 
-        public void GetNodeCount()
+        public int GetNodeCount()
         {
-
+            return this.coordinatesNodeMap.Count;
         }
 
         public void GetDOFsCount()
