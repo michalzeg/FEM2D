@@ -74,5 +74,18 @@ namespace FEM2DTests.Nodes
         public void Node_ReturnsBeamAndMembraneDOFs()
         {
         }
+
+        [Test]
+        public void Node_ReturnsDistanceToOtherNode()
+        {
+            var node1 = nodeFactory.Create(p1);
+            var node3 = nodeFactory.Create(p3);
+
+            var expectedDistance = 10d * Math.Sqrt(2);
+            var actualDistance = node1.DistanceTo(node3);
+
+            Assert.That(expectedDistance, Is.EqualTo(actualDistance).Within(1).Percent);
+            
+        }
     }
 }
