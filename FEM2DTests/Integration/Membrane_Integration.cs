@@ -14,15 +14,17 @@ namespace FEM2DTests.Integration
     public class MembraneIntegrationTests
     {
         private ResultProvider result;
+        private MembraneInputData membraneData;
+        private Structure structure;
 
         [OneTimeSetUp]
         public void Setup()
         {
-            var membraneData = GetMembraneData();
+            this.membraneData = GetMembraneData();
 
-            var structure = new Structure();
-            structure.AddMembraneGeometry(membraneData);
-            structure.Solve();
+            this.structure = new Structure();
+            this.structure.AddMembraneGeometry(membraneData);
+            this.structure.Solve();
 
             this.result = structure.Results;
         }
@@ -61,6 +63,24 @@ namespace FEM2DTests.Integration
             });
 
         }
+
+        [Test]
+        public void Membrane_Integration_NumberOfNodesAndElements_Passed()
+        {
+            var expectedNodeCount = 26;
+            var expectedElementCount = 27;
+
+            var actualNodeCount = this.structure.NodeFactory.GetNodeCount();
+            var actualElementCount = this.structure.ElementFactory.GetAll().Count();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(expectedElementCount, Is.EqualTo(actualElementCount));
+                Assert.That(expectedNodeCount, Is.EqualTo(actualNodeCount));
+            });
+        }
+
+
 
         private static MembraneInputData GetMembraneData()
         {
