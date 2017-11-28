@@ -24,8 +24,8 @@ namespace Triangulation
             var mesh = GetMesh(area);
 
             mesh.Triangulate(geometry);
-            mesh.Smooth();
-            mesh.Refine();
+            //mesh.Smooth();
+            //mesh.Refine();
             
             var triangles = mesh.Triangles.Select(e => e.ToTriangleGeometry());
 
