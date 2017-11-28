@@ -49,7 +49,7 @@ namespace FEM2D.Nodes
 
         public int[] GetDOF()
         {
-            //return this.dof.GetDofs();
+            return this.dof.GetDofs();
             var result = new[] { 2*Number - 2, 2*Number -1};
             return result;
         }

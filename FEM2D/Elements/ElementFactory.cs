@@ -29,6 +29,11 @@ namespace FEM2D.Elements
             var element = new TriangleElement(node1, node2, node3, membraneProperties, this.freeNumber);
             this.elements.Add(element);
             freeNumber++;
+
+            node1.SetMembraneDofs();
+            node2.SetMembraneDofs();
+            node3.SetMembraneDofs();
+
             return element;
         }
 

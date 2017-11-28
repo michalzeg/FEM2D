@@ -11,9 +11,9 @@ namespace FEM2D.Nodes
     /// </summary>
     internal class Dof
     {
-        private int dofUx;
-        private int dofUy;
-        private int dofRz;
+        private int? dofUx;
+        private int? dofUy;
+        private int? dofRz;
 
         private IDofNumberCalculator dofCalculator;
 
@@ -26,9 +26,13 @@ namespace FEM2D.Nodes
             this.SetRzDof = this.SetRzDofAction;
         }
 
-        public IEnumerable<int> GetDofs()
+        public int[] GetDofs()
         {
-            return new[] { this.dofUx, this.dofUy, this.dofRz };
+            var dofs = new[] { this.dofUx, this.dofUy, this.dofRz }
+                             .Where(e => e.HasValue)
+                             .Select(e=>e.Value)
+                             .ToArray();
+            return dofs;
         }
 
         public Action SetUxDof  { get; private set; }
