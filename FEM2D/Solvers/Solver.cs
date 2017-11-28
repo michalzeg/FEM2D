@@ -29,10 +29,6 @@ namespace FEM2D.Solvers
             this.matrixSolver = new CholeskyDescomposition();
         }
 
-        public void Solve(MembraneGeometry membraneGeometry)
-        {
-          //  this.Solve(membraneGeometry.Elements, membraneGeometry.Nodes, membraneGeometry.NodalLoads);
-        }
 
         public void Solve(ElementFactory elementCollection, NodeFactory nodeCollection, IEnumerable<NodalLoad> loads)
         {

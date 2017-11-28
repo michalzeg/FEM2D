@@ -12,26 +12,23 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Structures
 {
-    public class MembraneGeometry
+    public class MembraneCreator
     {
-        public IEnumerable<Node> Nodes { get; private set; }
-        public IEnumerable<ITriangleElement> Elements { get; private set; }
         public IList<NodalLoad> NodalLoads { get; private set; }
 
         private IEnumerable<TriangleGeometry> triangles;
         private MembraneInputData membraneData;
-        private NodeFactory nodeFactory;
-
+        private readonly NodeFactory nodeFactory;
+        private readonly ElementFactory elementFactory;
 
         private Dictionary<PointD, Node> vertexNodeMap;
 
-        public MembraneGeometry()
+        public MembraneCreator()
         {
             this.NodalLoads = new List<NodalLoad>();
-            this.Elements = new List<ITriangleElement>();
-            this.Nodes = new List<Node>();
 
             this.nodeFactory = new NodeFactory();
+            this.elementFactory = new ElementFactory();
         }
 
         public void CreateGeometry(IEnumerable<TriangleGeometry> triangles, MembraneInputData membraneData)
@@ -51,24 +48,20 @@ namespace FEM2D.Structures
             var vertices = triangles.Select(e => new[] { e.Vertex1, e.Vertex2, e.Vertex3 })
                 .SelectMany(e => e).Distinct();
 
-            this.Nodes = vertices.Select(vertex => this.nodeFactory.Create(vertex)).ToList();
-            this.vertexNodeMap = this.Nodes.ToDictionary(e => e.Coordinates, f => f);
+            var nodes = vertices.Select(vertex => this.nodeFactory.Create(vertex)).ToList();
+            this.vertexNodeMap = nodes.ToDictionary(e => e.Coordinates, f => f);
         }
 
         private void CreateTriangleElements()
         {
-            var triangleElements = new List<TriangleElement>();
-            var counter = 1;
             foreach (var triangle in this.triangles)
             {
                 var node1 = this.vertexNodeMap[triangle.Vertex1];
                 var node2 = this.vertexNodeMap[triangle.Vertex2];
                 var node3 = this.vertexNodeMap[triangle.Vertex3];
-                var triangleElement = new TriangleElement(node1, node2, node3, this.membraneData.Properties,counter);
-                counter++;
-                triangleElements.Add(triangleElement);
+                var triangleElement = this.elementFactory.CreateTriangle(node1, node2, node3, this.membraneData.Properties);
+
             }
-            this.Elements = triangleElements;
         }
 
         private void ApplyNodalLoads()

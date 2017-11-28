@@ -138,13 +138,14 @@ namespace TestApplication
             var time = new Stopwatch();
             time.Start();
 
-            var membrane = new Membrane();
-            membrane.Solve(membraneData);
+            var structure = new Structure();
+            structure.AddMembraneGeometry(membraneData);
+            structure.Solve();
 
-            var nodes = membrane.Geometry.Nodes;
-            var elements = membrane.Geometry.Elements;
+            var nodes = structure.NodeFactory.GetAll();
+            var elements = structure.ElementFactory.GetAll();
 
-            var result = membrane.Results;
+            var result = structure.Results;
 
             var outputCrator = new OutputCreator(result,membraneData);
             var output = outputCrator.CreateOutput();
@@ -292,13 +293,14 @@ namespace TestApplication
                 },
             };
 
-            var membrane = new Membrane();
-            membrane.Solve(membraneData);
+            var structure = new Structure();
+            structure.AddMembraneGeometry(membraneData);
+            structure.Solve();
 
-            var nodes = membrane.Geometry.Nodes;
-            var elements = membrane.Geometry.Elements;
+            var nodes = structure.NodeFactory.GetAll();
+            var elements = structure.ElementFactory.GetAll();
 
-            var result = membrane.Results;
+            var result = structure.Results;
 
             var outputCrator = new OutputCreator(result,membraneData);
             var output = outputCrator.CreateOutput();
@@ -429,13 +431,14 @@ namespace TestApplication
                 },
             };
 
-            var membrane = new Membrane();
-            membrane.Solve(membraneData);
+            var structure = new Structure();
+            structure.AddMembraneGeometry(membraneData);
+            structure.Solve();
 
-            var nodes = membrane.Geometry.Nodes;
-            var elements = membrane.Geometry.Elements;
+            var nodes = structure.NodeFactory.GetAll();
+            var elements = structure.ElementFactory.GetAll();
 
-            var result = membrane.Results;
+            var result = structure.Results;
 
             var outputCrator = new OutputCreator(result,membraneData);
             var output = outputCrator.CreateOutput();
@@ -592,11 +595,12 @@ namespace TestApplication
                 },
             };
 
-            var membrane = new Membrane();
-            membrane.Solve(membraneData);
+            var membrane = new Structure();
+            membrane.AddMembraneGeometry(membraneData);
+            membrane.Solve();
 
-            var nodes = membrane.Geometry.Nodes;
-            var elements = membrane.Geometry.Elements;
+            var nodes = membrane.NodeFactory.GetAll();
+            var elements = membrane.ElementFactory.GetAll();
 
             var result = membrane.Results;
 

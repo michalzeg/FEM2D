@@ -17,7 +17,7 @@ namespace FEM2DTests.Solvers
     public class SolverTest
     {
         [Test]
-        public void SolverTest_Passed()
+        public void Solver_IntegrationTest_Passed()
         {
             var material = new MembraneProperties
             {
