@@ -16,7 +16,7 @@ namespace FEM2D.Solvers
     {
         private readonly IMatrixAggregator matrixAggregator;
         private readonly ILoadAggregator loadAggregator;
-        private readonly IBoundaryProvider boundaryProvider;
+        private readonly IMatrixReducer matrixReducer;
         private readonly IMatrixSolver matrixSolver;
 
         public ResultFactory Results { get; private set; }
@@ -25,7 +25,7 @@ namespace FEM2D.Solvers
         {
             this.matrixAggregator = new MatrixAggregator();
             this.loadAggregator = new LoadAggregator();
-            this.boundaryProvider = new BoundaryProvider();
+            this.matrixReducer = new MatrixReducer();
             this.matrixSolver = new CholeskyDescomposition();
         }
 
@@ -40,10 +40,10 @@ namespace FEM2D.Solvers
             var stiffnessMatrix = matrixAggregator.Aggregate(elements, dofNumber);
             var loadVector = loadAggregator.Aggregate(loads, dofNumber);
 
-            var reducedStiffnessMatrix = stiffnessMatrix.Clone();
-            var reducedLoadVector = loadVector.Clone();
-            this.boundaryProvider.CreateVector(nodes, dofNumber);
-            this.boundaryProvider.Reduce(reducedStiffnessMatrix, reducedLoadVector);
+            this.matrixReducer.Initialize(nodes, dofNumber);
+            var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
+            var reducedLoadVector = this.matrixReducer.ReduceVector(loadVector);
+            
 
             var displacements = this.matrixSolver.Solve(reducedStiffnessMatrix, reducedLoadVector);
             this.Results = new ResultFactory(displacements, nodes, elements);

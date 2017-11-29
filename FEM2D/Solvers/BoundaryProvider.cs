@@ -10,19 +10,21 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
-    public class BoundaryProvider : IBoundaryProvider
+    public class MatrixReducer : IMatrixReducer
     {
 
-        public Vector<double> BundaryVector { get; private set; }
+        private Vector<double> bundaryVector;
+        private IEnumerable<int> dofsToReduce;
 
-        public BoundaryProvider()
+
+        public MatrixReducer()
         {
 
         }
 
-        public void CreateVector(IEnumerable<Node> nodes, int dofCount)
+        public void Initialize(IEnumerable<Node> nodes, int dofCount)
         {
-            this.BundaryVector = Vector.Build.Sparse(dofCount, 1);
+            this.bundaryVector = Vector.Build.Sparse(dofCount, 1);
 
             var fixedNodes = nodes.Where(e => e.Restraint != Restraint.Free);
 
@@ -33,37 +35,46 @@ namespace FEM2D.Solvers
                 if (node.Restraint.HasFlag(Restraint.FixedX))
                 {
                     var dof = dofs[0];
-                    this.BundaryVector[dof] = 0;
+                    this.bundaryVector[dof] = 0;
                 }
                 if (node.Restraint.HasFlag(Restraint.FixedY))
                 {
                     var dof = dofs[1];
-                    this.BundaryVector[dof] = 0;
+                    this.bundaryVector[dof] = 0;
                 }
             }
-
-        }
-
-        public void Reduce(Matrix<double> matrix, Vector<double> vector)
-        {
-
-            var dofsToReduce = this.BundaryVector
+            this.dofsToReduce = this.bundaryVector
                 .Select((e, i) => new { value = e, index = i })
                 .Where(e => e.value == 0)
                 .Select(e => e.index);
+        }
+
+        public Matrix<double> ReduceMatrix(Matrix<double> matrix)
+        {
+            var reducedMatrix = matrix.Clone();
 
             foreach (var dof in dofsToReduce)
             {
-                matrix.ClearColumn(dof);
+                reducedMatrix.ClearColumn(dof);
 
-                matrix.ClearRow(dof);
+                reducedMatrix.ClearRow(dof);
 
-                matrix[dof, dof] = 1;
-
-                vector[dof] = 0;
+                reducedMatrix[dof, dof] = 1;
             }
+            return reducedMatrix;
         }
 
+        public Vector<double> ReduceVector(Vector<double> vector)
+        {
+            var reducedVector = vector.Clone();
+
+            foreach (var dof in dofsToReduce)
+            {
+                reducedVector[dof] = 0;
+            }
+
+            return reducedVector;
+        }
 
     }
 }

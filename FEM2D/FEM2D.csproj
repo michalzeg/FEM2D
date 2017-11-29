@@ -74,9 +74,9 @@
     <Compile Include="Results\TriangleElementResult.cs" />
     <Compile Include="Solvers\BoundaryProvider.cs" />
     <Compile Include="Solvers\CholeskyDescomposition.cs" />
-    <Compile Include="Solvers\IBoundaryProvider.cs" />
     <Compile Include="Solvers\ILoadAggregator.cs" />
     <Compile Include="Solvers\IMatrixAggregator.cs" />
+    <Compile Include="Solvers\IMatrixReducer.cs" />
     <Compile Include="Solvers\IMatrixSolver.cs" />
     <Compile Include="Solvers\LoadAggregator.cs" />
     <Compile Include="Solvers\MatrixAggregator.cs" />
