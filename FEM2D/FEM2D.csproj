@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\Beam\BeamElement.cs" />
     <Compile Include="Elements\Beam\IBeamElement.cs" />
     <Compile Include="Elements\ElementFactory.cs" />
     <Compile Include="Elements\IElement.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Loads\LoadFactory.cs" />
     <Compile Include="Loads\NodalLoad.cs" />
     <Compile Include="Loads\TriangleEdgeLoad.cs" />
+    <Compile Include="Matrix\BeamMatrix.cs" />
     <Compile Include="Matrix\HashMatrix.cs" />
     <Compile Include="Matrix\MembraneMatrix.cs" />
     <Compile Include="Nodes\Dofs\Dof.cs" />

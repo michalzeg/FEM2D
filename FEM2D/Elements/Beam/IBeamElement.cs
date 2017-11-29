@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace FEM2D.Elements.Beam
 {
     public interface IBeamElement : IElement
     {
-
+        BeamProperties BeamProperties { get; }
+        double Length { get; }
     }
 }
