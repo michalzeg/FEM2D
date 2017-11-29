@@ -56,6 +56,7 @@
     <Compile Include="Elements\IElement.cs" />
     <Compile Include="Elements\Triangle\ITriangleElement.cs" />
     <Compile Include="Elements\Triangle\TriangleElement.cs" />
+    <Compile Include="Loads\LoadFactory.cs" />
     <Compile Include="Loads\NodalLoad.cs" />
     <Compile Include="Loads\TriangleEdgeLoad.cs" />
     <Compile Include="Matrix\HashMatrix.cs" />

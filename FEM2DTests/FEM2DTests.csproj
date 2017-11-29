@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Elements\TriangleElementTest.cs" />
     <Compile Include="Integration\Membrane_Integration.cs" />
+    <Compile Include="Loads\LoadFactoryTests.cs" />
     <Compile Include="Matrix\MatrixCalculatorTest.cs" />
     <Compile Include="Nodes\Dofs\DofTests.cs" />
     <Compile Include="Nodes\NodeTests.cs" />
@@ -86,7 +87,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Loads\" />
     <Folder Include="Materials\" />
   </ItemGroup>
   <Choose>
