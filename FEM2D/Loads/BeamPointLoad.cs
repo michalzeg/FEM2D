@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Loads
 {
-    public class BeamPointLoad
+    public class BeamPointLoad:INodalLoad
     {
         public NodalLoad[] NodalLoads { get; }
         private readonly IBeamElement beamElement;
@@ -34,12 +34,9 @@ namespace FEM2D.Loads
         private NodalLoad GenerateNodalLoad(int nodeIndex,double relativePosition)
         {
             var loadValue = this.valueY * relativePosition;
-            var result = new NodalLoad()
-            {
-                Node = this.beamElement.Nodes[nodeIndex],
-                ValueX = 0,
-                ValueY = loadValue
-            };
+            var node = this.beamElement.Nodes[nodeIndex];
+            var result = new NodalLoad(node, 0, loadValue);
+            
             return result;
         }
 

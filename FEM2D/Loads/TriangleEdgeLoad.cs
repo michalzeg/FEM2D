@@ -36,18 +36,10 @@ namespace FEM2D.Loads
             var loadX = 0.5 * this.valueX * length;
             var loadY = 0.5 * this.valueY * length;
 
-            var load1 = new NodalLoad
-            {
-                Node = this.node1,
-                ValueX = loadX,
-                ValueY = loadY
-            };
-            var load2 = new NodalLoad
-            {
-                Node = this.node2,
-                ValueX = loadX,
-                ValueY = loadY
-            };
+            var load1 = new NodalLoad(this.node1, loadX, loadY);
+
+            var load2 = new NodalLoad(this.node2, loadX, loadY);
+            
 
             return new[] { load1, load2 };
         }

@@ -19,12 +19,8 @@ namespace FEM2D.Loads
 
         public void AddNodalLoad(Node node, double valueX, double valueY)
         {
-            var load = new NodalLoad
-            {
-                Node = node,
-                ValueX = valueX,
-                ValueY = valueY
-            };
+            var load = new NodalLoad(node, valueX, valueY);
+
             this.nodalLoads.Add(load);
         }
         public void AddBeamPointLoad(IBeamElement beamElement, double valueY)

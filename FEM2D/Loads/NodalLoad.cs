@@ -7,11 +7,20 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Loads
 {
-    public class NodalLoad
+    public class NodalLoad : INodalLoad
     {
-        public Node Node { get; set; }
-        public double ValueX { get; set; }
-        public double ValueY { get; set; }
+        public NodalLoad[] NodalLoads => new[] { this };
+
+        public Node Node { get; }
+        public double ValueX { get; }
+        public double ValueY { get; }
+
+        public NodalLoad(Node node, double valueX, double valueY)
+        {
+            this.Node = node;
+            this.ValueX = valueX;
+            this.ValueY = valueY;
+        }
 
     }
 }
