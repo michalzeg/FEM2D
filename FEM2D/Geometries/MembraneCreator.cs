@@ -79,7 +79,7 @@ namespace FEM2D.Structures
             {
                 var point = new PointD(vertex.X, vertex.Y);
                 var node = this.vertexNodeMap[point];
-                this.loadFactory.Add(node, vertex.LoadX, vertex.LoadY);
+                this.loadFactory.AddNodalLoad(node, vertex.LoadX, vertex.LoadY);
             }
         }
 

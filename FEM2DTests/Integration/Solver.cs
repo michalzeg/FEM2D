@@ -41,7 +41,7 @@ namespace FEM2DTests.Solvers
             var element2 = elements.CreateTriangle(node3, node4, node2, material);
 
             var loads = new LoadFactory();
-            loads.Add(node2, 0, -1000);
+            loads.AddNodalLoad(node2, 0, -1000);
 
             var solver = new Solver();
             solver.Solve(elements, nodes, loads);

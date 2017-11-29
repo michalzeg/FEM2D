@@ -1,4 +1,5 @@
-﻿using FEM2D.Nodes;
+﻿using FEM2D.Elements.Beam;
+using FEM2D.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace FEM2D.Loads
             this.nodalLoads = new List<NodalLoad>();
         }
 
-        public void Add(Node node, double valueX, double valueY)
+        public void AddNodalLoad(Node node, double valueX, double valueY)
         {
             var load = new NodalLoad
             {
@@ -26,7 +27,10 @@ namespace FEM2D.Loads
             };
             this.nodalLoads.Add(load);
         }
-        
+        public void AddBeamPointLoad(IBeamElement beamElement, double valueY)
+        {
+
+        }
 
         public IEnumerable<NodalLoad> GetNodalLoads()
         {

@@ -53,7 +53,7 @@ namespace TestApplication
             var elements = new ElementFactory();
 
             var loads = new LoadFactory();
-            loads.Add(node2, 0, -1000);
+            loads.AddNodalLoad(node2, 0, -1000);
 
             var element1 = elements.CreateTriangle(node1, node2, node4, material);
             var element2 = elements.CreateTriangle(node3, node4, node2, material);

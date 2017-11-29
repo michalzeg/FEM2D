@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Elements\TriangleElementTest.cs" />
     <Compile Include="Integration\Membrane_Integration.cs" />
+    <Compile Include="Loads\BeamPointLoadTests.cs" />
     <Compile Include="Loads\LoadFactoryTests.cs" />
     <Compile Include="Matrix\MatrixCalculatorTest.cs" />
     <Compile Include="Nodes\Dofs\DofTests.cs" />
