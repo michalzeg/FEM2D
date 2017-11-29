@@ -34,18 +34,14 @@ namespace FEM2DTests.Solvers
             var node4 = nodes.Create(0, 0, Restraint.Fixed);
 
 
-            var nodeLoad = new NodalLoad
-            {
-                Node = node2,
-                ValueY = -1000,// -100000
-            };
-            var loads = new[] { nodeLoad };
+
 
             var elements = new ElementFactory();
             var element1 = elements.CreateTriangle(node1, node2, node4, material);
             var element2 = elements.CreateTriangle(node3, node4, node2, material);
 
-
+            var loads = new LoadFactory();
+            loads.Add(node2, 0, -1000);
 
             var solver = new Solver();
             solver.Solve(elements, nodes, loads);

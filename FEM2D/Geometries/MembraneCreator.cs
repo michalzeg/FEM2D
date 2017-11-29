@@ -16,23 +16,26 @@ namespace FEM2D.Structures
     public class MembraneCreator
     {
         private readonly MeshCreator meshCreator;
+        private readonly NodeFactory nodeFactory;
+        private readonly ElementFactory elementFactory;
+        private readonly LoadFactory loadFactory;
 
-        public IList<NodalLoad> NodalLoads { get; private set; }
 
         private IEnumerable<TriangleGeometry> triangles;
         private MembraneInputData membraneData;
-        private readonly NodeFactory nodeFactory;
-        private readonly ElementFactory elementFactory;
+
+        
 
         private Dictionary<PointD, Node> vertexNodeMap;
 
-        public MembraneCreator(NodeFactory nodeFactory, ElementFactory elementFactory)
+        public MembraneCreator(NodeFactory nodeFactory, ElementFactory elementFactory, LoadFactory loadFactory)
         {
             this.meshCreator = new MeshCreator();
-            this.NodalLoads = new List<NodalLoad>();
+            
 
             this.nodeFactory = nodeFactory;
             this.elementFactory = elementFactory;
+            this.loadFactory = loadFactory;
         }
 
         public void CreateGeometry(MembraneInputData membraneData)
@@ -76,12 +79,7 @@ namespace FEM2D.Structures
             {
                 var point = new PointD(vertex.X, vertex.Y);
                 var node = this.vertexNodeMap[point];
-                this.NodalLoads.Add(new NodalLoad
-                {
-                    Node = node,
-                    ValueX = vertex.LoadX,
-                    ValueY = vertex.LoadY,
-                });
+                this.loadFactory.Add(node, vertex.LoadX, vertex.LoadY);
             }
         }
 

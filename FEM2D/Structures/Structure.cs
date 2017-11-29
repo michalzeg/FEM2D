@@ -17,8 +17,8 @@ namespace FEM2D.Structures
     {
         private readonly Solver solver;
         
-        private IList<NodalLoad> nodalLoads;
 
+        public LoadFactory LoadFactory { get; private set; }
         public NodeFactory NodeFactory { get; private set; }
         public ElementFactory ElementFactory { get; private set; }
         public ResultFactory Results { get; private set; }
@@ -28,20 +28,20 @@ namespace FEM2D.Structures
             this.solver = new Solver();
             this.NodeFactory = new NodeFactory();
             this.ElementFactory = new ElementFactory();
-            this.nodalLoads = new List<NodalLoad>();
+            this.LoadFactory = new LoadFactory();
+
         }
 
         public void Solve()
         {
-            this.solver.Solve(this.ElementFactory, this.NodeFactory, this.nodalLoads);
+            this.solver.Solve(this.ElementFactory, this.NodeFactory, this.LoadFactory);
             this.Results = this.solver.Results;
         }
 
         public void AddMembraneGeometry(MembraneInputData membraneData)
         {
-            var membraneCreator = new MembraneCreator(this.NodeFactory,this.ElementFactory);
+            var membraneCreator = new MembraneCreator(this.NodeFactory,this.ElementFactory,this.LoadFactory);
             membraneCreator.CreateGeometry(membraneData);
-            this.nodalLoads = this.nodalLoads.Concat(membraneCreator.NodalLoads).ToList();
         }
        
     }

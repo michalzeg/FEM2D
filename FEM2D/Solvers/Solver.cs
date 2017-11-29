@@ -30,10 +30,11 @@ namespace FEM2D.Solvers
         }
 
 
-        public void Solve(ElementFactory elementFactory, NodeFactory nodeFactory, IEnumerable<NodalLoad> loads)
+        public void Solve(ElementFactory elementFactory, NodeFactory nodeFactory, LoadFactory loadFactory)
         {
             var nodes = nodeFactory.GetAll();
             var elements = elementFactory.GetAll();
+            var loads = loadFactory.GetNodalLoads();
 
             var dofNumber = nodeFactory.GetDOFsCount();
             var stiffnessMatrix = matrixAggregator.Aggregate(elements, dofNumber);

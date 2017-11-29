@@ -11,8 +11,6 @@ namespace FEM2D.Loads
     {
         private IList<NodalLoad> nodalLoads;
 
-        public IEnumerable<NodalLoad> NodalLoads => this.nodalLoads;
-
         public LoadFactory()
         {
             this.nodalLoads = new List<NodalLoad>();
@@ -29,5 +27,10 @@ namespace FEM2D.Loads
             this.nodalLoads.Add(load);
         }
         
+
+        public IEnumerable<NodalLoad> GetNodalLoads()
+        {
+            return this.nodalLoads;
+        }
     }
 }
