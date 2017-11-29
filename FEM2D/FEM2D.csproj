@@ -72,7 +72,7 @@
     <Compile Include="Results\Nodes\NodeResult.cs" />
     <Compile Include="Results\ResultFactory.cs" />
     <Compile Include="Results\TriangleElementResult.cs" />
-    <Compile Include="Solvers\BoundaryProvider.cs" />
+    <Compile Include="Solvers\MatrixReducer.cs" />
     <Compile Include="Solvers\CholeskyDescomposition.cs" />
     <Compile Include="Solvers\ILoadAggregator.cs" />
     <Compile Include="Solvers\IMatrixAggregator.cs" />
