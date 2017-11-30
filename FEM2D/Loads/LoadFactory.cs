@@ -10,11 +10,11 @@ namespace FEM2D.Loads
 {
     public class LoadFactory
     {
-        private IList<NodalLoad> nodalLoads;
+        private IList<INodalLoad> nodalLoads;
 
         public LoadFactory()
         {
-            this.nodalLoads = new List<NodalLoad>();
+            this.nodalLoads = new List<INodalLoad>();
         }
 
         public void AddNodalLoad(Node node, double valueX, double valueY)
@@ -23,14 +23,15 @@ namespace FEM2D.Loads
 
             this.nodalLoads.Add(load);
         }
-        public void AddBeamPointLoad(IBeamElement beamElement, double valueY)
+        public void AddBeamPointLoad(IBeamElement beamElement, double valueY, double relativePosition)
         {
-
+            var load = new BeamPointLoad(beamElement, valueY, relativePosition);
+            this.nodalLoads.Add(load);
         }
 
         public IEnumerable<NodalLoad> GetNodalLoads()
         {
-            return this.nodalLoads;
+            return this.nodalLoads.SelectMany(e => e.NodalLoads);
         }
     }
 }
