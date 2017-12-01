@@ -74,8 +74,9 @@
     <Compile Include="Restraints\Restraint.cs" />
     <Compile Include="Results\Nodes\MembraneNodeResult.cs" />
     <Compile Include="Results\Nodes\NodeResult.cs" />
+    <Compile Include="Results\Nodes\NodeResults.cs" />
     <Compile Include="Results\ResultFactory.cs" />
-    <Compile Include="Results\TriangleElementResult.cs" />
+    <Compile Include="Results\Membranes\TriangleElementResult.cs" />
     <Compile Include="Solvers\MatrixReducer.cs" />
     <Compile Include="Solvers\CholeskyDescomposition.cs" />
     <Compile Include="Solvers\ILoadAggregator.cs" />
