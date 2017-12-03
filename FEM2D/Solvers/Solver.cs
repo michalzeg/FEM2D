@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
-    public class Solver
+    public sealed class Solver
     {
         private readonly IMatrixAggregator matrixAggregator;
         private readonly ILoadAggregator loadAggregator;
@@ -46,7 +46,7 @@ namespace FEM2D.Solvers
             
 
             var displacements = this.matrixSolver.Solve(reducedStiffnessMatrix, reducedLoadVector);
-            this.Results = new ResultFactory(displacements, nodes, elements);
+            this.Results = new ResultFactory(displacements, nodeFactory, elementFactory);
         }
     }
 }

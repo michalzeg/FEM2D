@@ -42,13 +42,13 @@ namespace FEM2DTests.Integration
             var expectedMinTauXY =   -321.56; 
 
 
-            var actualMaxSigmaX = result.TriangleResult.Max(e => e.SigmaX);
-            var actualMaxSigmaY = result.TriangleResult.Max(e => e.SigmaY);
-            var actualMaxTauXY = result.TriangleResult.Max(e => e.TauXY);
+            var actualMaxSigmaX = result.MembraneResults.GetElementResult().Max(e => e.SigmaX);
+            var actualMaxSigmaY = result.MembraneResults.GetElementResult().Max(e => e.SigmaY);
+            var actualMaxTauXY =  result.MembraneResults.GetElementResult().Max(e => e.TauXY);
 
-            var actualMinSigmaX = result.TriangleResult.Min(e => e.SigmaX);
-            var actualMinSigmaY = result.TriangleResult.Min(e => e.SigmaY);
-            var actualMinTauXY = result.TriangleResult.Min(e => e.TauXY);
+            var actualMinSigmaX = result.MembraneResults.GetElementResult().Min(e => e.SigmaX);
+            var actualMinSigmaY = result.MembraneResults.GetElementResult().Min(e => e.SigmaY);
+            var actualMinTauXY = result.MembraneResults.GetElementResult().Min(e => e.TauXY);
 
             var tolerance = 1;
             Assert.Multiple(() =>

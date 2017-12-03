@@ -29,10 +29,7 @@ namespace FEM2D.Results
         {
             Condition.Requires(dofIndices).IsNotNull().IsNotEmpty();
 
-            var displacements = this.dofDisplacementMap.Keys
-                .Intersect(dofIndices)
-                .Select(e => this.dofDisplacementMap[e])
-                .ToArray();
+            var displacements = dofIndices.Select(e => this.dofDisplacementMap[e]).ToArray();
             return displacements;
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Results
 {
-    public class TriangleResult
+    public class MembraneElementResult
     {
         public ITriangleElement Element { get; internal set; }
         public double SigmaX { get; internal set; }

@@ -32,9 +32,11 @@ namespace Output.OutputCreator
             this.CreateNodeOutput();
             this.CreateTriangleOutput();
 
-            var sxx = this.results.TriangleResult.Select(e => e.SigmaX);
-            var syy = this.results.TriangleResult.Select(e => e.SigmaY);
-            var txy = this.results.TriangleResult.Select(e => e.TauXY);
+            var triangleResults = this.results.MembraneResults.GetElementResult();
+            var triangleNodeResults = this.results.MembraneResults.GetNodeResult();
+            var sxx = triangleResults.Select(e => e.SigmaX);
+            var syy = triangleResults.Select(e => e.SigmaY);
+            var txy = triangleResults.Select(e => e.TauXY);
 
             var membraneOutput = new MembraneOutputData
             {
@@ -48,8 +50,8 @@ namespace Output.OutputCreator
                 MinSyy = syy.Min(),
                 MinTxy = txy.Min(),
 
-                MaxUx = this.results.MembraneNodeResults.Max(e => Math.Abs(e.UX)),
-                MaxUy = this.results.MembraneNodeResults.Max(e => Math.Abs(e.UY)),
+                MaxUx = triangleNodeResults.Max(e => Math.Abs(e.UX)),
+                MaxUy = triangleNodeResults.Max(e => Math.Abs(e.UY)),
 
                 SxxPercentile005 = sxx.Percentile(percentileMin),
                 SxxPercentile095 = sxx.Percentile(percentileMax),
@@ -68,7 +70,7 @@ namespace Output.OutputCreator
 
         private void CreateNodeOutput()
         {
-            this.nodes = this.results.MembraneNodeResults
+            this.nodes = this.results.NodeResults.GetNodeResult()
                         .Select(n => n.ConvertToOutput())
                         .ToList();
         }
@@ -77,13 +79,10 @@ namespace Output.OutputCreator
         {
             this.triangles = new List<TriangleOutput>();
 
-            foreach (var triangleResult in this.results.TriangleResult)
+            foreach (var triangleResult in this.results.MembraneResults.GetElementResult())
             {
-                //var node0Result = this.results.GetNodeResult(triangleResult.Element.Nodes[0]);
-               // var node1Result = this.results.GetNodeResult(triangleResult.Element.Nodes[1]);
-                //var node2Result = this.results.GetNodeResult(triangleResult.Element.Nodes[2]);
 
-                var nodeResults = this.results.GetNodeResult(triangleResult.Element.Nodes);
+                var nodeResults = this.results.MembraneResults.GetNodeResult(triangleResult.Element.Nodes);
 
                 var nodeDetails = nodeResults.Select(n => n.ConvertToOutputDetailed());
 

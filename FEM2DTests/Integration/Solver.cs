@@ -34,8 +34,6 @@ namespace FEM2DTests.Solvers
             var node4 = nodes.Create(0, 0, Restraint.Fixed);
 
 
-
-
             var elements = new ElementFactory();
             var element1 = elements.CreateTriangle(node1, node2, node4, material);
             var element2 = elements.CreateTriangle(node3, node4, node2, material);
@@ -47,15 +45,18 @@ namespace FEM2DTests.Solvers
             solver.Solve(elements, nodes, loads);
             var results = solver.Results;
 
+            var result1 = results.MembraneResults.GetElementResult(element1);
+            var result2 = results.MembraneResults.GetElementResult(element2);
+
             Assert.Multiple(() =>
             {
-                Assert.That(results.TriangleResult[0].SigmaX, Is.EqualTo(-93d).Within(1d));
-                Assert.That(results.TriangleResult[0].SigmaY, Is.EqualTo(-1136d).Within(1d));
-                Assert.That(results.TriangleResult[0].TauXY, Is.EqualTo(-62d).Within(1d));
+                Assert.That(result1.SigmaX, Is.EqualTo(-93d).Within(1d));
+                Assert.That(result1.SigmaY, Is.EqualTo(-1136d).Within(1d));
+                Assert.That(result1.TauXY, Is.EqualTo(-62d).Within(1d));
 
-                Assert.That(results.TriangleResult[1].SigmaX, Is.EqualTo(93d).Within(1d));
-                Assert.That(results.TriangleResult[1].SigmaY, Is.EqualTo(23d).Within(1d));
-                Assert.That(results.TriangleResult[1].TauXY, Is.EqualTo(-297d).Within(1d));
+                Assert.That(result2.SigmaX, Is.EqualTo(93d).Within(1d));
+                Assert.That(result2.SigmaY, Is.EqualTo(23d).Within(1d));
+                Assert.That(result2.TauXY, Is.EqualTo(-297d).Within(1d));
             });
         }
     }

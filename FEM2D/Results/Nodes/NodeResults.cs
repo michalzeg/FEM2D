@@ -29,7 +29,6 @@ namespace FEM2D.Results.Nodes
             var result = this.nodeResultMap[node];
             return result;
         }
-
         public IEnumerable<NodeResult> GetNodeResult(IEnumerable<Node> nodes)
         {
             var results = this.nodeResultMap.Keys
@@ -37,7 +36,10 @@ namespace FEM2D.Results.Nodes
                 .Select(e => this.nodeResultMap[e]);
             return results;
         }
-
+        public IEnumerable<NodeResult> GetNodeResult()
+        {
+            return this.GetNodeResult(this.nodes);
+        }
         
 
         private void CreateNodeResultMap()

@@ -11,7 +11,7 @@ namespace Output.OutputCreator
 {
     public static class Converters
     {
-        public static NodeOutput ConvertToOutput(this MembraneNodeResult nodeResult)
+        public static NodeOutput ConvertToOutput(this NodeResult nodeResult)
         {
             var result = new NodeOutput
             {
