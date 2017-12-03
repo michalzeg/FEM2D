@@ -72,6 +72,7 @@
     <Compile Include="Nodes\NodeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restraints\Restraint.cs" />
+    <Compile Include="Results\Membranes\TriangleElementResults.cs" />
     <Compile Include="Results\Nodes\MembraneNodeResult.cs" />
     <Compile Include="Results\Nodes\NodeResult.cs" />
     <Compile Include="Results\Nodes\NodeResults.cs" />
