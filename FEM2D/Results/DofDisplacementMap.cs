@@ -25,5 +25,15 @@ namespace FEM2D.Results
 
             return this.dofDisplacementMap[dofIndex];
         }
+        public IEnumerable<double> GetValue(IEnumerable<int> dofIndices)
+        {
+            Condition.Requires(dofIndices).IsNotNull().IsNotEmpty();
+
+            var displacements = this.dofDisplacementMap.Keys
+                .Intersect(dofIndices)
+                .Select(e => this.dofDisplacementMap[e])
+                .ToArray();
+            return displacements;
+        }
     }
 }
