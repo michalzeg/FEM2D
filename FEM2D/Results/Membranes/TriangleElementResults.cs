@@ -1,5 +1,6 @@
 ﻿using FEM2D.Elements;
 using FEM2D.Nodes;
+using FEM2D.Results.Nodes;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using System;
@@ -13,19 +14,35 @@ namespace FEM2D.Results.Membranes
     public class TriangleElementResults
     {
         private readonly DofDisplacementMap dofDisplacementMap;
+        private readonly NodeResults nodeResults;
         private readonly IEnumerable<ITriangleElement> elements;
 
         private Dictionary<Node, ITriangleElement[]> nodeElementsMap;
         private Dictionary<ITriangleElement, TriangleResult> triangleResultMap;
 
-        internal TriangleElementResults(DofDisplacementMap dofDisplacementMap, IEnumerable<ITriangleElement> elements)
+        internal TriangleElementResults(DofDisplacementMap dofDisplacementMap,NodeResults nodeResults, IEnumerable<ITriangleElement> elements)
         {
             this.dofDisplacementMap = dofDisplacementMap;
+            this.nodeResults = nodeResults;
             this.elements = elements;
 
             CreateNodeTriangleMap();
             CalculateTriangleElementsResults();
         }
+
+        public TriangleResult GetNodeResult(ITriangleElement triangle)
+        {
+            var result = this.triangleResultMap[triangle];
+            return result;
+        }
+        public IEnumerable<TriangleResult> GetNodeResult(IEnumerable<ITriangleElement> nodes)
+        {
+            var results = this.triangleResultMap.Keys
+                .Intersect(nodes)
+                .Select(e => this.triangleResultMap[e]);
+            return results;
+        }
+
 
         private void CalculateTriangleElementsResults()
         {
@@ -50,7 +67,6 @@ namespace FEM2D.Results.Membranes
             };
             return result;
         }
-
         private void CreateNodeTriangleMap()
         {
             var elementNodeMap = this.elements.ToDictionary(e => e, f => f.Nodes);
@@ -67,5 +83,34 @@ namespace FEM2D.Results.Membranes
             this.nodeElementsMap = elementNodeList.ToLookup(e => e.Value, f => f.Key)
                 .ToDictionary(e => e.Key, f => f.ToArray());
         }
+
+        public MembraneNodeResult GetNodeResult(Node node)
+        {
+            var elements = this.nodeElementsMap[node].Select(e => this.triangleResultMap[e]);
+
+            var averageSxx = elements.Average(e => e.SigmaX);
+            var averageSyy = elements.Average(e => e.SigmaY);
+            var averageTxy = elements.Average(e => e.TauXY);
+
+            var nodeResult = this.nodeResults.GetNodeResult(node);
+
+            var result = new MembraneNodeResult
+            {
+                Node = node,
+                UX = nodeResult.UX,
+                UY = nodeResult.UY,
+                AverageSigmaXX = averageSxx,
+                AverageSigmaYY = averageSyy,
+                AverageTauXY = averageTxy,
+            };
+            return result;
+        }
+
+        public IEnumerable<MembraneNodeResult> GetNodeResult(IEnumerable<Node> nodes)
+        {
+            var results = nodes.Select(n => this.GetNodeResult(n)).ToList();
+            return results;
+        }
+
     }
 }
