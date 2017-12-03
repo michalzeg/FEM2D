@@ -10,16 +10,16 @@ namespace FEM2D.Results.Nodes
 {
     public class NodeResults
     {
-        private IDictionary<int, double> dofDisplacementMap;
+
         private IDictionary<Node, NodeResult> nodeResultMap;
         private readonly IEnumerable<Node> nodes;
+        private readonly DofDisplacementMap dofDisplacementMap;
         private IEnumerable<NodeResult> nodeResults;
 
-        public NodeResults(Vector<double> displacements, IEnumerable<Node> nodes)
+        internal NodeResults(DofDisplacementMap dofDisplacementMap, IEnumerable<Node> nodes)
         {
             this.nodes = nodes;
-
-            CreateDofDisplacementMap(displacements);
+            this.dofDisplacementMap = dofDisplacementMap;
             CalculateNodesResults();
             CreateNodeResultMap();
         }
@@ -38,12 +38,7 @@ namespace FEM2D.Results.Nodes
             return results;
         }
 
-        private void CreateDofDisplacementMap(Vector<double> displacements)
-        {
-            this.dofDisplacementMap = displacements
-                .Select((e, i) => new { index = i, value = e })
-                .ToDictionary(i => i.index, v => v.value);
-        }
+        
 
         private void CreateNodeResultMap()
         {
@@ -63,9 +58,9 @@ namespace FEM2D.Results.Nodes
             var dofY = dofs[1];
             var dofR = dofs.Length == 3 ? dofs[2] : -1;
 
-            var uX = this.dofDisplacementMap[dofX];
-            var uY = this.dofDisplacementMap[dofY];
-            var rZ = dofR == -1 ? 0 : this.dofDisplacementMap[dofR];
+            var uX = this.dofDisplacementMap.GetValue(dofX);
+            var uY = this.dofDisplacementMap.GetValue(dofY);
+            var rZ = dofR == -1 ? 0 : this.dofDisplacementMap.GetValue(dofR);
 
             var result = new NodeResult
             {
