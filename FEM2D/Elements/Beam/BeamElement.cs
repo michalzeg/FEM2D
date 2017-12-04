@@ -41,7 +41,7 @@ namespace FEM2D.Elements.Beam
 
         public Matrix<double> GetStiffnessMatrix()
         {
-            return this.beamMatrix.GetK(this.Length, this.BeamProperties.MomentOfInertia, this.BeamProperties.ModulusOfElasticity);
+            return this.beamMatrix.GetK(this.Length, this.BeamProperties.MomentOfInertia, this.BeamProperties.ModulusOfElasticity,this.BeamProperties.Area);
         }
     }
 }

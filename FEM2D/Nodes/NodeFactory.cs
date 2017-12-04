@@ -54,6 +54,7 @@ namespace FEM2D.Nodes
             return this.coordinatesNodeMap.Select(e => e.Value)
                 .Select(e => e.GetDOF())
                 .SelectMany(e => e)
+                .Distinct()
                 .Count();
         }
     }

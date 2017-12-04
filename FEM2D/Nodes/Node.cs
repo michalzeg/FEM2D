@@ -61,6 +61,16 @@ namespace FEM2D.Nodes
             return distance;
         }
 
+        public void SetFixedSupport()
+        {
+            this.Restraint = Restraint.Fixed;
+        }
+
+        public void SetPinnedSupport()
+        {
+            this.Restraint = Restraint.FixedX | Restraint.FixedY;
+        }
+
         public override bool Equals(object obj)
         {
             var other = obj as Node;

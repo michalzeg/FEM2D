@@ -10,19 +10,22 @@ namespace FEM2D.Matrix
 {
     public class BeamMatrix
     {
-        public Matrix<double> GetK(double length, double momentOfInertia, double modulusOfElasticity)
+        public Matrix<double> GetK(double length, double momentOfInertia, double modulusOfElasticity,double area)
         {
             var L = length;
             var I = momentOfInertia;
             var E = modulusOfElasticity;
+            var A = area;
 
             var matrix = DenseMatrix.OfArray(new double[,]
             {
-                {12 , 6*L  , -12 , 6L    },
-                {6*L, 4*L*L, -6*L, 2*L*L },
-                {-12, 6L   , 12  , -6*L  },
-                {6L , 2*L*L, -6*L, 4*L*L }
-            }) * E * I / (L * L * L);
+                {A*L*L/I,0,0,-A*L*L/I,0,0 },
+                {0,12,6*L,0,-12,6*L },
+                {0,6*L,4*L*L,0,-6*L,-2*L*L },
+                {-A*L*L/I,0,0,A*L*L/I,0,0 },
+                {0,-12,-6*L,0,12,-6*L },
+                {0,6*L,2*L*L,0,-6*L,4*L*L }
+            }) * 3 * E * I / (L * L * L);
 
 
             return matrix;
