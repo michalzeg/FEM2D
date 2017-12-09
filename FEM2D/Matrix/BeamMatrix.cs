@@ -19,12 +19,12 @@ namespace FEM2D.Matrix
 
             var matrix = DenseMatrix.OfArray(new double[,]
             {
-                {A*L*L/I,0,0,-A*L*L/I,0,0 },
-                {0,12,6*L,0,-12,6*L },
-                {0,6*L,4*L*L,0,-6*L,-2*L*L },
-                {-A*L*L/I,0,0,A*L*L/I,0,0 },
-                {0,-12,-6*L,0,12,-6*L },
-                {0,6*L,2*L*L,0,-6*L,4*L*L }
+                {A*L*L/I , 0    ,0     , -A*L*L/I, 0   , 0      },
+                {0       , 12   , 6*L  , 0       , -12 , 6*L    },
+                {0       , 6*L  , 4*L*L, 0       , -6*L, 2*L*L },
+                {-A*L*L/I, 0    ,0     , A*L*L/I , 0   , 0      },
+                {0       ,-12   , -6*L , 0       , 12  , -6*L   },
+                {0       ,6*L   , 2*L*L, 0       , -6*L, 4*L*L  }
             }) * 3 * E * I / (L * L * L);
 
 

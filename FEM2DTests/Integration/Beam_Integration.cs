@@ -44,8 +44,33 @@ namespace FEM2DTests.Integration
             structure.LoadFactory.AddNodalLoad(node2, 0, -1000);
 
             structure.Solve();
-            var results = structure.Results;
-            Assert.Fail();
+            var results = structure.Results.BeamResults;
+
+            var beam1Result = results.GetResult(beam1);
+            var beam2Result = results.GetResult(beam2);
+
+
+            
+            //Assert.Fail();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(0,    Is.EqualTo(beam1Result.Moment(0)).Within(0.1));
+                Assert.That(-2500, Is.EqualTo(beam1Result.Moment(0.5)).Within(0.1));
+                Assert.That(-5000, Is.EqualTo(beam1Result.Moment(1)).Within(0.1));
+
+                Assert.That(-5000, Is.EqualTo(beam2Result.Moment(0)).Within(0.1));
+                Assert.That(-2500, Is.EqualTo(beam2Result.Moment(0.5)).Within(0.1));
+                Assert.That(0, Is.EqualTo(beam2Result.Moment(1)).Within(0.1));
+
+                Assert.That(500, Is.EqualTo(beam1Result.Shear(0)).Within(0.1));
+                Assert.That(500, Is.EqualTo(beam1Result.Shear(0.5)).Within(0.1));
+                Assert.That(500, Is.EqualTo(beam1Result.Shear(1)).Within(0.1));
+
+                Assert.That(-500, Is.EqualTo(beam2Result.Shear(0)).Within(0.1));
+                Assert.That(-500, Is.EqualTo(beam2Result.Shear(0.5)).Within(0.1));
+                Assert.That(-500, Is.EqualTo(beam2Result.Shear(1)).Within(0.1));
+            });
         }
 
     }

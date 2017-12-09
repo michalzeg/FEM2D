@@ -46,7 +46,7 @@ namespace FEM2D.Solvers
             
 
             var displacements = this.matrixSolver.Solve(reducedStiffnessMatrix, reducedLoadVector);
-            this.Results = new ResultFactory(displacements, nodeFactory, elementFactory);
+            this.Results = new ResultFactory(displacements, nodeFactory, elementFactory,loadFactory);
         }
     }
 }

@@ -33,5 +33,10 @@ namespace FEM2D.Loads
         {
             return this.nodalLoads.SelectMany(e => e.NodalLoads);
         }
+
+        public IEnumerable<IBeamLoad> GetBeamLoads()
+        {
+            return this.nodalLoads.OfType<IBeamLoad>().Cast<IBeamLoad>();
+        }
     }
 }
