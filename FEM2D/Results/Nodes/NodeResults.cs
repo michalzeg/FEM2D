@@ -58,11 +58,11 @@ namespace FEM2D.Results.Nodes
 
             var dofX = dofs[0];
             var dofY = dofs[1];
-            var dofR = dofs.Length == 3 ? dofs[2] : -1;
+            var dofR = node.TryGetRotationDOF();
 
             var uX = this.dofDisplacementMap.GetValue(dofX);
             var uY = this.dofDisplacementMap.GetValue(dofY);
-            var rZ = dofR == -1 ? 0 : this.dofDisplacementMap.GetValue(dofR);
+            var rZ = this.dofDisplacementMap.GetValue(dofR);
 
             var result = new NodeResult
             {

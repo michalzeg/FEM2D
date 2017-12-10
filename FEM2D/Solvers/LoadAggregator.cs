@@ -22,8 +22,11 @@ namespace FEM2D.Solvers
                 var dofs = load.Node.GetDOF();
                 var x = dofs[0];
                 var y = dofs[1];
+                var r = load.Node.TryGetRotationDOF();
                 aggregatedLoad[x] += load.ValueX;
                 aggregatedLoad[y] += load.ValueY;
+                if (r != -1)
+                    aggregatedLoad[r] += load.ValueM;
             }
 
             return aggregatedLoad;

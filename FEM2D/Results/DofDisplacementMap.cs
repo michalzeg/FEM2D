@@ -21,9 +21,11 @@ namespace FEM2D.Results
 
         public double GetValue(int dofIndex)
         {
-            Condition.Requires(dofIndex).IsGreaterOrEqual(0).IsLessThan(this.dofDisplacementMap.Count);
+            double result = 0d;
 
-            return this.dofDisplacementMap[dofIndex];
+            this.dofDisplacementMap.TryGetValue(dofIndex, out result);
+
+            return result;
         }
         public IEnumerable<double> GetValue(IEnumerable<int> dofIndices)
         {

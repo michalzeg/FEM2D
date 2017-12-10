@@ -14,12 +14,14 @@ namespace FEM2D.Loads
         public Node Node { get; }
         public double ValueX { get; }
         public double ValueY { get; }
+        public double ValueM { get; }
 
-        public NodalLoad(Node node, double valueX, double valueY)
+        public NodalLoad(Node node, double valueX, double valueY, double valueM = 0)
         {
             this.Node = node;
             this.ValueX = valueX;
             this.ValueY = valueY;
+            this.ValueM = valueM;
         }
 
     }

@@ -51,7 +51,12 @@ namespace FEM2D.Nodes
         {
             return this.dof.GetDofs();
         }
-
+        public int TryGetRotationDOF()
+        {
+            var dofs = this.GetDOF();
+            var result = dofs.Length == 3 ? dofs[2] : -1;
+            return result;
+        }
 
         public double DistanceTo(Node node)
         {
