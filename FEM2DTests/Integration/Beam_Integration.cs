@@ -154,20 +154,20 @@ namespace FEM2DTests.Integration
             {
                 Assert.That(0, Is.EqualTo(beam1Result.Moment(0)).Within(0.1));
                 Assert.That(-3750, Is.EqualTo(beam1Result.Moment(0.5)).Within(0.1));
-                //Assert.That(-2500, Is.EqualTo(beam1Result.Moment(1)).Within(0.1));
-                //
-                //Assert.That(-2500, Is.EqualTo(beam2Result.Moment(0)).Within(0.1));
+                Assert.That(-2500, Is.EqualTo(beam1Result.Moment(1)).Within(0.1));
+                
+                Assert.That(-2500, Is.EqualTo(beam2Result.Moment(0)).Within(0.1));
                 //Assert.That(-1250, Is.EqualTo(beam2Result.Moment(0.5)).Within(0.1));
                 //Assert.That(0, Is.EqualTo(beam2Result.Moment(1)).Within(0.1));
                 //
-                //Assert.That(750, Is.EqualTo(beam1Result.Shear(0)).Within(0.1));
-                //Assert.That(750, Is.EqualTo(beam1Result.Shear(0.49)).Within(0.1));
-                //Assert.That(-250, Is.EqualTo(beam1Result.Shear(0.51)).Within(0.1));
-                //Assert.That(-250, Is.EqualTo(beam1Result.Shear(1)).Within(0.1));
-                //
-                //Assert.That(-250, Is.EqualTo(beam2Result.Shear(0)).Within(0.1));
-                //Assert.That(-250, Is.EqualTo(beam2Result.Shear(0.5)).Within(0.1));
-                //Assert.That(-250, Is.EqualTo(beam2Result.Shear(1)).Within(0.1));
+                Assert.That(750, Is.EqualTo(beam1Result.Shear(0)).Within(0.1));
+                Assert.That(750, Is.EqualTo(beam1Result.Shear(0.49)).Within(0.1));
+                Assert.That(-250, Is.EqualTo(beam1Result.Shear(0.51)).Within(0.1));
+                Assert.That(-250, Is.EqualTo(beam1Result.Shear(1)).Within(0.1));
+                
+                Assert.That(-250, Is.EqualTo(beam2Result.Shear(0)).Within(0.1));
+                Assert.That(-250, Is.EqualTo(beam2Result.Shear(0.5)).Within(0.1));
+                Assert.That(-250, Is.EqualTo(beam2Result.Shear(1)).Within(0.1));
             });
         }
     }
