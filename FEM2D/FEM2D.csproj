@@ -81,6 +81,7 @@
     <Compile Include="Results\Beams\ForceDistributionCalculators\BeamForceDistributionCalculator.cs" />
     <Compile Include="Results\Beams\ForceDistributionCalculators\PointLoadDistributionCalculator.cs" />
     <Compile Include="Results\Beams\ForceDistributionCalculators\IBeamForceDistributionCalculator.cs" />
+    <Compile Include="Results\Beams\ForceDistributionCalculators\UniformLoadDistributionCalculator.cs" />
     <Compile Include="Results\DofDisplacementMap.cs" />
     <Compile Include="Results\Membranes\MembraneElementResults.cs" />
     <Compile Include="Results\Membranes\MembraneNodeResult.cs" />

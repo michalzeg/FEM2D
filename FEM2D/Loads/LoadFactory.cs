@@ -28,7 +28,11 @@ namespace FEM2D.Loads
             var load = new BeamPointLoad(beamElement, valueY, relativePosition);
             this.nodalLoads.Add(load);
         }
-
+        public void AddBeamUniformLoad(IBeamElement beamElement, double valueY)
+        {
+            var load = new BeamUniformLoad(beamElement, valueY);
+            this.nodalLoads.Add(load);
+        }
         public IEnumerable<NodalLoad> GetNodalLoads()
         {
             return this.nodalLoads.SelectMany(e => e.NodalLoads);
