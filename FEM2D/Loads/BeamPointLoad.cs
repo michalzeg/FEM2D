@@ -15,6 +15,7 @@ namespace FEM2D.Loads
         public IBeamElement BeamElement { get; private set; }
         public double ValueY { get; private set; }
         public double RelativePosition { get; private set; }
+        public double[] NodalForces { get; private set; }
 
         public BeamPointLoad(IBeamElement beamElement, double valueY, double relativePosition)
         {
@@ -40,7 +41,7 @@ namespace FEM2D.Loads
             return result;
         }
 
-
+        
 
     }
 }

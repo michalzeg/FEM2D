@@ -36,6 +36,9 @@ namespace FEM2D.Results.Beams
         private BeamElementResult CalculateElementResult(IBeamElement element)
         {
             var dofs = element.GetDOFs();
+            var loads = this.loads.Where(e => e.BeamElement.Equals(element)).ToList();
+
+            
 
             var displacements = this.dofDisplacementMap.GetValue(dofs).ToArray();
 
@@ -47,7 +50,7 @@ namespace FEM2D.Results.Beams
             var shearStart = forces[1];
             var momentStart = forces[2];
 
-            var loads = this.loads.Where(e => e.BeamElement.Equals(element));
+            
 
             var result = new BeamElementResult(momentStart, shearStart, loads,element);
             
