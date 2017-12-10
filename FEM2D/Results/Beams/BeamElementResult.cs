@@ -1,5 +1,6 @@
 ﻿using FEM2D.Elements.Beam;
 using FEM2D.Loads;
+using FEM2D.Results.Beams.ForceDistributionCalculators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace FEM2D.Results.Beams
     {
         private readonly IEnumerable<IBeamLoad> beamLoads;
         private readonly IBeamElement element;
-        private readonly IEnumerable<BeamPointLoad> pointLoads;
+        private readonly IBeamForceDistributionCalculator distributionCalculator;
         private readonly double momentAtStart;
         private readonly double shearAtStart;
        
@@ -23,15 +24,15 @@ namespace FEM2D.Results.Beams
             this.shearAtStart = shearAtStart;
             this.beamLoads = loads;
             this.element = element;
-            this.pointLoads = loads.OfType<BeamPointLoad>().Cast<BeamPointLoad>().ToList();
+            this.distributionCalculator = new BeamForceDistributionCalculator(loads);
         }
 
         public double Moment(double relativePosition)
         {
 
             var result = this.momentAtStart
-                       - this.momentFromPointLoads(relativePosition)
-                       - this.momentFromShearAtStart(relativePosition);
+                       - this.distributionCalculator.Moment(relativePosition)
+                       - this.MomentFromShearAtStart(relativePosition);
             return result;
         }
 
@@ -39,29 +40,17 @@ namespace FEM2D.Results.Beams
         {
 
             var result = shearAtStart
-                         + this.shearFromPointLoads(relativePosition);
+                         + this.distributionCalculator.Shear(relativePosition);
             return result;             
         }
 
-        private double momentFromPointLoads(double relativePosition)
-        {
-            var result = this.pointLoads
-                             .Where(e => e.RelativePosition < relativePosition)
-                             .Sum(e => (relativePosition - e.RelativePosition) * e.BeamElement.Length * e.ValueY);
-            return result;
-        }
-        private double momentFromShearAtStart(double relativePosition)
+        
+        private double MomentFromShearAtStart(double relativePosition)
         {
             return relativePosition * this.shearAtStart * this.element.Length;
         }
 
-        private double shearFromPointLoads(double relativePosition)
-        {
-            var result = this.pointLoads
-                            .Where(e => e.RelativePosition < relativePosition)
-                            .Sum(e => e.ValueY);
-            return result;
-        }
+        
 
         
     }
