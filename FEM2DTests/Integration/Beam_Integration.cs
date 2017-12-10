@@ -152,7 +152,7 @@ namespace FEM2DTests.Integration
 
             Assert.Multiple(() =>
             {
-                //Assert.That(0, Is.EqualTo(beam1Result.Moment(0)).Within(0.1));
+                Assert.That(0, Is.EqualTo(beam1Result.Moment(0)).Within(0.1));
                 Assert.That(-3750, Is.EqualTo(beam1Result.Moment(0.5)).Within(0.1));
                 //Assert.That(-2500, Is.EqualTo(beam1Result.Moment(1)).Within(0.1));
                 //

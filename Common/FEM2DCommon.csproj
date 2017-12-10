@@ -53,6 +53,7 @@
     <Compile Include="DTO\TriangleGeometry.cs" />
     <Compile Include="DTO\TriangleOutput.cs" />
     <Compile Include="DTO\VertexInput.cs" />
+    <Compile Include="Extensions\Array.cs" />
     <Compile Include="Extensions\Double.cs" />
     <Compile Include="Extensions\Matrix.cs" />
     <Compile Include="Extensions\Vector.cs" />

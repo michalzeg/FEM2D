@@ -1,4 +1,5 @@
-﻿using FEM2D.Elements.Beam;
+﻿using Common.Extensions;
+using FEM2D.Elements.Beam;
 using FEM2D.Loads;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
@@ -38,13 +39,11 @@ namespace FEM2D.Results.Beams
             var dofs = element.GetDOFs();
             var loads = this.loads.Where(e => e.BeamElement.Equals(element)).ToList();
 
-            
+            var equivalentLoads = this.loads.GetEquivalentNodalForces().ToVector();
 
-            var displacements = this.dofDisplacementMap.GetValue(dofs).ToArray();
+            var displacements = this.dofDisplacementMap.GetValue(dofs).ToVector();
 
-            var displacementVector = Vector.Build.DenseOfArray(displacements);
-
-            var forces = element.GetStiffnessMatrix() * displacementVector;
+            var forces = -1*equivalentLoads + element.GetStiffnessMatrix() * displacements;
 
             var normalStart = forces[0];
             var shearStart = forces[1];

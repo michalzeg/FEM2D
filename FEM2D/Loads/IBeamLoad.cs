@@ -12,5 +12,6 @@ namespace FEM2D.Loads
     {
         IBeamElement BeamElement { get; }
         NodalLoad[] NodalLoads { get; }
+        double[] GetEquivalenNodalForces();
     }
 }
