@@ -57,8 +57,10 @@
     <Compile Include="Elements\IElement.cs" />
     <Compile Include="Elements\Triangle\ITriangleElement.cs" />
     <Compile Include="Elements\Triangle\TriangleElement.cs" />
-    <Compile Include="Loads\BeamPointLoad.cs" />
-    <Compile Include="Loads\IBeamLoad.cs" />
+    <Compile Include="Loads\Beams\BeamLoad.cs" />
+    <Compile Include="Loads\Beams\BeamPointLoad.cs" />
+    <Compile Include="Loads\Beams\BeamUniformLoad.cs" />
+    <Compile Include="Loads\Beams\IBeamLoad.cs" />
     <Compile Include="Loads\INodalLoad.cs" />
     <Compile Include="Loads\LoadFactory.cs" />
     <Compile Include="Loads\NodalLoad.cs" />

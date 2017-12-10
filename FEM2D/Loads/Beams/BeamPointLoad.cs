@@ -1,5 +1,6 @@
 ﻿using CuttingEdge.Conditions;
 using FEM2D.Elements.Beam;
+using FEM2D.Loads.Beams;
 using FEM2D.Nodes;
 using FEM2D.ShapeFunctions;
 using System;
@@ -10,20 +11,17 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Loads
 {
-    public class BeamPointLoad:INodalLoad, IBeamLoad
+    public class BeamPointLoad:BeamLoad, INodalLoad
     {
-        public NodalLoad[] NodalLoads { get; }
-        public IBeamElement BeamElement { get; private set; }
+
         public double ValueY { get; private set; }
         public double RelativePosition { get; private set; }
 
-        internal double[] EquivalentNodalForces { get; private set; }
-
         public BeamPointLoad(IBeamElement beamElement, double valueY, double relativePosition)
+            : base(beamElement)
         {
             Condition.Requires(relativePosition).IsGreaterOrEqual(0).IsLessOrEqual(1);
 
-            this.BeamElement = beamElement;
             this.ValueY = valueY;
             this.RelativePosition = relativePosition;
 
@@ -32,20 +30,6 @@ namespace FEM2D.Loads
             var node2Load = this.GenerateNode1Load(1, relativePosition, BeamShapeFunctions.N5, BeamShapeFunctions.N6);
 
             this.NodalLoads = new[] { node1Load, node2Load };
-        }
-
-        public double[] GetEquivalenNodalForces()
-        {
-            var result = new[]
-                        {
-                this.NodalLoads[0].ValueX,
-                this.NodalLoads[0].ValueY,
-                this.NodalLoads[0].ValueM,
-                this.NodalLoads[1].ValueX,
-                this.NodalLoads[1].ValueY,
-                this.NodalLoads[1].ValueM,
-            };
-            return result;
         }
 
         private NodalLoad GenerateNode1Load(int nodeIndex,double relativePosition, Func<double,double,double> shapeFunctionY,Func<double,double,double> shapeFunctionM)
