@@ -6,51 +6,51 @@ using System.Threading.Tasks;
 
 namespace FEM2D.ShapeFunctions
 {
-    public class BeamShapeFunctions
+    public static class BeamShapeFunctions
     {
 
-        public double N1(double relativePosition, double length)
+        public static double N1(double position, double length)
         {
-            var x = relativePosition;
+            var x = position;
             var L = length;
             return 1 - x / L;
         }
 
-        public double N2(double relativePosition, double length)
+        public static double N2(double position, double length)
         {
-            var x = relativePosition;
+            var x = position;
             var L = length;
 
             return 1 - 3 * x * x / (L * L) + 2 * x * x * x / (L * L * L);
         }
 
-        public double N3(double relativePosition, double length)
+        public static double N3(double position, double length)
         {
-            var x = relativePosition;
+            var x = position;
             var L = length;
 
             return x * (1 - x / L) * (1 - x / L);
         }
 
-        public double N4(double relativePosition, double length)
+        public static double N4(double position, double length)
         {
-            var x = relativePosition;
+            var x = position;
             var L = length;
 
             return x / L;
         }
 
-        public double N5(double relativePosition, double length)
+        public static double N5(double position, double length)
         {
-            var x = relativePosition;
+            var x = position;
             var L = length;
 
             return 3 * x * x / (L * L) - 2 * x * x * x / (L * L * L);
         }
 
-        public double N6(double relativePosition, double length)
+        public static double N6(double position, double length)
         {
-            var x = relativePosition;
+            var x = position;
             var L = length;
 
             return x * x / L * (x / L - 1);

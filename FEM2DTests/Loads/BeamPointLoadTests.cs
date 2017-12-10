@@ -50,15 +50,24 @@ namespace FEM2DTests.Loads
 
             var beamPointLoad = this.CreateBeamPointLoad(0.4);
 
-            var expectedNode1Load = -600d;
-            var expectedNode2Load = -400d;
+            var expectedNode1LoadY = -648d;
+            var expectedNode2LoadY = -352d;
 
-            var actualNode1Load = beamPointLoad.NodalLoads[0].ValueY;
-            var actualNode2Load = beamPointLoad.NodalLoads[1].ValueY;
+            var expectedNode1LoadM = -1440d;
+            var expectedNode2LoadM = 960d;
+
+            var actualNode1LoadY = beamPointLoad.NodalLoads[0].ValueY;
+            var actualNode2LoadY = beamPointLoad.NodalLoads[1].ValueY;
+
+            var actualNode1LoadM = beamPointLoad.NodalLoads[0].ValueM;
+            var actualNode2LoadM = beamPointLoad.NodalLoads[1].ValueM;
             Assert.Multiple(() =>
             {
-                Assert.That(expectedNode1Load, Is.EqualTo(actualNode1Load).Within(1).Percent);
-                Assert.That(expectedNode2Load, Is.EqualTo(actualNode2Load).Within(1).Percent);
+                Assert.That(expectedNode1LoadY, Is.EqualTo(actualNode1LoadY).Within(1).Percent);
+                Assert.That(expectedNode2LoadY, Is.EqualTo(actualNode2LoadY).Within(1).Percent);
+
+                Assert.That(expectedNode1LoadM, Is.EqualTo(actualNode1LoadM).Within(1).Percent);
+                Assert.That(expectedNode2LoadM, Is.EqualTo(actualNode2LoadM).Within(1).Percent);
             });
         }
 
