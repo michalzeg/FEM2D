@@ -44,10 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\BeamProperties.cs" />
+    <Compile Include="ElementProperties\BeamProperties.cs" />
     <Compile Include="DTO\Edge.cs" />
     <Compile Include="DTO\MembraneOutputData.cs" />
-    <Compile Include="DTO\MembraneProperties.cs" />
+    <Compile Include="ElementProperties\MembraneProperties.cs" />
     <Compile Include="DTO\MembraneInputData.cs" />
     <Compile Include="DTO\NodeOutput.cs" />
     <Compile Include="DTO\TriangleGeometry.cs" />
