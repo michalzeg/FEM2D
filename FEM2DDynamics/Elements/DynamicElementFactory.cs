@@ -1,4 +1,5 @@
 ﻿using Common.DTO;
+using Common.ElementProperties;
 using FEM2D.Elements;
 using FEM2D.Nodes;
 using FEM2DDynamics.Elements.Beam;
@@ -21,10 +22,10 @@ namespace FEM2DDynamics.Elements
             this.elements = new List<IDynamicElement>();
         }
 
-        public IDynamicBeamElement CreateBeam(Node node1, Node node2, BeamProperties beamProperties)
+        public IDynamicBeamElement CreateBeam(Node node1, Node node2, DynamicBeamProperties dynamicBeamProperties)
         {
-            var element = this.elementFactory.CreateBeam(node1, node2, beamProperties);
-            var dynamicElement = new DynamicBeamElement(element);
+            var element = this.elementFactory.CreateBeam(node1, node2, dynamicBeamProperties.BeamProperties);
+            var dynamicElement = new DynamicBeamElement(element,dynamicBeamProperties);
 
             this.elements.Add(dynamicElement);
             

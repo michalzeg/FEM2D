@@ -47,6 +47,7 @@
     <Compile Include="ElementProperties\BeamProperties.cs" />
     <Compile Include="DTO\Edge.cs" />
     <Compile Include="DTO\MembraneOutputData.cs" />
+    <Compile Include="ElementProperties\DynamicBeamProperties.cs" />
     <Compile Include="ElementProperties\MembraneProperties.cs" />
     <Compile Include="DTO\MembraneInputData.cs" />
     <Compile Include="DTO\NodeOutput.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.ElementProperties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace FEM2DDynamics.Elements.Beam
 {
     public interface IDynamicBeamElement : IDynamicElement
     {
+        DynamicBeamProperties DynamicBeamProperties { get; }
     }
 }
