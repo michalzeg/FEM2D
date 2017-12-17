@@ -20,7 +20,7 @@ namespace FEM2D.Elements.Beam
         public double Length { get; private set; }
 
 
-        internal BeamElement(Node node1, Node node2, BeamProperties beamProperties, int number)
+        protected internal BeamElement(Node node1, Node node2, BeamProperties beamProperties, int number)
         {
             this.Nodes = new[] { node1, node2 };
             this.BeamProperties = beamProperties;
