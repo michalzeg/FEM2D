@@ -6,6 +6,6 @@ namespace FEM2D.Solvers
 {
     public interface IMatrixAggregator
     {
-        Matrix<double> Aggregate(IEnumerable<IElement> elements, int dofNumber);
+        Matrix<double> AggregateStiffnessMatrix(IEnumerable<IElement> elements, int dofNumber);
     }
 }

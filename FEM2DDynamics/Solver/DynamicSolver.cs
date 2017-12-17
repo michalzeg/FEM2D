@@ -13,19 +13,21 @@ namespace FEM2DDynamics.Solver
 {
     internal class DynamicSolver
     {
-        private readonly IMatrixAggregator matrixAggregator;
+        private readonly IDynamicMatrixAggregator matrixAggregator;
         private readonly ILoadAggregator loadAggregator;
         private readonly IMatrixReducer matrixReducer;
         private readonly IMatrixSolver matrixSolver;
+        private readonly IDampingMatrixCalculator dampingCalculator;
 
         public ResultFactory Results { get; private set; }
 
         public DynamicSolver()
         {
-            this.matrixAggregator = new MatrixAggregator();
+            this.matrixAggregator = new DynamicMatrixAggregator();
             this.loadAggregator = new LoadAggregator();
             this.matrixReducer = new MatrixReducer();
             this.matrixSolver = new CholeskyDescomposition();
+            this.dampingCalculator = new SimpleDampingMatrixCalculator();
         }
 
 
@@ -36,11 +38,18 @@ namespace FEM2DDynamics.Solver
             var loads = loadFactory.GetNodalLoads();
 
             var dofNumber = nodeFactory.GetDOFsCount();
-            var stiffnessMatrix = matrixAggregator.Aggregate(elements, dofNumber);
+            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(elements, dofNumber);
+            var massMatrix = matrixAggregator.AggregateMassMatrix(elements, dofNumber);
+            var dampingMatrix = dampingCalculator.GetDampingMatrix(stiffnessMatrix, massMatrix);
+
+
             var loadVector = loadAggregator.Aggregate(loads, dofNumber);
 
             this.matrixReducer.Initialize(nodes, dofNumber);
             var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
+            var reducedMassMatrix = this.matrixReducer.ReduceMatrix(massMatrix);
+            var reducedDampingMatrix = this.matrixReducer.ReduceMatrix(dampingMatrix);
+
             var reducedLoadVector = this.matrixReducer.ReduceVector(loadVector);
 
 

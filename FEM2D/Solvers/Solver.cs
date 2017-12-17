@@ -37,7 +37,7 @@ namespace FEM2D.Solvers
             var loads = loadFactory.GetNodalLoads();
 
             var dofNumber = nodeFactory.GetDOFsCount();
-            var stiffnessMatrix = matrixAggregator.Aggregate(elements, dofNumber);
+            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(elements, dofNumber);
             var loadVector = loadAggregator.Aggregate(loads, dofNumber);
 
             this.matrixReducer.Initialize(nodes, dofNumber);

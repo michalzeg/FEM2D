@@ -13,14 +13,20 @@ namespace FEM2D.Solvers
 {
     public class MatrixAggregator : IMatrixAggregator
     {
-        public Matrix<double> Aggregate(IEnumerable<IElement> elements, int dofNumber)
+
+        public Matrix<double> AggregateStiffnessMatrix(IEnumerable<IElement> elements, int dofNumber)
+        {
+            var matrix = this.Aggregate(elements, dofNumber, e => e.GetStiffnessMatrix());
+            return matrix;
+        }
+
+        protected Matrix<double> Aggregate(IEnumerable<IElement> elements, int dofNumber, Func<IElement, Matrix<double>> elementMatrix)
         {
             var aggregatedMatrix = SparseMatrix.Create(dofNumber, dofNumber, 0d);
-
             foreach (var element in elements)
             {
                 var dofs = element.GetDOFs();
-                var k = element.GetStiffnessMatrix();
+                var k = elementMatrix(element); 
                 for (int i = 0; i < k.ColumnCount; i++)
                 {
                     for (int j = 0; j < k.RowCount; j++)

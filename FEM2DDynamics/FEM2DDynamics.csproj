@@ -60,7 +60,11 @@
     <Compile Include="Elements\DynamicElementFactory.cs" />
     <Compile Include="Elements\IDynamicElement.cs" />
     <Compile Include="Matrix\DynamicBeamMatrix.cs" />
+    <Compile Include="Solver\DampingMatrixCalculator.cs" />
+    <Compile Include="Solver\DynamicMatrixAggregator.cs" />
     <Compile Include="Solver\DynamicSolver.cs" />
+    <Compile Include="Solver\IDampingMatrixCalculator.cs" />
+    <Compile Include="Solver\IDynamicMatrixAggregator.cs" />
     <Compile Include="Structure\DynamicStructure.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
