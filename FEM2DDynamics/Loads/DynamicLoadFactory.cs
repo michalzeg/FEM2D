@@ -25,9 +25,9 @@ namespace FEM2DDynamics.Loads
             this.nodeFactory = nodeFactory;
         }
 
-        public void AddPointMovingLoad( double value,double basePosition)
+        public void AddPointMovingLoad( double value,double basePositionX)
         {
-            var load = new PointMovingLoad(value, basePosition);
+            var load = new PointMovingLoad(value, basePositionX);
             this.movingLoads.Add(load);
         }
 
