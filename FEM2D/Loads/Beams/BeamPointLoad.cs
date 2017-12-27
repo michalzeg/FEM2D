@@ -44,6 +44,13 @@ namespace FEM2D.Loads
             return result;
         }
 
-        
+        public static BeamPointLoad FromGlobalPosition(IBeamElement beamElement, double valueY, double globalPosition)
+        {
+            var absolutePosition = globalPosition - beamElement.Nodes[0].Coordinates.X;
+            var relativePosition = absolutePosition / beamElement.Length;
+
+            var result = new BeamPointLoad(beamElement, valueY, relativePosition);
+            return result;
+        }
     }
 }

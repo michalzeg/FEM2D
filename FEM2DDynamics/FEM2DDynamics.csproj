@@ -59,6 +59,9 @@
     <Compile Include="Elements\Beam\IDynamicBeamElement.cs" />
     <Compile Include="Elements\DynamicElementFactory.cs" />
     <Compile Include="Elements\IDynamicElement.cs" />
+    <Compile Include="Loads\DynamicLoadFactory.cs" />
+    <Compile Include="Loads\IMovingPointLoad.cs" />
+    <Compile Include="Loads\PointMovingLoad.cs" />
     <Compile Include="Matrix\DynamicBeamMatrix.cs" />
     <Compile Include="Solver\DampingMatrixCalculator.cs" />
     <Compile Include="Solver\DynamicMatrixAggregator.cs" />

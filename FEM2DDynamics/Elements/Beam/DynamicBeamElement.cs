@@ -9,7 +9,8 @@ using FEM2D.Elements.Beam;
 using Common.DTO;
 using Common.ElementProperties;
 using FEM2DDynamics.Matrix;
-
+using Common.Point;
+using Common.Geometry;
 namespace FEM2DDynamics.Elements.Beam
 {
     public class DynamicBeamElement : BeamElement, IDynamicBeamElement
@@ -31,6 +32,11 @@ namespace FEM2DDynamics.Elements.Beam
         {
             var matrix = DynamicBeamMatrix.GetMassMatrix(this.Length, this.DynamicBeamProperties.Density);
             return matrix;
+        }
+
+        public bool IsBetweenEnds(PointD point)
+        {
+            return Geometry.IsInsideSegmentWithoutEnds(this.Nodes[0].Coordinates, this.Nodes[1].Coordinates, point);
         }
     }
 }

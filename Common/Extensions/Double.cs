@@ -25,6 +25,12 @@ namespace Common.Extensions
             return result;
         }
 
+        public static bool IsApproximatelyEqualToZero(this double initialValue)
+        {
+            var result = DoubleExtensionMethods.IsApproximatelyEqualTo(initialValue, 0d, MaximumDifferenceAllowed);
+            return result;
+        }
+
         /// <summary>
         /// Method for checking if two doubles are equal with the given difference/>
         /// </summary>
