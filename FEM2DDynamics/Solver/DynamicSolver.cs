@@ -5,6 +5,7 @@ using FEM2D.Solvers;
 using FEM2DDynamics.Elements;
 using FEM2DDynamics.Loads;
 using FEM2DDynamics.Matrix;
+using FEM2DDynamics.Results;
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace FEM2DDynamics.Solver
         private readonly IMatrixSolver matrixSolver;
         private readonly IDampingMatrixCalculator dampingCalculator;
         private readonly IEquationOfMotionSolver equationSolver;
+
+        public DynamicResultFactory Results { get; private set; }
 
         public DynamicSolver()
         {
@@ -49,7 +52,8 @@ namespace FEM2DDynamics.Solver
 
 
             var displacements = this.equationSolver.Solve(matrixData, loadFactory, dofNumber,matrixReducer);
-            //this.Results = new ResultFactory(displacements, nodeFactory, elementFactory, loadFactory);
+            this.Results = new DynamicResultFactory(displacements,loadFactory);
+
         }
 
         private MatrixData GetMatrixData(Matrix<double> stiffnessMatrix, Matrix<double> massMatrix, Matrix<double> dampingMatrix)

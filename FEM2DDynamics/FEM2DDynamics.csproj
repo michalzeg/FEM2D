@@ -64,7 +64,12 @@
     <Compile Include="Loads\PointMovingLoad.cs" />
     <Compile Include="Matrix\DynamicBeamMatrix.cs" />
     <Compile Include="Matrix\MatrixData.cs" />
+    <Compile Include="Results\Beam\DynamicBeamElementResult.cs" />
+    <Compile Include="Results\DynamicBeamElementResults.cs" />
     <Compile Include="Results\DynamicDisplacements.cs" />
+    <Compile Include="Results\SimpleDynamicDofDisplacementMap.cs" />
+    <Compile Include="Results\DynamicResultFactory.cs" />
+    <Compile Include="Results\IDynamicDofDisplacementMap.cs" />
     <Compile Include="Results\TimeDisplacementPair.cs" />
     <Compile Include="Solver\DampingMatrixCalculator.cs" />
     <Compile Include="Solver\DynamicMatrixAggregator.cs" />

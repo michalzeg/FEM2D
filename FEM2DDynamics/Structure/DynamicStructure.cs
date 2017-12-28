@@ -1,6 +1,7 @@
 ﻿using FEM2D.Nodes;
 using FEM2DDynamics.Elements;
 using FEM2DDynamics.Loads;
+using FEM2DDynamics.Results;
 using FEM2DDynamics.Solver;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace FEM2DDynamics.Structure
         public DynamicLoadFactory LoadFactory { get; private set; }
         public NodeFactory NodeFactory { get; private set; }
         public DynamicElementFactory ElementFactory { get; private set; }
-        //public ResultFactory Results { get; private set; }
+        public DynamicResultFactory Results { get; private set; }
 
         public DynamicStructure()
         {
@@ -32,7 +33,7 @@ namespace FEM2DDynamics.Structure
         public void Solve()
         {
             this.solver.Solve(this.ElementFactory, this.NodeFactory, this.LoadFactory);
-            //this.Results = this.solver.Results;
+            this.Results = this.solver.Results;
         }
     }
 }

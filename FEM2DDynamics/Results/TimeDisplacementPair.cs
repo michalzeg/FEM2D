@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathNet.Numerics.LinearAlgebra;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace FEM2DDynamics.Results
     internal class TimeDisplacementPair
     {
         public double Time { get; set; }
-        public IEnumerable<double> Displacements { get; set; }
+        public Vector<double> Displacements { get; set; }
     }
 }

@@ -64,7 +64,7 @@ namespace FEM2DDynamics.Solver
                 var pi_ = pi - a * uMinus1 - b * ui;
                 var uiPlus = K_Inverted * pi_;
 
-                result.AddResult(time, ui.ToList());
+                result.AddResult(time, ui);
 
                 uMinus1 = ui;
                 ui = uiPlus;

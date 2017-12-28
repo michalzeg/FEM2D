@@ -44,10 +44,10 @@ namespace FEM2DDynamicTestApplication
             structure.LoadFactory.AddPointMovingLoad(-1000, 10);
 
             structure.Solve();
-            //var results = structure.Results.BeamResults;
+            var results = structure.Results.BeamResults;
 
-            //var beam1Result = results.GetResult(beam1);
-            //var beam2Result = results.GetResult(beam2);
+            var beam1Result = results.GetResult(beam1,2);
+            var beam2Result = results.GetResult(beam2,2);
         }
     }
 }

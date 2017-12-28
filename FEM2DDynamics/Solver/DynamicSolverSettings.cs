@@ -18,7 +18,7 @@ namespace FEM2DDynamics.Solver
             {
                 return new DynamicSolverSettings
                 {
-                    DeltaTime = 0.00001,
+                    DeltaTime = 0.01,
                     StartTime = 0,
                     EndTime = 10
                 };
