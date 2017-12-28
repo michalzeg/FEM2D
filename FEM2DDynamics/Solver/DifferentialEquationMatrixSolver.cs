@@ -64,15 +64,14 @@ namespace FEM2DDynamics.Solver
                 var pi_ = pi - a * uiMinus1 - b * ui;
                 var uiPlus1 = K_Inverted * pi_;
 
+                var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
+                var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
 
                 //check
-                //var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
-                //var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
-                
                 //var res = this.matrixData.StiffnessMatrix * ui + this.matrixData.DampingMatrix * uidot + this.matrixData.MassMatrix * uidot2 - pi;
 
 
-                result.AddResult(time, ui);
+                result.AddResult(time, ui, uidot, uidot2);
 
                 uiMinus1 = ui;
                 ui = uiPlus1;

@@ -20,7 +20,7 @@ namespace FEM2DDynamics.Solver
                 {
                     DeltaTime = 0.01,
                     StartTime = 0,
-                    EndTime = 10
+                    EndTime = 100
                 };
             }
         }

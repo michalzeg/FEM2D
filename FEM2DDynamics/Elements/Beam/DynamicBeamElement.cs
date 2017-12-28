@@ -11,6 +11,8 @@ using Common.ElementProperties;
 using FEM2DDynamics.Matrix;
 using Common.Point;
 using Common.Geometry;
+using FEM2DDynamics.Solver;
+
 namespace FEM2DDynamics.Elements.Beam
 {
     public class DynamicBeamElement : BeamElement, IDynamicBeamElement
@@ -37,6 +39,12 @@ namespace FEM2DDynamics.Elements.Beam
         public bool IsBetweenEnds(PointD point)
         {
             return Geometry.IsInsideSegmentWithoutEnds(this.Nodes[0].Coordinates, this.Nodes[1].Coordinates, point);
+        }
+
+        public Matrix<double> GetDampingMatrix()
+        {
+            var matrix = SimpleDampingMatrixCalculator.CalculateDampingMatrix(this.GetStiffnessMatrix(), this.GetMassMatrix());
+            return matrix;
         }
     }
 }

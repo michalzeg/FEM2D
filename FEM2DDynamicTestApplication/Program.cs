@@ -62,7 +62,7 @@ namespace FEM2DDynamicTestApplication
                 var moment = beam1Result.Moment(1);
 
                 beam1Result = results.GetResult(beam1, time);
-                document.AddEntity(new Point(time,displ , 0));
+                document.AddEntity(new Point(time*100,moment , 0));
 
                 time += 0.01;
             }

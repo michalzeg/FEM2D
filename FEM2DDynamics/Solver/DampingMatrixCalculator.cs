@@ -10,14 +10,21 @@ namespace FEM2DDynamics.Solver
     public class SimpleDampingMatrixCalculator : IDampingMatrixCalculator
     {
 
-        private double alfa = 0.02;
-        private double beta = 0.03;
+        private const double alfa = 0.02;
+        private const double beta = 0.03;
 
         public Matrix<double> GetDampingMatrix(Matrix<double> stiffness, Matrix<double> mass)
         {
-            var result = this.alfa * stiffness + this.beta + mass;
+            var result = CalculateDampingMatrix(stiffness, mass);
             return result;
         }
 
+        public static Matrix<double> CalculateDampingMatrix(Matrix<double> stiffness, Matrix<double> mass)
+        {
+            var result = alfa * stiffness + beta + mass;
+            return result;
+        }
+
+        
     }
 }

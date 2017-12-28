@@ -11,5 +11,6 @@ namespace FEM2DDynamics.Elements
     public interface IDynamicElement :IElement
     {
         Matrix<double> GetMassMatrix();
+        Matrix<double> GetDampingMatrix();
     }
 }
