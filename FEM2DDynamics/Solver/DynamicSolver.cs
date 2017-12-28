@@ -44,7 +44,7 @@ namespace FEM2DDynamics.Solver
             var dofNumber = nodeFactory.GetDOFsCount();
             var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(elements, dofNumber);
             var massMatrix = matrixAggregator.AggregateMassMatrix(elements, dofNumber);
-            var dampingMatrix = dampingCalculator.GetDampingMatrix(stiffnessMatrix, massMatrix);
+            var dampingMatrix = matrixAggregator.AggregateDampingMatrix(elements, dofNumber);
 
             this.matrixReducer.Initialize(nodes, dofNumber);
 

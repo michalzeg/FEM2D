@@ -17,17 +17,21 @@ namespace FEM2DDynamics.Elements.Beam
 {
     public class DynamicBeamElement : BeamElement, IDynamicBeamElement
     {
+        private readonly IDampingMatrixCalculator dampingCalculator;
+
         public DynamicBeamProperties DynamicBeamProperties { get; private set; }
 
         internal DynamicBeamElement(Node node1, Node node2, DynamicBeamProperties dynamicBeamProperties, int number)
             :base(node1,node2,dynamicBeamProperties.BeamProperties,number)
         {
             this.DynamicBeamProperties = dynamicBeamProperties;
+            this.dampingCalculator = new SimpleDampingMatrixCalculator();
         }
         internal DynamicBeamElement(IBeamElement beamElement,DynamicBeamProperties dynamicBeamProeprties)
             :base(beamElement.Nodes[0],beamElement.Nodes[1],beamElement.BeamProperties,beamElement.Number)
         {
             this.DynamicBeamProperties = dynamicBeamProeprties;
+            this.dampingCalculator = new SimpleDampingMatrixCalculator();
         }
 
         public Matrix<double> GetMassMatrix()
@@ -43,7 +47,7 @@ namespace FEM2DDynamics.Elements.Beam
 
         public Matrix<double> GetDampingMatrix()
         {
-            var matrix = SimpleDampingMatrixCalculator.CalculateDampingMatrix(this.GetStiffnessMatrix(), this.GetMassMatrix());
+            var matrix =  dampingCalculator.GetDampingMatrix(this.GetStiffnessMatrix(), this.GetMassMatrix());
             return matrix;
         }
     }
