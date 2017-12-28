@@ -21,9 +21,9 @@ namespace FEM2DDynamics.Structure
         public DynamicElementFactory ElementFactory { get; private set; }
         public DynamicResultFactory Results { get; private set; }
 
-        public DynamicStructure()
+        public DynamicStructure(DynamicSolverSettings settings)
         {
-            this.solver = new DynamicSolver();
+            this.solver = new DynamicSolver(settings);
             this.NodeFactory = new NodeFactory();
             this.ElementFactory = new DynamicElementFactory();
             this.LoadFactory = new DynamicLoadFactory(ElementFactory, NodeFactory);

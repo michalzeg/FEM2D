@@ -1,6 +1,7 @@
 ﻿using Common.DTO;
 using Common.ElementProperties;
 using FEM2D.Structures;
+using FEM2DDynamics.Solver;
 using FEM2DDynamics.Structure;
 using netDxf;
 using netDxf.Entities;
@@ -33,8 +34,14 @@ namespace FEM2DDynamicTestApplication
                 BeamProperties = properties,
                 Density = 2000,
             };
+            var settings = new DynamicSolverSettings
+            {
+                DeltaTime = 0.01,
+                EndTime = 100,
+                StartTime = 0
+            };
 
-            var structure = new DynamicStructure();
+            var structure = new DynamicStructure(settings);
             var node1 = structure.NodeFactory.Create(0, 0);
             node1.SetPinnedSupport();
             var node2 = structure.NodeFactory.Create(10, 0);
@@ -56,7 +63,7 @@ namespace FEM2DDynamicTestApplication
 
             var document = new DxfDocument();
             var time = 0d;
-            while (time<=10)
+            while (time<=settings.EndTime)
             {
                 var displ = results.GetDisplacement(beam1, 1, time);
                 var moment = beam1Result.Moment(1);

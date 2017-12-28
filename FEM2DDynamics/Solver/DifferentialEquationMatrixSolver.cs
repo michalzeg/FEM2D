@@ -27,11 +27,7 @@ namespace FEM2DDynamics.Solver
             this.loadAggregator = new LoadAggregator();
             this.settings = settings;
         }
-        public DifferentialEquationMatrixSolver():this(DynamicSolverSettings.Default)
-        {
-            
-        }
-
+  
         public DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory, int dofNumber, IMatrixReducer matrixReducer)
         {
             var result = new DynamicDisplacements();

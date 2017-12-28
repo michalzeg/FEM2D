@@ -26,13 +26,13 @@ namespace FEM2DDynamics.Solver
 
         public DynamicResultFactory Results { get; private set; }
 
-        public DynamicSolver()
+        public DynamicSolver(DynamicSolverSettings settings)
         {
             this.matrixAggregator = new DynamicMatrixAggregator();
             this.matrixReducer = new MatrixReducer();
             this.matrixSolver = new CholeskyDescomposition();
             this.dampingCalculator = new SimpleDampingMatrixCalculator();
-            this.equationSolver = new DifferentialEquationMatrixSolver();
+            this.equationSolver = new DifferentialEquationMatrixSolver(settings);
         }
 
 
