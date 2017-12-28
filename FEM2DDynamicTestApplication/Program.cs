@@ -2,6 +2,8 @@
 using Common.ElementProperties;
 using FEM2D.Structures;
 using FEM2DDynamics.Structure;
+using netDxf;
+using netDxf.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +48,25 @@ namespace FEM2DDynamicTestApplication
             structure.Solve();
             var results = structure.Results.BeamResults;
 
-            var beam1Result = results.GetResult(beam1,2);
-            var beam2Result = results.GetResult(beam2,2);
+            var beam1Result = results.GetResult(beam1,1);
+            var beam2Result = results.GetResult(beam2,1);
+
+
+            var filePath = @"D:\test.dxf";
+
+            var document = new DxfDocument();
+            var time = 0d;
+            while (time<=10)
+            {
+                var displ = results.GetDisplacement(beam1, 1, time);
+                var moment = beam1Result.Moment(1);
+
+                beam1Result = results.GetResult(beam1, time);
+                document.AddEntity(new Point(time,displ , 0));
+
+                time += 0.01;
+            }
+            document.Save(filePath);
         }
     }
 }

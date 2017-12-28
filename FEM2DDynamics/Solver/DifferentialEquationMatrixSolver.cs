@@ -50,7 +50,7 @@ namespace FEM2DDynamics.Solver
             var u0dot2 = matrixData.MassMatrix.Inverse() * (p0 - this.matrixData.DampingMatrix * u0dot - this.matrixData.StiffnessMatrix * u0);
 
 
-            var uMinus1 = u0 - deltaT * u0dot + 0.5 * deltaT * deltaT * u0dot2;
+            var uiMinus1 = u0 - deltaT * u0dot + 0.5 * deltaT * deltaT * u0dot2;
             var K_ = this.matrixData.MassMatrix / (deltaT * deltaT) + this.matrixData.DampingMatrix / (2 * deltaT);
             var K_Inverted = K_.Inverse();
             var a = this.matrixData.MassMatrix / (deltaT * deltaT) - this.matrixData.DampingMatrix / (2 * deltaT);
@@ -61,14 +61,27 @@ namespace FEM2DDynamics.Solver
             var ui = u0;
             do
             {
-                var pi_ = pi - a * uMinus1 - b * ui;
-                var uiPlus = K_Inverted * pi_;
+                var pi_ = pi - a * uiMinus1 - b * ui;
+                var uiPlus1 = K_Inverted * pi_;
+
+
+                //check
+                //var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
+                //var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
+                
+                //var res = this.matrixData.StiffnessMatrix * ui + this.matrixData.DampingMatrix * uidot + this.matrixData.MassMatrix * uidot2 - pi;
+
 
                 result.AddResult(time, ui);
 
-                uMinus1 = ui;
-                ui = uiPlus;
+                uiMinus1 = ui;
+                ui = uiPlus1;
                 time += deltaT;
+                var loads = this.loadFactory.GetNodalLoads(time);
+                var aggregatedLoad = this.loadAggregator.Aggregate(loads, dofNumber);
+                pi = this.matrixReducer.ReduceVector(aggregatedLoad);
+
+
 
             } while (time <= this.settings.EndTime);
 
