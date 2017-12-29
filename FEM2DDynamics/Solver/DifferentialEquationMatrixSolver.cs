@@ -30,7 +30,7 @@ namespace FEM2DDynamics.Solver
   
         public DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory, int dofNumber, IMatrixReducer matrixReducer)
         {
-            var result = new DynamicDisplacements();
+            var result = new DynamicDisplacements(settings);
 
             this.matrixData = matrixData;
             this.loadFactory = loadFactory;
