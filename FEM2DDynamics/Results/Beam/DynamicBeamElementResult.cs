@@ -13,8 +13,8 @@ namespace FEM2DDynamics.Results.Beam
     {
         public double Time { get; }
 
-        public DynamicBeamElementResult(double momentAtStart, double shearAtStart, IEnumerable<IBeamLoad> loads, IBeamElement element,double time) 
-            :base(momentAtStart,shearAtStart,loads,element)
+        public DynamicBeamElementResult(double momentAtStart, double shearAtStart, IEnumerable<IBeamLoad> loads, IBeamElement element,IList<double> displacements, double time) 
+            :base(momentAtStart,shearAtStart,loads,element,displacements)
         {
             this.Time = time;
         }

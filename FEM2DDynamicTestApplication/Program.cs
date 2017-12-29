@@ -65,11 +65,11 @@ namespace FEM2DDynamicTestApplication
             var time = 0d;
             while (time<=settings.EndTime)
             {
-                //var displ = results.GetDisplacement(beam1, 1, time);
-                var moment = beam1Result.Moment(1);
+                var displ = beam1Result.GetDisplacement(1);
+                //var moment = beam1Result.Moment(1);
 
                 beam1Result = results.GetResult(beam1, time);
-                document.AddEntity(new Point(time*100,moment , 0));
+                document.AddEntity(new Point(time,displ*100 , 0));
 
                 time += 0.01;
             }

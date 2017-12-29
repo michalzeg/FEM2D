@@ -55,32 +55,11 @@ namespace FEM2DDynamics.Results
             var momentStart = forces[2];
 
 
-            var result = new DynamicBeamElementResult(momentStart, shearStart, beamLoads, element,time);
+            var result = new DynamicBeamElementResult(momentStart, shearStart, beamLoads, element,displacements.Displacements.ToList(),time);
 
             return result;
         }
 
-        //public double GetDisplacement(IDynamicBeamElement element, double relativePosition, double time)
-        //{
-        //    var position = relativePosition * element.Length;
-        //
-        //    var node0Dofs = element.Nodes[0].GetDOF();
-        //    var node1Dofs = element.Nodes[1].GetDOF();
-        //
-        //    var u1 = this.dofDisplacementMap.GetDisplacement(node0Dofs[0],time);
-        //    var u2 = this.dofDisplacementMap.GetDisplacement(node0Dofs[1],time);
-        //    var u3 = this.dofDisplacementMap.GetDisplacement(node0Dofs[2],time);
-        //    var u4 = this.dofDisplacementMap.GetDisplacement(node1Dofs[0],time);
-        //    var u5 = this.dofDisplacementMap.GetDisplacement(node1Dofs[1],time);
-        //    var u6 = this.dofDisplacementMap.GetDisplacement(node1Dofs[2],time);
-        //
-        //    var result = u1 * BeamShapeFunctions.N1(position, element.Length)
-        //        + u2 * BeamShapeFunctions.N2(position, element.Length)
-        //        + u3 * BeamShapeFunctions.N3(position, element.Length)
-        //        + u4 * BeamShapeFunctions.N4(position, element.Length)
-        //        + u5 * BeamShapeFunctions.N5(position, element.Length)
-        //        + u6 * BeamShapeFunctions.N6(position, element.Length);
-        //    return result;
-        //}
+       
     }
 }
