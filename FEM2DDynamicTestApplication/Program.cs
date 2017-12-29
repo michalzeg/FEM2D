@@ -50,7 +50,7 @@ namespace FEM2DDynamicTestApplication
 
             var beam1 = structure.ElementFactory.CreateBeam(node1, node2, dynamicProperties);
             var beam2 = structure.ElementFactory.CreateBeam(node2, node3, dynamicProperties);
-            structure.LoadFactory.AddPointMovingLoad(-1000, 10);
+            structure.LoadFactory.AddPointMovingLoad(-1000, 0,1);
 
             structure.Solve();
             var results = structure.Results.BeamResults;

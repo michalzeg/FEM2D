@@ -39,6 +39,17 @@ namespace Common.Point
                 && this.Y.IsApproximatelyEqualTo(other.Y));
         }
 
+        public PointD Move(PointD point)
+        {
+            var result = new PointD(this.X + point.X, this.Y + point.Y);
+            return result;
+        }
+
+        public PointD Move(double x, double y)
+        {
+            return this.Move(new PointD(x, y));
+        }
+
         public static bool operator ==(PointD point1, PointD point2)
         {
             return point1.Equals(point2);

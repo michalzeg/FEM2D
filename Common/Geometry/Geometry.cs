@@ -43,18 +43,11 @@ namespace Common.Geometry
 
         public static bool IsInsideSegmentWithoutEnds(PointD startPoint, PointD endPoint, PointD point)
         {
-            var x1 = startPoint.X;
-            var y1 = startPoint.Y;
-            var x2 = endPoint.X;
-            var y2 = endPoint.Y;
-            var x = point.X;
-            var y = point.Y;
+            if (startPoint == point || endPoint == point)
+                return false;
 
-            var result = AreColinear(startPoint, endPoint, point)
-                && Math.Min(x1, x2) < x
-                && x < Math.Max(x1, x2)
-                && Math.Min(y1, y2) < y
-                && y < Math.Max(y1, y2);
+
+            var result = IsInsideSegment(startPoint, endPoint, point);
 
             return result;
         }
