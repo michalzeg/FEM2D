@@ -29,41 +29,17 @@ namespace FEM2DDynamics.Results
             });
         }
 
-        internal Vector<double> GetClosesDisplacementRight(double time)
+        internal TimeDisplacementPair GetClosesRight(double time)
         {
             var closestLeft = this.timeDisplacementPairs.TakeWhile(e => e.Time <= time).Last();
-            return closestLeft.Displacements;
+            return closestLeft;
         }
 
-        internal Vector<double> GetClosestDisplacementLeft(double time)
+        internal TimeDisplacementPair GetClosestLeft(double time)
         {
             var closestRight = this.timeDisplacementPairs.SkipWhile(e => e.Time < time).First();
-            return closestRight.Displacements;
+            return closestRight;
         }
-
-        internal Vector<double> GetClosesVelocitiesRight(double time)
-        {
-            var closestLeft = this.timeDisplacementPairs.TakeWhile(e => e.Time <= time).Last();
-            return closestLeft.Velocities;
-        }
-
-        internal Vector<double> GetClosestVelocitiesLeft(double time)
-        {
-            var closestRight = this.timeDisplacementPairs.SkipWhile(e => e.Time < time).First();
-            return closestRight.Velocities;
-        }
-
-        internal Vector<double> GetClosesAccelerationsRight(double time)
-        {
-            var closestLeft = this.timeDisplacementPairs.TakeWhile(e => e.Time <= time).Last();
-            return closestLeft.Accelerations;
-        }
-
-        internal Vector<double> GetClosestAccelerationsLeft(double time)
-        {
-            var closestRight = this.timeDisplacementPairs.SkipWhile(e => e.Time < time).First();
-            return closestRight.Accelerations;
-        }
-
+        
     }
 }

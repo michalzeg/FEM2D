@@ -1,4 +1,6 @@
-﻿using MathNet.Numerics.Interpolation;
+﻿using Common.Extensions;
+using MathNet.Numerics.Interpolation;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,58 +22,46 @@ namespace FEM2DDynamics.Results
             this.dynamicDisplacements = dynamicDisplacements;
         }
 
-        public double GetDisplacement(int dofIndex, double time)
+        
+        public TimeDisplacementPair GetDisplacements(IEnumerable<int> dofIndices, double time)
         {
 
-            var leftValue = this.dynamicDisplacements.GetClosestDisplacementLeft(time);
-            var rightValue = this.dynamicDisplacements.GetClosesDisplacementRight(time);
+            var leftValue = this.dynamicDisplacements.GetClosestLeft(time);
+            var rightValue = this.dynamicDisplacements.GetClosesRight(time);
 
-            var average = leftValue + (rightValue - leftValue) / 2;
+            var avgDisplacement = this.CalculateAverage(leftValue.Displacements, rightValue.Displacements);
+            var avgVelocity = this.CalculateAverage(leftValue.Velocities, rightValue.Velocities);
+            var avgAccelerations = this.CalculateAverage(leftValue.Accelerations, rightValue.Accelerations);
 
-            return average[dofIndex];
+            var displacementResult = this.GetAppropriateValues(avgDisplacement,dofIndices);
+            var velocityResult = this.GetAppropriateValues(avgVelocity, dofIndices);
+            var accelerationResult = this.GetAppropriateValues(avgAccelerations, dofIndices);
+
+
+
+            return new TimeDisplacementPair
+            {
+                Time = time,
+                Displacements = displacementResult,
+                Velocities = velocityResult,
+                Accelerations = accelerationResult,
+            };
         }
-        public IEnumerable<double> GetDisplacement(IEnumerable<int> dofIndices, double time)
+
+        private Vector<double> GetAppropriateValues(Vector<double> values, IEnumerable<int> dofIndices)
         {
-
-            var result = dofIndices.Select(e => this.GetDisplacement(e, time)).ToList();
-
+            var result = values.Select((e, i) => new { Value = e, Index = i })
+                                                    .Where(e => dofIndices.Contains(e.Index))
+                                                    .Select(e => e.Value)
+                                                    .ToVector();
             return result;
         }
 
-        public double GetVelocity(int dofIndex, double time)
+        private Vector<double> CalculateAverage(Vector<double> leftValue, Vector<double> rightValue)
         {
-
-            var leftValue = this.dynamicDisplacements.GetClosestVelocitiesLeft(time);
-            var rightValue = this.dynamicDisplacements.GetClosesVelocitiesRight(time);
-
             var average = leftValue + (rightValue - leftValue) / 2;
 
-            return average[dofIndex];
-        }
-        public IEnumerable<double> GetVelocity(IEnumerable<int> dofIndices, double time)
-        {
-
-            var result = dofIndices.Select(e => this.GetVelocity(e, time)).ToList();
-
-            return result;
-        }
-
-        public double GetAcceleration(int dofIndex, double time)
-        {
-
-            var leftValue = this.dynamicDisplacements.GetClosestAccelerationsLeft(time);
-            var rightValue = this.dynamicDisplacements.GetClosesAccelerationsRight(time);
-
-            var average = leftValue + (rightValue - leftValue) / 2;
-
-            return average[dofIndex];
-        }
-        public IEnumerable<double> GetAcceleration(IEnumerable<int> dofIndices, double time)
-        {
-
-            var result = dofIndices.Select(e => this.GetAcceleration(e, time)).ToList();
-
-            return result;
+            return average;
         }
     }
 }
