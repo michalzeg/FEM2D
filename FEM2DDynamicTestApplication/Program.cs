@@ -37,7 +37,7 @@ namespace FEM2DDynamicTestApplication
             var settings = new DynamicSolverSettings
             {
                 DeltaTime = 0.01,
-                EndTime = 100,
+                EndTime = 400,
                 StartTime = 0
             };
 

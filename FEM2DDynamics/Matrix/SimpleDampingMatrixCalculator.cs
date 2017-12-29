@@ -11,7 +11,7 @@ namespace FEM2DDynamics.Solver
     {
 
         private const double alfa = 0.002;
-        private const double beta = 0.003;
+        private const double beta = 0.03;
 
         public Matrix<double> GetDampingMatrix(Matrix<double> stiffness, Matrix<double> mass)
         {
@@ -21,7 +21,7 @@ namespace FEM2DDynamics.Solver
 
         public static Matrix<double> CalculateDampingMatrix(Matrix<double> stiffness, Matrix<double> mass)
         {
-            var result = alfa * stiffness + beta + mass;
+            var result = alfa * stiffness + beta * mass;
             return result;
         }
 
