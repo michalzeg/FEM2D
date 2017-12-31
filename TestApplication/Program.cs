@@ -65,8 +65,8 @@ namespace TestApplication
             var results = solver.Results;
 
             var outputCrator = new OutputCreator(results);
-            var output = outputCrator.CreateOutput();
-
+            outputCrator.CreateOutput();
+            var output = outputCrator.Output;
             var js = JsonConvert.SerializeObject(output);
 
         }
@@ -145,7 +145,8 @@ namespace TestApplication
             var result = structure.Results;
 
             var outputCrator = new OutputCreator(result,membraneData);
-            var output = outputCrator.CreateOutput();
+            outputCrator.CreateOutput();
+            var output = outputCrator.Output;
 
             time.Stop();
             var e = time.Elapsed;
@@ -300,7 +301,8 @@ namespace TestApplication
             var result = structure.Results;
 
             var outputCrator = new OutputCreator(result,membraneData);
-            var output = outputCrator.CreateOutput();
+            outputCrator.CreateOutput();
+            var output = outputCrator.Output;
 
             var js = JsonConvert.SerializeObject(output);
 
@@ -438,7 +440,8 @@ namespace TestApplication
             var result = structure.Results;
 
             var outputCrator = new OutputCreator(result,membraneData);
-            var output = outputCrator.CreateOutput();
+            outputCrator.CreateOutput();
+            var output = outputCrator.Output;
 
             var js = JsonConvert.SerializeObject(output);
 
@@ -603,7 +606,8 @@ namespace TestApplication
             var result = membrane.Results;
 
             var outputCrator = new OutputCreator(result, membraneData);
-            var output = outputCrator.CreateOutput();
+            outputCrator.CreateOutput();
+            var output = outputCrator.Output;
 
             var js = JsonConvert.SerializeObject(output);
 

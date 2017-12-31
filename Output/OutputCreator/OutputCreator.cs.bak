@@ -17,40 +17,26 @@ namespace Output.OutputCreator
 
         private readonly ResultFactory results;
         private readonly MembraneInputData inputData;
-        private readonly IEnumerable<NodeResult> nodeResults;
-        private readonly IEnumerable<MembraneElementResult> membraneResults;
 
         private IList<NodeOutput> nodes;
         private IList<TriangleOutput> triangles;
 
-        public MembraneOutputData Output { get; private set; }
-        public bool HasError { get; private set; }
-
         public OutputCreator(ResultFactory results, MembraneInputData inputData = null)
         {
-            this.nodeResults = results.NodeResults.GetNodeResult();
-            this.membraneResults = results.MembraneResults.GetElementResult();
-
-            if (nodeResults.Any(e => double.IsNaN(e.UX) || double.IsNaN(e.UY))) 
-            {
-                this.HasError = true;
-                return;
-            }
-
             this.results = results;
             this.inputData = inputData;
         }
 
-        public void CreateOutput()
+        public MembraneOutputData CreateOutput()
         {
             this.CreateNodeOutput();
             this.CreateTriangleOutput();
 
-            
-
-            var sxx = this.membraneResults.Select(e => e.SigmaX);
-            var syy = this.membraneResults.Select(e => e.SigmaY);
-            var txy = this.membraneResults.Select(e => e.TauXY);
+            var triangleResults = this.results.MembraneResults.GetElementResult();
+            var triangleNodeResults = this.results.MembraneResults.GetNodeResult();
+            var sxx = triangleResults.Select(e => e.SigmaX);
+            var syy = triangleResults.Select(e => e.SigmaY);
+            var txy = triangleResults.Select(e => e.TauXY);
 
             var membraneOutput = new MembraneOutputData
             {
@@ -64,8 +50,8 @@ namespace Output.OutputCreator
                 MinSyy = syy.Min(),
                 MinTxy = txy.Min(),
 
-                MaxUx = nodeResults.Max(e => Math.Abs(e.UX)),
-                MaxUy = nodeResults.Max(e => Math.Abs(e.UY)),
+                MaxUx = triangleNodeResults.Max(e => Math.Abs(e.UX)),
+                MaxUy = triangleNodeResults.Max(e => Math.Abs(e.UY)),
 
                 SxxPercentile005 = sxx.Percentile(percentileMin),
                 SxxPercentile095 = sxx.Percentile(percentileMax),
@@ -79,12 +65,12 @@ namespace Output.OutputCreator
                 InputData = this.inputData,
             };
 
-            this.Output = membraneOutput;
+            return membraneOutput;
         }
 
         private void CreateNodeOutput()
         {
-            this.nodes = nodeResults
+            this.nodes = this.results.NodeResults.GetNodeResult()
                         .Select(n => n.ConvertToOutput())
                         .ToList();
         }
@@ -93,7 +79,7 @@ namespace Output.OutputCreator
         {
             this.triangles = new List<TriangleOutput>();
 
-            foreach (var triangleResult in this.membraneResults)
+            foreach (var triangleResult in this.results.MembraneResults.GetElementResult())
             {
 
                 var nodeResults = this.results.MembraneResults.GetNodeResult(triangleResult.Element.Nodes);
