@@ -7,23 +7,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Common.Forces;
 namespace FEM2D.Results.Beams
 {
     public class BeamElementResult
     {
+        private readonly BeamForces forcesAtStart;
         private readonly IEnumerable<IBeamLoad> beamLoads;
         private readonly IBeamElement element;
         private readonly IList<double> displacements;
         private readonly IBeamForceDistributionCalculator distributionCalculator;
-        private readonly double momentAtStart;
-        private readonly double shearAtStart;
        
 
-        internal BeamElementResult(double momentAtStart, double shearAtStart, IEnumerable<IBeamLoad> loads,IBeamElement element, IList<double> displacements)
+        internal BeamElementResult(BeamForces forcesAtStart, IEnumerable<IBeamLoad> loads,IBeamElement element, IList<double> displacements)
         {
-            this.momentAtStart = momentAtStart;
-            this.shearAtStart = shearAtStart;
+            this.forcesAtStart = forcesAtStart;
             this.beamLoads = loads;
             this.element = element;
             this.displacements = displacements;
@@ -33,7 +31,7 @@ namespace FEM2D.Results.Beams
         public double Moment(double relativePosition)
         {
 
-            var result = this.momentAtStart
+            var result = this.forcesAtStart.Moment
                        - this.distributionCalculator.Moment(relativePosition)
                        - this.MomentFromShearAtStart(relativePosition);
             return result;
@@ -42,7 +40,7 @@ namespace FEM2D.Results.Beams
         public double Shear(double relativePosition)
         {
 
-            var result = shearAtStart
+            var result = forcesAtStart.Shear
                          + this.distributionCalculator.Shear(relativePosition);
             return result;             
         }
@@ -70,7 +68,7 @@ namespace FEM2D.Results.Beams
 
         private double MomentFromShearAtStart(double relativePosition)
         {
-            return relativePosition * this.shearAtStart * this.element.Length;
+            return relativePosition * this.forcesAtStart.Shear * this.element.Length;
         }
 
         

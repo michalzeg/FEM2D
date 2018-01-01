@@ -58,6 +58,7 @@
     <Compile Include="Extensions\Double.cs" />
     <Compile Include="Extensions\Matrix.cs" />
     <Compile Include="Extensions\Vector.cs" />
+    <Compile Include="Forces\BeamForces.cs" />
     <Compile Include="Geometry\Geometry.cs" />
     <Compile Include="Point\PointD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
 ﻿using Common.Extensions;
+using Common.Forces;
 using FEM2D.Elements.Beam;
 using FEM2D.Loads;
 using FEM2D.Results.Beams;
@@ -37,25 +38,21 @@ namespace FEM2DDynamics.Results
         {
             var dofs = element.GetDOFs();
             var beamLoads = this.loadFactory.GetBeamLoads(element, time);
-
-
+            
             var equivalentLoads = beamLoads.GetEquivalentNodalForces().ToVector();
 
             var displacements = this.dofDisplacementMap.GetDisplacements(dofs, time);
             
-
             var forces = -1 * equivalentLoads 
                 + element.GetStiffnessMatrix() * displacements.Displacements
                 +element.GetDampingMatrix()*displacements.Velocities
                 +element.GetMassMatrix()*displacements.Accelerations
                 ;
 
-            var normalStart = forces[0];
-            var shearStart = forces[1];
-            var momentStart = forces[2];
+            var forcesAtStart = BeamForces.FromFEMResult(forces);
 
 
-            var result = new DynamicBeamElementResult(momentStart, shearStart, beamLoads, element,displacements.Displacements.ToList(),time);
+            var result = new DynamicBeamElementResult(forcesAtStart, beamLoads, element,displacements.Displacements.ToList(),time);
 
             return result;
         }

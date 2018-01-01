@@ -1,4 +1,5 @@
-﻿using FEM2D.Elements.Beam;
+﻿using Common.Forces;
+using FEM2D.Elements.Beam;
 using FEM2D.Loads;
 using FEM2D.Results.Beams;
 using System;
@@ -13,8 +14,8 @@ namespace FEM2DDynamics.Results.Beam
     {
         public double Time { get; }
 
-        public DynamicBeamElementResult(double momentAtStart, double shearAtStart, IEnumerable<IBeamLoad> loads, IBeamElement element,IList<double> displacements, double time) 
-            :base(momentAtStart,shearAtStart,loads,element,displacements)
+        public DynamicBeamElementResult(BeamForces forcesAtStart, IEnumerable<IBeamLoad> loads, IBeamElement element,IList<double> displacements, double time) 
+            :base(forcesAtStart,loads,element,displacements)
         {
             this.Time = time;
         }

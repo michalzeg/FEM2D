@@ -1,4 +1,5 @@
 ﻿using Common.Extensions;
+using Common.Forces;
 using FEM2D.Elements.Beam;
 using FEM2D.Loads;
 using FEM2D.ShapeFunctions;
@@ -44,18 +45,15 @@ namespace FEM2D.Results.Beams
 
             var displacements = this.dofDisplacementMap.GetValue(dofs).ToVector();
 
-            var forces = -1*equivalentLoads + element.GetStiffnessMatrix() * displacements;
+            var forces = -1 * equivalentLoads + element.GetStiffnessMatrix() * displacements;
+            var forcesAtStart = BeamForces.FromFEMResult(forces);
 
-            var normalStart = forces[0];
-            var shearStart = forces[1];
-            var momentStart = forces[2];
+            var result = new BeamElementResult(forcesAtStart, beamLoads, element, displacements.ToList());
 
-            
-
-            var result = new BeamElementResult(momentStart, shearStart, beamLoads,element,displacements.ToList());
-            
             return result;
         }
+
+        
 
         public BeamElementResult GetResult(IBeamElement element)
         {
