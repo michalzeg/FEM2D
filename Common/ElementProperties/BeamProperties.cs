@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Sections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,16 @@ namespace Common.DTO
     public class BeamProperties
     {
         public double ModulusOfElasticity { get; set; }
-        public double MomentOfInertia { get; set; }
-        public double Area { get; set; }
+        public Section Section { get; set; }
+
+        public double Area => this.Section.SectionProperties.A;
+        public double MomentOfInertia => this.Section.SectionProperties.Iy0;
 
 
         public static BeamProperties Default => new BeamProperties
         {
             ModulusOfElasticity = 200,
-            MomentOfInertia = 200,
-            Area = 300
+            Section = Section.FromRectangle(1,1),
         };
     }
 }

@@ -23,12 +23,7 @@ namespace FEM2DDynamicTestApplication
 
         private static void DynamicLoadInCentre()
         {
-            var properties = new BeamProperties
-            {
-                Area = 0.2,
-                ModulusOfElasticity = 200000,
-                MomentOfInertia = 1,
-            };
+            var properties = BeamProperties.Default;
             var dynamicProperties = new DynamicBeamProperties
             {
                 BeamProperties = properties,

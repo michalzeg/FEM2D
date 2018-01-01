@@ -25,12 +25,7 @@ namespace FEM2DTests.Integration
         public void Beam_Integration_PointForceInMiddle()
         {
 
-            var properties = new BeamProperties
-            {
-                Area = 0.2,
-                ModulusOfElasticity = 200000,
-                MomentOfInertia = 1,
-            };
+            var properties = BeamProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -74,12 +69,7 @@ namespace FEM2DTests.Integration
         public void Beam_Integration_PointMomentInMiddle()
         {
 
-            var properties = new BeamProperties
-            {
-                Area = 0.2,
-                ModulusOfElasticity = 200000,
-                MomentOfInertia = 1,
-            };
+            var properties = BeamProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -125,12 +115,7 @@ namespace FEM2DTests.Integration
         public void Beam_Integration_PointForceInQuarter()
         {
 
-            var properties = new BeamProperties
-            {
-                Area = 0.2,
-                ModulusOfElasticity = 200000,
-                MomentOfInertia = 1,
-            };
+            var properties = BeamProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -175,12 +160,7 @@ namespace FEM2DTests.Integration
         public void Beam_Integration_UniformLoad()
         {
 
-            var properties = new BeamProperties
-            {
-                Area = 0.2,
-                ModulusOfElasticity = 200000,
-                MomentOfInertia = 1,
-            };
+            var properties = BeamProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -225,12 +205,7 @@ namespace FEM2DTests.Integration
         public void Beam_Integration_UniformLoadOnHalf()
         {
 
-            var properties = new BeamProperties
-            {
-                Area = 0.2,
-                ModulusOfElasticity = 200000,
-                MomentOfInertia = 1,
-            };
+            var properties = BeamProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
