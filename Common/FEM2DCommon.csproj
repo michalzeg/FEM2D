@@ -48,6 +48,9 @@
     <Compile Include="DTO\Edge.cs" />
     <Compile Include="DTO\MembraneOutputData.cs" />
     <Compile Include="ElementProperties\BeamPropertiesBuilder\BeamPropertiesBuilder.cs" />
+    <Compile Include="ElementProperties\BeamPropertiesBuilder\IBeamPropertiesBuilderFinish.cs" />
+    <Compile Include="ElementProperties\BeamPropertiesBuilder\IBeamPropertiesBuilderSetMaterial.cs" />
+    <Compile Include="ElementProperties\BeamPropertiesBuilder\IBeamPropertiesBuilderSetSection.cs" />
     <Compile Include="ElementProperties\DynamicBeamProperties.cs" />
     <Compile Include="ElementProperties\MembraneProperties.cs" />
     <Compile Include="DTO\MembraneInputData.cs" />

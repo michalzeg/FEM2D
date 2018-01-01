@@ -1,4 +1,5 @@
 ﻿using Common.DTO;
+using Common.Sections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,19 @@ using System.Threading.Tasks;
 
 namespace Common.ElementProperties
 {
-    public class BeamPropertiesBuilder
+    public class BeamPropertiesBuilder : IBeamPropertiesBuilderFinish, IBeamPropertiesBuilderSetMaterial, IBeamPropertiesBuilderSetSection
     {
         private BeamProperties beamProperties;
 
-        public BeamPropertiesBuilder()
+        private BeamPropertiesBuilder()
         {
             this.beamProperties = new BeamProperties();
+        }
+
+        public static IBeamPropertiesBuilderSetMaterial Create()
+        {
+            var builder = new BeamPropertiesBuilder();
+            return builder;
         }
 
         public BeamProperties Build()
@@ -21,18 +28,23 @@ namespace Common.ElementProperties
             return this.beamProperties;
         }
 
-        public BeamPropertiesBuilder SetSteel()
+
+        public IBeamPropertiesBuilderSetSection SetSteel()
         {
             this.beamProperties.ModulusOfElasticity=200000000;
             return this;
         }
-        public BeamPropertiesBuilder SetModulusOfElasticity(double modulus)
+        public IBeamPropertiesBuilderSetSection SetModulusOfElasticity(double modulus)
         {
             this.beamProperties.ModulusOfElasticity = modulus;
             return this;
         }
 
-
+        public IBeamPropertiesBuilderFinish SetRectangularSection(double width, double height)
+        {
+            this.beamProperties.Section = Section.FromRectangle(width, height);
+            return this;
+        }
        
 
     }

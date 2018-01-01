@@ -17,6 +17,7 @@ using Output.OutputCreator;
 using Newtonsoft.Json;
 using MathNet.Numerics.Statistics;
 using System.Diagnostics;
+using Common.ElementProperties;
 
 namespace TestApplication
 {
@@ -29,6 +30,11 @@ namespace TestApplication
             //ResultsToDxfMembrane();
             //ResultsToDxfMembrane1x1();
             //AppTest();
+
+            var sectionProperties = BeamPropertiesBuilder.Create()
+                .SetSteel()
+                .SetRectangularSection(20, 20)
+                .Build();
 
         }
 
