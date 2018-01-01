@@ -70,15 +70,15 @@ namespace Common.Sections
         private void CalculateCentralMoments()
         {
             //in central coordinate system
-            result.Ix0 = result.Ix - result.F * result.Y0 * result.Y0;
-            result.Iy0 = result.Iy - result.F * result.X0 * result.X0;
-            result.Ixy0 = result.Ixy - result.F * result.X0 * result.Y0;
+            result.Ix0 = result.Ix - result.A * result.Y0 * result.Y0;
+            result.Iy0 = result.Iy - result.A * result.X0 * result.X0;
+            result.Ixy0 = result.Ixy - result.A * result.X0 * result.Y0;
         }
 
         private void CalculateCentreOfGravity()
         {
-            result.X0 = result.Sy / result.F;
-            result.Y0 = result.Sx / result.F;
+            result.X0 = result.Sy / result.A;
+            result.Y0 = result.Sx / result.A;
         }
 
         private void CalculateBaseProperties(IEnumerable<Perimeter> perimeters)
@@ -92,7 +92,7 @@ namespace Common.Sections
                     x2 = perimeter.Coordinates[i + 1].X;
                     y1 = perimeter.Coordinates[i].Y;
                     y2 = perimeter.Coordinates[i + 1].Y;
-                    result.F = result.F + (x1 - x2) * (y2 + y1);
+                    result.A = result.A + (x1 - x2) * (y2 + y1);
                     result.Sx = result.Sx + (x1 - x2) * (y1 * y1 + y1 * y2 + y2 * y2);
                     result.Sy = result.Sy + (y2 - y1) * (x1 * x1 + x1 * x2 + x2 * x2);
                     result.Ix = result.Ix + (x1 - x2) * (y1 * y1 * y1 + y1 * y1 * y2 + y1 * y2 * y2 + y2 * y2 * y2);
@@ -103,7 +103,7 @@ namespace Common.Sections
             }
 
             //applying mulipliers
-            result.F = result.F / 2;
+            result.A = result.A / 2;
             result.Sx = result.Sx / 6;
             result.Sy = result.Sy / 6;
             result.Ix = result.Ix / 12;

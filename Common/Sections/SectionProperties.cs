@@ -8,7 +8,7 @@ namespace Common.Sections
 {
     public class SectionProperties
     {
-        public double F   {get;set;}
+        public double A   {get;set;}
         public double Sx  {get;set;}
         public double Sy  {get;set;}
         public double Ix  {get;set;}
