@@ -24,13 +24,13 @@ namespace Common.Sections
         public double I1  {get;set;}
         public double I2 { get; set; }
 
-        public double X0_max {get; set;}
-        public double X0_min {get; set;}
-        public double Y0_max {get; set;}
-        public double Y0_min {get; set;}
-        public double XI_max {get; set;}
-        public double XI_min {get; set;}
-        public double YI_max {get; set;}
-        public double YI_min { get; set; }
+        public double DX0_max {get; set;}
+        public double DX0_min {get; set;}
+        public double DY0_max {get; set;}
+        public double DY0_min {get; set;}
+        public double DXI_max {get; set;}
+        public double DXI_min {get; set;}
+        public double DYI_max {get; set;}
+        public double DYI_min { get; set; }
     }
 }

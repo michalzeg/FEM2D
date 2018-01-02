@@ -37,18 +37,18 @@ namespace Common.Sections
             var xo = result.X0 * cos - result.Y0 * sin;
             var yo = result.X0 * sin + result.Y0 * cos;
 
-            result.XI_max = perimeters.Max(s => s.Coordinates.Max(point => point.X * cos - point.Y * sin)) - xo;
-            result.XI_min = perimeters.Min(s => s.Coordinates.Min(point => point.X * cos - point.Y * sin)) - xo;
-            result.YI_max = perimeters.Max(s => s.Coordinates.Max(point => point.X * sin + point.Y * cos)) - yo;
-            result.YI_min = perimeters.Min(s => s.Coordinates.Min(point => point.X * sin + point.Y * cos)) - yo;
+            result.DXI_max = perimeters.Max(s => s.Coordinates.Max(point => point.X * cos - point.Y * sin)) - xo;
+            result.DXI_min = perimeters.Min(s => s.Coordinates.Min(point => point.X * cos - point.Y * sin)) - xo;
+            result.DYI_max = perimeters.Max(s => s.Coordinates.Max(point => point.X * sin + point.Y * cos)) - yo;
+            result.DYI_min = perimeters.Min(s => s.Coordinates.Min(point => point.X * sin + point.Y * cos)) - yo;
         }
 
         private void CalculateExtrimesInCentral(IEnumerable<Perimeter> perimeters)
         {
-            result.X0_max = perimeters.Max(s => s.Coordinates.Max(point => point.X)) - result.X0;
-            result.X0_min = perimeters.Min(s => s.Coordinates.Min(point => point.X)) - result.X0;
-            result.Y0_max = perimeters.Max(s => s.Coordinates.Max(point => point.Y)) - result.Y0;
-            result.Y0_min = perimeters.Min(s => s.Coordinates.Min(point => point.Y)) - result.Y0;
+            result.DX0_max = perimeters.Max(s => s.Coordinates.Max(point => point.X)) - result.X0;
+            result.DX0_min = perimeters.Min(s => s.Coordinates.Min(point => point.X)) - result.X0;
+            result.DY0_max = perimeters.Max(s => s.Coordinates.Max(point => point.Y)) - result.Y0;
+            result.DY0_min = perimeters.Min(s => s.Coordinates.Min(point => point.Y)) - result.Y0;
         }
 
         private double CalculateAlfa()

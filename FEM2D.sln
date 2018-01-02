@@ -21,10 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamics", "FEM2DDynam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicTestApplication", "FEM2DDynamicTestApplication\FEM2DDynamicTestApplication.csproj", "{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DStressCalculator", "FEM2DStressCalculator\FEM2DStressCalculator.csproj", "{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}"
+EndProject
 Global
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -62,6 +61,10 @@ Global
 		{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +76,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC5E2571-D1D4-4B4C-9EB7-09670CED9E5C}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
