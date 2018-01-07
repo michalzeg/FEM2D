@@ -5,6 +5,7 @@ using FEM2DDynamics.Solver;
 using FEM2DDynamics.Structure;
 using netDxf;
 using netDxf.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,21 +55,25 @@ namespace FEM2DDynamicTestApplication
             var beam2Result = results.GetResult(beam2,1);
 
 
+            //dxf
             var filePath = @"D:\test.dxf";
 
             var document = new DxfDocument();
             var time = 0d;
+
             while (time<=settings.EndTime)
             {
-                var displ = beam1Result.GetDisplacement(1);
-                //var moment = beam1Result.Moment(1);
+                //var displ = beam1Result.GetDisplacement(1);
+                var moment = beam1Result.Moment(1);
 
                 beam1Result = results.GetResult(beam1, time);
-                document.AddEntity(new Point(time,displ*100 , 0));
+                document.AddEntity(new Point(time,moment , 0));
 
                 time += 0.01;
             }
             document.Save(filePath);
+
+           
         }
     }
 }
