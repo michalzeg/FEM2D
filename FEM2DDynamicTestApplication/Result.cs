@@ -8,23 +8,23 @@ namespace FEM2DDynamicTestApplication
 {
     public class ResultData
     {
-        double MaxStress { get; set; }
-        double MinStress { get; set; }
-        double MaxAbsoluteDisplacement { get; set; }
-        IEnumerable<TimeResult> TimeResults { get; set; }
+        public double MaxStress { get; set; }
+        public double MinStress { get; set; }
+        public double MaxAbsoluteDisplacement { get; set; }
+        public IEnumerable<TimeResult> TimeResults { get; set; }
     }
 
     public class TimeResult
     {
-        double Time { get; set; }
-        IEnumerable<PositionResult> PositionResults { get; set; }
+        public double Time { get; set; }
+        public IEnumerable<PositionResult> PositionResults { get; set; }
     }
 
     public class PositionResult
     {
-        double Position { get; set; }
-        double TopStress { get; set; }
-        double BottomStress { get; set; }
-        double Displacement { get; set; }
+        public double GlobalPosition { get; set; }
+        public double TopStress { get; set; }
+        public double BottomStress { get; set; }
+        public double Displacement { get; set; }
     }
 }

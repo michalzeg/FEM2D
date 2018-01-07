@@ -66,6 +66,10 @@
       <Project>{cc63723e-8c8c-4d10-9c5c-035a7e694eff}</Project>
       <Name>FEM2DDynamics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
+      <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
+      <Name>FEM2DStressCalculator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FEM2D\FEM2D.csproj">
       <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
       <Name>FEM2D</Name>

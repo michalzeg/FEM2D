@@ -18,8 +18,8 @@ namespace Common.DTO
 
         public static BeamProperties Default => new BeamProperties
         {
-            ModulusOfElasticity = 200,
-            Section = Section.FromRectangle(1,1),
+            ModulusOfElasticity = 200000000,
+            Section = Section.FromRectangle(1,0.3),
         };
     }
 }
