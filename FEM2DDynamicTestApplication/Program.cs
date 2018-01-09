@@ -136,18 +136,10 @@ namespace FEM2DDynamicTestApplication
             resultData.TimeResults = timeResults;
 
             var extremes = timeResults.SelectMany(e => e.PositionResults)
-                .Select(e => new
-                {
-                    Displacement = Math.Abs(e.Displacement).Round(3),
-                    Stress = new[] {e.TopStress.Round(1),e.BottomStress.Round(1)}
-                })
-
+                .Select(e => Math.Abs(e.Displacement).Round(3))
                 .ToList();
 
-            resultData.MaxAbsoluteDisplacement = extremes.Select(e => e.Displacement).Max();
-
-
-            var avg = extremes.SelectMany(e => e.Stress).Select(e => Math.Abs(e)).Average();
+            resultData.MaxAbsoluteDisplacement = extremes.Select(e => e).Max();
 
             var obj = JsonConvert.SerializeObject(resultData);
             File.WriteAllText(@"e:\disp.json", obj);
