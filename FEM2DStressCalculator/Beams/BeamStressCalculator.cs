@@ -19,16 +19,16 @@ namespace FEM2DStressCalculator.Beams
 
         public double TopNormalStress(BeamForces forces)
         {
-            var result = forces.Axial / this.sectionProperties.A
-                + forces.Moment / this.sectionProperties.Ix0 * this.sectionProperties.DY0_max;
+            var result = (forces.Axial / this.sectionProperties.A)
+                         + forces.Moment / this.sectionProperties.Ix0 * this.sectionProperties.DY0_max;
 
             return result;
         }
 
         public double BottomNormalStress(BeamForces forces)
         {
-            var result = forces.Axial / this.sectionProperties.A
-                - forces.Moment / this.sectionProperties.Ix0 * this.sectionProperties.DY0_min;
+            var result = (forces.Axial / this.sectionProperties.A) 
+                - (forces.Moment / this.sectionProperties.Ix0 * this.sectionProperties.DY0_min);
 
             return result;
         }
