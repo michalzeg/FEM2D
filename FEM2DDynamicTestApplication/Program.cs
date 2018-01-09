@@ -94,6 +94,7 @@ namespace FEM2DDynamicTestApplication
             while (time <= settings.EndTime)
             {
                 var positionResults = new List<PositionResult>();
+                var stresses = new List<double>();
                 foreach (var beam in beams)
                 {
                     var beamResult = results.GetResult(beam, time);
@@ -106,6 +107,9 @@ namespace FEM2DDynamicTestApplication
 
                         var topStress = stressCalculator.TopNormalStress(forces);
                         var bottomStress = stressCalculator.BottomNormalStress(forces);
+
+                        stresses.Add(topStress);
+                        stresses.Add(bottomStress);
 
                         var positionResult = new PositionResult
                         {
@@ -121,6 +125,8 @@ namespace FEM2DDynamicTestApplication
 
                 var timeResult = new TimeResult();
                 timeResult.Time = time;
+                timeResult.MaxStress = stresses.Max();
+                timeResult.MinStress = stresses.Min();
                 timeResult.PositionResults = positionResults;
                 timeResults.Add(timeResult);
                 time += deltaT;
@@ -139,8 +145,9 @@ namespace FEM2DDynamicTestApplication
                 .ToList();
 
             resultData.MaxAbsoluteDisplacement = extremes.Select(e => e.Displacement).Max();
-            resultData.MaxStress = extremes.SelectMany(e => e.Stress).Max();
-            resultData.MinStress = extremes.SelectMany(e => e.Stress).Min();
+
+
+            var avg = extremes.SelectMany(e => e.Stress).Select(e => Math.Abs(e)).Average();
 
             var obj = JsonConvert.SerializeObject(resultData);
             File.WriteAllText(@"e:\disp.json", obj);
