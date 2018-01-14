@@ -32,5 +32,14 @@ namespace FEM2DStressCalculator.Beams
 
             return result;
         }
+
+        public double NormalStressAt(BeamForces forces, double y)
+        {
+            var distance = y - this.sectionProperties.Y0;
+            var result = (forces.Axial / this.sectionProperties.A)
+                         + forces.Moment / this.sectionProperties.Ix0 * distance;
+
+            return result;
+        }
     }
 }
