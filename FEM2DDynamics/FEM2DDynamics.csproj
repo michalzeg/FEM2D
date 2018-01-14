@@ -44,9 +44,21 @@
       <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
       <Name>FEM2DCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
+      <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
+      <Name>FEM2DStressCalculator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FEM2D\FEM2D.csproj">
       <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
       <Name>FEM2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Output\FEM2DOutput.csproj">
+      <Project>{599fbf44-d588-4a46-a73f-b8fca5373707}</Project>
+      <Name>FEM2DOutput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Triangulation\FEM2DTriangulation.csproj">
+      <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>
+      <Name>FEM2DTriangulation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
