@@ -57,5 +57,16 @@ namespace FEM2D.Nodes
                 .Distinct()
                 .Count();
         }
+
+        public void SetSupportAt(PointD location, Restraint restraint)
+        {
+            Node node;
+            if (this.coordinatesNodeMap.TryGetValue(location,out node))
+            {
+                node.SetRestraint(restraint);
+            }
+        }
+
+
     }
 }

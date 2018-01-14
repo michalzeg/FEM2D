@@ -68,12 +68,17 @@ namespace FEM2D.Nodes
 
         public void SetFixedSupport()
         {
-            this.Restraint = Restraint.Fixed;
+            this.SetRestraint(Restraint.Fixed);
         }
 
         public void SetPinnedSupport()
         {
-            this.Restraint = Restraint.FixedX | Restraint.FixedY;
+            this.SetRestraint(Restraint.FixedX | Restraint.FixedY);
+        }
+
+        public void SetRestraint(Restraint restraint)
+        {
+            this.Restraint = restraint;
         }
 
         public override bool Equals(object obj)
