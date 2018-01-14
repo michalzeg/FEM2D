@@ -1,4 +1,5 @@
 ﻿using Common.Extensions;
+using FEM2DCommon.Extensions;
 using MathNet.Numerics.Interpolation;
 using MathNet.Numerics.LinearAlgebra;
 using System;

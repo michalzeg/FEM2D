@@ -1,5 +1,6 @@
 ﻿using Common.Extensions;
 using FEM2D.Solvers;
+using FEM2DCommon.Extensions;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using NUnit.Framework;

@@ -1,4 +1,4 @@
-﻿using Common.ElementProperties;
+﻿using FEM2DCommon.ElementProperties;
 using Common.Point;
 using FEM2D.Elements.Beam;
 using System;

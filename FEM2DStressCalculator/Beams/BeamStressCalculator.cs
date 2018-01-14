@@ -1,5 +1,5 @@
-﻿using Common.Forces;
-using Common.Sections;
+﻿using FEM2DCommon.Forces;
+using FEM2DCommon.Sections;
 using System;
 using System.Collections.Generic;
 using System.Linq;

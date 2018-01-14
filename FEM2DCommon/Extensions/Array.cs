@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Extensions
+namespace FEM2DCommon.Extensions
 {
     public static class ArrayExtensions
     {

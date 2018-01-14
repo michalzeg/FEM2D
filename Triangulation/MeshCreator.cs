@@ -8,8 +8,9 @@ using TriangleNet.Smoothing;
 using TriangleNet.Algorithm;
 using TriangleNet;
 using TriangleNet.Data;
-using Common.DTO;
+
 using Triangulation.Extensions;
+using FEM2DCommon.DTO;
 
 namespace Triangulation
 {

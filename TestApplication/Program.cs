@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using netDxf;
 using Triangulation;
 using netDxf.Entities;
-using Common.DTO;
+using FEM2DCommon.DTO;
 using FEM2D.Structures;
 using FEM2D.Nodes;
 using FEM2D.Restraints;
@@ -17,7 +17,7 @@ using Output.OutputCreator;
 using Newtonsoft.Json;
 using MathNet.Numerics.Statistics;
 using System.Diagnostics;
-using Common.ElementProperties;
+using FEM2DCommon.ElementProperties;
 
 namespace TestApplication
 {

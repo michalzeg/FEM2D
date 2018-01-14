@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using FEM2D.Nodes;
 using MathNet.Numerics.LinearAlgebra;
 using FEM2D.Elements.Beam;
-using Common.DTO;
-using Common.ElementProperties;
+using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using FEM2DDynamics.Matrix;
 using Common.Point;
-using Common.Geometry;
+using FEM2DCommon.Geometry;
 using FEM2DDynamics.Solver;
 
 namespace FEM2DDynamics.Elements.Beam

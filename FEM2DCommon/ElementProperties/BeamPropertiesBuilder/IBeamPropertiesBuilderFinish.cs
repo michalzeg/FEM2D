@@ -1,6 +1,6 @@
-﻿using Common.DTO;
+﻿using FEM2DCommon.DTO;
 
-namespace Common.ElementProperties
+namespace FEM2DCommon.ElementProperties
 {
     public interface IBeamPropertiesBuilderFinish
     {

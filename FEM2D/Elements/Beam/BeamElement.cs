@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using FEM2D.Nodes;
 using MathNet.Numerics.LinearAlgebra;
-using Common.DTO;
 using FEM2D.Matrix;
+using FEM2DCommon.DTO;
 
 namespace FEM2D.Elements.Beam
 {

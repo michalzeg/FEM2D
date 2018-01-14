@@ -1,5 +1,5 @@
-﻿using Common.DTO;
-using Common.ElementProperties;
+﻿using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using FEM2D.Elements;
 using FEM2D.Nodes;
 using FEM2DDynamics.Elements.Beam;

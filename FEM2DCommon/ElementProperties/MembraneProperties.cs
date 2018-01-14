@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.DTO
+namespace FEM2DCommon.DTO
 {
     public class MembraneProperties
     {

@@ -1,12 +1,12 @@
-﻿using Common.DTO;
-using Common.Sections;
+﻿using FEM2DCommon.DTO;
+using FEM2DCommon.Sections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.ElementProperties
+namespace FEM2DCommon.ElementProperties
 {
     public class BeamPropertiesBuilder : IBeamPropertiesBuilderFinish, IBeamPropertiesBuilderSetMaterial, IBeamPropertiesBuilderSetSection
     {

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Triangulation</RootNamespace>
     <AssemblyName>FEMTriangulation</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,7 +49,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\FEM2DCommon.csproj">
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{e71c41fb-f049-4cd7-958b-7312bb2fe840}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2DCommon\FEM2DCommon.csproj">
       <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
       <Name>FEM2DCommon</Name>
     </ProjectReference>

@@ -1,7 +1,7 @@
-﻿using Common.DTO;
-using Common.ElementProperties;
+﻿using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using Common.Extensions;
-using Common.Sections;
+using FEM2DCommon.Sections;
 using FEM2D.Structures;
 using FEM2DDynamics.Solver;
 using FEM2DDynamics.Structure;

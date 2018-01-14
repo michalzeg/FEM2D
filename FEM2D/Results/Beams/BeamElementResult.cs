@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common.Forces;
+using FEM2DCommon.Forces;
 namespace FEM2D.Results.Beams
 {
     public class BeamElementResult

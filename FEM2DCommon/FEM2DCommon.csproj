@@ -7,10 +7,11 @@
     <ProjectGuid>{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common</RootNamespace>
+    <RootNamespace>FEMCommon</RootNamespace>
     <AssemblyName>FEMCommon</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,12 +60,10 @@
     <Compile Include="DTO\TriangleOutput.cs" />
     <Compile Include="DTO\VertexInput.cs" />
     <Compile Include="Extensions\Array.cs" />
-    <Compile Include="Extensions\Double.cs" />
     <Compile Include="Extensions\Matrix.cs" />
     <Compile Include="Extensions\Vector.cs" />
     <Compile Include="Forces\BeamForces.cs" />
     <Compile Include="Geometry\Geometry.cs" />
-    <Compile Include="Point\PointD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sections\Perimeter.cs" />
     <Compile Include="Sections\Section.cs" />
@@ -73,6 +72,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{e71c41fb-f049-4cd7-958b-7312bb2fe840}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

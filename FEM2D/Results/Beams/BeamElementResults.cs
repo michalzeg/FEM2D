@@ -1,5 +1,5 @@
 ﻿using Common.Extensions;
-using Common.Forces;
+using FEM2DCommon.Forces;
 using FEM2D.Elements.Beam;
 using FEM2D.Loads;
 using FEM2D.ShapeFunctions;
@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FEM2DCommon.Extensions;
 
 namespace FEM2D.Results.Beams
 {

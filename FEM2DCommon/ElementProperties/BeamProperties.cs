@@ -1,11 +1,11 @@
-﻿using Common.Sections;
+﻿using FEM2DCommon.Sections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.DTO
+namespace FEM2DCommon.DTO
 {
     public class BeamProperties
     {

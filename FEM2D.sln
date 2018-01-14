@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2D", "FEM2D\FEM2D.csproj", "{2743B6ED-2F44-4E77-B4FE-0D68D3C58280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DCommon", "Common\FEM2DCommon.csproj", "{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DCommon", "FEM2DCommon\FEM2DCommon.csproj", "{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C361E3EA-5F2A-4078-B18E-E68F442066EF}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicTestApplication", "FEM2DDynamicTestApplication\FEM2DDynamicTestApplication.csproj", "{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DStressCalculator", "FEM2DStressCalculator\FEM2DStressCalculator.csproj", "{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{E71C41FB-F049-4CD7-958B-7312BB2FE840}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71C41FB-F049-4CD7-958B-7312BB2FE840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71C41FB-F049-4CD7-958B-7312BB2FE840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71C41FB-F049-4CD7-958B-7312BB2FE840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71C41FB-F049-4CD7-958B-7312BB2FE840}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,11 +1,12 @@
-﻿using Common.Point;
+﻿
+using Common.Point;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.DTO
+namespace FEM2DCommon.DTO
 {
     public class TriangleGeometry : IEquatable<TriangleGeometry>
     {

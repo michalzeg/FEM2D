@@ -10,7 +10,7 @@ using CuttingEdge;
 using FEM2D.Nodes;
 using MathNet.Numerics.LinearAlgebra.Double;
 using FEM2D.Matrix;
-using Common.DTO;
+using FEM2DCommon.DTO;
 
 namespace FEM2D.Elements
 {

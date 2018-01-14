@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.Sections
+namespace FEM2DCommon.Sections
 {
     public class Perimeter
     {

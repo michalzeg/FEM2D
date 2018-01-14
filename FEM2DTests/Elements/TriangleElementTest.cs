@@ -9,7 +9,7 @@ using FEM2D.Elements;
 using MathNet.Numerics.LinearAlgebra.Double;
 using FEM2D.Nodes;
 using Common.Point;
-using Common.DTO;
+using FEM2DCommon.DTO;
 
 namespace FEM2DTests.Elements
 {

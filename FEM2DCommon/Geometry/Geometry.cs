@@ -1,11 +1,13 @@
-﻿using Common.Point;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FEM2DCommon.Extensions;
+using Common.Point;
 using Common.Extensions;
-namespace Common.Geometry
+
+namespace FEM2DCommon.Geometry
 {
     public static class Geometry
     {
