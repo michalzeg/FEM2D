@@ -1,4 +1,4 @@
-﻿using Common.Point;
+﻿using Common.Geometry;
 using FEM2D.Elements.Beam;
 using FEM2D.Loads;
 using FEM2D.Nodes;

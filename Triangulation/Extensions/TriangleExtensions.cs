@@ -1,4 +1,4 @@
-﻿using Common.Point;
+﻿using Common.Geometry;
 using FEM2DCommon.DTO;
 using System;
 using System.Collections.Generic;

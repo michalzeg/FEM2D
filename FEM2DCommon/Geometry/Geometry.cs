@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FEM2DCommon.Extensions;
-using Common.Point;
+using Common.Geometry;
 using Common.Extensions;
 
 namespace FEM2DCommon.Geometry

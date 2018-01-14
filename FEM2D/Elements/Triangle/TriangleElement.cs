@@ -1,4 +1,4 @@
-﻿using Common.Point;
+﻿using Common.Geometry;
 using CuttingEdge.Conditions;
 using MathNet.Numerics.LinearAlgebra;
 using System;

@@ -30,7 +30,6 @@ namespace FEM2D.Results.Beams
 
         public BeamForces GetBeamForces(double relativePosition)
         {
-            var normal = 0;
             var moment = this.Moment(relativePosition);
             var shear = this.Shear(relativePosition);
             var result = new BeamForces

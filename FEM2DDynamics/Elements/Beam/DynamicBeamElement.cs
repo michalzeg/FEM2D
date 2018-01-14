@@ -9,7 +9,7 @@ using FEM2D.Elements.Beam;
 using FEM2DCommon.DTO;
 using FEM2DCommon.ElementProperties;
 using FEM2DDynamics.Matrix;
-using Common.Point;
+using Common.Geometry;
 using FEM2DCommon.Geometry;
 using FEM2DDynamics.Solver;
 

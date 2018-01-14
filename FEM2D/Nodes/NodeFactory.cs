@@ -1,4 +1,4 @@
-﻿using Common.Point;
+﻿using Common.Geometry;
 using FEM2D.Restraints;
 using System;
 using System.Collections.Generic;

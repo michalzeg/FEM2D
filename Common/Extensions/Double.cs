@@ -25,12 +25,6 @@ namespace Common.Extensions
             return result;
         }
 
-        public static bool IsApproximatelyEqualToZero(this double initialValue)
-        {
-            var result = DoubleExtensionMethods.IsApproximatelyEqualTo(initialValue, 0d, MaximumDifferenceAllowed);
-            return result;
-        }
-
         /// <summary>
         /// Method for checking if two doubles are equal with the given difference/>
         /// </summary>
@@ -41,6 +35,11 @@ namespace Common.Extensions
         public static bool IsApproximatelyEqualTo(this double initialValue, double value, double maximumDifferenceAllowed)
         {
             return (Math.Abs(initialValue - value) < maximumDifferenceAllowed);
+        }
+
+        public static bool IsApproximatelyEqualToZero(this double initialValue)
+        {
+            return IsApproximatelyEqualTo(initialValue, 0d);
         }
 
         /// <summary>
@@ -80,7 +79,7 @@ namespace Common.Extensions
         /// <param name="base">The base of the power</param>
         /// <param name="exponent">The exponent</param>
         /// <returns></returns>
-        public static double Power(this double @base, double exponent)
+        public static double Power(this double @base,double exponent)
         {
             return Math.Pow(@base, exponent);
         }

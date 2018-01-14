@@ -1,5 +1,5 @@
 ﻿using FEM2DCommon.ElementProperties;
-using Common.Point;
+using Common.Geometry;
 using FEM2D.Elements.Beam;
 using System;
 using System.Collections.Generic;
