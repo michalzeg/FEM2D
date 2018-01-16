@@ -40,6 +40,12 @@ namespace FEM2DCommon.ElementProperties
             return this;
         }
 
+        public IBeamPropertiesBuilderFinish SetSection(Section section)
+        {
+            this.beamProperties.Section = section;
+            return this;
+        }
+
         public IBeamPropertiesBuilderFinish SetRectangularSection(double width, double height)
         {
             this.beamProperties.Section = Section.FromRectangle(width, height);

@@ -16,6 +16,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FEMCommon.ElementProperties.SectionBuilders;
+using FEMCommon.ElementProperties.SectionBuilders.CustomSection;
+using Common.Geometry;
 
 namespace FEM2DDynamicTestApplication
 {
@@ -27,7 +29,11 @@ namespace FEM2DDynamicTestApplication
 
 
             var c = RectangularSectionBuilder.RectangularSection.SetWidth(10).SetHeight(20).BuildSection();
+            var d = CustomSectionBuilder.CustomSection.WithPerimeter(new Perimeter(new List<PointD>())).WithNoMorePerimeters().Build();
+            var g = BeamPropertiesBuilder.Create().SetSteel().SetSection(d).Build();
         }
+
+
 
         private static void DynamicLoadInCentre()
         {

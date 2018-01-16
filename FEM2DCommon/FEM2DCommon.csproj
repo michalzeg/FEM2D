@@ -59,6 +59,11 @@
     <Compile Include="DTO\TriangleGeometry.cs" />
     <Compile Include="DTO\TriangleOutput.cs" />
     <Compile Include="DTO\VertexInput.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\CustomSection\CustomSectionBuilder.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\CustomSection\ICustomSectionBuilderAddFirstPerimeter.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\CustomSection\ICustomSectionBuilderAddOtherPerimeters.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\CustomSection\ICustomSectionBuilderFinish.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\ISectionBuilder.cs" />
     <Compile Include="ElementProperties\SectionBuilders\RectangularSection\IRectangularSectionBuilderFinish.cs" />
     <Compile Include="ElementProperties\SectionBuilders\RectangularSection\IRectangularSectionBuilderSetHeight.cs" />
     <Compile Include="ElementProperties\SectionBuilders\RectangularSection\IRectangularSectionBuilderSetWidth.cs" />

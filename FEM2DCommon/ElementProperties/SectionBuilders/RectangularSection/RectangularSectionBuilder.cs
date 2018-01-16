@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FEMCommon.ElementProperties.SectionBuilders
 {
-    public class RectangularSectionBuilder : IRectangularSectionBuilderSetHeight, IRectangularSectionBuilderSetWidth, IRectangularSectionBuilderFinish
+    public class RectangularSectionBuilder : ISectionBuilder ,IRectangularSectionBuilderSetHeight, IRectangularSectionBuilderSetWidth, IRectangularSectionBuilderFinish
     {
         private double width;
         private double height;
@@ -24,6 +24,7 @@ namespace FEMCommon.ElementProperties.SectionBuilders
         {
             
         }
+
 
         public IRectangularSectionBuilderSetHeight SetWidth(double width)
         {
