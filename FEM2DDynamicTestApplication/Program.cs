@@ -15,6 +15,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FEMCommon.ElementProperties.SectionBuilders;
 
 namespace FEM2DDynamicTestApplication
 {
@@ -24,6 +25,8 @@ namespace FEM2DDynamicTestApplication
         {
             DynamicLoadInCentre();
 
+
+            var c = RectangularSectionBuilder.RectangularSection.SetWidth(10).SetHeight(20).BuildSection();
         }
 
         private static void DynamicLoadInCentre()

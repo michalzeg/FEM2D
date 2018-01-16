@@ -59,6 +59,10 @@
     <Compile Include="DTO\TriangleGeometry.cs" />
     <Compile Include="DTO\TriangleOutput.cs" />
     <Compile Include="DTO\VertexInput.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\RectangularSection\IRectangularSectionBuilderFinish.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\RectangularSection\IRectangularSectionBuilderSetHeight.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\RectangularSection\IRectangularSectionBuilderSetWidth.cs" />
+    <Compile Include="ElementProperties\SectionBuilders\RectangularSection\RectangularSectionBuilder.cs" />
     <Compile Include="Extensions\Array.cs" />
     <Compile Include="Extensions\Matrix.cs" />
     <Compile Include="Extensions\Vector.cs" />
