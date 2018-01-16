@@ -12,7 +12,7 @@ namespace FEM2DCommon.ElementProperties
     {
         private BeamProperties beamProperties;
 
-        private BeamPropertiesBuilder()
+        internal BeamPropertiesBuilder()
         {
             this.beamProperties = new BeamProperties();
         }
