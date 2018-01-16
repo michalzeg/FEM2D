@@ -88,15 +88,14 @@
     <Compile Include="Results\DynamicResultFactory.cs" />
     <Compile Include="Results\IDynamicDofDisplacementMap.cs" />
     <Compile Include="Results\TimeDisplacementPair.cs" />
-    <Compile Include="Matrix\SimpleDampingMatrixCalculator.cs" />
     <Compile Include="Solver\DynamicMatrixAggregator.cs" />
     <Compile Include="Solver\DynamicSolver.cs" />
-    <Compile Include="Matrix\IDampingMatrixCalculator.cs" />
     <Compile Include="Solver\IDampingFactors.cs" />
     <Compile Include="Solver\IDynamicMatrixAggregator.cs" />
     <Compile Include="Solver\DifferentialEquationMatrixSolver.cs" />
     <Compile Include="Solver\IEquationOfMotionSolver.cs" />
     <Compile Include="Solver\DynamicSolverSettings.cs" />
+    <Compile Include="Solver\INaturalFrequencyCalculator.cs" />
     <Compile Include="Solver\NaturalFrequencyCalculator.cs" />
     <Compile Include="Solver\RayleightDamping.cs" />
     <Compile Include="Structure\DynamicStructure.cs" />

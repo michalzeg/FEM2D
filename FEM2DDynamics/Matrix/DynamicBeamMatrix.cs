@@ -29,5 +29,12 @@ namespace FEM2DDynamics.Matrix
 
             return matrix;
         }
+
+        public static Matrix<double> GetDampingMatrix(Matrix<double> stiffness, Matrix<double> mass, double stiffnessFactor, double massFactor)
+        {
+            var matrix = stiffnessFactor * stiffness + massFactor * mass;
+
+            return matrix;
+        }
     }
 }

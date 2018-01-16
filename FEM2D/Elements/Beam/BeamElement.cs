@@ -13,6 +13,7 @@ namespace FEM2D.Elements.Beam
     public class BeamElement : IBeamElement
     {
         private readonly BeamMatrix beamMatrix;
+        private Matrix<double> stiffnessMatrix;
 
         public Node[] Nodes { get; private set; }
         public int Number { get; private set; }
@@ -41,7 +42,9 @@ namespace FEM2D.Elements.Beam
 
         public Matrix<double> GetStiffnessMatrix()
         {
-            return this.beamMatrix.GetK(this.Length, this.BeamProperties.MomentOfInertia, this.BeamProperties.ModulusOfElasticity,this.BeamProperties.Area);
+            if (this.stiffnessMatrix == null)
+                this.stiffnessMatrix = this.beamMatrix.GetK(this.Length, this.BeamProperties.MomentOfInertia, this.BeamProperties.ModulusOfElasticity,this.BeamProperties.Area);
+            return this.stiffnessMatrix;
         }
     }
 }

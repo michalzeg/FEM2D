@@ -1,8 +1,8 @@
 ﻿namespace FEM2DDynamics.Solver
 {
-    internal interface IDampingFactors
+    public interface IDampingFactors
     {
-        double MassDampingFActor { get; }
+        double MassDampingFactor { get; }
         double StiffnessDampingFactor { get; }
     }
 }

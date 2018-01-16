@@ -1,4 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using Common.Extensions;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Solver
 {
-    internal class NaturalFrequencyCalculator
+    internal class NaturalFrequencyCalculator : INaturalFrequencyCalculator
     {
         private readonly Matrix<double> mass;
         private readonly Matrix<double> stiffness;
@@ -18,13 +19,19 @@ namespace FEM2DDynamics.Solver
         {
             this.mass = mass;
             this.stiffness = stiffness;
+
+            this.Calculate();
         }
 
-        public void Calculate(Matrix<double> mass, Matrix<double> stiffness)
+        private void Calculate()
         {
             var eigen = (this.mass.Inverse() * this.stiffness).Evd();
 
-            this.naturalFrequency = eigen.EigenValues.OrderBy(e => e.Real).Select(e=>e.Real).ToList();
+            this.naturalFrequency = eigen.EigenValues
+                                         .OrderBy(e => e.Real)
+                                         .Select(e=>e.Real)
+                                         .Where(e=>!e.IsApproximatelyEqualTo(1d))
+                                         .ToList();
 
         }
 

@@ -28,11 +28,6 @@ namespace FEM2DDynamicTestApplication
         {
             DynamicLoadInCentre();
 
-
-            var c = RectangularSectionBuilder.RectangularSection.SetWidth(10).SetHeight(20).BuildSection();
-            var d = CustomSectionBuilder.CustomSection.WithPerimeter(new Perimeter(new List<PointD>())).WithNoMorePerimeters().Build();
-            var g = BeamPropertiesBuilder.Create().SetSteel().SetSection(d).Build();
-            var f = DynamicBeamPropertiesBuilder.Create().SetCustomMaterial().SetDensity(2000).SetModulusOfElasticity(2000).SetRectangularSection(20, 20).Build();
         }
 
         private static void DynamicLoadInCentre()
@@ -46,8 +41,9 @@ namespace FEM2DDynamicTestApplication
             var settings = new DynamicSolverSettings
             {
                 DeltaTime = 0.01,
-                EndTime = 400,
-                StartTime = 0
+                EndTime = 200,
+                StartTime = 0,
+                DampingRatio = 0.005,
             };
 
 

@@ -55,7 +55,6 @@
     <Compile Include="ElementProperties\DynamicBeamProperties.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\DynamicBeamPropertiesBuilder.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderFinish.cs" />
-    <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetDamping.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetDensity.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetMaterial.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetModulus.cs" />

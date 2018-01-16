@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder
 {
-    public class DynamicBeamPropertiesBuilder : IDynamicBeamPropertiesBuilderFinish, IDynamicBeamPropertiesBuilderSetSection, IDynamicBeamPropertiesBuilderSetModulus, IDynamicBeamPropertiesBuilderSetDensity, IDynamicBeamPropertiesBuilderSetMaterial, IDynamicBeamPropertiesBuilderSetDamping
+    public class DynamicBeamPropertiesBuilder : IDynamicBeamPropertiesBuilderFinish, IDynamicBeamPropertiesBuilderSetSection, IDynamicBeamPropertiesBuilderSetModulus, IDynamicBeamPropertiesBuilderSetDensity, IDynamicBeamPropertiesBuilderSetMaterial
     {
 
         private BeamPropertiesBuilder beamPropertiesBuilder;
@@ -30,7 +30,6 @@ namespace FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder
         {
             this.beamPropertiesBuilder.SetSteel();
             this.dynamicBeamProperties.Density = 7850;
-            this.dynamicBeamProperties.Damping = 0.03;
             return this;
         }
 
@@ -39,15 +38,9 @@ namespace FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder
             return this;
         }
 
-        public IDynamicBeamPropertiesBuilderSetDamping SetDensity(double density)
+        public IDynamicBeamPropertiesBuilderSetModulus SetDensity(double density)
         {
             this.dynamicBeamProperties.Density = density;
-            return this;
-        }
-
-        public IDynamicBeamPropertiesBuilderSetModulus SetDamping(double damping)
-        {
-            this.dynamicBeamProperties.Damping = damping;
             return this;
         }
 

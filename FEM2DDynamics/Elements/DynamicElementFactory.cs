@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FEM2DDynamics.Solver;
 
 namespace FEM2DDynamics.Elements
 {
@@ -44,5 +45,12 @@ namespace FEM2DDynamics.Elements
             return result;
         }
 
+        public void UpdateDampingFactor(IDampingFactors dampingFactors)
+        {
+            foreach (var element in this.elements)
+            {
+                element.UpdateDampingFactors(dampingFactors);
+            }
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace FEM2DDynamics.Results
         internal TimeDisplacementPair GetClosesRight(double time)
         {
             var index = this.CalculateClosestRightIndex(time);
+            index = index == this.timeDisplacementPairs.Count ? index - 1 : index;
             var closestLeft = this.timeDisplacementPairs[index];
             return closestLeft;
         }
@@ -41,6 +42,7 @@ namespace FEM2DDynamics.Results
         internal TimeDisplacementPair GetClosestLeft(double time)
         {
             var index = this.CalculateClosestLeftIndex(time);
+            index = index == this.timeDisplacementPairs.Count ? index - 1 : index;
             var closestRight = this.timeDisplacementPairs[index];
             return closestRight;
         }

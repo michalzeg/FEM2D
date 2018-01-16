@@ -21,8 +21,8 @@ namespace FEM2DDynamics.Solver
         
         private readonly IMatrixReducer matrixReducer;
         private readonly IMatrixSolver matrixSolver;
-        private readonly IDampingMatrixCalculator dampingCalculator;
         private readonly IEquationOfMotionSolver equationSolver;
+        private readonly DynamicSolverSettings settings;
 
         public DynamicResultFactory Results { get; private set; }
 
@@ -31,8 +31,8 @@ namespace FEM2DDynamics.Solver
             this.matrixAggregator = new DynamicMatrixAggregator();
             this.matrixReducer = new MatrixReducer();
             this.matrixSolver = new CholeskyDescomposition();
-            this.dampingCalculator = new SimpleDampingMatrixCalculator();
             this.equationSolver = new DifferentialEquationMatrixSolver(settings);
+            this.settings = settings;
         }
 
 
@@ -42,30 +42,59 @@ namespace FEM2DDynamics.Solver
             var elements = elementFactory.GetAll();
 
             var dofNumber = nodeFactory.GetDOFsCount();
-            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(elements, dofNumber);
-            var massMatrix = matrixAggregator.AggregateMassMatrix(elements, dofNumber);
-            var dampingMatrix = matrixAggregator.AggregateDampingMatrix(elements, dofNumber);
-
             this.matrixReducer.Initialize(nodes, dofNumber);
+            var reducedStiffnessMatrix = GetStiffnessMatrix(elements, dofNumber);
+            var reducedMassMatrix = GetMassMatrix(elements, dofNumber);
 
-            var matrixData = this.GetMatrixData(stiffnessMatrix, massMatrix, dampingMatrix);
+            var dampingFactors = GetDampingFactors(reducedStiffnessMatrix, reducedMassMatrix);
+            elementFactory.UpdateDampingFactor(dampingFactors);
+            var reducedDampingMatrix = GetDampingMatrix(elements, dofNumber);
+
+            var matrixData = this.GetMatrixData(reducedStiffnessMatrix, reducedMassMatrix, reducedDampingMatrix);
 
 
-            var displacements = this.equationSolver.Solve(matrixData, loadFactory, dofNumber,matrixReducer);
-            this.Results = new DynamicResultFactory(displacements,loadFactory);
+            var displacements = this.equationSolver.Solve(matrixData, loadFactory, dofNumber, matrixReducer);
+            this.Results = new DynamicResultFactory(displacements, loadFactory);
 
+        }
+
+        private Matrix<double> GetDampingMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
+        {
+            var dampingMatrix = matrixAggregator.AggregateDampingMatrix(elements, dofNumber);
+            var reducedDampingMatrix = matrixReducer.ReduceMatrix(dampingMatrix);
+            return reducedDampingMatrix;
+        }
+
+        private IDampingFactors GetDampingFactors( Matrix<double> reducedStiffnessMatrix, Matrix<double> reducedMassMatrix)
+        {
+            var naturalFrequencies = new NaturalFrequencyCalculator(reducedMassMatrix, reducedStiffnessMatrix);
+            var dampingFactors = new RayleightDamping(naturalFrequencies, settings.DampingRatio);
+            
+            return dampingFactors;
+        }
+
+        private Matrix<double> GetMassMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
+        {
+            var massMatrix = matrixAggregator.AggregateMassMatrix(elements, dofNumber);
+            var reducedMassMatrix = this.matrixReducer.ReduceMatrix(massMatrix);
+            return reducedMassMatrix;
+        }
+
+        private Matrix<double> GetStiffnessMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
+        {
+            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(elements, dofNumber);
+            var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
+            return reducedStiffnessMatrix;
         }
 
         private MatrixData GetMatrixData(Matrix<double> stiffnessMatrix, Matrix<double> massMatrix, Matrix<double> dampingMatrix)
         {
-            var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
-            var reducedMassMatrix = this.matrixReducer.ReduceMatrix(massMatrix);
-            var reducedDampingMatrix = this.matrixReducer.ReduceMatrix(dampingMatrix);
+            
             var matrixData = new MatrixData
             {
-                DampingMatrix = reducedDampingMatrix,
-                MassMatrix = reducedMassMatrix,
-                StiffnessMatrix = reducedStiffnessMatrix
+                DampingMatrix = dampingMatrix,
+                MassMatrix = massMatrix,
+                StiffnessMatrix = stiffnessMatrix
             };
             return matrixData;
         }

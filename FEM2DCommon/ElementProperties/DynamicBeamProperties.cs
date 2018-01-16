@@ -11,7 +11,6 @@ namespace FEM2DCommon.ElementProperties
     {
         public BeamProperties BeamProperties { get; set; }
         public double Density { get; set; }
-        public double Damping { get; set; }
 
         public static DynamicBeamProperties Default =>
             new DynamicBeamProperties

@@ -11,6 +11,7 @@ namespace FEM2DDynamics.Solver
         public double DeltaTime { get; set; }
         public double StartTime { get; set; }
         public double EndTime { get; set; }
+        public double DampingRatio { get; set; }
 
         public static DynamicSolverSettings Default
         {
@@ -20,7 +21,8 @@ namespace FEM2DDynamics.Solver
                 {
                     DeltaTime = 0.01,
                     StartTime = 0,
-                    EndTime = 100
+                    EndTime = 100,
+                    DampingRatio = 0.03,
                 };
             }
         }

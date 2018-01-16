@@ -11,16 +11,15 @@ namespace FEM2DDynamics.Solver
     internal class RayleightDamping : IDampingFactors
     {
         private readonly NaturalFrequencyCalculator naturalFrequencyCalculator;
-        private readonly DynamicBeamProperties dynamicBeamProperties;
+        private readonly double dampingRatio;
 
         public double StiffnessDampingFactor { get; private set; }
-        public double MassDampingFActor { get; private set; }
+        public double MassDampingFactor { get; private set; }
 
-        public RayleightDamping(NaturalFrequencyCalculator naturalFrequencyCalculator, DynamicBeamProperties dynamicBeamProperties)
+        public RayleightDamping(NaturalFrequencyCalculator naturalFrequencyCalculator, double dampingRatio)
         {
             this.naturalFrequencyCalculator = naturalFrequencyCalculator;
-            this.dynamicBeamProperties = dynamicBeamProperties;
-
+            this.dampingRatio = dampingRatio;
             this.Initialize();
         }
 
@@ -30,11 +29,13 @@ namespace FEM2DDynamics.Solver
             var omegaMatrix = GetOmegaMatrix();
 
             var dampingFactors = 2 * omegaMatrix.Inverse() * ksiVector;
+            this.MassDampingFactor = dampingFactors[0];
+            this.StiffnessDampingFactor = dampingFactors[1];
         }
 
         private Vector<double> GetKsiVector()
         {
-            var ksi = this.dynamicBeamProperties.Damping;
+            var ksi = this.dampingRatio;
             var ksiVector = Vector<double>.Build.DenseOfArray(new[] { ksi, ksi });
             return ksiVector;
         }

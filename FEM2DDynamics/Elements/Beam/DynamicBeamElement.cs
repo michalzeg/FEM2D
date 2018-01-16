@@ -17,7 +17,12 @@ namespace FEM2DDynamics.Elements.Beam
 {
     public class DynamicBeamElement : BeamElement, IDynamicBeamElement
     {
-        private readonly IDampingMatrixCalculator dampingCalculator;
+
+        private double stiffnessDampingFactor = 1;
+        private double massDampingFactor = 1;
+        private Matrix<double> massMatrix;
+        private Matrix<double> dampingMatrix;
+
 
         public DynamicBeamProperties DynamicBeamProperties { get; private set; }
 
@@ -25,19 +30,18 @@ namespace FEM2DDynamics.Elements.Beam
             :base(node1,node2,dynamicBeamProperties.BeamProperties,number)
         {
             this.DynamicBeamProperties = dynamicBeamProperties;
-            this.dampingCalculator = new SimpleDampingMatrixCalculator();
         }
         internal DynamicBeamElement(IBeamElement beamElement,DynamicBeamProperties dynamicBeamProeprties)
             :base(beamElement.Nodes[0],beamElement.Nodes[1],beamElement.BeamProperties,beamElement.Number)
         {
             this.DynamicBeamProperties = dynamicBeamProeprties;
-            this.dampingCalculator = new SimpleDampingMatrixCalculator();
         }
 
         public Matrix<double> GetMassMatrix()
         {
-            var matrix = DynamicBeamMatrix.GetMassMatrix(this.Length, this.DynamicBeamProperties.Density);
-            return matrix;
+            if (this.massMatrix == null)
+                this.massMatrix = DynamicBeamMatrix.GetMassMatrix(this.Length, this.DynamicBeamProperties.Density);
+            return this.massMatrix;
         }
 
         public bool IsBetweenEnds(PointD point)
@@ -47,8 +51,16 @@ namespace FEM2DDynamics.Elements.Beam
 
         public Matrix<double> GetDampingMatrix()
         {
-            var matrix =  dampingCalculator.GetDampingMatrix(this.GetStiffnessMatrix(), this.GetMassMatrix());
-            return matrix;
+            if (this.dampingMatrix == null)
+                this.dampingMatrix = DynamicBeamMatrix.GetDampingMatrix(this.GetStiffnessMatrix(), this.GetMassMatrix(), this.stiffnessDampingFactor, this.massDampingFactor);
+            return this.dampingMatrix;
+        }
+
+        public void UpdateDampingFactors(IDampingFactors dampingFactors)
+        {
+            this.massDampingFactor = dampingFactors.MassDampingFactor;
+            this.stiffnessDampingFactor = dampingFactors.StiffnessDampingFactor;
+            this.dampingMatrix = DynamicBeamMatrix.GetDampingMatrix(this.GetStiffnessMatrix(), this.GetMassMatrix(), this.stiffnessDampingFactor, this.massDampingFactor);
         }
     }
 }
