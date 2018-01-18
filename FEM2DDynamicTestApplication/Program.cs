@@ -36,7 +36,7 @@ namespace FEM2DDynamicTestApplication
 
             var settings = new DynamicSolverSettings
             {
-                DeltaTime = 0.0001,
+                DeltaTime = 0.01,
                 EndTime = 40,
                 StartTime = 0,
                 DampingRatio = 0.003,

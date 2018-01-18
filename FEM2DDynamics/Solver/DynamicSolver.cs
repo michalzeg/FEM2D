@@ -24,6 +24,7 @@ namespace FEM2DDynamics.Solver
         private readonly IEquationOfMotionSolver equationSolver;
         private readonly DynamicSolverSettings settings;
 
+
         public DynamicResultFactory Results { get; private set; }
 
         public DynamicSolver(DynamicSolverSettings settings)
@@ -46,7 +47,10 @@ namespace FEM2DDynamics.Solver
             var reducedStiffnessMatrix = GetStiffnessMatrix(elements, dofNumber);
             var reducedMassMatrix = GetMassMatrix(elements, dofNumber);
 
-            var dampingFactors = GetDampingFactors(reducedStiffnessMatrix, reducedMassMatrix);
+            var naturalFrequencies = new NaturalFrequencyCalculator(reducedMassMatrix, reducedStiffnessMatrix);
+            var dampingFactors = new RayleightDamping(naturalFrequencies, settings.DampingRatio);
+            this.CheckDeltaTime(naturalFrequencies);
+
             elementFactory.UpdateDampingFactor(dampingFactors);
             var reducedDampingMatrix = GetDampingMatrix(elements, dofNumber);
 
@@ -58,6 +62,13 @@ namespace FEM2DDynamics.Solver
 
         }
 
+        private void CheckDeltaTime(NaturalFrequencyCalculator naturalFrequency)
+        {
+            var period = naturalFrequency.GetPeriod();
+            if (this.settings.DeltaTime >= 0.1 * period)
+                this.settings.DeltaTime = 0.1 * period;
+        }
+
         private Matrix<double> GetDampingMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
         {
             var dampingMatrix = matrixAggregator.AggregateDampingMatrix(elements, dofNumber);
@@ -65,13 +76,7 @@ namespace FEM2DDynamics.Solver
             return reducedDampingMatrix;
         }
 
-        private IDampingFactors GetDampingFactors( Matrix<double> reducedStiffnessMatrix, Matrix<double> reducedMassMatrix)
-        {
-            var naturalFrequencies = new NaturalFrequencyCalculator(reducedMassMatrix, reducedStiffnessMatrix);
-            var dampingFactors = new RayleightDamping(naturalFrequencies, settings.DampingRatio);
-            
-            return dampingFactors;
-        }
+        
 
         private Matrix<double> GetMassMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
         {

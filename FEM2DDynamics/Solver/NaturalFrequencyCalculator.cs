@@ -45,5 +45,11 @@ namespace FEM2DDynamics.Solver
             return this.naturalFrequency[1];
         }
 
+        public double GetPeriod()
+        {
+            var result = 1 / (this.GetFirstMode() / 2 / Math.PI);
+            return result;
+        }
+
     }
 }
