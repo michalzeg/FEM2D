@@ -32,18 +32,14 @@ namespace FEM2DDynamicTestApplication
 
         private static void DynamicLoadInCentre()
         {
-            var properties = BeamProperties.Default;
-            var dynamicProperties = new DynamicBeamProperties
-            {
-                BeamProperties = properties,
-                Density = 2000,
-            };
+            var dynamicProperties = NewMethod();
+
             var settings = new DynamicSolverSettings
             {
-                DeltaTime = 0.01,
-                EndTime = 200,
+                DeltaTime = 0.0001,
+                EndTime = 40,
                 StartTime = 0,
-                DampingRatio = 0.005,
+                DampingRatio = 0.003,
             };
 
 
@@ -71,7 +67,7 @@ namespace FEM2DDynamicTestApplication
             var beam1Result = results.GetResult(beam1, 1);
             var beam2Result = results.GetResult(beam2, 1);
 
-            
+
             //Json
             SaveToJson(settings, beam1, beam2, beam3, beam4, results);
 
@@ -81,13 +77,90 @@ namespace FEM2DDynamicTestApplication
 
         }
 
+        private static DynamicBeamProperties NewMethod()
+        {
+            var perimeters = new List<Perimeter>
+            {
+                new Perimeter(new List<PointD>{
+                    new PointD(-0.5,0),
+                    new PointD(-0.5,0.1),
+                    new PointD(0.5,1),
+                    new PointD(0.5,0),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(-0.05,0.1),
+                    new PointD(-0.05,1),
+                    new PointD(0.05,1),
+                    new PointD(0.05,0.1),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(-0.05,1),
+                    new PointD(-0.05,2),
+                    new PointD(0.05,2),
+                    new PointD(0.05,1),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(-0.05,2),
+                    new PointD(-0.05,3.9),
+                    new PointD(0.05,3.9),
+                    new PointD(0.05,2),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(-0.5,3.9),
+                    new PointD(-0.5,4),
+                    new PointD(0.5,4),
+                    new PointD(0.5,3.9),
+                }),
+
+
+                new Perimeter(new List<PointD>{
+                    new PointD(2,0),
+                    new PointD(2,0.1),
+                    new PointD(3,1),
+                    new PointD(3,0),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(2.45,0.1),
+                    new PointD(2.45,1),
+                    new PointD(2.55,1),
+                    new PointD(2.55,0.1),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(2.45,1),
+                    new PointD(2.45,2),
+                    new PointD(2.55,2),
+                    new PointD(2.55,1),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(2.45,2),
+                    new PointD(2.45,3.9),
+                    new PointD(2.55,3.9),
+                    new PointD(2.55,2),
+                }),
+                new Perimeter(new List<PointD>{
+                    new PointD(2,3.9),
+                    new PointD(2,4),
+                    new PointD(3,4),
+                    new PointD(3,3.9),
+                }),
+            };
+
+            var section = new Section(perimeters);
+
+            var dynamicProperties = DynamicBeamPropertiesBuilder.Create()
+                .SetSteel()
+                .SetSection(section)
+                .Build();
+            return dynamicProperties;
+        }
+
         private static void SaveToJson(DynamicSolverSettings settings, FEM2DDynamics.Elements.Beam.IDynamicBeamElement beam1, FEM2DDynamics.Elements.Beam.IDynamicBeamElement beam2, FEM2DDynamics.Elements.Beam.IDynamicBeamElement beam3, FEM2DDynamics.Elements.Beam.IDynamicBeamElement beam4, FEM2DDynamics.Results.DynamicBeamElementResults results)
         {
             var section = Section.FromRectangle(1, 0.3);
 
             var stressCalculator = new BeamStressCalculator(section.SectionProperties);
 
-            
+
             var deltaT = 1;
             var time = 0;
 
@@ -125,7 +198,7 @@ namespace FEM2DDynamicTestApplication
                         };
                         positionResults.Add(positionResult);
                     }
-                    
+
                 }
 
                 var timeResult = new TimeResult();
