@@ -53,7 +53,7 @@ namespace FEM2DDynamics.Results
             var forcesAtStart = BeamForces.FromFEMResult(forces);
 
 
-            var result = new DynamicBeamElementResult(forcesAtStart, beamLoads, element,displacements.Displacements.ToList(),time);
+            var result = new DynamicBeamElementResult(forcesAtStart, beamLoads, element,displacements.Displacements.ToList(),displacements.Accelerations.ToList(),time);
 
             return result;
         }

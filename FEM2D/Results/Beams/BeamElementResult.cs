@@ -60,15 +60,26 @@ namespace FEM2D.Results.Beams
 
         public double GetDisplacement(double relativePosition)
         {
+            var result = this.GetGeneralizedDisplacement(relativePosition, this.displacements);
+            return result;
+        }
+
+        private double MomentFromShearAtStart(double relativePosition)
+        {
+            return relativePosition * this.forcesAtStart.Shear * this.element.Length;
+        }
+
+        protected double GetGeneralizedDisplacement(double relativePosition, IList<double> generalizedDisplacement)
+        {
             var position = relativePosition * this.element.Length;
 
 
-            var u1 = this.displacements[0];
-            var u2 = this.displacements[1];
-            var u3 = this.displacements[2];
-            var u4 = this.displacements[3];
-            var u5 = this.displacements[4];
-            var u6 = this.displacements[5]; 
+            var u1 = generalizedDisplacement[0];
+            var u2 = generalizedDisplacement[1];
+            var u3 = generalizedDisplacement[2];
+            var u4 = generalizedDisplacement[3];
+            var u5 = generalizedDisplacement[4];
+            var u6 = generalizedDisplacement[5];
 
             var result = u1 * BeamShapeFunctions.N1(position, element.Length)
                 + u2 * BeamShapeFunctions.N2(position, element.Length)
@@ -78,13 +89,6 @@ namespace FEM2D.Results.Beams
                 + u6 * BeamShapeFunctions.N6(position, element.Length);
             return result;
         }
-
-        private double MomentFromShearAtStart(double relativePosition)
-        {
-            return relativePosition * this.forcesAtStart.Shear * this.element.Length;
-        }
-
-        
 
         
     }
