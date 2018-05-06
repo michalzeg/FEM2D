@@ -69,9 +69,7 @@
     <Compile Include="Integration\Beam_Integration.cs" />
     <Compile Include="Integration\Membrane_Integration.cs" />
     <Compile Include="Loads\BeamPointLoadTests.cs" />
-    <Compile Include="Loads\LoadFactoryTests.cs" />
     <Compile Include="Matrix\MatrixCalculatorTest.cs" />
-    <Compile Include="Nodes\Dofs\DofTests.cs" />
     <Compile Include="Nodes\NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Solvers\CholeskyDescompositionTests.cs" />
@@ -100,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Materials\" />
+    <Folder Include="Nodes\Dofs\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

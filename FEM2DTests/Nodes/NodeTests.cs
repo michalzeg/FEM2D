@@ -1,27 +1,23 @@
-﻿using FEM2DCommon.DTO;
-using Common.Geometry;
+﻿using Common.Geometry;
 using FEM2D.Elements;
 using FEM2D.Nodes;
+using FEM2DCommon.DTO;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DTests.Nodes
 {
     [TestFixture]
     public class NodeTests
     {
-        NodeFactory nodeFactory;
-        ElementFactory elementFactory;
-        MembraneProperties membraneProperties;
-        BeamProperties beamProperties;
+        private NodeFactory nodeFactory;
+        private ElementFactory elementFactory;
+        private MembraneProperties membraneProperties;
+        private BeamProperties beamProperties;
 
-        PointD p1;
-        PointD p2;
-        PointD p3;
+        private PointD p1;
+        private PointD p2;
+        private PointD p3;
 
         [SetUp]
         public void Setup()
@@ -39,7 +35,6 @@ namespace FEM2DTests.Nodes
         [Test]
         public void Node_ReturnsMembraneDOFs()
         {
-            
             var node1 = nodeFactory.Create(p1);
             var node2 = nodeFactory.Create(p2);
             var node3 = nodeFactory.Create(p3);
@@ -60,19 +55,6 @@ namespace FEM2DTests.Nodes
                 Assert.That(actualDOFs2, Is.EquivalentTo(expectedDOFs2));
                 Assert.That(actualDOFs3, Is.EquivalentTo(expectedDOFs3));
             });
-
-        }
-
-        [Test]
-        [Ignore("To be implemented")]
-        public void Node_ReturnsBeamDOFs()
-        {
-        }
-
-        [Test]
-        [Ignore("To be implemented")]
-        public void Node_ReturnsBeamAndMembraneDOFs()
-        {
         }
 
         [Test]
@@ -88,9 +70,6 @@ namespace FEM2DTests.Nodes
                 Assert.That(node2.Number, Is.EqualTo(2));
                 Assert.That(node3.Number, Is.EqualTo(3));
             });
-
-            
-
         }
 
         [Test]
@@ -103,7 +82,6 @@ namespace FEM2DTests.Nodes
             var actualDistance = node1.DistanceTo(node3);
 
             Assert.That(expectedDistance, Is.EqualTo(actualDistance).Within(1).Percent);
-            
         }
     }
 }
