@@ -1,16 +1,10 @@
-﻿using Common.Extensions;
-using FEM2DCommon.Extensions;
-using MathNet.Numerics.Interpolation;
+﻿using FEM2DCommon.Extensions;
 using MathNet.Numerics.LinearAlgebra;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Results
 {
-
     /// <summary>
     /// Displacement calculator. It uses simple interpolation to calculate displacement values over time.
     /// </summary>
@@ -23,10 +17,8 @@ namespace FEM2DDynamics.Results
             this.dynamicDisplacements = dynamicDisplacements;
         }
 
-        
         public TimeDisplacementPair GetDisplacements(IEnumerable<int> dofIndices, double time)
         {
-
             var leftValue = this.dynamicDisplacements.GetClosestLeft(time);
             var rightValue = this.dynamicDisplacements.GetClosesRight(time);
 
@@ -34,11 +26,9 @@ namespace FEM2DDynamics.Results
             var avgVelocity = this.CalculateAverage(leftValue.Velocities, rightValue.Velocities);
             var avgAccelerations = this.CalculateAverage(leftValue.Accelerations, rightValue.Accelerations);
 
-            var displacementResult = this.GetAppropriateValues(avgDisplacement,dofIndices);
+            var displacementResult = this.GetAppropriateValues(avgDisplacement, dofIndices);
             var velocityResult = this.GetAppropriateValues(avgVelocity, dofIndices);
             var accelerationResult = this.GetAppropriateValues(avgAccelerations, dofIndices);
-
-
 
             return new TimeDisplacementPair
             {

@@ -1,15 +1,11 @@
 ﻿using Common.Geometry;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DCommon.Sections
 {
     public class Section
     {
-        public IEnumerable<Perimeter> Perimeters { get;}
+        public IEnumerable<Perimeter> Perimeters { get; }
         public SectionProperties SectionProperties { get; }
 
         public Section(IEnumerable<Perimeter> perimeters)

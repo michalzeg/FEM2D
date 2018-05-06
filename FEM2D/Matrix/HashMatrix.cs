@@ -1,14 +1,11 @@
 ﻿using FEM2D.Utils;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics.LinearAlgebra;
+
 namespace FEM2D.Matrix
 {
-    public class HashMatrix<T>  where T :struct,IEquatable<T>,IFormattable
+    public class HashMatrix<T> where T : struct, IEquatable<T>, IFormattable
     {
         private readonly IHashFunction hashFunction;
         private readonly IDictionary<int, T> container;

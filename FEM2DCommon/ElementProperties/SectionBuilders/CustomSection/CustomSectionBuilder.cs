@@ -1,15 +1,10 @@
 ﻿using FEM2DCommon.Sections;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEMCommon.ElementProperties.SectionBuilders.CustomSection
 {
     public class CustomSectionBuilder : ISectionBuilder, ICustomSectionBuilderAddFirstPerimeter, ICustomSectionBuilderAddOtherPerimeters, ICustomSectionBuilderFinish
     {
-
         private IList<Perimeter> perimeters = new List<Perimeter>();
 
         public static ICustomSectionBuilderAddFirstPerimeter CustomSection
@@ -22,7 +17,6 @@ namespace FEMCommon.ElementProperties.SectionBuilders.CustomSection
 
         private CustomSectionBuilder()
         {
-
         }
 
         public ICustomSectionBuilderAddOtherPerimeters WithPerimeter(Perimeter perimeter)
@@ -41,6 +35,5 @@ namespace FEMCommon.ElementProperties.SectionBuilders.CustomSection
             var result = new Section(this.perimeters);
             return result;
         }
-
     }
 }

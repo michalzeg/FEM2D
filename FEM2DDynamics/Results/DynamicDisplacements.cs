@@ -2,14 +2,9 @@
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Results
 {
-
-
     internal class DynamicDisplacements
     {
         private readonly IList<TimeDisplacementPair> timeDisplacementPairs = new List<TimeDisplacementPair>();
@@ -46,12 +41,12 @@ namespace FEM2DDynamics.Results
             var closestRight = this.timeDisplacementPairs[index];
             return closestRight;
         }
-        
+
         private int CalculateClosestRightIndex(double time)
         {
             var index = this.CalculateClosestLeftIndex(time) + 1;
 
-            var result = index >= this.timeDisplacementPairs.Count-1 ? this.timeDisplacementPairs.Count-1 : index;
+            var result = index >= this.timeDisplacementPairs.Count - 1 ? this.timeDisplacementPairs.Count - 1 : index;
 
             return result;
         }

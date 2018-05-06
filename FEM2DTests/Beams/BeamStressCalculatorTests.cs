@@ -1,7 +1,6 @@
 using FEM2DCommon.Forces;
 using FEM2DCommon.Sections;
 using FEM2DStressCalculator.Beams;
-using NSubstitute;
 using NUnit.Framework;
 
 namespace FEM2DTests.Beams
@@ -21,7 +20,6 @@ namespace FEM2DTests.Beams
                 DY0_max = 2d,
                 DY0_min = 0.5,
             };
-            
         }
 
         [Test]
@@ -44,11 +42,11 @@ namespace FEM2DTests.Beams
             var actualTopStress = beamStressCalculator.TopNormalStress(forces);
             var actualBottomStress = beamStressCalculator.BottomNormalStress(forces);
 
-            Assert.Multiple(() => {
+            Assert.Multiple(() =>
+            {
                 Assert.That(expectedTopStress, Is.EqualTo(actualTopStress).Within(1).Percent);
                 Assert.That(expectedBottomStress, Is.EqualTo(actualBottomStress).Within(1).Percent);
             });
-
         }
 
         [Test]
@@ -71,11 +69,11 @@ namespace FEM2DTests.Beams
             var actualTopStress = beamStressCalculator.TopNormalStress(forces);
             var actualBottomStress = beamStressCalculator.BottomNormalStress(forces);
 
-            Assert.Multiple(() => {
+            Assert.Multiple(() =>
+            {
                 Assert.That(expectedTopStress, Is.EqualTo(actualTopStress).Within(1).Percent);
                 Assert.That(expectedBottomStress, Is.EqualTo(actualBottomStress).Within(1).Percent);
             });
-
         }
 
         private BeamStressCalculator CreateBeamStressCalculator()

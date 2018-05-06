@@ -1,10 +1,7 @@
 ﻿using Common.Geometry;
 using FEM2D.Restraints;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Nodes
 {
@@ -23,17 +20,16 @@ namespace FEM2D.Nodes
 
         public Node Create(PointD coordinates, Restraint restraint = Restraint.Free)
         {
-
             if (this.coordinatesNodeMap.ContainsKey(coordinates))
             {
                 return this.coordinatesNodeMap[coordinates];
             }
-            var node = new Node(coordinates, this.freeNumber,this.dofCalculator, restraint);
+            var node = new Node(coordinates, this.freeNumber, this.dofCalculator, restraint);
             this.coordinatesNodeMap.Add(coordinates, node);
             this.freeNumber++;
             return node;
-
         }
+
         public Node Create(double x, double y, Restraint restraint = Restraint.Free)
         {
             return this.Create(new PointD(x, y), restraint);
@@ -61,12 +57,10 @@ namespace FEM2D.Nodes
         public void SetSupportAt(PointD location, Restraint restraint)
         {
             Node node;
-            if (this.coordinatesNodeMap.TryGetValue(location,out node))
+            if (this.coordinatesNodeMap.TryGetValue(location, out node))
             {
                 node.SetRestraint(restraint);
             }
         }
-
-
     }
 }

@@ -1,19 +1,17 @@
-﻿using Common.Geometry;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DCommon.Sections
 {
     public class SectionPropertiesCalculator
     {
         private SectionProperties result;
+
         public SectionPropertiesCalculator()
         {
-
         }
+
         public SectionProperties CalculateProperties(IEnumerable<Perimeter> perimeters)
         {
             this.result = new SectionProperties();
@@ -99,7 +97,6 @@ namespace FEM2DCommon.Sections
                     result.Iy = result.Iy + (y2 - y1) * (x1 * x1 * x1 + x1 * x1 * x2 + x1 * x2 * x2 + x2 * x2 * x2);
                     result.Ixy = result.Ixy + (x1 - x2) * (x1 * (3 * y1 * y1 + y2 * y2 + 2 * y1 * y2) + x2 * (3 * y2 * y2 + y1 * y1 + 2 * y1 * y2));
                 }
-
             }
 
             //applying mulipliers

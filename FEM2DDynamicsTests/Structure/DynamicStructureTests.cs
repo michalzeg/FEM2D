@@ -1,22 +1,19 @@
-﻿using NUnit.Framework;
-using FEM2DDynamics.Structure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Geometry;
 using FEM2DCommon.ElementProperties;
 using FEM2DCommon.Sections;
-using FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder;
-using Common.Geometry;
 using FEM2DDynamics.Solver;
+using FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace FEM2DDynamics.Structure.Tests
 {
     [TestFixture()]
     public class DynamicStructureTests
     {
-        const double tolerance = 0.0000001;
+        private const double tolerance = 0.0000001;
+
         private static DynamicBeamProperties GetDynamicProperties()
         {
             var perimeters = new List<Perimeter>
@@ -51,7 +48,6 @@ namespace FEM2DDynamics.Structure.Tests
                     new PointD(0.5,4),
                     new PointD(0.5,3.9),
                 }),
-
 
                 new Perimeter(new List<PointD>{
                     new PointD(2,0),
@@ -185,7 +181,6 @@ namespace FEM2DDynamics.Structure.Tests
                 Assert.That(beam2Result.GetAcceleration(0), Is.EqualTo(-0.0054744875917376).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(0.5), Is.EqualTo(-0.0035298283944376).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(1), Is.EqualTo(0).Within(tolerance));
-
             });
         }
 
@@ -219,7 +214,6 @@ namespace FEM2DDynamics.Structure.Tests
             var time = 2;
             var beam1Result = results.GetResult(beam1, time);
             var beam2Result = results.GetResult(beam2, time);
-            
 
             Assert.Multiple(() =>
             {
@@ -249,7 +243,6 @@ namespace FEM2DDynamics.Structure.Tests
                 Assert.That(beam2Result.GetAcceleration(0), Is.EqualTo(-1.49518662896552E-05).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(0.5), Is.EqualTo(4.83508435064712E-06).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(1), Is.EqualTo(0).Within(tolerance));
-
             });
         }
 
@@ -285,8 +278,6 @@ namespace FEM2DDynamics.Structure.Tests
             var beam1Result = results.GetResult(beam1, time);
             var beam2Result = results.GetResult(beam2, time);
 
-
-
             Assert.Multiple(() =>
             {
                 Assert.That(beam1Result.Time, Is.EqualTo(2).Within(tolerance));
@@ -315,7 +306,6 @@ namespace FEM2DDynamics.Structure.Tests
                 Assert.That(beam2Result.GetAcceleration(0), Is.EqualTo(5.48462242802293E-05).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(0.5), Is.EqualTo(-0.000119157322591677).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(1), Is.EqualTo(0).Within(tolerance));
-
             });
         }
     }

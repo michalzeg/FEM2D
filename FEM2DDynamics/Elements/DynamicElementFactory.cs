@@ -1,14 +1,10 @@
-﻿using FEM2DCommon.DTO;
-using FEM2DCommon.ElementProperties;
-using FEM2D.Elements;
+﻿using FEM2D.Elements;
 using FEM2D.Nodes;
+using FEM2DCommon.ElementProperties;
 using FEM2DDynamics.Elements.Beam;
-using System;
+using FEM2DDynamics.Solver;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FEM2DDynamics.Solver;
 
 namespace FEM2DDynamics.Elements
 {
@@ -26,13 +22,12 @@ namespace FEM2DDynamics.Elements
         public IDynamicBeamElement CreateBeam(Node node1, Node node2, DynamicBeamProperties dynamicBeamProperties)
         {
             var element = this.elementFactory.CreateBeam(node1, node2, dynamicBeamProperties.BeamProperties);
-            var dynamicElement = new DynamicBeamElement(element,dynamicBeamProperties);
+            var dynamicElement = new DynamicBeamElement(element, dynamicBeamProperties);
 
             this.elements.Add(dynamicElement);
-            
+
             return dynamicElement;
         }
-
 
         public IEnumerable<IDynamicElement> GetAll()
         {

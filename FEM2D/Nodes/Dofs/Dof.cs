@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Nodes
 {
@@ -30,33 +27,36 @@ namespace FEM2D.Nodes
         {
             var dofs = new[] { this.dofUx, this.dofUy, this.dofRz }
                              .Where(e => e.HasValue)
-                             .Select(e=>e.Value)
+                             .Select(e => e.Value)
                              .ToArray();
             return dofs;
         }
 
-        public Action SetUxDof  { get; private set; }
+        public Action SetUxDof { get; private set; }
 
         public Action SetUyDof { get; private set; }
         public Action SetRzDof { get; private set; }
-
 
         private void SetUxDofAction()
         {
             this.dofUx = this.dofCalculator.GetFreeDOFNumber();
             this.SetUxDof = this.EmptyAction;
         }
+
         private void SetUyDofAction()
         {
             this.dofUy = this.dofCalculator.GetFreeDOFNumber();
             this.SetUyDof = this.EmptyAction;
         }
+
         private void SetRzDofAction()
         {
             this.dofRz = this.dofCalculator.GetFreeDOFNumber();
             this.SetRzDof = this.EmptyAction;
         }
 
-        private void EmptyAction() { }
+        private void EmptyAction()
+        {
+        }
     }
 }

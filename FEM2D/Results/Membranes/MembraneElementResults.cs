@@ -1,13 +1,9 @@
 ﻿using FEM2D.Elements;
 using FEM2D.Nodes;
 using FEM2D.Results.Nodes;
-using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Results.Membranes
 {
@@ -20,7 +16,7 @@ namespace FEM2D.Results.Membranes
         private Dictionary<Node, ITriangleElement[]> nodeElementsMap;
         private Dictionary<ITriangleElement, MembraneElementResult> triangleResultMap;
 
-        internal MembraneElementResults(DofDisplacementMap dofDisplacementMap,NodeResults nodeResults, IEnumerable<ITriangleElement> elements)
+        internal MembraneElementResults(DofDisplacementMap dofDisplacementMap, NodeResults nodeResults, IEnumerable<ITriangleElement> elements)
         {
             this.dofDisplacementMap = dofDisplacementMap;
             this.nodeResults = nodeResults;
@@ -35,6 +31,7 @@ namespace FEM2D.Results.Membranes
             var result = this.triangleResultMap[triangle];
             return result;
         }
+
         public IEnumerable<MembraneElementResult> GetElementResult(IEnumerable<ITriangleElement> nodes)
         {
             var results = this.triangleResultMap.Keys
@@ -42,6 +39,7 @@ namespace FEM2D.Results.Membranes
                 .Select(e => this.triangleResultMap[e]);
             return results;
         }
+
         public IEnumerable<MembraneElementResult> GetElementResult()
         {
             var results = this.triangleResultMap.Values;
@@ -69,11 +67,13 @@ namespace FEM2D.Results.Membranes
             };
             return result;
         }
+
         public IEnumerable<MembraneNodeResult> GetNodeResult(IEnumerable<Node> nodes)
         {
             var results = nodes.Select(n => this.GetNodeResult(n)).ToList();
             return results;
         }
+
         public IEnumerable<MembraneNodeResult> GetNodeResult()
         {
             var nodes = this.elements.Select(e => e.Nodes).SelectMany(e => e);
@@ -84,8 +84,9 @@ namespace FEM2D.Results.Membranes
 
         private void CalculateTriangleElementsResults()
         {
-            this.triangleResultMap = this.elements.ToDictionary(e => e,f=> this.CalculateTriangleElementResult(f));
+            this.triangleResultMap = this.elements.ToDictionary(e => e, f => this.CalculateTriangleElementResult(f));
         }
+
         private MembraneElementResult CalculateTriangleElementResult(ITriangleElement element)
         {
             var dofs = element.GetDOFs();
@@ -105,6 +106,7 @@ namespace FEM2D.Results.Membranes
             };
             return result;
         }
+
         private void CreateNodeTriangleMap()
         {
             var elementNodeMap = this.elements.ToDictionary(e => e, f => f.Nodes);
@@ -121,8 +123,5 @@ namespace FEM2D.Results.Membranes
             this.nodeElementsMap = elementNodeList.ToLookup(e => e.Value, f => f.Key)
                 .ToDictionary(e => e.Key, f => f.ToArray());
         }
-
-        
-
     }
 }

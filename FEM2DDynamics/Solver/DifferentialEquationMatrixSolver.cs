@@ -2,19 +2,12 @@
 using FEM2DDynamics.Loads;
 using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
-using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Solver
 {
     internal class DifferentialEquationMatrixSolver : IEquationOfMotionSolver
     {
-
         private MatrixData matrixData;
         private IMatrixReducer matrixReducer;
         private DynamicLoadFactory loadFactory;
@@ -27,7 +20,7 @@ namespace FEM2DDynamics.Solver
             this.loadAggregator = new LoadAggregator();
             this.settings = settings;
         }
-  
+
         public DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory, int dofNumber, IMatrixReducer matrixReducer)
         {
             var result = new DynamicDisplacements(settings);
@@ -44,7 +37,6 @@ namespace FEM2DDynamics.Solver
             var u0dot = Vector.Build.Sparse(dofNumber, 0d);
             var u0 = Vector.Build.Sparse(dofNumber, 0d);
             var u0dot2 = matrixData.MassMatrix.Inverse() * (p0 - this.matrixData.DampingMatrix * u0dot - this.matrixData.StiffnessMatrix * u0);
-
 
             var uiMinus1 = u0 - deltaT * u0dot + 0.5 * deltaT * deltaT * u0dot2;
             var K_ = this.matrixData.MassMatrix / (deltaT * deltaT) + this.matrixData.DampingMatrix / (2 * deltaT);
@@ -74,14 +66,9 @@ namespace FEM2DDynamics.Solver
                 var loads = this.loadFactory.GetNodalLoads(time);
                 var aggregatedLoad = this.loadAggregator.Aggregate(loads, dofNumber);
                 pi = this.matrixReducer.ReduceVector(aggregatedLoad);
-
-
-
             } while (time <= this.settings.EndTime);
-
 
             return result;
         }
-
     }
 }

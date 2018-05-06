@@ -1,10 +1,5 @@
 ﻿using FEM2DCommon.DTO;
 using FEM2DCommon.Sections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DCommon.ElementProperties
 {
@@ -28,12 +23,12 @@ namespace FEM2DCommon.ElementProperties
             return this.beamProperties;
         }
 
-
         public IBeamPropertiesBuilderSetSection SetSteel()
         {
-            this.beamProperties.ModulusOfElasticity=200000000;
+            this.beamProperties.ModulusOfElasticity = 200000000;
             return this;
         }
+
         public IBeamPropertiesBuilderSetSection SetModulusOfElasticity(double modulus)
         {
             this.beamProperties.ModulusOfElasticity = modulus;
@@ -51,7 +46,5 @@ namespace FEM2DCommon.ElementProperties
             this.beamProperties.Section = Section.FromRectangle(width, height);
             return this;
         }
-       
-
     }
 }

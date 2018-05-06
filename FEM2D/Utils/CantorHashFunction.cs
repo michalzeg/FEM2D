@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Utils
 {
@@ -19,7 +15,7 @@ namespace FEM2D.Utils
 
         public int Hash(int i, int j)
         {
-            var result = (i + j) * (i + j + 1)/2 + j;
+            var result = (i + j) * (i + j + 1) / 2 + j;
             return result;
         }
     }

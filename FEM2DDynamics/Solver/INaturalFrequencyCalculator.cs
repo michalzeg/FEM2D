@@ -3,6 +3,7 @@
     internal interface INaturalFrequencyCalculator
     {
         double GetFirstMode();
+
         double GetSecondMode();
     }
 }

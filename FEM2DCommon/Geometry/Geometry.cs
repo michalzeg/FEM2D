@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FEM2DCommon.Extensions;
+﻿using Common.Extensions;
 using Common.Geometry;
-using Common.Extensions;
+using System;
 
 namespace FEM2DCommon.Geometry
 {
@@ -47,7 +42,6 @@ namespace FEM2DCommon.Geometry
         {
             if (startPoint == point || endPoint == point)
                 return false;
-
 
             var result = IsInsideSegment(startPoint, endPoint, point);
 

@@ -1,29 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using netDxf;
-using Triangulation;
-using netDxf.Entities;
-using FEM2DCommon.DTO;
-using FEM2D.Structures;
+﻿using FEM2D.Elements;
+using FEM2D.Loads;
 using FEM2D.Nodes;
 using FEM2D.Restraints;
-using FEM2D.Elements;
-using FEM2D.Loads;
 using FEM2D.Solvers;
-using Output.OutputCreator;
-using Newtonsoft.Json;
-using MathNet.Numerics.Statistics;
-using System.Diagnostics;
+using FEM2D.Structures;
+using FEM2DCommon.DTO;
 using FEM2DCommon.ElementProperties;
+using netDxf;
+using netDxf.Entities;
+using Newtonsoft.Json;
+using Output.OutputCreator;
+using System;
+using System.Diagnostics;
 
 namespace TestApplication
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //ResultsToJSon();
             ResultsToDxfCantilever();
@@ -35,7 +29,6 @@ namespace TestApplication
                 .SetSteel()
                 .SetRectangularSection(20, 20)
                 .Build();
-
         }
 
         private static void ResultsToJSon()
@@ -54,8 +47,6 @@ namespace TestApplication
             var node3 = nodes.Create(0, 2, Restraint.Fixed);
             var node4 = nodes.Create(0, 0, Restraint.Fixed);
 
-
-
             var elements = new ElementFactory();
 
             var loads = new LoadFactory();
@@ -63,8 +54,6 @@ namespace TestApplication
 
             var element1 = elements.CreateTriangle(node1, node2, node4, material);
             var element2 = elements.CreateTriangle(node3, node4, node2, material);
-
-
 
             var solver = new Solver();
             solver.Solve(elements, nodes, loads);
@@ -74,7 +63,6 @@ namespace TestApplication
             outputCrator.CreateOutput();
             var output = outputCrator.Output;
             var js = JsonConvert.SerializeObject(output);
-
         }
 
         private static void ResultsToDxfCantilever()
@@ -124,7 +112,6 @@ namespace TestApplication
                 Number = 3,
                 Start = vertex3,
                 End = vertex1,
-
             };
 
             var membraneData = new MembraneInputData
@@ -150,7 +137,7 @@ namespace TestApplication
 
             var result = structure.Results;
 
-            var outputCrator = new OutputCreator(result,membraneData);
+            var outputCrator = new OutputCreator(result, membraneData);
             outputCrator.CreateOutput();
             var output = outputCrator.Output;
 
@@ -174,8 +161,6 @@ namespace TestApplication
 
             foreach (var triangle in elements)
             {
-
-
                 var x1 = triangle.Nodes[0].Coordinates.X;
                 var y1 = triangle.Nodes[0].Coordinates.Y;
 
@@ -187,7 +172,6 @@ namespace TestApplication
 
                 var xc = (x1 + x2 + x3) / 3;
                 var yc = (y1 + y2 + y3) / 3;
-
 
                 var node1 = triangle.Nodes[0].Number;
                 var node2 = triangle.Nodes[1].Number;
@@ -233,7 +217,6 @@ namespace TestApplication
                 X = 20,
                 Y = 30,
                 LoadX = 500,
-                
             };
             var vertex4 = new VertexInput
             {
@@ -241,14 +224,12 @@ namespace TestApplication
                 X = 10,
                 Y = 30,
                 LoadY = -1000,
-
             };
             var vertex5 = new VertexInput
             {
                 Number = 5,
                 X = 0,
                 Y = 30,
-
             };
 
             var edge1 = new Edge
@@ -268,27 +249,24 @@ namespace TestApplication
                 Number = 3,
                 Start = vertex3,
                 End = vertex4,
-
             };
             var edge4 = new Edge
             {
                 Number = 3,
                 Start = vertex4,
                 End = vertex5,
-
             };
             var edge5 = new Edge
             {
                 Number = 3,
                 Start = vertex5,
                 End = vertex1,
-
             };
 
             var membraneData = new MembraneInputData
             {
-                Vertices = new[] { vertex1, vertex2, vertex3,vertex4,vertex5 },
-                Edges = new[] { edge1, edge2, edge3,edge4,edge5 },
+                Vertices = new[] { vertex1, vertex2, vertex3, vertex4, vertex5 },
+                Edges = new[] { edge1, edge2, edge3, edge4, edge5 },
                 Properties = new MembraneProperties
                 {
                     ModulusOfElasticity = 200000000,
@@ -306,7 +284,7 @@ namespace TestApplication
 
             var result = structure.Results;
 
-            var outputCrator = new OutputCreator(result,membraneData);
+            var outputCrator = new OutputCreator(result, membraneData);
             outputCrator.CreateOutput();
             var output = outputCrator.Output;
 
@@ -327,8 +305,6 @@ namespace TestApplication
 
             foreach (var triangle in elements)
             {
-
-
                 var x1 = triangle.Nodes[0].Coordinates.X;
                 var y1 = triangle.Nodes[0].Coordinates.Y;
 
@@ -340,7 +316,6 @@ namespace TestApplication
 
                 var xc = (x1 + x2 + x3) / 3;
                 var yc = (y1 + y2 + y3) / 3;
-
 
                 var node1 = triangle.Nodes[0].Number;
                 var node2 = triangle.Nodes[1].Number;
@@ -377,14 +352,13 @@ namespace TestApplication
                 Number = 2,
                 X = 1,
                 Y = 0,
-                
             };
             var vertex3 = new VertexInput
             {
                 Number = 3,
                 X = 1,
                 Y = 1,
-                LoadY=-100000,
+                LoadY = -100000,
             };
             var vertex4 = new VertexInput
             {
@@ -394,7 +368,6 @@ namespace TestApplication
                 SupportX = true,
                 SupportY = true,
             };
-            
 
             var edge1 = new Edge
             {
@@ -413,16 +386,13 @@ namespace TestApplication
                 Number = 3,
                 Start = vertex3,
                 End = vertex4,
-
             };
             var edge4 = new Edge
             {
                 Number = 3,
                 Start = vertex4,
                 End = vertex1,
-
             };
-            
 
             var membraneData = new MembraneInputData
             {
@@ -445,7 +415,7 @@ namespace TestApplication
 
             var result = structure.Results;
 
-            var outputCrator = new OutputCreator(result,membraneData);
+            var outputCrator = new OutputCreator(result, membraneData);
             outputCrator.CreateOutput();
             var output = outputCrator.Output;
 
@@ -466,8 +436,6 @@ namespace TestApplication
 
             foreach (var triangle in elements)
             {
-
-
                 var x1 = triangle.Nodes[0].Coordinates.X;
                 var y1 = triangle.Nodes[0].Coordinates.Y;
 
@@ -479,7 +447,6 @@ namespace TestApplication
 
                 var xc = (x1 + x2 + x3) / 3;
                 var yc = (y1 + y2 + y3) / 3;
-
 
                 var node1 = triangle.Nodes[0].Number;
                 var node2 = triangle.Nodes[1].Number;
@@ -522,7 +489,6 @@ namespace TestApplication
                 SupportY = true,
                 LoadX = 0,
                 LoadY = 0,
-
             };
             var vertex3 = new VertexInput
             {
@@ -572,28 +538,24 @@ namespace TestApplication
                 Number = 3,
                 Start = vertex3,
                 End = vertex4,
-
             };
             var edge4 = new Edge
             {
                 Number = 3,
                 Start = vertex4,
                 End = vertex5,
-
             };
             var edge5 = new Edge
             {
                 Number = 5,
                 Start = vertex5,
                 End = vertex1,
-
-
             };
 
             var membraneData = new MembraneInputData
             {
-                Vertices = new[] { vertex1, vertex2, vertex3, vertex4,vertex5 },
-                Edges = new[] { edge1, edge2, edge3, edge4,edge5 },
+                Vertices = new[] { vertex1, vertex2, vertex3, vertex4, vertex5 },
+                Edges = new[] { edge1, edge2, edge3, edge4, edge5 },
                 Properties = new MembraneProperties
                 {
                     ModulusOfElasticity = 200000000,
@@ -634,8 +596,6 @@ namespace TestApplication
 
             foreach (var triangle in elements)
             {
-
-
                 var x1 = triangle.Nodes[0].Coordinates.X;
                 var y1 = triangle.Nodes[0].Coordinates.Y;
 
@@ -647,7 +607,6 @@ namespace TestApplication
 
                 var xc = (x1 + x2 + x3) / 3;
                 var yc = (y1 + y2 + y3) / 3;
-
 
                 var node1 = triangle.Nodes[0].Number;
                 var node2 = triangle.Nodes[1].Number;

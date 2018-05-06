@@ -2,13 +2,6 @@
 using FEM2D.Loads;
 using FEM2D.Nodes;
 using FEM2D.Results;
-using FEM2D.Structures;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
@@ -29,7 +22,6 @@ namespace FEM2D.Solvers
             this.matrixSolver = new CholeskyDescomposition();
         }
 
-
         public void Solve(ElementFactory elementFactory, NodeFactory nodeFactory, LoadFactory loadFactory)
         {
             var nodes = nodeFactory.GetAll();
@@ -43,10 +35,9 @@ namespace FEM2D.Solvers
             this.matrixReducer.Initialize(nodes, dofNumber);
             var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
             var reducedLoadVector = this.matrixReducer.ReduceVector(loadVector);
-            
 
             var displacements = this.matrixSolver.Solve(reducedStiffnessMatrix, reducedLoadVector);
-            this.Results = new ResultFactory(displacements, nodeFactory, elementFactory,loadFactory);
+            this.Results = new ResultFactory(displacements, nodeFactory, elementFactory, loadFactory);
         }
     }
 }

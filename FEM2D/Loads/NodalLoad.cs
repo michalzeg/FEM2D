@@ -1,9 +1,4 @@
 ﻿using FEM2D.Nodes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Loads
 {
@@ -23,6 +18,5 @@ namespace FEM2D.Loads
             this.ValueY = valueY;
             this.ValueM = valueM;
         }
-
     }
 }

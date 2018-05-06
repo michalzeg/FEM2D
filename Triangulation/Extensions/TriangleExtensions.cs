@@ -1,10 +1,5 @@
 ﻿using Common.Geometry;
 using FEM2DCommon.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TriangleNet.Data;
 
 namespace Triangulation.Extensions
@@ -19,7 +14,7 @@ namespace Triangulation.Extensions
 
             var result = new TriangleGeometry
             {
-                Number=triangle.ID,
+                Number = triangle.ID,
                 Vertex1 = vertex1,
                 Vertex2 = vertex2,
                 Vertex3 = vertex3,
@@ -27,8 +22,7 @@ namespace Triangulation.Extensions
 
             return result;
         }
-          
-        
+
         public static PointD ToPointD(this TriangleNet.Data.Vertex vertex)
         {
             var result = new PointD
@@ -37,6 +31,6 @@ namespace Triangulation.Extensions
                 Y = vertex.Y
             };
             return result;
-        }  
+        }
     }
 }

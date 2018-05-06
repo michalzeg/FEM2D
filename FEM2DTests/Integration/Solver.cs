@@ -1,15 +1,11 @@
-﻿using FEM2DCommon.DTO;
-using FEM2D.Elements;
+﻿using FEM2D.Elements;
 using FEM2D.Loads;
 using FEM2D.Nodes;
 using FEM2D.Restraints;
 using FEM2D.Solvers;
+using FEM2DCommon.DTO;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DTests.Solvers
 {
@@ -28,11 +24,10 @@ namespace FEM2DTests.Solvers
 
             var nodes = new NodeFactory();
 
-            var node1 = nodes.Create(3, 0,Restraint.FixedY);
+            var node1 = nodes.Create(3, 0, Restraint.FixedY);
             var node2 = nodes.Create(3, 2);
             var node3 = nodes.Create(0, 2, Restraint.Fixed);
             var node4 = nodes.Create(0, 0, Restraint.Fixed);
-
 
             var elements = new ElementFactory();
             var element1 = elements.CreateTriangle(node1, node2, node4, material);

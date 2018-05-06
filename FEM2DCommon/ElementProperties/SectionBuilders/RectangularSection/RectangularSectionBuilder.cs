@@ -1,13 +1,8 @@
 ﻿using FEM2DCommon.Sections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEMCommon.ElementProperties.SectionBuilders
 {
-    public class RectangularSectionBuilder : ISectionBuilder ,IRectangularSectionBuilderSetHeight, IRectangularSectionBuilderSetWidth, IRectangularSectionBuilderFinish
+    public class RectangularSectionBuilder : ISectionBuilder, IRectangularSectionBuilderSetHeight, IRectangularSectionBuilderSetWidth, IRectangularSectionBuilderFinish
     {
         private double width;
         private double height;
@@ -22,9 +17,7 @@ namespace FEMCommon.ElementProperties.SectionBuilders
 
         private RectangularSectionBuilder()
         {
-            
         }
-
 
         public IRectangularSectionBuilderSetHeight SetWidth(double width)
         {

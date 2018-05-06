@@ -1,9 +1,4 @@
 ﻿using FEM2D.Elements.Beam;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Loads.Beams
 {
@@ -11,7 +6,6 @@ namespace FEM2D.Loads.Beams
     {
         public NodalLoad[] NodalLoads { get; protected set; }
         public IBeamElement BeamElement { get; private set; }
-
 
         protected BeamLoad(IBeamElement beamElement)
         {
@@ -31,8 +25,5 @@ namespace FEM2D.Loads.Beams
             };
             return result;
         }
-
-        
-
     }
 }

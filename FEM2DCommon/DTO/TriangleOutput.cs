@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FEM2DCommon.DTO
 {
@@ -15,6 +11,5 @@ namespace FEM2DCommon.DTO
         public double Sxx { get; set; }
         public double Syy { get; set; }
         public double Txy { get; set; }
-
     }
 }

@@ -2,24 +2,18 @@
 using FEM2D.Restraints;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
     public class MatrixReducer : IMatrixReducer
     {
-
         private Vector<double> bundaryVector;
         private IEnumerable<int> dofsToReduce;
 
-
         public MatrixReducer()
         {
-
         }
 
         public void Initialize(IEnumerable<Node> nodes, int dofCount)
@@ -75,6 +69,5 @@ namespace FEM2D.Solvers
 
             return reducedVector;
         }
-
     }
 }

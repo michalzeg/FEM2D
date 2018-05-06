@@ -1,16 +1,10 @@
 ﻿using FEM2DCommon.ElementProperties;
 using FEM2DCommon.Sections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder
 {
     public class DynamicBeamPropertiesBuilder : IDynamicBeamPropertiesBuilderFinish, IDynamicBeamPropertiesBuilderSetSection, IDynamicBeamPropertiesBuilderSetModulus, IDynamicBeamPropertiesBuilderSetDensity, IDynamicBeamPropertiesBuilderSetMaterial
     {
-
         private BeamPropertiesBuilder beamPropertiesBuilder;
 
         private DynamicBeamProperties dynamicBeamProperties;
@@ -33,7 +27,7 @@ namespace FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder
             return this;
         }
 
-       public IDynamicBeamPropertiesBuilderSetDensity SetCustomMaterial()
+        public IDynamicBeamPropertiesBuilderSetDensity SetCustomMaterial()
         {
             return this;
         }

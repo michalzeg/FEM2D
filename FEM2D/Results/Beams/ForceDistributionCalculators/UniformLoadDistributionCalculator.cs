@@ -1,9 +1,6 @@
 ﻿using FEM2D.Loads;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Results.Beams.ForceDistributionCalculators
 {
@@ -19,7 +16,7 @@ namespace FEM2D.Results.Beams.ForceDistributionCalculators
         public double Moment(double relativePosition)
         {
             var result = this.uniformLoads
-                             .Sum(e => this.MomentFromUniformLoad(e,relativePosition));
+                             .Sum(e => this.MomentFromUniformLoad(e, relativePosition));
             return result;
         }
 
@@ -34,7 +31,7 @@ namespace FEM2D.Results.Beams.ForceDistributionCalculators
         public double Shear(double relativePosition)
         {
             var result = this.uniformLoads
-                            .Sum(e => this.ShearFromUniformLoad(e,relativePosition));
+                            .Sum(e => this.ShearFromUniformLoad(e, relativePosition));
             return result;
         }
 

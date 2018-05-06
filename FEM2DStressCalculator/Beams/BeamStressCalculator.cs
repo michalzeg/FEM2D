@@ -1,10 +1,5 @@
 ﻿using FEM2DCommon.Forces;
 using FEM2DCommon.Sections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DStressCalculator.Beams
 {
@@ -27,7 +22,7 @@ namespace FEM2DStressCalculator.Beams
 
         public double BottomNormalStress(BeamForces forces)
         {
-            var result = (forces.Axial / this.sectionProperties.A) 
+            var result = (forces.Axial / this.sectionProperties.A)
                 - (forces.Moment / this.sectionProperties.Ix0 * this.sectionProperties.DY0_min);
 
             return result;

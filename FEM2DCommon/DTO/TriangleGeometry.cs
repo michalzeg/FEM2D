@@ -1,10 +1,5 @@
-﻿
-using Common.Geometry;
+﻿using Common.Geometry;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DCommon.DTO
 {
@@ -15,7 +10,6 @@ namespace FEM2DCommon.DTO
         public PointD Vertex2 { get; set; }
         public PointD Vertex3 { get; set; }
 
-
         public override bool Equals(object obj)
         {
             var other = obj as TriangleGeometry;
@@ -23,9 +17,10 @@ namespace FEM2DCommon.DTO
                 return false;
             return this.Equals(other);
         }
+
         public override int GetHashCode()
         {
-            return this.Number.GetHashCode() 
+            return this.Number.GetHashCode()
                 ^ this.Vertex1.GetHashCode()
                 ^ this.Vertex2.GetHashCode()
                 ^ this.Vertex3.GetHashCode();
@@ -44,6 +39,7 @@ namespace FEM2DCommon.DTO
         {
             return geometry1.Equals(geometry2);
         }
+
         public static bool operator !=(TriangleGeometry geometry1, TriangleGeometry geometry2)
         {
             return !(geometry1 == geometry2);

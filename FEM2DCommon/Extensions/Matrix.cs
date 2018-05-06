@@ -1,10 +1,5 @@
 ﻿using Common.Extensions;
 using MathNet.Numerics.LinearAlgebra;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DCommon.Extensions
 {
@@ -21,7 +16,6 @@ namespace FEM2DCommon.Extensions
             if (matrix.ColumnCount != other.ColumnCount
                 || matrix.RowCount != other.RowCount)
                 return false;
-
 
             for (int colIndex = 0; colIndex < matrix.ColumnCount; colIndex++)
             {

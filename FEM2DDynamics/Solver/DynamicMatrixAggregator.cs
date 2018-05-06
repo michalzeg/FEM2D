@@ -2,15 +2,12 @@
 using FEM2D.Solvers;
 using FEM2DDynamics.Elements;
 using MathNet.Numerics.LinearAlgebra;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Solver
 {
-    public  class DynamicMatrixAggregator : MatrixAggregator, IDynamicMatrixAggregator
+    public class DynamicMatrixAggregator : MatrixAggregator, IDynamicMatrixAggregator
     {
         public Matrix<double> AggregateDampingMatrix(IEnumerable<IElement> elements, int dofNumber)
         {

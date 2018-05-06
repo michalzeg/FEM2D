@@ -1,10 +1,5 @@
 ﻿using Common.Extensions;
 using MathNet.Numerics.LinearAlgebra;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DCommon.Extensions
 {
@@ -21,13 +16,12 @@ namespace FEM2DCommon.Extensions
             if (vector.Count != other.Count)
                 return false;
 
-
             for (int rowIndex = 0; rowIndex < vector.Count; rowIndex++)
             {
-                    if (!vector[rowIndex].IsApproximatelyEqualTo(other[rowIndex]))
-                    {
-                        return false;
-                    }
+                if (!vector[rowIndex].IsApproximatelyEqualTo(other[rowIndex]))
+                {
+                    return false;
+                }
             }
             return true;
         }

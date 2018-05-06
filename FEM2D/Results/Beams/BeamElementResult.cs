@@ -2,12 +2,9 @@
 using FEM2D.Loads;
 using FEM2D.Results.Beams.ForceDistributionCalculators;
 using FEM2D.ShapeFunctions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FEM2DCommon.Forces;
+using System.Collections.Generic;
+
 namespace FEM2D.Results.Beams
 {
     public class BeamElementResult
@@ -17,9 +14,8 @@ namespace FEM2D.Results.Beams
         private readonly IBeamElement element;
         private readonly IList<double> displacements;
         private readonly IBeamForceDistributionCalculator distributionCalculator;
-       
 
-        internal BeamElementResult(BeamForces forcesAtStart, IEnumerable<IBeamLoad> loads,IBeamElement element, IList<double> displacements)
+        internal BeamElementResult(BeamForces forcesAtStart, IEnumerable<IBeamLoad> loads, IBeamElement element, IList<double> displacements)
         {
             this.forcesAtStart = forcesAtStart;
             this.beamLoads = loads;
@@ -43,7 +39,6 @@ namespace FEM2D.Results.Beams
 
         public double Moment(double relativePosition)
         {
-
             var result = this.forcesAtStart.Moment
                        - this.distributionCalculator.Moment(relativePosition)
                        - this.MomentFromShearAtStart(relativePosition);
@@ -52,10 +47,9 @@ namespace FEM2D.Results.Beams
 
         public double Shear(double relativePosition)
         {
-
             var result = forcesAtStart.Shear
                          + this.distributionCalculator.Shear(relativePosition);
-            return result;             
+            return result;
         }
 
         public double GetDisplacement(double relativePosition)
@@ -73,7 +67,6 @@ namespace FEM2D.Results.Beams
         {
             var position = relativePosition * this.element.Length;
 
-
             var u1 = generalizedDisplacement[0];
             var u2 = generalizedDisplacement[1];
             var u3 = generalizedDisplacement[2];
@@ -89,7 +82,5 @@ namespace FEM2D.Results.Beams
                 + u6 * BeamShapeFunctions.N6(position, element.Length);
             return result;
         }
-
-        
     }
 }

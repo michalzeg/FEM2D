@@ -1,24 +1,18 @@
 ﻿using Common.Geometry;
-using FEM2D.Elements.Beam;
 using FEM2D.Loads;
 using FEM2D.Nodes;
 using FEM2DDynamics.Elements;
 using FEM2DDynamics.Elements.Beam;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Loads
 {
     public class DynamicLoadFactory
     {
-
         private readonly IList<IMovingPointLoad> movingLoads = new List<IMovingPointLoad>();
         private readonly DynamicElementFactory elementFactory;
         private readonly NodeFactory nodeFactory;
-        
 
         public DynamicLoadFactory(DynamicElementFactory elementFactory, NodeFactory nodeFactory)
         {
@@ -26,15 +20,14 @@ namespace FEM2DDynamics.Loads
             this.nodeFactory = nodeFactory;
         }
 
-        public void AddPointMovingLoad( double value,double basePositionX, double speed)
+        public void AddPointMovingLoad(double value, double basePositionX, double speed)
         {
-            var load = new PointMovingLoad(value, basePositionX,speed);
+            var load = new PointMovingLoad(value, basePositionX, speed);
             this.movingLoads.Add(load);
         }
 
         public IEnumerable<NodalLoad> GetNodalLoads(double time)
         {
-
             var result = new List<NodalLoad>();
             var nodes = this.nodeFactory.GetAll();
             var beams = this.elementFactory.GetBeamElements();
@@ -77,6 +70,5 @@ namespace FEM2DDynamics.Loads
             var nodalLoads = loadedNodes.Select(n => new NodalLoad(n, 0, value));
             return nodalLoads;
         }
-
     }
 }

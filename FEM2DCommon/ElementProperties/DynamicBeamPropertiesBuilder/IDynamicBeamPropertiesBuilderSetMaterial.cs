@@ -3,6 +3,7 @@
     public interface IDynamicBeamPropertiesBuilderSetMaterial
     {
         IDynamicBeamPropertiesBuilderSetDensity SetCustomMaterial();
+
         IDynamicBeamPropertiesBuilderSetSection SetSteel();
     }
 }

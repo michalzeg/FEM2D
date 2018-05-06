@@ -1,9 +1,4 @@
 ﻿using FEM2DDynamics.Loads;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Results
 {
@@ -19,8 +14,7 @@ namespace FEM2DDynamics.Results
             this.dofDisplacementMap = new SimpleDynamicDofDisplacementMap(dynamicDisplacements);
             this.loadFactory = loadFactory;
 
-            this.BeamResults = new DynamicBeamElementResults(dofDisplacementMap,loadFactory);
-            
+            this.BeamResults = new DynamicBeamElementResults(dofDisplacementMap, loadFactory);
         }
     }
 }

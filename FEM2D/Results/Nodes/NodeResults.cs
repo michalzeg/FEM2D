@@ -1,16 +1,11 @@
 ﻿using FEM2D.Nodes;
-using MathNet.Numerics.LinearAlgebra;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Results.Nodes
 {
     public class NodeResults
     {
-
         private IDictionary<Node, NodeResult> nodeResultMap;
         private readonly IEnumerable<Node> nodes;
         private readonly DofDisplacementMap dofDisplacementMap;
@@ -29,6 +24,7 @@ namespace FEM2D.Results.Nodes
             var result = this.nodeResultMap[node];
             return result;
         }
+
         public IEnumerable<NodeResult> GetNodeResult(IEnumerable<Node> nodes)
         {
             var results = this.nodeResultMap.Keys
@@ -36,11 +32,11 @@ namespace FEM2D.Results.Nodes
                 .Select(e => this.nodeResultMap[e]);
             return results;
         }
+
         public IEnumerable<NodeResult> GetNodeResult()
         {
             return this.GetNodeResult(this.nodes);
         }
-        
 
         private void CreateNodeResultMap()
         {
@@ -52,6 +48,7 @@ namespace FEM2D.Results.Nodes
             this.nodeResults = this.nodes
                                .Select(n => this.CalcualteNodeResult(n));
         }
+
         private NodeResult CalcualteNodeResult(Node node)
         {
             var dofs = node.GetDOF();
@@ -74,6 +71,5 @@ namespace FEM2D.Results.Nodes
 
             return result;
         }
-
     }
 }

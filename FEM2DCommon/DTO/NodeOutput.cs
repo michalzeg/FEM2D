@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM2DCommon.DTO
+﻿namespace FEM2DCommon.DTO
 {
     public class NodeOutput
     {
@@ -20,6 +14,6 @@ namespace FEM2DCommon.DTO
     {
         public double AvgSxx { get; set; }
         public double AvgSyy { get; set; }
-        public double AvgTxy { get; set; }     
+        public double AvgTxy { get; set; }
     }
 }

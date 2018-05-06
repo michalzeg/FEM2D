@@ -1,12 +1,8 @@
-﻿using FEM2DCommon.DTO;
-using FEM2D.Results;
+﻿using FEM2D.Results;
 using FEM2D.Structures;
+using FEM2DCommon.DTO;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DTests.Integration
 {
@@ -32,19 +28,17 @@ namespace FEM2DTests.Integration
         [Test]
         public void Membrane_Integration_MinMaxStresses_Passed()
         {
+            var expectedMaxSigmaX = 250.63;
+            var expectedMaxSigmaY = 320.67;
+            var expectedMaxTauXY = 330.89;
 
-            var expectedMaxSigmaX =  250.63 ;
-            var expectedMaxSigmaY =  320.67 ;
-            var expectedMaxTauXY  =  330.89 ;
-                                      
-            var expectedMinSigmaX =  -330.24 ;
-            var expectedMinSigmaY =  -597.20 ;
-            var expectedMinTauXY =   -321.56; 
-
+            var expectedMinSigmaX = -330.24;
+            var expectedMinSigmaY = -597.20;
+            var expectedMinTauXY = -321.56;
 
             var actualMaxSigmaX = result.MembraneResults.GetElementResult().Max(e => e.SigmaX);
             var actualMaxSigmaY = result.MembraneResults.GetElementResult().Max(e => e.SigmaY);
-            var actualMaxTauXY =  result.MembraneResults.GetElementResult().Max(e => e.TauXY);
+            var actualMaxTauXY = result.MembraneResults.GetElementResult().Max(e => e.TauXY);
 
             var actualMinSigmaX = result.MembraneResults.GetElementResult().Min(e => e.SigmaX);
             var actualMinSigmaY = result.MembraneResults.GetElementResult().Min(e => e.SigmaY);
@@ -59,9 +53,8 @@ namespace FEM2DTests.Integration
 
                 Assert.That(expectedMinSigmaX, Is.EqualTo(actualMinSigmaX).Within(tolerance).Percent);
                 Assert.That(expectedMinSigmaY, Is.EqualTo(actualMinSigmaY).Within(tolerance).Percent);
-                Assert.That(expectedMinTauXY, Is.EqualTo (actualMinTauXY).Within(tolerance).Percent);
+                Assert.That(expectedMinTauXY, Is.EqualTo(actualMinTauXY).Within(tolerance).Percent);
             });
-
         }
 
         [Test]
@@ -79,8 +72,6 @@ namespace FEM2DTests.Integration
                 Assert.That(expectedNodeCount, Is.EqualTo(actualNodeCount));
             });
         }
-
-
 
         private static MembraneInputData GetMembraneData()
         {
@@ -125,7 +116,6 @@ namespace FEM2DTests.Integration
                 Number = 3,
                 Start = vertex3,
                 End = vertex1,
-
             };
 
             var membraneData = new MembraneInputData

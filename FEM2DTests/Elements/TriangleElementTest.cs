@@ -1,15 +1,8 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSubstitute;
+﻿using Common.Geometry;
 using FEM2D.Elements;
-using MathNet.Numerics.LinearAlgebra.Double;
 using FEM2D.Nodes;
-using Common.Geometry;
 using FEM2DCommon.DTO;
+using NUnit.Framework;
 
 namespace FEM2DTests.Elements
 {

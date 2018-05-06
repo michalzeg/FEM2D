@@ -1,13 +1,9 @@
-﻿using FEM2DCommon.DTO;
-using FEM2D.Nodes;
+﻿using FEM2D.Nodes;
+using FEM2DCommon.DTO;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Matrix
 {
@@ -50,7 +46,7 @@ namespace FEM2D.Matrix
                 {y23, 0  , y31, 0  , y12 ,0   },
                 {0  , x32, 0  , x13, 0   ,x21 },
                 {x32, y23, x13, y31, x21 ,y12 }
-            })* (1 / detJ);
+            }) * (1 / detJ);
 
             return B;
         }

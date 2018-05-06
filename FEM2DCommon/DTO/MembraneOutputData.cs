@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace FEM2DCommon.DTO
 {
@@ -14,12 +10,12 @@ namespace FEM2DCommon.DTO
         public IEnumerable<NodeOutput> Nodes { get; set; }
         public IEnumerable<TriangleOutput> Triangles { get; set; }
 
-        public double MaxSxx {get; set;}
-        public double MaxSyy {get; set;}
-        public double MaxTxy {get; set;}
-        public double MinSxx {get; set;}
-        public double MinSyy {get; set;}
-        public double MinTxy {get; set;}
+        public double MaxSxx { get; set; }
+        public double MaxSyy { get; set; }
+        public double MaxTxy { get; set; }
+        public double MinSxx { get; set; }
+        public double MinSyy { get; set; }
+        public double MinTxy { get; set; }
 
         public double SxxPercentile095 { get; set; }
         public double SxxPercentile005 { get; set; }
@@ -30,7 +26,7 @@ namespace FEM2DCommon.DTO
         public double TxyPercentile095 { get; set; }
         public double TxyPercentile005 { get; set; }
 
-        public double MaxUx  {get; set;}
-        public double MaxUy  {get; set;}
+        public double MaxUx { get; set; }
+        public double MaxUy { get; set; }
     }
 }

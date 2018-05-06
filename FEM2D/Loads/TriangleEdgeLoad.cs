@@ -3,8 +3,6 @@ using FEM2D.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Loads
 {
@@ -39,7 +37,6 @@ namespace FEM2D.Loads
             var load1 = new NodalLoad(this.node1, loadX, loadY);
 
             var load2 = new NodalLoad(this.node2, loadX, loadY);
-            
 
             return new[] { load1, load2 };
         }

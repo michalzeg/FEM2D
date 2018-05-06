@@ -1,9 +1,5 @@
 ﻿using Common.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Common.Geometry
 {
@@ -20,7 +16,11 @@ namespace Common.Geometry
             this.X = x;
             this.Y = y;
         }
-        public PointD() { }
+
+        public PointD()
+        {
+        }
+
         public override bool Equals(object obj)
         {
             PointD other = obj as PointD;
@@ -28,6 +28,7 @@ namespace Common.Geometry
                 return false;
             return this.Equals(other);
         }
+
         public override int GetHashCode()
         {
             return this.X.GetHashCode() ^ this.Y.GetHashCode();
@@ -43,6 +44,7 @@ namespace Common.Geometry
         {
             return point1.Equals(point2);
         }
+
         public static bool operator !=(PointD point1, PointD point2)
         {
             return !(point1 == point2);
@@ -58,6 +60,5 @@ namespace Common.Geometry
         {
             return this.Move(new PointD(x, y));
         }
-
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using FEM2D.Loads;
+﻿using FEM2D.Loads;
 using MathNet.Numerics.LinearAlgebra;
+using System.Collections.Generic;
 
 namespace FEM2D.Solvers
 {

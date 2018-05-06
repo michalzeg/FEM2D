@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FEM2D.ShapeFunctions
+﻿namespace FEM2D.ShapeFunctions
 {
     public static class BeamShapeFunctions
     {
-
         public static double N1(double position, double length)
         {
             var x = position;

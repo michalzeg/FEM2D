@@ -1,12 +1,9 @@
-﻿using FEM2DCommon.DTO;
-using FEM2D.Nodes;
-using FEM2D.Results;
+﻿using FEM2D.Results;
+using FEM2DCommon.DTO;
+using MathNet.Numerics.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MathNet.Numerics.Statistics;
 
 namespace Output.OutputCreator
 {
@@ -31,7 +28,7 @@ namespace Output.OutputCreator
             this.nodeResults = results.NodeResults.GetNodeResult();
             this.membraneResults = results.MembraneResults.GetElementResult();
 
-            if (nodeResults.Any(e => double.IsNaN(e.UX) || double.IsNaN(e.UY))) 
+            if (nodeResults.Any(e => double.IsNaN(e.UX) || double.IsNaN(e.UY)))
             {
                 this.HasError = true;
                 return;
@@ -45,8 +42,6 @@ namespace Output.OutputCreator
         {
             this.CreateNodeOutput();
             this.CreateTriangleOutput();
-
-            
 
             var sxx = this.membraneResults.Select(e => e.SigmaX);
             var syy = this.membraneResults.Select(e => e.SigmaY);
@@ -95,7 +90,6 @@ namespace Output.OutputCreator
 
             foreach (var triangleResult in this.membraneResults)
             {
-
                 var nodeResults = this.results.MembraneResults.GetNodeResult(triangleResult.Element.Nodes);
 
                 var nodeDetails = nodeResults.Select(n => n.ConvertToOutputDetailed());
@@ -103,7 +97,7 @@ namespace Output.OutputCreator
                 var triangleOutput = new TriangleOutput
                 {
                     Number = triangleResult.Element.Number,
-                    
+
                     Nodes = nodeDetails,
                     Sxx = triangleResult.SigmaX,
                     Syy = triangleResult.SigmaY,

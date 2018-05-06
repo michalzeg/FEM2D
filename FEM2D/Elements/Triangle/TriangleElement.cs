@@ -1,22 +1,14 @@
-﻿using Common.Geometry;
-using CuttingEdge.Conditions;
+﻿using FEM2D.Matrix;
+using FEM2D.Nodes;
+using FEM2DCommon.DTO;
 using MathNet.Numerics.LinearAlgebra;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CuttingEdge;
-using FEM2D.Nodes;
-using MathNet.Numerics.LinearAlgebra.Double;
-using FEM2D.Matrix;
-using FEM2DCommon.DTO;
 
 namespace FEM2D.Elements
 {
     public class TriangleElement : ITriangleElement
     {
-
         private readonly MembraneMatrix matrixCalculator;
 
         public int Number { get; private set; }
@@ -28,7 +20,7 @@ namespace FEM2D.Elements
         private Matrix<double> D;
         private Matrix<double> K;
 
-        internal TriangleElement(Node p1, Node p2, Node p3,MembraneProperties properties,int number)
+        internal TriangleElement(Node p1, Node p2, Node p3, MembraneProperties properties, int number)
         {
             this.Nodes = new[] { p1, p2, p3 };
             this.Properties = properties;

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FEM2D.Matrix;
 using FEM2D.Nodes;
-using MathNet.Numerics.LinearAlgebra;
-using FEM2D.Matrix;
 using FEM2DCommon.DTO;
+using MathNet.Numerics.LinearAlgebra;
+using System.Linq;
 
 namespace FEM2D.Elements.Beam
 {
@@ -20,7 +16,6 @@ namespace FEM2D.Elements.Beam
         public BeamProperties BeamProperties { get; set; }
         public double Length { get; private set; }
 
-
         protected internal BeamElement(Node node1, Node node2, BeamProperties beamProperties, int number)
         {
             this.Nodes = new[] { node1, node2 };
@@ -29,7 +24,6 @@ namespace FEM2D.Elements.Beam
             this.Length = node1.DistanceTo(node2);
 
             this.beamMatrix = new BeamMatrix();
-
         }
 
         public int[] GetDOFs()
@@ -43,7 +37,7 @@ namespace FEM2D.Elements.Beam
         public Matrix<double> GetStiffnessMatrix()
         {
             if (this.stiffnessMatrix == null)
-                this.stiffnessMatrix = this.beamMatrix.GetK(this.Length, this.BeamProperties.MomentOfInertia, this.BeamProperties.ModulusOfElasticity,this.BeamProperties.Area);
+                this.stiffnessMatrix = this.beamMatrix.GetK(this.Length, this.BeamProperties.MomentOfInertia, this.BeamProperties.ModulusOfElasticity, this.BeamProperties.Area);
             return this.stiffnessMatrix;
         }
     }

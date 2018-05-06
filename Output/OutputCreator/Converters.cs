@@ -1,11 +1,5 @@
-﻿using FEM2DCommon.DTO;
-using FEM2D.Nodes;
-using FEM2D.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FEM2D.Results;
+using FEM2DCommon.DTO;
 
 namespace Output.OutputCreator
 {
@@ -39,6 +33,5 @@ namespace Output.OutputCreator
             };
             return result;
         }
-        
     }
 }

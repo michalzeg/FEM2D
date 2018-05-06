@@ -1,14 +1,7 @@
-﻿using Common.Extensions;
-using FEM2D.Solvers;
+﻿using FEM2D.Solvers;
 using FEM2DCommon.Extensions;
-using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DTests.Solvers
 {
@@ -71,7 +64,6 @@ namespace FEM2DTests.Solvers
         [Test]
         public void TestCholesky15x15_Passed()
         {
-
             var K = DenseMatrix.OfArray(new double[,]
             {
                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -89,7 +81,6 @@ namespace FEM2DTests.Solvers
                 {0,0,0,0,0,0,0,0,0,0,0,0,1,0,0},
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,1,0},
                 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-
             });
             var c = K.IsHermitian();
             var d = K.Cholesky();

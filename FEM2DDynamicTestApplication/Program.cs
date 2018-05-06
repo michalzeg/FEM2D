@@ -1,11 +1,11 @@
-﻿using FEM2DCommon.DTO;
+﻿using Common.Extensions;
+using Common.Geometry;
 using FEM2DCommon.ElementProperties;
-using Common.Extensions;
 using FEM2DCommon.Sections;
-using FEM2D.Structures;
 using FEM2DDynamics.Solver;
 using FEM2DDynamics.Structure;
 using FEM2DStressCalculator.Beams;
+using FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder;
 using netDxf;
 using netDxf.Entities;
 using Newtonsoft.Json;
@@ -13,21 +13,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FEMCommon.ElementProperties.SectionBuilders;
-using FEMCommon.ElementProperties.SectionBuilders.CustomSection;
-using Common.Geometry;
-using FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder;
 
 namespace FEM2DDynamicTestApplication
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             DynamicLoadInCentre();
-
         }
 
         private static void DynamicLoadInCentre()
@@ -41,8 +34,6 @@ namespace FEM2DDynamicTestApplication
                 StartTime = 0,
                 DampingRatio = 0.003,
             };
-
-
 
             var structure = new DynamicStructure(settings);
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -67,14 +58,11 @@ namespace FEM2DDynamicTestApplication
             var beam1Result = results.GetResult(beam1, 1);
             var beam2Result = results.GetResult(beam2, 1);
 
-
             //Json
             SaveToJson(settings, beam1, beam2, beam3, beam4, results);
 
-
             //dxf
             SaveToDxf(settings, beam1, results);
-
         }
 
         private static DynamicBeamProperties GetSection()
@@ -111,7 +99,6 @@ namespace FEM2DDynamicTestApplication
                     new PointD(0.5,4),
                     new PointD(0.5,3.9),
                 }),
-
 
                 new Perimeter(new List<PointD>{
                     new PointD(2,0),
@@ -160,7 +147,6 @@ namespace FEM2DDynamicTestApplication
 
             var stressCalculator = new BeamStressCalculator(section.SectionProperties);
 
-
             var deltaT = 1;
             var time = 0;
 
@@ -198,7 +184,6 @@ namespace FEM2DDynamicTestApplication
                         };
                         positionResults.Add(positionResult);
                     }
-
                 }
 
                 var timeResult = new TimeResult();
@@ -221,7 +206,6 @@ namespace FEM2DDynamicTestApplication
 
             var obj = JsonConvert.SerializeObject(resultData);
             File.WriteAllText(@"e:\disp.json", obj);
-
         }
 
         private static void SaveToDxf(DynamicSolverSettings settings, FEM2DDynamics.Elements.Beam.IDynamicBeamElement beam1, FEM2DDynamics.Results.DynamicBeamElementResults results)
@@ -236,7 +220,6 @@ namespace FEM2DDynamicTestApplication
                 var result = results.GetResult(beam1, time);
                 var displ = result.GetDisplacement(1);
                 var moment = result.Moment(1);
-
 
                 document.AddEntity(new Point(time * 100, moment, 0));
 

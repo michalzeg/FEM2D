@@ -1,16 +1,9 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics.LinearAlgebra;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FEM2D.Matrix;
+﻿using FEM2D.Matrix;
 using FEM2D.Nodes;
-using Common.Extensions;
 using FEM2DCommon.DTO;
 using FEM2DCommon.Extensions;
+using MathNet.Numerics.LinearAlgebra.Double;
+using NUnit.Framework;
 
 namespace FEM2DTests.MatrixTest
 {
@@ -48,8 +41,6 @@ namespace FEM2DTests.MatrixTest
             var node1 = nodes.Create(3, 0);
             var node2 = nodes.Create(3, 2);
             var node3 = nodes.Create(0, 0);
-
-           
 
             //taken from book
             var expectedB = DenseMatrix.OfArray(new double[,]

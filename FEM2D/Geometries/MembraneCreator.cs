@@ -1,14 +1,11 @@
-﻿using FEM2DCommon.DTO;
-using Common.Geometry;
+﻿using Common.Geometry;
 using FEM2D.Elements;
 using FEM2D.Loads;
 using FEM2D.Nodes;
 using FEM2D.Restraints;
-using System;
+using FEM2DCommon.DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Triangulation;
 
 namespace FEM2D.Structures
@@ -20,18 +17,14 @@ namespace FEM2D.Structures
         private readonly ElementFactory elementFactory;
         private readonly LoadFactory loadFactory;
 
-
         private IEnumerable<TriangleGeometry> triangles;
         private MembraneInputData membraneData;
-
-        
 
         private Dictionary<PointD, Node> vertexNodeMap;
 
         public MembraneCreator(NodeFactory nodeFactory, ElementFactory elementFactory, LoadFactory loadFactory)
         {
             this.meshCreator = new MeshCreator();
-            
 
             this.nodeFactory = nodeFactory;
             this.elementFactory = elementFactory;
@@ -67,7 +60,6 @@ namespace FEM2D.Structures
                 var node2 = this.vertexNodeMap[triangle.Vertex2];
                 var node3 = this.vertexNodeMap[triangle.Vertex3];
                 var triangleElement = this.elementFactory.CreateTriangle(node1, node2, node3, this.membraneData.Properties);
-
             }
         }
 
@@ -85,7 +77,6 @@ namespace FEM2D.Structures
 
         private void ApplyElementLoads()
         {
-
         }
 
         private void ApplySupports()

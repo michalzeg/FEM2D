@@ -1,10 +1,5 @@
-﻿using FEM2D.Matrix;
-using MathNet.Numerics.LinearAlgebra;
+﻿using MathNet.Numerics.LinearAlgebra;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2D.Solvers
 {
@@ -13,7 +8,6 @@ namespace FEM2D.Solvers
     /// </summary>
     public class CholeskyDescomposition : IMatrixSolver
     {
-
         private Matrix<double> K;
         private Vector<double> P;
 
@@ -22,9 +16,9 @@ namespace FEM2D.Solvers
         private Vector<double> U;
 
         private int dofCount;
+
         public CholeskyDescomposition()
         {
-
         }
 
         public Vector<double> Solve(Matrix<double> K, Vector<double> P)
@@ -38,7 +32,6 @@ namespace FEM2D.Solvers
             return this.U;
         }
 
-        
         private void Decompose()
         {
             this.dofCount = this.P.Count;
@@ -49,9 +42,9 @@ namespace FEM2D.Solvers
                 for (int j = 0; j <= i; j++)
                 {
                     var v = 0d;
-                    if(i==j)
+                    if (i == j)
                     {
-                        for (int n = 0; n <= j -1; n++)
+                        for (int n = 0; n <= j - 1; n++)
                         {
                             v = v + Math.Pow(tempLL[j, n], 2);
                         }
@@ -59,7 +52,7 @@ namespace FEM2D.Solvers
                     }
                     else
                     {
-                        for (int n = 0; n <= j-1; n++)
+                        for (int n = 0; n <= j - 1; n++)
                         {
                             v = v + tempLL[i, n] * tempLL[j, n];
                         }
@@ -76,7 +69,7 @@ namespace FEM2D.Solvers
             for (int i = 0; i < this.dofCount; i++)
             {
                 var v = 0d;
-                for (int j = 0; j <= i-1; j++)
+                for (int j = 0; j <= i - 1; j++)
                 {
                     v = v + LL[i, j] * Y[j];
                 }
@@ -87,14 +80,14 @@ namespace FEM2D.Solvers
         private void CalculateU()
         {
             this.U = Vector<double>.Build.Sparse(this.dofCount, 0d);
-            for (int i = this.dofCount-1; i >= 0; i--)
+            for (int i = this.dofCount - 1; i >= 0; i--)
             {
                 var v = 0d;
-                for (int j = i+1; j <= this.dofCount-1; j++)
+                for (int j = i + 1; j <= this.dofCount - 1; j++)
                 {
                     v = v + LL[j, i] * U[j];
                 }
-                U[i]=(Y[i] - v) / LL[i, i];
+                U[i] = (Y[i] - v) / LL[i, i];
             }
         }
     }

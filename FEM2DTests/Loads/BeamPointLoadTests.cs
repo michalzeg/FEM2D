@@ -29,8 +29,7 @@ namespace FEM2DTests.Loads
         [Test]
         public void BeamPointLoad_ThrowsErrorIfRelativePositionLessThanZero_Passed()
         {
-
-            Action beamPointLoadCreator = ()=> new BeamPointLoad(this.beamElement,-1000,-1);
+            Action beamPointLoadCreator = () => new BeamPointLoad(this.beamElement, -1000, -1);
 
             Assert.That(new TestDelegate(beamPointLoadCreator), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
@@ -38,7 +37,6 @@ namespace FEM2DTests.Loads
         [Test]
         public void BeamPointLoad_ThrowsErrorIfRelativePositionGreaterThanOne_Passed()
         {
-
             Action beamPointLoadCreator = () => new BeamPointLoad(this.beamElement, -1000, 1.01);
 
             Assert.That(new TestDelegate(beamPointLoadCreator), Throws.TypeOf<ArgumentOutOfRangeException>());
@@ -47,7 +45,6 @@ namespace FEM2DTests.Loads
         [Test]
         public void BeamPointLoad_ReturnsProperLoadAtNodes_Passed()
         {
-
             var beamPointLoad = this.CreateBeamPointLoad(0.4);
 
             var expectedNode1LoadY = -648d;
@@ -70,8 +67,6 @@ namespace FEM2DTests.Loads
                 Assert.That(expectedNode2LoadM, Is.EqualTo(actualNode2LoadM).Within(1).Percent);
             });
         }
-
-        
 
         private BeamPointLoad CreateBeamPointLoad(double relativePosition)
         {

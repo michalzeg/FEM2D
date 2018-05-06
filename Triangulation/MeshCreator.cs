@@ -1,16 +1,9 @@
-﻿using System;
+﻿using FEM2DCommon.DTO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TriangleNet.Geometry;
-using TriangleNet.Smoothing;
-using TriangleNet.Algorithm;
 using TriangleNet;
-using TriangleNet.Data;
-
+using TriangleNet.Geometry;
 using Triangulation.Extensions;
-using FEM2DCommon.DTO;
 
 namespace Triangulation
 {
@@ -27,11 +20,10 @@ namespace Triangulation
             mesh.Triangulate(geometry);
             //mesh.Smooth();
             //mesh.Refine();
-            
+
             var triangles = mesh.Triangles.Select(e => e.ToTriangleGeometry());
 
             return triangles;
-
         }
 
         private static InputGeometry GetGeometry(MembraneInputData membraneGeometry)
@@ -58,7 +50,7 @@ namespace Triangulation
         {
             Mesh mesh = new Mesh();
             mesh.Behavior.Quality = true;
-            mesh.Behavior.MaxArea = area*areaFactor;
+            mesh.Behavior.MaxArea = area * areaFactor;
 
             mesh.Behavior.ConformingDelaunay = true;
             return mesh;
