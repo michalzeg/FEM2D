@@ -2,39 +2,35 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following
+// General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FEM2D")]
+[assembly: AssemblyTitle("FEM2DDynamics")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("FEM2D")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("FEM2DDynamics")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("FEM2DTests")]
 [assembly: InternalsVisibleTo("FEM2DDynamicsTests")]
-[assembly: InternalsVisibleTo("FEM2DDynamics")]
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
-// Setting ComVisible to false makes the types in this assembly not visible
-// to COM components.  If you need to access a type in this assembly from
+
+// Setting ComVisible to false makes the types in this assembly not visible 
+// to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2743b6ed-2f44-4e77-b4fe-0d68d3c58280")]
+[assembly: Guid("1ef0ee30-69f9-4ac5-a597-9338fff83cb1")]
 
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
-//      Minor Version
+//      Minor Version 
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
