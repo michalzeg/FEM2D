@@ -4,13 +4,13 @@ namespace FEM2DDynamics.Solver
 {
     internal class RayleightDamping : IDampingFactors
     {
-        private readonly NaturalFrequencyCalculator naturalFrequencyCalculator;
+        private readonly INaturalFrequencyCalculator naturalFrequencyCalculator;
         private readonly double dampingRatio;
 
         public double StiffnessDampingFactor { get; private set; }
         public double MassDampingFactor { get; private set; }
 
-        public RayleightDamping(NaturalFrequencyCalculator naturalFrequencyCalculator, double dampingRatio)
+        public RayleightDamping(INaturalFrequencyCalculator naturalFrequencyCalculator, double dampingRatio)
         {
             this.naturalFrequencyCalculator = naturalFrequencyCalculator;
             this.dampingRatio = dampingRatio;

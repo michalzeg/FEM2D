@@ -15,6 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 [assembly: InternalsVisibleTo("FEM2DTests")]
 [assembly: InternalsVisibleTo("FEM2DDynamicsTests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 
 // Setting ComVisible to false makes the types in this assembly not visible 
