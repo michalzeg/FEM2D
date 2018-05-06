@@ -63,10 +63,9 @@ namespace FEM2DDynamics.Solver
                 var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
                 var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
 
-                //check
+#if DEBUG
                 var res = this.matrixData.StiffnessMatrix * ui + this.matrixData.DampingMatrix * uidot + this.matrixData.MassMatrix * uidot2 - pi;
-
-
+#endif
                 result.AddResult(time, ui, uidot, uidot2);
 
                 uiMinus1 = ui;
