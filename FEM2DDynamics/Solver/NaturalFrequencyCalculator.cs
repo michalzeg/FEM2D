@@ -24,11 +24,10 @@ namespace FEM2DDynamics.Solver
         private void Calculate()
         {
             var eigen = (this.mass.Inverse() * this.stiffness).Evd();
-
             this.naturalFrequency = eigen.EigenValues
+                                         .Where(e => !e.Real.IsApproximatelyEqualTo(1d))
                                          .OrderBy(e => e.Real)
-                                         .Select(e => e.Real)
-                                         .Where(e => !e.IsApproximatelyEqualTo(1d))
+                                         .Select(e => Math.Sqrt(e.Real))
                                          .ToList();
         }
 

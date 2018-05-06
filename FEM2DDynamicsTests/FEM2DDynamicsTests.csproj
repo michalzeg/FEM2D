@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Elements\Beam\DynamicBeamElementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Solver\NaturalFrequencyCalculatorTests.cs" />
     <Compile Include="Structure\DynamicStructureTests.cs" />
   </ItemGroup>
   <ItemGroup>

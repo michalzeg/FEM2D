@@ -55,8 +55,8 @@ namespace FEM2DDynamics.Solver
         private void CheckDeltaTime(NaturalFrequencyCalculator naturalFrequency)
         {
             var period = naturalFrequency.GetPeriod();
-            if (this.settings.DeltaTime >= 0.1 * period)
-                this.settings.DeltaTime = 0.1 * period;
+            if (this.settings.DeltaTime >= 0.01 * period)
+                this.settings.DeltaTime = 0.01 * period;
         }
 
         private Matrix<double> GetDampingMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
