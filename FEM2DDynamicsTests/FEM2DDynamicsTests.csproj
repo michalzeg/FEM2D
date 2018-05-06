@@ -60,9 +60,33 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{C394E565-ED2A-434B-95F5-7B2B924EB9AC}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2DCommon\FEM2DCommon.csproj">
+      <Project>{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}</Project>
+      <Name>FEM2DCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FEM2DDynamics\FEM2DDynamics.csproj">
       <Project>{CC63723E-8C8C-4D10-9C5C-035A7E694EFF}</Project>
       <Name>FEM2DDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
+      <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
+      <Name>FEM2DStressCalculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2D\FEM2D.csproj">
+      <Project>{2743B6ED-2F44-4E77-B4FE-0D68D3C58280}</Project>
+      <Name>FEM2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Output\FEM2DOutput.csproj">
+      <Project>{599fbf44-d588-4a46-a73f-b8fca5373707}</Project>
+      <Name>FEM2DOutput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Triangulation\FEM2DTriangulation.csproj">
+      <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>
+      <Name>FEM2DTriangulation</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

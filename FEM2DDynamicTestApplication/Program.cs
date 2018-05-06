@@ -32,7 +32,7 @@ namespace FEM2DDynamicTestApplication
 
         private static void DynamicLoadInCentre()
         {
-            var dynamicProperties = NewMethod();
+            var dynamicProperties = GetSection();
 
             var settings = new DynamicSolverSettings
             {
@@ -77,7 +77,7 @@ namespace FEM2DDynamicTestApplication
 
         }
 
-        private static DynamicBeamProperties NewMethod()
+        private static DynamicBeamProperties GetSection()
         {
             var perimeters = new List<Perimeter>
             {
