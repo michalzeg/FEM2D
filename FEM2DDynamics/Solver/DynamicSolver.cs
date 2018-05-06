@@ -14,7 +14,6 @@ namespace FEM2DDynamics.Solver
         private readonly IDynamicMatrixAggregator matrixAggregator;
 
         private readonly IMatrixReducer matrixReducer;
-        private readonly IMatrixSolver matrixSolver;
         private readonly IEquationOfMotionSolver equationSolver;
         private readonly DynamicSolverSettings settings;
 
@@ -24,7 +23,6 @@ namespace FEM2DDynamics.Solver
         {
             this.matrixAggregator = new DynamicMatrixAggregator();
             this.matrixReducer = new MatrixReducer();
-            this.matrixSolver = new CholeskyDescomposition();
             this.equationSolver = new DifferentialEquationMatrixSolver(settings);
             this.settings = settings;
         }
