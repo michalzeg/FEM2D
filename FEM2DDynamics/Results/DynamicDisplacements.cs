@@ -1,4 +1,5 @@
 ﻿using FEM2DDynamics.Solver;
+using FEM2DDynamics.Time;
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ namespace FEM2DDynamics.Results
     internal class DynamicDisplacements
     {
         private readonly IList<TimeDisplacementPair> timeDisplacementPairs = new List<TimeDisplacementPair>();
-        private readonly DynamicSolverSettings dynamicSolverSettings;
+        private readonly TimeProvider timeProvider;
 
-        internal DynamicDisplacements(DynamicSolverSettings dynamicSolverSettings)
+        internal DynamicDisplacements(TimeProvider timeProvider)
         {
-            this.dynamicSolverSettings = dynamicSolverSettings;
+            this.timeProvider = timeProvider;
         }
 
         internal void AddResult(double time, Vector<double> displacements, Vector<double> velocities, Vector<double> accelerations)
@@ -53,7 +54,7 @@ namespace FEM2DDynamics.Results
 
         private int CalculateClosestLeftIndex(double time)
         {
-            var result = (int)Math.Floor(time / this.dynamicSolverSettings.DeltaTime);
+            var result = (int)Math.Floor(time / this.timeProvider.DeltaTime);
             return result;
         }
     }

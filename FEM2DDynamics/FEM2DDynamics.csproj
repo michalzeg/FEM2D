@@ -92,7 +92,7 @@
     <Compile Include="Results\TimeDisplacementPair.cs" />
     <Compile Include="Solver\DynamicMatrixAggregator.cs" />
     <Compile Include="Solver\DynamicSolver.cs" />
-    <Compile Include="Solver\IDampingFactors.cs" />
+    <Compile Include="Solver\IDampingFactorCalculator.cs" />
     <Compile Include="Solver\IDynamicMatrixAggregator.cs" />
     <Compile Include="Solver\DifferentialEquationMatrixSolver.cs" />
     <Compile Include="Solver\IEquationOfMotionSolver.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="Solver\NaturalFrequencyCalculator.cs" />
     <Compile Include="Solver\RayleightDamping.cs" />
     <Compile Include="Structure\DynamicStructure.cs" />
+    <Compile Include="Time\TimeProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

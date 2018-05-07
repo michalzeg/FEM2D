@@ -40,7 +40,7 @@ namespace FEM2DDynamics.Elements
             return result;
         }
 
-        public void UpdateDampingFactor(IDampingFactors dampingFactors)
+        public void UpdateDampingFactor(IDampingFactorCalculator dampingFactors)
         {
             foreach (var element in this.elements)
             {

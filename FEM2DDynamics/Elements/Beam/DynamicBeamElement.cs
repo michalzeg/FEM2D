@@ -49,7 +49,7 @@ namespace FEM2DDynamics.Elements.Beam
             return this.dampingMatrix;
         }
 
-        public void UpdateDampingFactors(IDampingFactors dampingFactors)
+        public void UpdateDampingFactors(IDampingFactorCalculator dampingFactors)
         {
             this.massDampingFactor = dampingFactors.MassDampingFactor;
             this.stiffnessDampingFactor = dampingFactors.StiffnessDampingFactor;

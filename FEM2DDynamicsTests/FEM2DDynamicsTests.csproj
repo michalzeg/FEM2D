@@ -74,6 +74,7 @@
     <Compile Include="Solver\NaturalFrequencyCalculatorTests.cs" />
     <Compile Include="Solver\RayleightDampingTests.cs" />
     <Compile Include="Structure\DynamicStructureTests.cs" />
+    <Compile Include="Time\TimeProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

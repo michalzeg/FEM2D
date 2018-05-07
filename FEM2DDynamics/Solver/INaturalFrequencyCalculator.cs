@@ -5,5 +5,7 @@
         double GetFirstMode();
 
         double GetSecondMode();
+
+        double GetPeriod();
     }
 }

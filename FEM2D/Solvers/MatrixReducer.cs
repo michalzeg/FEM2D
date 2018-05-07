@@ -16,6 +16,11 @@ namespace FEM2D.Solvers
         {
         }
 
+        public MatrixReducer(NodeFactory nodeFactory)
+        {
+            this.Initialize(nodeFactory);
+        }
+
         public void Initialize(NodeFactory nodeFactory)
         {
             var nodes = nodeFactory.GetAll();

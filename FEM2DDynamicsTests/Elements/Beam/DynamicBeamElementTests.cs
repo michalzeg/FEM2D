@@ -151,7 +151,7 @@ namespace FEM2DDynamicsTests.Elements.Beam
             var massDapingFactor = 0.1;
             var stiffnessDampingFactor = 0.5;
 
-            var dampingFactors = Substitute.For<IDampingFactors>();
+            var dampingFactors = Substitute.For<IDampingFactorCalculator>();
             dampingFactors.MassDampingFactor.Returns(massDapingFactor);
             dampingFactors.StiffnessDampingFactor.Returns(stiffnessDampingFactor);
 

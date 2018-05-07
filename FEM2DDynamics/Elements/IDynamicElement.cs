@@ -10,6 +10,6 @@ namespace FEM2DDynamics.Elements
 
         Matrix<double> GetDampingMatrix();
 
-        void UpdateDampingFactors(IDampingFactors dampingFactors);
+        void UpdateDampingFactors(IDampingFactorCalculator dampingFactors);
     }
 }

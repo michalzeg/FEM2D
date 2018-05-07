@@ -1,4 +1,5 @@
 ﻿using Common.Extensions;
+using FEM2DDynamics.Matrix;
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,12 @@ namespace FEM2DDynamics.Solver
         private readonly Matrix<double> stiffness;
 
         private IList<double> naturalFrequency;
+
+        public NaturalFrequencyCalculator(MatrixData matrixData)
+            :this(matrixData.MassMatrix,matrixData.StiffnessMatrix)
+        {
+
+        }
 
         public NaturalFrequencyCalculator(Matrix<double> mass, Matrix<double> stiffness)
         {
