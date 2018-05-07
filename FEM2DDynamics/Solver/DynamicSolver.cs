@@ -5,8 +5,6 @@ using FEM2DDynamics.Loads;
 using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
-using MathNet.Numerics.LinearAlgebra;
-using System.Collections.Generic;
 
 namespace FEM2DDynamics.Solver
 {
@@ -22,7 +20,7 @@ namespace FEM2DDynamics.Solver
         private readonly DynamicLoadFactory loadFactory;
         private readonly TimeProvider timeProvider;
         private readonly INaturalFrequencyCalculator naturalFrequencyCalculator;
-
+        private readonly IDampingFactorCalculator dampingCalulator;
         private readonly MatrixData matrixData;
 
         public DynamicResultFactory Results { get; private set; }
@@ -34,31 +32,22 @@ namespace FEM2DDynamics.Solver
             this.nodeFactory = nodeFactory;
             this.loadFactory = loadFactory;
 
-            
             this.matrixAggregator = new DynamicMatrixAggregator();
             this.matrixReducer = new MatrixReducer(nodeFactory);
-            
 
             this.matrixData = new MatrixData(this.matrixReducer, this.matrixAggregator, this.elementFactory, this.nodeFactory.GetDOFsCount());
             this.naturalFrequencyCalculator = new NaturalFrequencyCalculator(this.matrixData);
             this.timeProvider = new TimeProvider(settings, naturalFrequencyCalculator);
             this.equationSolver = new DifferentialEquationMatrixSolver(this.timeProvider);
+            this.dampingCalulator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
         }
-
 
         public void Solve()
         {
-            
-            var dampingFactors = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
-
-            elementFactory.UpdateDampingFactor(dampingFactors);
+            elementFactory.UpdateDampingFactor(this.dampingCalulator);
 
             var displacements = this.equationSolver.Solve(matrixData, loadFactory, this.nodeFactory.GetDOFsCount(), matrixReducer);
             this.Results = new DynamicResultFactory(displacements, loadFactory);
         }
-
-        
-
-        
     }
 }
