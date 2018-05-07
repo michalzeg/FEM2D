@@ -16,6 +16,13 @@ namespace FEM2D.Solvers
         {
         }
 
+        public void Initialize(NodeFactory nodeFactory)
+        {
+            var nodes = nodeFactory.GetAll();
+            var dofCount = nodeFactory.GetDOFsCount();
+            this.Initialize(nodes, dofCount);
+        }
+
         public void Initialize(IEnumerable<Node> nodes, int dofCount)
         {
             this.bundaryVector = Vector.Build.Sparse(dofCount, 1);

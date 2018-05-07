@@ -16,37 +16,38 @@ namespace FEM2DDynamics.Solver
         private readonly IMatrixReducer matrixReducer;
         private readonly IEquationOfMotionSolver equationSolver;
         private readonly DynamicSolverSettings settings;
+        private readonly DynamicElementFactory elementFactory;
+        private readonly NodeFactory nodeFactory;
+        private readonly DynamicLoadFactory loadFactory;
+
+        private readonly MatrixData matrixData;
 
         public DynamicResultFactory Results { get; private set; }
 
-        public DynamicSolver(DynamicSolverSettings settings)
+        public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory)
         {
             this.matrixAggregator = new DynamicMatrixAggregator();
             this.matrixReducer = new MatrixReducer();
             this.equationSolver = new DifferentialEquationMatrixSolver(settings);
             this.settings = settings;
+            this.elementFactory = elementFactory;
+            this.nodeFactory = nodeFactory;
+            this.loadFactory = loadFactory;
+
+            this.matrixReducer.Initialize(nodeFactory);
+            this.matrixData = new MatrixData(this.matrixReducer, this.matrixAggregator, this.elementFactory, this.nodeFactory.GetDOFsCount());
         }
 
-        public void Solve(DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory)
+
+        public void Solve()
         {
-            var nodes = nodeFactory.GetAll();
-            var elements = elementFactory.GetAll();
-
-            var dofNumber = nodeFactory.GetDOFsCount();
-            this.matrixReducer.Initialize(nodes, dofNumber);
-            var reducedStiffnessMatrix = GetStiffnessMatrix(elements, dofNumber);
-            var reducedMassMatrix = GetMassMatrix(elements, dofNumber);
-
-            var naturalFrequencies = new NaturalFrequencyCalculator(reducedMassMatrix, reducedStiffnessMatrix);
+            var naturalFrequencies = new NaturalFrequencyCalculator(this.matrixData.MassMatrix, this.matrixData.StiffnessMatrix);
             var dampingFactors = new RayleightDamping(naturalFrequencies, settings.DampingRatio);
             this.CheckDeltaTime(naturalFrequencies);
 
             elementFactory.UpdateDampingFactor(dampingFactors);
-            var reducedDampingMatrix = GetDampingMatrix(elements, dofNumber);
 
-            var matrixData = this.GetMatrixData(reducedStiffnessMatrix, reducedMassMatrix, reducedDampingMatrix);
-
-            var displacements = this.equationSolver.Solve(matrixData, loadFactory, dofNumber, matrixReducer);
+            var displacements = this.equationSolver.Solve(matrixData, loadFactory, this.nodeFactory.GetDOFsCount(), matrixReducer);
             this.Results = new DynamicResultFactory(displacements, loadFactory);
         }
 
@@ -57,36 +58,6 @@ namespace FEM2DDynamics.Solver
                 this.settings.DeltaTime = 0.01 * period;
         }
 
-        private Matrix<double> GetDampingMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
-        {
-            var dampingMatrix = matrixAggregator.AggregateDampingMatrix(elements, dofNumber);
-            var reducedDampingMatrix = matrixReducer.ReduceMatrix(dampingMatrix);
-            return reducedDampingMatrix;
-        }
-
-        private Matrix<double> GetMassMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
-        {
-            var massMatrix = matrixAggregator.AggregateMassMatrix(elements, dofNumber);
-            var reducedMassMatrix = this.matrixReducer.ReduceMatrix(massMatrix);
-            return reducedMassMatrix;
-        }
-
-        private Matrix<double> GetStiffnessMatrix(IEnumerable<IDynamicElement> elements, int dofNumber)
-        {
-            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(elements, dofNumber);
-            var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
-            return reducedStiffnessMatrix;
-        }
-
-        private MatrixData GetMatrixData(Matrix<double> stiffnessMatrix, Matrix<double> massMatrix, Matrix<double> dampingMatrix)
-        {
-            var matrixData = new MatrixData
-            {
-                DampingMatrix = dampingMatrix,
-                MassMatrix = massMatrix,
-                StiffnessMatrix = stiffnessMatrix
-            };
-            return matrixData;
-        }
+        
     }
 }
