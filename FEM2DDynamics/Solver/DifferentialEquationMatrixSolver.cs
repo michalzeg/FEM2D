@@ -12,31 +12,30 @@ namespace FEM2DDynamics.Solver
         private MatrixData matrixData;
         private IMatrixReducer matrixReducer;
         private DynamicLoadFactory loadFactory;
-        private int dofNumber;
         private ILoadAggregator loadAggregator;
         private readonly TimeProvider timeProvider;
 
-        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator)
+        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator, IMatrixReducer matrixReducer)
         {
             this.timeProvider = timeProvider;
             this.loadAggregator = loadAggregator;
+            this.matrixReducer = matrixReducer;
         }
 
-        public DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory, int dofNumber, IMatrixReducer matrixReducer)
+        public DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory)
         {
             var result = new DynamicDisplacements(timeProvider);
 
             this.matrixData = matrixData;
             this.loadFactory = loadFactory;
-            this.dofNumber = dofNumber;
-            this.matrixReducer = matrixReducer;
+            
 
             var deltaT = this.timeProvider.DeltaTime;
             var startLoads = this.loadFactory.GetNodalLoads(0);
             var aggregatedStartLoads = this.loadAggregator.Aggregate(startLoads);
             var p0 = this.matrixReducer.ReduceVector(aggregatedStartLoads);
-            var u0dot = Vector.Build.Sparse(dofNumber, 0d);
-            var u0 = Vector.Build.Sparse(dofNumber, 0d);
+            var u0dot = Vector.Build.Sparse(p0.Count, 0d);
+            var u0 = Vector.Build.Sparse(p0.Count, 0d);
             var u0dot2 = matrixData.MassMatrix.Inverse() * (p0 - this.matrixData.DampingMatrix * u0dot - this.matrixData.StiffnessMatrix * u0);
 
             var uiMinus1 = u0 - deltaT * u0dot + 0.5 * deltaT * deltaT * u0dot2;
