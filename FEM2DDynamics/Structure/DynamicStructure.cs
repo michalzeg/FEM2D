@@ -28,8 +28,7 @@ namespace FEM2DDynamics.Structure
         public void Solve()
         {
             this.solver = new DynamicSolver(settings, this.ElementFactory, this.NodeFactory, this.LoadFactory);
-            this.solver.Solve();
-            this.Results = this.solver.Results;
+            this.Results = this.solver.Solve();
         }
     }
 }

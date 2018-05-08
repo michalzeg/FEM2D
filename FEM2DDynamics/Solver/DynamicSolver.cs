@@ -20,10 +20,10 @@ namespace FEM2DDynamics.Solver
         private readonly DynamicLoadFactory loadFactory;
         private readonly TimeProvider timeProvider;
         private readonly INaturalFrequencyCalculator naturalFrequencyCalculator;
-        private readonly IDampingFactorCalculator dampingCalulator;
+        private readonly IDampingFactorCalculator dampingCalculator;
         private readonly MatrixData matrixData;
         private readonly ILoadAggregator loadAggregator;
-        public DynamicResultFactory Results { get; private set; }
+
 
         public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory)
         {
@@ -40,15 +40,14 @@ namespace FEM2DDynamics.Solver
             this.naturalFrequencyCalculator = new NaturalFrequencyCalculator(this.matrixData);
             this.timeProvider = new TimeProvider(settings, naturalFrequencyCalculator);
             this.equationSolver = new DifferentialEquationMatrixSolver(this.timeProvider,loadAggregator,matrixReducer);
-            this.dampingCalulator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
+            this.dampingCalculator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
+            elementFactory.UpdateDampingFactor(this.dampingCalculator);
         }
 
-        public void Solve()
+        public DynamicResultFactory Solve()
         {
-            elementFactory.UpdateDampingFactor(this.dampingCalulator);
-
             var displacements = this.equationSolver.Solve(matrixData, loadFactory);
-            this.Results = new DynamicResultFactory(displacements, loadFactory);
+            return new DynamicResultFactory(displacements, loadFactory);
         }
     }
 }
