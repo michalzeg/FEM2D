@@ -23,7 +23,7 @@ namespace FEM2DDynamics.Matrix
         public Matrix<double> DampingMatrix => this.dampingMatrix.Value;
 
 
-        public MatrixData(IMatrixReducer matrixReducer, IDynamicMatrixAggregator matrixAggregator, DynamicElementFactory elementFactory, int dofNumber)
+        public MatrixData(IMatrixReducer matrixReducer, IDynamicMatrixAggregator matrixAggregator, DynamicElementFactory elementFactory)
         {
             this.massMatrix = new Lazy<Matrix<double>>(this.GetMassMatrix);
             this.stiffnessMatrix = new Lazy<Matrix<double>>(this.GetStiffnessMatrix);
@@ -32,7 +32,7 @@ namespace FEM2DDynamics.Matrix
             this.matrixReducer = matrixReducer;
             this.matrixAggregator = matrixAggregator;
             this.elementFactory = elementFactory;
-            this.dofNumber = dofNumber;
+            this.dofNumber = elementFactory.GetDOFsCount();
         }
 
         private Matrix<double> GetDampingMatrix()

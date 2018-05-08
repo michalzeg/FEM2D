@@ -1,12 +1,13 @@
 ﻿using FEM2D.Elements.Beam;
 using FEM2D.Nodes;
+using FEM2D.Nodes.Dofs;
 using FEM2DCommon.DTO;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FEM2D.Elements
 {
-    public class ElementFactory
+    public class ElementFactory : IDofCountProvider
     {
         private readonly IList<IElement> elements;
         private int freeNumber = 1;
@@ -54,6 +55,17 @@ namespace FEM2D.Elements
         {
             var result = this.elements.OfType<ITriangleElement>();
             return result;
+        }
+
+        public int GetDOFsCount()
+        {
+            var dofCount = this.elements.Select(e => e.Nodes)
+                                 .SelectMany(e => e)
+                                 .Select(e => e.GetDOF())
+                                 .SelectMany(e => e)
+                                 .Distinct()
+                                 .Count();
+            return dofCount;
         }
     }
 }

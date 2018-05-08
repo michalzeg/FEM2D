@@ -16,10 +16,10 @@ namespace FEM2DDynamics.Solver
         private ILoadAggregator loadAggregator;
         private readonly TimeProvider timeProvider;
 
-        public DifferentialEquationMatrixSolver(TimeProvider timeProvider)
+        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator)
         {
-            this.loadAggregator = new LoadAggregator();
             this.timeProvider = timeProvider;
+            this.loadAggregator = loadAggregator;
         }
 
         public DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory, int dofNumber, IMatrixReducer matrixReducer)
@@ -33,7 +33,7 @@ namespace FEM2DDynamics.Solver
 
             var deltaT = this.timeProvider.DeltaTime;
             var startLoads = this.loadFactory.GetNodalLoads(0);
-            var aggregatedStartLoads = this.loadAggregator.Aggregate(startLoads, dofNumber);
+            var aggregatedStartLoads = this.loadAggregator.Aggregate(startLoads);
             var p0 = this.matrixReducer.ReduceVector(aggregatedStartLoads);
             var u0dot = Vector.Build.Sparse(dofNumber, 0d);
             var u0 = Vector.Build.Sparse(dofNumber, 0d);
@@ -65,7 +65,7 @@ namespace FEM2DDynamics.Solver
                 ui = uiPlus1;
                 this.timeProvider.Tick();
                 var loads = this.loadFactory.GetNodalLoads(this.timeProvider.CurrentTime);
-                var aggregatedLoad = this.loadAggregator.Aggregate(loads, dofNumber);
+                var aggregatedLoad = this.loadAggregator.Aggregate(loads);
                 pi = this.matrixReducer.ReduceVector(aggregatedLoad);
             } while (this.timeProvider.IsWorking());
 

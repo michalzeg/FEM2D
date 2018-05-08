@@ -1,5 +1,6 @@
 ﻿using FEM2D.Elements;
 using FEM2D.Nodes;
+using FEM2D.Nodes.Dofs;
 using FEM2DCommon.ElementProperties;
 using FEM2DDynamics.Elements.Beam;
 using FEM2DDynamics.Solver;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace FEM2DDynamics.Elements
 {
-    public class DynamicElementFactory
+    public class DynamicElementFactory : IDofCountProvider
     {
         private readonly ElementFactory elementFactory;
         private readonly IList<IDynamicElement> elements;
@@ -29,16 +30,9 @@ namespace FEM2DDynamics.Elements
             return dynamicElement;
         }
 
-        public IEnumerable<IDynamicElement> GetAll()
-        {
-            return this.elements;
-        }
+        public IEnumerable<IDynamicElement> GetAll() => this.elements;
 
-        public IEnumerable<IDynamicBeamElement> GetBeamElements()
-        {
-            var result = this.elements.OfType<IDynamicBeamElement>();
-            return result;
-        }
+        public IEnumerable<IDynamicBeamElement> GetBeamElements() => this.elements.OfType<IDynamicBeamElement>();
 
         public void UpdateDampingFactor(IDampingFactorCalculator dampingFactors)
         {
@@ -47,5 +41,7 @@ namespace FEM2DDynamics.Elements
                 element.UpdateDampingFactors(dampingFactors);
             }
         }
+
+        public int GetDOFsCount() => this.elementFactory.GetDOFsCount();
     }
 }

@@ -6,6 +6,6 @@ namespace FEM2D.Solvers
 {
     public interface ILoadAggregator
     {
-        Vector<double> Aggregate(IEnumerable<NodalLoad> loads, int dofNumber);
+        Vector<double> Aggregate(IEnumerable<NodalLoad> loads);
     }
 }

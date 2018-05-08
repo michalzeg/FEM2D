@@ -1,11 +1,12 @@
 ﻿using Common.Geometry;
+using FEM2D.Nodes.Dofs;
 using FEM2D.Restraints;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace FEM2D.Nodes
 {
-    public class NodeFactory
+    public class NodeFactory : IDofCountProvider
     {
         private readonly IDictionary<PointD, Node> coordinatesNodeMap;
         private readonly IDofNumberCalculator dofCalculator;

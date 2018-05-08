@@ -1,4 +1,5 @@
 ﻿using FEM2D.Loads;
+using FEM2D.Nodes.Dofs;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using System.Collections.Generic;
@@ -7,7 +8,15 @@ namespace FEM2D.Solvers
 {
     public class LoadAggregator : ILoadAggregator
     {
-        public Vector<double> Aggregate(IEnumerable<NodalLoad> loads, int dofNumber)
+        private int dofNumber;
+
+        public LoadAggregator(IDofCountProvider dofCountProvider)
+        {
+            this.dofNumber = dofCountProvider.GetDOFsCount();
+        }
+
+
+        public Vector<double> Aggregate(IEnumerable<NodalLoad> loads)
         {
             var aggregatedLoad = Vector.Build.Sparse(dofNumber, 0d);
 

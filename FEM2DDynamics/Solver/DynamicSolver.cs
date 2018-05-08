@@ -22,7 +22,7 @@ namespace FEM2DDynamics.Solver
         private readonly INaturalFrequencyCalculator naturalFrequencyCalculator;
         private readonly IDampingFactorCalculator dampingCalulator;
         private readonly MatrixData matrixData;
-
+        private readonly ILoadAggregator loadAggregator;
         public DynamicResultFactory Results { get; private set; }
 
         public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory)
@@ -34,11 +34,11 @@ namespace FEM2DDynamics.Solver
 
             this.matrixAggregator = new DynamicMatrixAggregator();
             this.matrixReducer = new MatrixReducer(nodeFactory);
-
-            this.matrixData = new MatrixData(this.matrixReducer, this.matrixAggregator, this.elementFactory, this.nodeFactory.GetDOFsCount());
+            this.loadAggregator = new LoadAggregator(nodeFactory);
+            this.matrixData = new MatrixData(this.matrixReducer, this.matrixAggregator, this.elementFactory);
             this.naturalFrequencyCalculator = new NaturalFrequencyCalculator(this.matrixData);
             this.timeProvider = new TimeProvider(settings, naturalFrequencyCalculator);
-            this.equationSolver = new DifferentialEquationMatrixSolver(this.timeProvider);
+            this.equationSolver = new DifferentialEquationMatrixSolver(this.timeProvider,loadAggregator);
             this.dampingCalulator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
         }
 
