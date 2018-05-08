@@ -9,8 +9,6 @@ namespace FEM2D.Structures
 {
     public class Structure
     {
-        private readonly Solver solver;
-
         public LoadFactory LoadFactory { get; private set; }
         public NodeFactory NodeFactory { get; private set; }
         public ElementFactory ElementFactory { get; private set; }
@@ -18,7 +16,7 @@ namespace FEM2D.Structures
 
         public Structure()
         {
-            this.solver = new Solver();
+            
             this.NodeFactory = new NodeFactory();
             this.ElementFactory = new ElementFactory();
             this.LoadFactory = new LoadFactory();
@@ -26,8 +24,9 @@ namespace FEM2D.Structures
 
         public void Solve()
         {
-            this.solver.Solve(this.ElementFactory, this.NodeFactory, this.LoadFactory);
-            this.Results = this.solver.Results;
+            var solver = new Solver(this.ElementFactory, this.NodeFactory, this.LoadFactory);
+            solver.Solve();
+            this.Results = solver.Results;
         }
 
         public void AddMembraneGeometry(MembraneInputData membraneData)

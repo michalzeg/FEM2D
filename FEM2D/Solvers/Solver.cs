@@ -12,29 +12,32 @@ namespace FEM2D.Solvers
         private IMatrixReducer matrixReducer;
         private IMatrixSolver matrixSolver;
 
+        private readonly ElementFactory elementFactory;
+        private readonly NodeFactory nodeFactory;
+        private readonly LoadFactory loadFactory;
+
         public ResultFactory Results { get; private set; }
 
-        public Solver()
-        {
-            
-        }
-
-        public void Solve(ElementFactory elementFactory, NodeFactory nodeFactory, LoadFactory loadFactory)
+        public Solver(ElementFactory elementFactory, NodeFactory nodeFactory, LoadFactory loadFactory)
         {
             this.matrixAggregator = new MatrixAggregator();
             this.loadAggregator = new LoadAggregator(nodeFactory);
             this.matrixReducer = new MatrixReducer();
             this.matrixSolver = new CholeskyDescomposition();
 
-            var nodes = nodeFactory.GetAll();
-            var elements = elementFactory.GetAll();
-            var loads = loadFactory.GetNodalLoads();
+            this.elementFactory = elementFactory;
+            this.nodeFactory = nodeFactory;
+            this.loadFactory = loadFactory;
+        }
 
-            var dofNumber = nodeFactory.GetDOFsCount();
-            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(elements, dofNumber);
+        public void Solve()
+        {
+            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(this.elementFactory);
+
+            var loads = loadFactory.GetNodalLoads();
             var loadVector = loadAggregator.Aggregate(loads);
 
-            this.matrixReducer.Initialize(nodes, dofNumber);
+            this.matrixReducer.Initialize(nodeFactory);
             var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
             var reducedLoadVector = this.matrixReducer.ReduceVector(loadVector);
 

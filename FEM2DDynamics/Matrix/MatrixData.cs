@@ -16,7 +16,6 @@ namespace FEM2DDynamics.Matrix
         private readonly IMatrixReducer matrixReducer;
         private readonly IDynamicMatrixAggregator matrixAggregator;
         private readonly DynamicElementFactory elementFactory;
-        private readonly int dofNumber;
 
         public Matrix<double> MassMatrix => this.massMatrix.Value;
         public Matrix<double> StiffnessMatrix => this.stiffnessMatrix.Value;
@@ -32,26 +31,25 @@ namespace FEM2DDynamics.Matrix
             this.matrixReducer = matrixReducer;
             this.matrixAggregator = matrixAggregator;
             this.elementFactory = elementFactory;
-            this.dofNumber = elementFactory.GetDOFsCount();
         }
 
         private Matrix<double> GetDampingMatrix()
         {
-            var dampingMatrix = matrixAggregator.AggregateDampingMatrix(this.elementFactory.GetAll(), dofNumber);
+            var dampingMatrix = matrixAggregator.AggregateDampingMatrix(this.elementFactory);
             var reducedDampingMatrix = matrixReducer.ReduceMatrix(dampingMatrix);
             return reducedDampingMatrix;
         }
 
         private Matrix<double> GetMassMatrix()
         {
-            var massMatrix = matrixAggregator.AggregateMassMatrix(this.elementFactory.GetAll(), dofNumber);
+            var massMatrix = matrixAggregator.AggregateMassMatrix(this.elementFactory);
             var reducedMassMatrix = this.matrixReducer.ReduceMatrix(massMatrix);
             return reducedMassMatrix;
         }
 
         private Matrix<double> GetStiffnessMatrix()
         {
-            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(this.elementFactory.GetAll(), dofNumber);
+            var stiffnessMatrix = matrixAggregator.AggregateStiffnessMatrix(this.elementFactory);
             var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
             return reducedStiffnessMatrix;
         }

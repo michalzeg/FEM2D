@@ -36,8 +36,8 @@ namespace FEM2DTests.Solvers
             var loads = new LoadFactory();
             loads.AddNodalLoad(node2, 0, -1000);
 
-            var solver = new Solver();
-            solver.Solve(elements, nodes, loads);
+            var solver = new Solver(elements, nodes, loads);
+            solver.Solve();
             var results = solver.Results;
 
             var result1 = results.MembraneResults.GetElementResult(element1);

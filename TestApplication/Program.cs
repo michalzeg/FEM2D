@@ -55,8 +55,8 @@ namespace TestApplication
             var element1 = elements.CreateTriangle(node1, node2, node4, material);
             var element2 = elements.CreateTriangle(node3, node4, node2, material);
 
-            var solver = new Solver();
-            solver.Solve(elements, nodes, loads);
+            var solver = new Solver(elements, nodes, loads);
+            solver.Solve();
             var results = solver.Results;
 
             var outputCrator = new OutputCreator(results);

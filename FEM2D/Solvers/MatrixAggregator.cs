@@ -8,7 +8,12 @@ namespace FEM2D.Solvers
 {
     public class MatrixAggregator : IMatrixAggregator
     {
-        public Matrix<double> AggregateStiffnessMatrix(IEnumerable<IElement> elements, int dofNumber)
+        public virtual Matrix<double> AggregateStiffnessMatrix(ElementFactory elementFactory)
+        {
+            return this.AggregateStiffnessMatrix(elementFactory.GetAll(), elementFactory.GetDOFsCount());
+        }
+
+        public virtual Matrix<double> AggregateStiffnessMatrix(IEnumerable<IElement> elements, int dofNumber)
         {
             var matrix = this.Aggregate(elements, dofNumber, e => e.GetStiffnessMatrix());
             return matrix;
