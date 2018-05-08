@@ -7,6 +7,6 @@ namespace FEM2DDynamics.Solver
 {
     internal interface IEquationOfMotionSolver
     {
-        DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory);
+        DynamicDisplacements Solve();
     }
 }

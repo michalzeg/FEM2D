@@ -15,20 +15,18 @@ namespace FEM2DDynamics.Solver
         private ILoadAggregator loadAggregator;
         private readonly TimeProvider timeProvider;
 
-        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator, IMatrixReducer matrixReducer)
+        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator, IMatrixReducer matrixReducer, MatrixData matrixData, DynamicLoadFactory loadFactory)
         {
             this.timeProvider = timeProvider;
             this.loadAggregator = loadAggregator;
             this.matrixReducer = matrixReducer;
-        }
-
-        public DynamicDisplacements Solve(MatrixData matrixData, DynamicLoadFactory loadFactory)
-        {
-            var result = new DynamicDisplacements(timeProvider);
-
             this.matrixData = matrixData;
             this.loadFactory = loadFactory;
-            
+        }
+
+        public DynamicDisplacements Solve()
+        {
+            var result = new DynamicDisplacements(timeProvider);
 
             var deltaT = this.timeProvider.DeltaTime;
             var startLoads = this.loadFactory.GetNodalLoads(0);

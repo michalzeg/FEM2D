@@ -11,14 +11,13 @@ namespace FEM2DDynamics.Structure
         private DynamicSolver solver;
         private readonly DynamicSolverSettings settings;
 
-        public DynamicLoadFactory LoadFactory { get; private set; }
-        public NodeFactory NodeFactory { get; private set; }
-        public DynamicElementFactory ElementFactory { get; private set; }
+        public DynamicLoadFactory LoadFactory { get; }
+        public NodeFactory NodeFactory { get; }
+        public DynamicElementFactory ElementFactory { get; }
         public DynamicResultFactory Results { get; private set; }
 
         public DynamicStructure(DynamicSolverSettings settings)
         {
-            
             this.NodeFactory = new NodeFactory();
             this.ElementFactory = new DynamicElementFactory();
             this.LoadFactory = new DynamicLoadFactory(ElementFactory, NodeFactory);
@@ -28,6 +27,7 @@ namespace FEM2DDynamics.Structure
         public void Solve()
         {
             this.solver = new DynamicSolver(settings, this.ElementFactory, this.NodeFactory, this.LoadFactory);
+            this.solver.Initialize();
             this.Results = this.solver.Solve();
         }
     }

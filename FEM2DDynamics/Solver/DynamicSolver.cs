@@ -10,20 +10,12 @@ namespace FEM2DDynamics.Solver
 {
     internal class DynamicSolver
     {
-        private readonly IDynamicMatrixAggregator matrixAggregator;
-
-        private readonly IMatrixReducer matrixReducer;
-        private readonly IEquationOfMotionSolver equationSolver;
         private readonly DynamicSolverSettings settings;
         private readonly DynamicElementFactory elementFactory;
         private readonly NodeFactory nodeFactory;
         private readonly DynamicLoadFactory loadFactory;
-        private readonly TimeProvider timeProvider;
-        private readonly INaturalFrequencyCalculator naturalFrequencyCalculator;
-        private readonly IDampingFactorCalculator dampingCalculator;
-        private readonly MatrixData matrixData;
-        private readonly ILoadAggregator loadAggregator;
 
+        private IEquationOfMotionSolver equationSolver;
 
         public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory)
         {
@@ -31,22 +23,25 @@ namespace FEM2DDynamics.Solver
             this.elementFactory = elementFactory;
             this.nodeFactory = nodeFactory;
             this.loadFactory = loadFactory;
+        }
 
-            this.matrixAggregator = new DynamicMatrixAggregator();
-            this.matrixReducer = new MatrixReducer(nodeFactory);
-            this.loadAggregator = new LoadAggregator(nodeFactory);
+        public void Initialize()
+        {
+            var matrixAggregator = new DynamicMatrixAggregator();
+            var matrixReducer = new MatrixReducer(this.nodeFactory);
+            var loadAggregator = new LoadAggregator(this.nodeFactory);
+            var matrixData = new MatrixData(matrixReducer, matrixAggregator, this.elementFactory);
+            var naturalFrequencyCalculator = new NaturalFrequencyCalculator(matrixData);
+            var timeProvider = new TimeProvider(this.settings, naturalFrequencyCalculator);
+            var dampingCalculator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
 
-            this.matrixData = new MatrixData(this.matrixReducer, this.matrixAggregator, this.elementFactory);
-            this.naturalFrequencyCalculator = new NaturalFrequencyCalculator(this.matrixData);
-            this.timeProvider = new TimeProvider(settings, naturalFrequencyCalculator);
-            this.equationSolver = new DifferentialEquationMatrixSolver(this.timeProvider,loadAggregator,matrixReducer);
-            this.dampingCalculator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
-            elementFactory.UpdateDampingFactor(this.dampingCalculator);
+            elementFactory.UpdateDampingFactor(dampingCalculator);
+            this.equationSolver = new DifferentialEquationMatrixSolver(timeProvider, loadAggregator, matrixReducer, matrixData, loadFactory);
         }
 
         public DynamicResultFactory Solve()
         {
-            var displacements = this.equationSolver.Solve(matrixData, loadFactory);
+            var displacements = this.equationSolver.Solve();
             return new DynamicResultFactory(displacements, loadFactory);
         }
     }
