@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
+
 
 namespace FEM2DDynamicTestApplication
 {
@@ -21,6 +23,12 @@ namespace FEM2DDynamicTestApplication
         private static void Main(string[] args)
         {
             DynamicLoadInCentre();
+            DynamicLoadInCentre();
+            DynamicLoadInCentre();
+            DynamicLoadInCentre();
+            DynamicLoadInCentre();
+
+            Console.ReadKey();
         }
 
         private static void DynamicLoadInCentre()
@@ -34,7 +42,8 @@ namespace FEM2DDynamicTestApplication
                 StartTime = 0,
                 DampingRatio = 0.003,
             };
-
+            var timer = new Stopwatch();
+            timer.Start();
             var structure = new DynamicStructure(settings);
             var node1 = structure.NodeFactory.Create(0, 0);
             node1.SetPinnedSupport();
@@ -44,25 +53,45 @@ namespace FEM2DDynamicTestApplication
             var node4 = structure.NodeFactory.Create(30, 0);
             var node5 = structure.NodeFactory.Create(40, 0);
             node5.SetPinnedSupport();
+            var node6 = structure.NodeFactory.Create(50, 0);
+            var node7 = structure.NodeFactory.Create(60, 0);
+            var node8 = structure.NodeFactory.Create(70, 0);
+            var node9 = structure.NodeFactory.Create(80, 0);
+            node9.SetFixedSupport();
+
 
             var beam1 = structure.ElementFactory.CreateBeam(node1, node2, dynamicProperties);
             var beam2 = structure.ElementFactory.CreateBeam(node2, node3, dynamicProperties);
             var beam3 = structure.ElementFactory.CreateBeam(node3, node4, dynamicProperties);
             var beam4 = structure.ElementFactory.CreateBeam(node4, node5, dynamicProperties);
+            var beam5 = structure.ElementFactory.CreateBeam(node5, node6, dynamicProperties);
+            var beam6 = structure.ElementFactory.CreateBeam(node6, node7, dynamicProperties);
+            var beam7 = structure.ElementFactory.CreateBeam(node7, node8, dynamicProperties);
+            var beam8 = structure.ElementFactory.CreateBeam(node8, node9, dynamicProperties);
             structure.LoadFactory.AddPointMovingLoad(-1000, 0, 1);
+            structure.LoadFactory.AddPointMovingLoad(-2000, -1, 1);
+            structure.LoadFactory.AddPointMovingLoad(-2000, -2, 1);
+            structure.LoadFactory.AddPointMovingLoad(-2000, -3, 1);
             structure.LoadFactory.AddPointMovingLoad(-2000, -4, 1);
-
+            structure.LoadFactory.AddPointMovingLoad(-2000, -5, 1);
+            structure.LoadFactory.AddPointMovingLoad(-2000, -6, 1);
+            structure.LoadFactory.AddPointMovingLoad(-2000, -7, 1);
+            structure.LoadFactory.AddPointMovingLoad(-2000, -8, 1);
+            structure.LoadFactory.AddPointMovingLoad(-2000, -9, 1);
             structure.Solve();
             var results = structure.Results.BeamResults;
 
             var beam1Result = results.GetResult(beam1, 1);
             var beam2Result = results.GetResult(beam2, 1);
 
+            timer.Stop();
+            Console.WriteLine(timer.ElapsedMilliseconds);
+
             //Json
-            SaveToJson(settings, beam1, beam2, beam3, beam4, results);
+            //SaveToJson(settings, beam1, beam2, beam3, beam4, results);
 
             //dxf
-            SaveToDxf(settings, beam1, results);
+            //SaveToDxf(settings, beam1, results);
         }
 
         private static DynamicBeamProperties GetSection()
