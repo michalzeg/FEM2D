@@ -57,18 +57,12 @@ namespace FEM2DDynamics.Solver
 
         public DynamicResultFactory Solve()
         {
-            try
-            {
-                var nodalLoadProducerTask = Task.Run(() => this.nodaLoadProducer.Execute());
-                var aggregatedLoadProducerTask = Task.Run(() => this.aggregatedLoadProducer.Execute());
-                var solverTask = Task.Run(() => this.equationSolver.Solve());
+            var nodalLoadProducerTask = Task.Run(() => this.nodaLoadProducer.Execute());
+            var aggregatedLoadProducerTask = Task.Run(() => this.aggregatedLoadProducer.Execute());
+            var solverTask = Task.Run(() => this.equationSolver.Solve());
+            
+            Task.WaitAll(new[] { nodalLoadProducerTask, aggregatedLoadProducerTask, solverTask });
 
-                Task.WaitAll(new[] { nodalLoadProducerTask, aggregatedLoadProducerTask, solverTask });
-            }
-            catch
-            {
-                var c = 1;
-            }
             var displacements = this.equationSolver.Result;
             return new DynamicResultFactory(displacements, loadFactory);
         }
