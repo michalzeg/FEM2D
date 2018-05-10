@@ -4,32 +4,38 @@ using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
 using MathNet.Numerics.LinearAlgebra.Double;
+using System.Collections.Concurrent;
 
 namespace FEM2DDynamics.Solver
 {
     internal class DifferentialEquationMatrixSolver : IEquationOfMotionSolver
     {
         private MatrixData matrixData;
+        private readonly LoadPositionProducer loadPositionProducer;
+        private readonly BlockingCollection<Payload> payloads;
         private IMatrixReducer matrixReducer;
-        private DynamicLoadFactory loadFactory;
         private ILoadAggregator loadAggregator;
         private readonly TimeProvider timeProvider;
 
-        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator, IMatrixReducer matrixReducer, MatrixData matrixData, DynamicLoadFactory loadFactory)
+        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator, IMatrixReducer matrixReducer, MatrixData matrixData, LoadPositionProducer loadPositionProducer, BlockingCollection<Payload> payloads)
         {
             this.timeProvider = timeProvider;
             this.loadAggregator = loadAggregator;
             this.matrixReducer = matrixReducer;
             this.matrixData = matrixData;
-            this.loadFactory = loadFactory;
+            this.loadPositionProducer = loadPositionProducer;
+            this.payloads = payloads;
         }
 
-        public DynamicDisplacements Solve()
+        public DynamicDisplacements Result { get; private set; }
+
+        public void Solve()
         {
-            var result = new DynamicDisplacements(timeProvider);
+            Result = new DynamicDisplacements(timeProvider);
 
             var deltaT = this.timeProvider.DeltaTime;
-            var startLoads = this.loadFactory.GetNodalLoads(0);
+            var payload = this.payloads.Take();
+            var startLoads = payload.NodalLoads;
             var aggregatedStartLoads = this.loadAggregator.Aggregate(startLoads);
             var p0 = this.matrixReducer.ReduceVector(aggregatedStartLoads);
             var u0dot = Vector.Build.Sparse(p0.Count, 0d);
@@ -46,7 +52,7 @@ namespace FEM2DDynamics.Solver
             var ui = u0;
             do
             {
-                var time = this.timeProvider.CurrentTime;
+                var time = payload.Time;
                 var pi_ = pi - a * uiMinus1 - b * ui;
                 var uiPlus1 = K_Inverted * pi_;
 
@@ -56,17 +62,17 @@ namespace FEM2DDynamics.Solver
 #if DEBUG
                 var res = this.matrixData.StiffnessMatrix * ui + this.matrixData.DampingMatrix * uidot + this.matrixData.MassMatrix * uidot2 - pi;
 #endif
-                result.AddResult(time, ui, uidot, uidot2);
+                Result.AddResult(time, ui, uidot, uidot2);
 
                 uiMinus1 = ui;
                 ui = uiPlus1;
-                this.timeProvider.Tick();
-                var loads = this.loadFactory.GetNodalLoads(this.timeProvider.CurrentTime);
+                //this.timeProvider.Tick();
+                payload = this.payloads.Take();
+                var loads = payload.NodalLoads;
                 var aggregatedLoad = this.loadAggregator.Aggregate(loads);
                 pi = this.matrixReducer.ReduceVector(aggregatedLoad);
-            } while (this.timeProvider.IsWorking());
+            } while (!this.payloads.IsCompleted);
 
-            return result;
         }
     }
 }
