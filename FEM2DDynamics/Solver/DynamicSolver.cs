@@ -97,7 +97,7 @@ namespace FEM2DDynamics.Solver
 
         public void Execute()
         {
-            while (!this.NodalLoadPayloads.IsCompleted) 
+            do
             {
                 var payload = this.NodalLoadPayloads.Take();
                 var loads = payload.NodalLoads;
@@ -112,6 +112,7 @@ namespace FEM2DDynamics.Solver
                 };
                 this.AggregatedLoadPayloads.Add(result);
             }
+            while (!this.NodalLoadPayloads.IsCompleted);
             this.AggregatedLoadPayloads.CompleteAdding();
         }
 

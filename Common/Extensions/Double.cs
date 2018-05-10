@@ -38,6 +38,10 @@ namespace Common.Extensions
             return IsApproximatelyEqualTo(initialValue, 0d);
         }
 
+        public static bool IsApproximatelyLessOrEqualTo(this double initialValue, double value, double maximumDifferenceAllowed = MaximumDifferenceAllowed)
+        {
+            return initialValue < value || initialValue.IsApproximatelyEqualTo(value);
+        }
         /// <summary>
         /// Rounds the given double to the 2 digits
         /// </summary>

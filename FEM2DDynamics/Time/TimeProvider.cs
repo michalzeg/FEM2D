@@ -1,4 +1,5 @@
-﻿using FEM2DDynamics.Solver;
+﻿using Common.Extensions;
+using FEM2DDynamics.Solver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace FEM2DDynamics.Time
             this.CurrentTime += this.DeltaTime;
         }
 
-        public bool IsWorking() => this.CurrentTime <= this.settings.EndTime;
+        public bool IsWorking() => this.CurrentTime.IsApproximatelyLessOrEqualTo(this.settings.EndTime);
 
     }
 }
