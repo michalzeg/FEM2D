@@ -35,9 +35,8 @@ namespace FEM2DDynamics.Solver
 
             var deltaT = this.timeProvider.DeltaTime;
             var payload = this.payloads.Take();
-            var startLoads = payload.NodalLoads;
-            var aggregatedStartLoads = this.loadAggregator.Aggregate(startLoads);
-            var p0 = this.matrixReducer.ReduceVector(aggregatedStartLoads);
+            var p0 = payload.AggregatedLoad;
+
             var u0dot = Vector.Build.Sparse(p0.Count, 0d);
             var u0 = Vector.Build.Sparse(p0.Count, 0d);
             var u0dot2 = matrixData.MassMatrix.Inverse() * (p0 - this.matrixData.DampingMatrix * u0dot - this.matrixData.StiffnessMatrix * u0);
@@ -68,9 +67,7 @@ namespace FEM2DDynamics.Solver
                 ui = uiPlus1;
                 //this.timeProvider.Tick();
                 payload = this.payloads.Take();
-                var loads = payload.NodalLoads;
-                var aggregatedLoad = this.loadAggregator.Aggregate(loads);
-                pi = this.matrixReducer.ReduceVector(aggregatedLoad);
+                pi = payload.AggregatedLoad;
             } while (!this.payloads.IsCompleted);
 
         }

@@ -46,7 +46,7 @@ namespace FEM2DDynamics.Solver
             var dampingCalculator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
 
             this.payloads = new BlockingCollection<Payload>();
-            this.producer = new LoadPositionProducer(this.loadFactory, timeProvider, payloads);
+            this.producer = new LoadPositionProducer(this.loadFactory, timeProvider, payloads,loadAggregator,matrixReducer);
 
             elementFactory.UpdateDampingFactor(dampingCalculator);
             this.equationSolver = new DifferentialEquationMatrixSolver(timeProvider, loadAggregator, matrixReducer, matrixData,producer,payloads);
@@ -65,7 +65,7 @@ namespace FEM2DDynamics.Solver
     }
     internal class Payload
     {
-        public IEnumerable<NodalLoad> NodalLoads { get; set; }
+        public Vector<double> AggregatedLoad { get; set; }
         public double Time { get; set; }
     }
 
@@ -73,12 +73,16 @@ namespace FEM2DDynamics.Solver
     {
         private readonly DynamicLoadFactory loadFactory;
         private readonly TimeProvider timeProvider;
+        private readonly ILoadAggregator loadAggregator;
+        private readonly IMatrixReducer matrixReducer;
 
-        public LoadPositionProducer(DynamicLoadFactory loadFactory, TimeProvider timeProvider, BlockingCollection<Payload> payloads)
+        public LoadPositionProducer(DynamicLoadFactory loadFactory, TimeProvider timeProvider, BlockingCollection<Payload> payloads,ILoadAggregator matrixAggregator, IMatrixReducer matrixReducer)
         {
             this.loadFactory = loadFactory;
             this.timeProvider = timeProvider;
             Payloads = payloads;
+            this.loadAggregator = matrixAggregator;
+            this.matrixReducer = matrixReducer;
         }
 
         public BlockingCollection<Payload> Payloads { get; }
@@ -87,11 +91,14 @@ namespace FEM2DDynamics.Solver
         {
             do
             {
-                var load = this.loadFactory.GetNodalLoads(this.timeProvider.CurrentTime).ToList();
+                var loads = this.loadFactory.GetNodalLoads(this.timeProvider.CurrentTime).ToList();
+
+                var aggregatedLoad = this.loadAggregator.Aggregate(loads);
+                var reducedLoad = this.matrixReducer.ReduceVector(aggregatedLoad);
 
                 var result = new Payload
                 {
-                    NodalLoads = load,
+                    AggregatedLoad = reducedLoad,
                     Time = this.timeProvider.CurrentTime
             };
                 this.Payloads.Add(result);
