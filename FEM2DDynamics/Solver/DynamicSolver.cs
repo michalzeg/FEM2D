@@ -22,8 +22,10 @@ namespace FEM2DDynamics.Solver
         private readonly NodeFactory nodeFactory;
         private readonly DynamicLoadFactory loadFactory;
 
-        private BlockingCollection<Payload> payloads;
-        private LoadPositionProducer producer;
+        private BlockingCollection<NodalForcePayload> nodalLoadPayloads;
+        private BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
+        private NodalForceProducer nodaLoadProducer;
+        private AggregatedLoadProducer aggregatedLoadProducer;
 
         private IEquationOfMotionSolver equationSolver;
 
@@ -45,47 +47,96 @@ namespace FEM2DDynamics.Solver
             var timeProvider = new TimeProvider(this.settings, naturalFrequencyCalculator);
             var dampingCalculator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
 
-            this.payloads = new BlockingCollection<Payload>();
-            this.producer = new LoadPositionProducer(this.loadFactory, timeProvider, payloads,loadAggregator,matrixReducer);
-
+            this.nodalLoadPayloads = new BlockingCollection<NodalForcePayload>();
+            this.aggregatedLoadPayloads = new BlockingCollection<AggregatedLoadPayload>();
+            this.nodaLoadProducer = new NodalForceProducer(this.loadFactory, timeProvider, nodalLoadPayloads);
+            this.aggregatedLoadProducer = new AggregatedLoadProducer(this.aggregatedLoadPayloads, this.nodalLoadPayloads, loadAggregator, matrixReducer);
             elementFactory.UpdateDampingFactor(dampingCalculator);
-            this.equationSolver = new DifferentialEquationMatrixSolver(timeProvider, loadAggregator, matrixReducer, matrixData,producer,payloads);
+            this.equationSolver = new DifferentialEquationMatrixSolver(timeProvider, matrixData,nodaLoadProducer,aggregatedLoadPayloads);
         }
 
         public DynamicResultFactory Solve()
         {
-            var producerTask = Task.Run(() => this.producer.Execute());
-            var solverTask = Task.Run(() => this.equationSolver.Solve());
+            try
+            {
+                var nodalLoadProducerTask = Task.Run(() => this.nodaLoadProducer.Execute());
+                var aggregatedLoadProducerTask = Task.Run(() => this.aggregatedLoadProducer.Execute());
+                var solverTask = Task.Run(() => this.equationSolver.Solve());
 
-            Task.WaitAll(new[] { producerTask, solverTask });
-
+                Task.WaitAll(new[] { nodalLoadProducerTask, aggregatedLoadProducerTask, solverTask });
+            }
+            catch
+            {
+                var c = 1;
+            }
             var displacements = this.equationSolver.Result;
             return new DynamicResultFactory(displacements, loadFactory);
         }
     }
-    internal class Payload
+    internal class NodalForcePayload
+    {
+        public IEnumerable<NodalLoad> NodalLoads { get; set; }
+        public double Time { get; set; }
+    }
+
+    internal class AggregatedLoadPayload
     {
         public Vector<double> AggregatedLoad { get; set; }
         public double Time { get; set; }
     }
 
-    internal class LoadPositionProducer
+    internal class AggregatedLoadProducer
     {
-        private readonly DynamicLoadFactory loadFactory;
-        private readonly TimeProvider timeProvider;
         private readonly ILoadAggregator loadAggregator;
         private readonly IMatrixReducer matrixReducer;
 
-        public LoadPositionProducer(DynamicLoadFactory loadFactory, TimeProvider timeProvider, BlockingCollection<Payload> payloads,ILoadAggregator matrixAggregator, IMatrixReducer matrixReducer)
+        public AggregatedLoadProducer(BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads, BlockingCollection<NodalForcePayload> nodalForcePayloads, ILoadAggregator matrixAggregator, IMatrixReducer matrixReducer)
         {
-            this.loadFactory = loadFactory;
-            this.timeProvider = timeProvider;
-            Payloads = payloads;
+            AggregatedLoadPayloads = aggregatedLoadPayloads;
+            NodalLoadPayloads = nodalForcePayloads;
             this.loadAggregator = matrixAggregator;
             this.matrixReducer = matrixReducer;
         }
 
-        public BlockingCollection<Payload> Payloads { get; }
+        public BlockingCollection<AggregatedLoadPayload> AggregatedLoadPayloads { get; }
+        public BlockingCollection<NodalForcePayload> NodalLoadPayloads { get; }
+
+        public void Execute()
+        {
+            while (!this.NodalLoadPayloads.IsCompleted) 
+            {
+                var payload = this.NodalLoadPayloads.Take();
+                var loads = payload.NodalLoads;
+
+                var aggregatedLoad = this.loadAggregator.Aggregate(loads);
+                var reducedLoad = this.matrixReducer.ReduceVector(aggregatedLoad);
+
+                var result = new AggregatedLoadPayload
+                {
+                    AggregatedLoad = reducedLoad,
+                    Time = payload.Time
+                };
+                this.AggregatedLoadPayloads.Add(result);
+            }
+            this.AggregatedLoadPayloads.CompleteAdding();
+        }
+
+    }
+
+    internal class NodalForceProducer
+    {
+        private readonly DynamicLoadFactory loadFactory;
+        private readonly TimeProvider timeProvider;
+
+        public NodalForceProducer(DynamicLoadFactory loadFactory, TimeProvider timeProvider, BlockingCollection<NodalForcePayload> nodalLoadsPayloads)
+        {
+            this.loadFactory = loadFactory;
+            this.timeProvider = timeProvider;
+            NodalLoadsPayloads = nodalLoadsPayloads;
+
+        }
+
+        public BlockingCollection<NodalForcePayload> NodalLoadsPayloads { get; }
 
         public void Execute()
         {
@@ -93,19 +144,16 @@ namespace FEM2DDynamics.Solver
             {
                 var loads = this.loadFactory.GetNodalLoads(this.timeProvider.CurrentTime).ToList();
 
-                var aggregatedLoad = this.loadAggregator.Aggregate(loads);
-                var reducedLoad = this.matrixReducer.ReduceVector(aggregatedLoad);
-
-                var result = new Payload
+                var result = new NodalForcePayload
                 {
-                    AggregatedLoad = reducedLoad,
+                    NodalLoads = loads,
                     Time = this.timeProvider.CurrentTime
-            };
-                this.Payloads.Add(result);
+                };
+                this.NodalLoadsPayloads.Add(result);
                 this.timeProvider.Tick();
                
             } while (this.timeProvider.IsWorking());
-            this.Payloads.CompleteAdding();
+            this.NodalLoadsPayloads.CompleteAdding();
         }
 
     }

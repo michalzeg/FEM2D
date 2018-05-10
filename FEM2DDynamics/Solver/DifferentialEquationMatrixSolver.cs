@@ -11,17 +11,13 @@ namespace FEM2DDynamics.Solver
     internal class DifferentialEquationMatrixSolver : IEquationOfMotionSolver
     {
         private MatrixData matrixData;
-        private readonly LoadPositionProducer loadPositionProducer;
-        private readonly BlockingCollection<Payload> payloads;
-        private IMatrixReducer matrixReducer;
-        private ILoadAggregator loadAggregator;
+        private readonly NodalForceProducer loadPositionProducer;
+        private readonly BlockingCollection<AggregatedLoadPayload> payloads;
         private readonly TimeProvider timeProvider;
 
-        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, ILoadAggregator loadAggregator, IMatrixReducer matrixReducer, MatrixData matrixData, LoadPositionProducer loadPositionProducer, BlockingCollection<Payload> payloads)
+        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, MatrixData matrixData, NodalForceProducer loadPositionProducer, BlockingCollection<AggregatedLoadPayload> payloads)
         {
             this.timeProvider = timeProvider;
-            this.loadAggregator = loadAggregator;
-            this.matrixReducer = matrixReducer;
             this.matrixData = matrixData;
             this.loadPositionProducer = loadPositionProducer;
             this.payloads = payloads;
