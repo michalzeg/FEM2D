@@ -9,11 +9,11 @@ namespace FEM2DDynamics.Results
     internal class DynamicDisplacements
     {
         private readonly IList<TimeDisplacementPair> timeDisplacementPairs = new List<TimeDisplacementPair>();
-        private readonly TimeProvider timeProvider;
+        private readonly ITimeData timeData;
 
-        internal DynamicDisplacements(TimeProvider timeProvider)
+        internal DynamicDisplacements(ITimeData timeData)
         {
-            this.timeProvider = timeProvider;
+            this.timeData = timeData;
         }
 
         internal void AddResult(double time, Vector<double> displacements, Vector<double> velocities, Vector<double> accelerations)
@@ -54,7 +54,7 @@ namespace FEM2DDynamics.Results
 
         private int CalculateClosestLeftIndex(double time)
         {
-            var result = (int)Math.Floor(time / this.timeProvider.DeltaTime);
+            var result = (int)Math.Floor(time / this.timeData.DeltaTime);
             return result;
         }
     }

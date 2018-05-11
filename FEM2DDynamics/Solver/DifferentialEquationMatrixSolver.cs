@@ -10,27 +10,25 @@ namespace FEM2DDynamics.Solver
 {
     internal class DifferentialEquationMatrixSolver : IEquationOfMotionSolver
     {
-        private MatrixData matrixData;
-        private readonly NodalForceProducer loadPositionProducer;
-        private readonly BlockingCollection<AggregatedLoadPayload> payloads;
-        private readonly TimeProvider timeProvider;
+        private readonly MatrixData matrixData;
+        private readonly BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
+        private readonly ITimeData timeData;
 
-        public DifferentialEquationMatrixSolver(TimeProvider timeProvider, MatrixData matrixData, NodalForceProducer loadPositionProducer, BlockingCollection<AggregatedLoadPayload> payloads)
+        public DifferentialEquationMatrixSolver(ITimeData timeData, MatrixData matrixData, BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads)
         {
-            this.timeProvider = timeProvider;
+            this.timeData = timeData;
             this.matrixData = matrixData;
-            this.loadPositionProducer = loadPositionProducer;
-            this.payloads = payloads;
+            this.aggregatedLoadPayloads = aggregatedLoadPayloads;
         }
 
         public DynamicDisplacements Result { get; private set; }
 
         public void Solve()
         {
-            Result = new DynamicDisplacements(timeProvider);
+            Result = new DynamicDisplacements(timeData);
 
-            var deltaT = this.timeProvider.DeltaTime;
-            var payload = this.payloads.Take();
+            var deltaT = this.timeData.DeltaTime;
+            var payload = this.aggregatedLoadPayloads.Take();
             var p0 = payload.AggregatedLoad;
 
             var u0dot = Vector.Build.Sparse(p0.Count, 0d);
@@ -61,10 +59,9 @@ namespace FEM2DDynamics.Solver
 
                 uiMinus1 = ui;
                 ui = uiPlus1;
-                //this.timeProvider.Tick();
-                payload = this.payloads.Take();
+                payload = this.aggregatedLoadPayloads.Take();
                 pi = payload.AggregatedLoad;
-            } while (!this.payloads.IsCompleted);
+            } while (!this.aggregatedLoadPayloads.IsCompleted);
 
         }
     }

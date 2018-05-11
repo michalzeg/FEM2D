@@ -90,6 +90,9 @@
     <Compile Include="Results\DynamicResultFactory.cs" />
     <Compile Include="Results\IDynamicDofDisplacementMap.cs" />
     <Compile Include="Results\TimeDisplacementPair.cs" />
+    <Compile Include="Solver\ProducerConsumer\AggregatedLoadProducer.cs" />
+    <Compile Include="Solver\ProducerConsumer\NodalForceProducer.cs" />
+    <Compile Include="Solver\ProducerConsumer\AggregatedLoadPayload.cs" />
     <Compile Include="Solver\DynamicMatrixAggregator.cs" />
     <Compile Include="Solver\DynamicSolver.cs" />
     <Compile Include="Solver\IDampingFactorCalculator.cs" />
@@ -99,8 +102,10 @@
     <Compile Include="Solver\DynamicSolverSettings.cs" />
     <Compile Include="Solver\INaturalFrequencyCalculator.cs" />
     <Compile Include="Solver\NaturalFrequencyCalculator.cs" />
+    <Compile Include="Solver\ProducerConsumer\NodalForcePayload.cs" />
     <Compile Include="Solver\RayleightDamping.cs" />
     <Compile Include="Structure\DynamicStructure.cs" />
+    <Compile Include="Time\ITimeData.cs" />
     <Compile Include="Time\TimeProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

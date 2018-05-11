@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Time
 {
-    internal class TimeProvider
+
+    internal class TimeProvider : ITimeData
     {
         const double periodToDeltaTimeFactor = 0.01;
 
