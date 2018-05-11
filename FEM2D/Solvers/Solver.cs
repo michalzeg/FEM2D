@@ -20,14 +20,14 @@ namespace FEM2D.Solvers
 
         public Solver(ElementFactory elementFactory, NodeFactory nodeFactory, LoadFactory loadFactory)
         {
-            this.matrixAggregator = new MatrixAggregator();
-            this.loadAggregator = new LoadAggregator(nodeFactory);
-            this.matrixReducer = new MatrixReducer();
-            this.matrixSolver = new CholeskyDescomposition();
-
             this.elementFactory = elementFactory;
             this.nodeFactory = nodeFactory;
             this.loadFactory = loadFactory;
+
+            this.matrixAggregator = new MatrixAggregator();
+            this.loadAggregator = new LoadAggregator(nodeFactory);
+            this.matrixReducer = new MatrixReducer(nodeFactory);
+            this.matrixSolver = new CholeskyDescomposition();
         }
 
         public void Solve()
@@ -37,7 +37,6 @@ namespace FEM2D.Solvers
             var loads = loadFactory.GetNodalLoads();
             var loadVector = loadAggregator.Aggregate(loads);
 
-            this.matrixReducer.Initialize(nodeFactory);
             var reducedStiffnessMatrix = this.matrixReducer.ReduceMatrix(stiffnessMatrix);
             var reducedLoadVector = this.matrixReducer.ReduceVector(loadVector);
 
