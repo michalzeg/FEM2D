@@ -1,6 +1,4 @@
-﻿using FEM2D.Solvers;
-using FEM2DDynamics.Loads;
-using FEM2DDynamics.Matrix;
+﻿using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
 using MathNet.Numerics.LinearAlgebra.Double;
@@ -62,7 +60,6 @@ namespace FEM2DDynamics.Solver
                 payload = this.aggregatedLoadPayloads.Take();
                 pi = payload.AggregatedLoad;
             } while (!this.aggregatedLoadPayloads.IsCompleted);
-
         }
     }
 }

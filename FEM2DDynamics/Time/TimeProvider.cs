@@ -1,17 +1,12 @@
 ﻿using Common.Extensions;
 using FEM2DDynamics.Solver;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FEM2DDynamics.Time
 {
-
     internal class TimeProvider : ITimeData
     {
-        const double periodToDeltaTimeFactor = 0.01;
+        private const double periodToDeltaTimeFactor = 0.01;
 
         private readonly DynamicSolverSettings settings;
         private readonly INaturalFrequencyCalculator naturalFrequencyCalculator;
@@ -39,6 +34,5 @@ namespace FEM2DDynamics.Time
         }
 
         public bool IsWorking() => this.CurrentTime.IsApproximatelyLessOrEqualTo(this.settings.EndTime);
-
     }
 }

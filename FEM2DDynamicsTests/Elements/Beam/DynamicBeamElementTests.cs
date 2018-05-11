@@ -158,7 +158,7 @@ namespace FEM2DDynamicsTests.Elements.Beam
             var dynamicBeamElement = this.CreateDynamicBeamElement();
             dynamicBeamElement.UpdateDampingFactors(dampingFactors);
 
-            var expectedMassMatrix = stiffnessDampingFactor* stiffnessMatrix + massDapingFactor * massMatrix;
+            var expectedMassMatrix = stiffnessDampingFactor * stiffnessMatrix + massDapingFactor * massMatrix;
             var actualMassMatrix = dynamicBeamElement.GetDampingMatrix();
 
             Assert.That(actualMassMatrix, Is.EqualTo(expectedMassMatrix));

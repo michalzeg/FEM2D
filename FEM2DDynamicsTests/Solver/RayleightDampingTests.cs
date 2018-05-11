@@ -7,7 +7,7 @@ namespace FEM2DDynamicsTests.Solver
     [TestFixture]
     public class RayleightDampingTests
     {
-        const double damping = 0.2;
+        private const double damping = 0.2;
 
         private INaturalFrequencyCalculator subNaturalFrequencyCalculator;
 
@@ -31,9 +31,7 @@ namespace FEM2DDynamicsTests.Solver
             {
                 Assert.That(rayleightDamping.StiffnessDampingFactor, Is.EqualTo(expectedStiffnessFactor).Within(0.001));
                 Assert.That(rayleightDamping.MassDampingFactor, Is.EqualTo(expectedMassFactor).Within(0.001));
-
             });
-
         }
 
         private RayleightDamping CreateRayleightDamping()

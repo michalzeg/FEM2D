@@ -16,7 +16,6 @@ namespace FEM2D.Structures
 
         public Structure()
         {
-            
             this.NodeFactory = new NodeFactory();
             this.ElementFactory = new ElementFactory();
             this.LoadFactory = new LoadFactory();

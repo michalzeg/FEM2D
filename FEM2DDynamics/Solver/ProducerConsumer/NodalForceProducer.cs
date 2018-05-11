@@ -16,7 +16,6 @@ namespace FEM2DDynamics.Solver
             this.loadFactory = loadFactory;
             this.timeProvider = timeProvider;
             this.nodalLoadsPayloads = nodalLoadsPayloads;
-
         }
 
         public void Execute()
@@ -32,10 +31,8 @@ namespace FEM2DDynamics.Solver
                 };
                 this.nodalLoadsPayloads.Add(result);
                 this.timeProvider.Tick();
-               
             } while (this.timeProvider.IsWorking());
             this.nodalLoadsPayloads.CompleteAdding();
         }
-
     }
 }

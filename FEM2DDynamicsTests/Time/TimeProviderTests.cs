@@ -8,7 +8,6 @@ namespace FEM2DDynamicsTests.Time
     [TestFixture]
     public class TimeProviderTests
     {
-        
         [Test]
         public void TimeProvider_DeltaTimeIsNotChangedByNaturalFrequencyCalculator_HasProperValue()
         {
@@ -24,7 +23,6 @@ namespace FEM2DDynamicsTests.Time
             var timeProvider = new TimeProvider(settings, naturalFrecuencyCalculator);
 
             Assert.That(timeProvider.DeltaTime, Is.EqualTo(deltaTime).Within(0.00001));
-
         }
 
         [Test]
@@ -42,7 +40,6 @@ namespace FEM2DDynamicsTests.Time
             var timeProvider = new TimeProvider(settings, naturalFrecuencyCalculator);
 
             Assert.That(timeProvider.DeltaTime, Is.EqualTo(1).Within(0.00001));
-
         }
 
         [Test]
@@ -60,7 +57,6 @@ namespace FEM2DDynamicsTests.Time
             var timeProvider = new TimeProvider(settings, naturalFrecuencyCalculator);
 
             Assert.That(timeProvider.CurrentTime, Is.EqualTo(time).Within(0.00001));
-
         }
 
         [Test]
@@ -79,7 +75,6 @@ namespace FEM2DDynamicsTests.Time
             var timeProvider = new TimeProvider(settings, naturalFrecuencyCalculator);
             timeProvider.Tick();
             Assert.That(timeProvider.CurrentTime, Is.EqualTo(11).Within(0.00001));
-
         }
 
         [Test]
@@ -100,7 +95,6 @@ namespace FEM2DDynamicsTests.Time
             var timeProvider = new TimeProvider(settings, naturalFrecuencyCalculator);
             timeProvider.Tick();
             Assert.That(timeProvider.IsWorking(), Is.True);
-
         }
 
         [Test]
@@ -121,7 +115,6 @@ namespace FEM2DDynamicsTests.Time
             var timeProvider = new TimeProvider(settings, naturalFrecuencyCalculator);
             timeProvider.Tick();
             Assert.That(timeProvider.IsWorking(), Is.True);
-
         }
 
         [Test]
@@ -144,7 +137,6 @@ namespace FEM2DDynamicsTests.Time
             timeProvider.Tick();
             timeProvider.Tick();
             Assert.That(timeProvider.IsWorking(), Is.False);
-
         }
     }
 }

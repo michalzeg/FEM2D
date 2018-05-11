@@ -11,10 +11,9 @@ using netDxf.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
-
 
 namespace FEM2DDynamicTestApplication
 {
@@ -58,7 +57,6 @@ namespace FEM2DDynamicTestApplication
             var node8 = structure.NodeFactory.Create(70, 0);
             var node9 = structure.NodeFactory.Create(80, 0);
             node9.SetFixedSupport();
-
 
             var beam1 = structure.ElementFactory.CreateBeam(node1, node2, dynamicProperties);
             var beam2 = structure.ElementFactory.CreateBeam(node2, node3, dynamicProperties);

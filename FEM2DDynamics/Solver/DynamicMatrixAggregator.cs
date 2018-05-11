@@ -37,7 +37,7 @@ namespace FEM2DDynamics.Solver
 
         public Matrix<double> AggregateStiffnessMatrix(DynamicElementFactory elementFactory)
         {
-            return base.AggregateStiffnessMatrix(elementFactory.GetAll(),elementFactory.GetDOFsCount());
+            return base.AggregateStiffnessMatrix(elementFactory.GetAll(), elementFactory.GetDOFsCount());
         }
     }
 }

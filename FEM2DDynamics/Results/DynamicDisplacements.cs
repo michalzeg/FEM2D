@@ -1,5 +1,4 @@
-﻿using FEM2DDynamics.Solver;
-using FEM2DDynamics.Time;
+﻿using FEM2DDynamics.Time;
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;

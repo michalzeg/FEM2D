@@ -5,7 +5,6 @@ using FEM2DDynamics.Loads;
 using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
@@ -47,8 +46,8 @@ namespace FEM2DDynamics.Solver
             this.aggregatedLoadPayloads = new BlockingCollection<AggregatedLoadPayload>();
             this.nodaLoadProducer = new NodalForceProducer(this.loadFactory, timeProvider, nodalLoadPayloads);
             this.aggregatedLoadProducer = new AggregatedLoadProducer(this.aggregatedLoadPayloads, this.nodalLoadPayloads, loadAggregator, matrixReducer);
-            
-            this.equationSolver = new DifferentialEquationMatrixSolver(timeProvider, matrixData,aggregatedLoadPayloads);
+
+            this.equationSolver = new DifferentialEquationMatrixSolver(timeProvider, matrixData, aggregatedLoadPayloads);
             elementFactory.UpdateDampingFactor(dampingCalculator);
         }
 
@@ -57,7 +56,7 @@ namespace FEM2DDynamics.Solver
             var nodalLoadProducerTask = Task.Run(() => this.nodaLoadProducer.Execute());
             var aggregatedLoadProducerTask = Task.Run(() => this.aggregatedLoadProducer.Execute());
             var solverTask = Task.Run(() => this.equationSolver.Solve());
-            
+
             Task.WaitAll(new[] { nodalLoadProducerTask, aggregatedLoadProducerTask, solverTask });
 
             var displacements = this.equationSolver.Result;

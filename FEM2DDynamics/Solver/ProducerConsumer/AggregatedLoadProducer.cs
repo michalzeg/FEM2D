@@ -10,7 +10,6 @@ namespace FEM2DDynamics.Solver
         private BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
         private BlockingCollection<NodalForcePayload> nodalLoadPayloads;
 
-
         public AggregatedLoadProducer(BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads, BlockingCollection<NodalForcePayload> nodalForcePayloads, ILoadAggregator matrixAggregator, IMatrixReducer matrixReducer)
         {
             this.aggregatedLoadPayloads = aggregatedLoadPayloads;
@@ -39,6 +38,5 @@ namespace FEM2DDynamics.Solver
             while (!this.nodalLoadPayloads.IsCompleted);
             this.aggregatedLoadPayloads.CompleteAdding();
         }
-
     }
 }

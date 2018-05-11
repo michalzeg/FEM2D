@@ -15,9 +15,8 @@ namespace FEM2DDynamics.Solver
         private IList<double> naturalFrequency;
 
         public NaturalFrequencyCalculator(MatrixData matrixData)
-            :this(matrixData.MassMatrix,matrixData.StiffnessMatrix)
+            : this(matrixData.MassMatrix, matrixData.StiffnessMatrix)
         {
-
         }
 
         public NaturalFrequencyCalculator(Matrix<double> mass, Matrix<double> stiffness)

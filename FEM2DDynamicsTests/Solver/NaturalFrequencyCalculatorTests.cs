@@ -9,7 +9,8 @@ namespace FEM2DDynamicsTests.Solver
     [TestFixture]
     public class NaturalFrequencyCalculatorTests
     {
-        const double tolerance = 0.0001;
+        private const double tolerance = 0.0001;
+
         [SetUp]
         public void SetUp()
         {
@@ -22,12 +23,11 @@ namespace FEM2DDynamicsTests.Solver
 
             var naturalFrequencyCalculator = new NaturalFrequencyCalculator(matrices.massMatrix, matrices.stiffnessMatrix);
 
-            var actualResult = naturalFrequencyCalculator.GetFirstMode()/2/Math.PI;
+            var actualResult = naturalFrequencyCalculator.GetFirstMode() / 2 / Math.PI;
 
             var expectedResult = 5.7423;
 
             Assert.That(actualResult, Is.EqualTo(expectedResult).Within(tolerance));
-
         }
 
         [Test]
@@ -42,7 +42,6 @@ namespace FEM2DDynamicsTests.Solver
             var expectedResult = 13.8631;
 
             Assert.That(actualResult, Is.EqualTo(expectedResult).Within(tolerance));
-
         }
 
         [Test]
@@ -54,10 +53,9 @@ namespace FEM2DDynamicsTests.Solver
 
             var actualResult = naturalFrequencyCalculator.GetPeriod();
 
-            var expectedResult = 1/(5.7423);
+            var expectedResult = 1 / (5.7423);
 
             Assert.That(actualResult, Is.EqualTo(expectedResult).Within(tolerance));
-
         }
 
         private static (Matrix<double> massMatrix, Matrix<double> stiffnessMatrix) GetMatrices()

@@ -15,7 +15,6 @@ namespace FEM2D.Solvers
             this.dofNumber = dofCountProvider.GetDOFsCount();
         }
 
-
         public Vector<double> Aggregate(IEnumerable<NodalLoad> loads)
         {
             var aggregatedLoad = Vector.Build.Sparse(dofNumber, 0d);

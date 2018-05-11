@@ -3,13 +3,11 @@ using FEM2DDynamics.Elements;
 using FEM2DDynamics.Solver;
 using MathNet.Numerics.LinearAlgebra;
 using System;
-using System.Collections.Generic;
 
 namespace FEM2DDynamics.Matrix
 {
     internal class MatrixData
     {
-
         private readonly Lazy<Matrix<double>> massMatrix;
         private readonly Lazy<Matrix<double>> stiffnessMatrix;
         private readonly Lazy<Matrix<double>> dampingMatrix;
@@ -20,7 +18,6 @@ namespace FEM2DDynamics.Matrix
         public Matrix<double> MassMatrix => this.massMatrix.Value;
         public Matrix<double> StiffnessMatrix => this.stiffnessMatrix.Value;
         public Matrix<double> DampingMatrix => this.dampingMatrix.Value;
-
 
         public MatrixData(IMatrixReducer matrixReducer, IDynamicMatrixAggregator matrixAggregator, DynamicElementFactory elementFactory)
         {

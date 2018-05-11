@@ -181,7 +181,6 @@ namespace FEM2DDynamics.Structure.Tests
                 Assert.That(beam2Result.GetAcceleration(0), Is.EqualTo(-0.0129776063023049).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(0.5), Is.EqualTo(-0.00754867717045455).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(1), Is.EqualTo(0).Within(tolerance));
-
             });
         }
 
@@ -276,7 +275,6 @@ namespace FEM2DDynamics.Structure.Tests
                 Assert.That(beam2Result.GetAcceleration(0), Is.EqualTo(3.22969521823748E-05).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(0.5), Is.EqualTo(-3.64660805682782E-05).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(1), Is.EqualTo(0).Within(tolerance));
-
             });
         }
 
@@ -372,7 +370,6 @@ namespace FEM2DDynamics.Structure.Tests
                 Assert.That(beam2Result.GetAcceleration(0), Is.EqualTo(2.10145024489881E-05).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(0.5), Is.EqualTo(-0.000131293493274999).Within(tolerance));
                 Assert.That(beam2Result.GetAcceleration(1), Is.EqualTo(0).Within(tolerance));
-
             });
         }
     }

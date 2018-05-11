@@ -42,6 +42,7 @@ namespace Common.Extensions
         {
             return initialValue < value || initialValue.IsApproximatelyEqualTo(value);
         }
+
         /// <summary>
         /// Rounds the given double to the 2 digits
         /// </summary>
