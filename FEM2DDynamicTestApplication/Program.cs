@@ -4,6 +4,7 @@ using FEM2DCommon.ElementProperties;
 using FEM2DCommon.Sections;
 using FEM2DDynamics.Solver;
 using FEM2DDynamics.Structure;
+using FEM2DDynamics.Utils;
 using FEM2DStressCalculator.Beams;
 using FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder;
 using netDxf;
@@ -41,6 +42,15 @@ namespace FEM2DDynamicTestApplication
                 StartTime = 0,
                 DampingRatio = 0.003,
             };
+            var guid = Guid.NewGuid().ToString();
+            Directory.CreateDirectory(Path.Combine(@"E:", "Files", guid));
+            var progress = new Progress<ProgressMessage>(msg =>
+            {
+                var guid2 = Guid.NewGuid().ToString();
+                var path = Path.Combine(@"E:", "Files", guid, $"{msg.Progress.ToString()}_{guid2}.txt");
+                File.WriteAllText(path, msg.Progress.ToString());
+            });
+
             var timer = new Stopwatch();
             timer.Start();
             var structure = new DynamicStructure(settings);
@@ -76,7 +86,7 @@ namespace FEM2DDynamicTestApplication
             structure.LoadFactory.AddPointMovingLoad(-2000, -7, 1);
             structure.LoadFactory.AddPointMovingLoad(-2000, -8, 1);
             structure.LoadFactory.AddPointMovingLoad(-2000, -9, 1);
-            structure.Solve();
+            structure.Solve(progress);
             var results = structure.Results.BeamResults;
 
             var beam1Result = results.GetResult(beam1, 1);

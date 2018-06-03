@@ -75,6 +75,7 @@
     <Compile Include="Solver\RayleightDampingTests.cs" />
     <Compile Include="Structure\DynamicStructureTests.cs" />
     <Compile Include="Time\TimeProviderTests.cs" />
+    <Compile Include="Utils\ProgresUtilsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

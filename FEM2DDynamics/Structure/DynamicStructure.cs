@@ -3,6 +3,8 @@ using FEM2DDynamics.Elements;
 using FEM2DDynamics.Loads;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Solver;
+using FEM2DDynamics.Utils;
+using System;
 
 namespace FEM2DDynamics.Structure
 {
@@ -23,9 +25,9 @@ namespace FEM2DDynamics.Structure
             this.settings = settings;
         }
 
-        public void Solve()
+        public void Solve(IProgress<ProgressMessage> progress = null)
         {
-            var solver = new DynamicSolver(settings, this.ElementFactory, this.NodeFactory, this.LoadFactory);
+            var solver = new DynamicSolver(settings, this.ElementFactory, this.NodeFactory, this.LoadFactory, progress);
             solver.Initialize();
             this.Results = solver.Solve();
         }

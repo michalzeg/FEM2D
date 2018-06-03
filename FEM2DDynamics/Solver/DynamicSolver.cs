@@ -5,6 +5,8 @@ using FEM2DDynamics.Loads;
 using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
+using FEM2DDynamics.Utils;
+using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
 
@@ -16,7 +18,7 @@ namespace FEM2DDynamics.Solver
         private readonly DynamicElementFactory elementFactory;
         private readonly NodeFactory nodeFactory;
         private readonly DynamicLoadFactory loadFactory;
-
+        private readonly IProgress<ProgressMessage> progress;
         private BlockingCollection<NodalForcePayload> nodalLoadPayloads;
         private BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
         private NodalForceProducer nodaLoadProducer;
@@ -24,12 +26,13 @@ namespace FEM2DDynamics.Solver
 
         private IEquationOfMotionSolver equationSolver;
 
-        public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory)
+        public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory, IProgress<ProgressMessage> progress)
         {
             this.settings = settings;
             this.elementFactory = elementFactory;
             this.nodeFactory = nodeFactory;
             this.loadFactory = loadFactory;
+            this.progress = progress;
         }
 
         public void Initialize()
@@ -39,7 +42,7 @@ namespace FEM2DDynamics.Solver
             var loadAggregator = new LoadAggregator(this.nodeFactory);
             var matrixData = new MatrixData(matrixReducer, matrixAggregator, this.elementFactory);
             var naturalFrequencyCalculator = new NaturalFrequencyCalculator(matrixData);
-            var timeProvider = new TimeProvider(this.settings, naturalFrequencyCalculator);
+            var timeProvider = new TimeProvider(this.settings, naturalFrequencyCalculator, this.progress);
             var dampingCalculator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
 
             this.nodalLoadPayloads = new BlockingCollection<NodalForcePayload>();

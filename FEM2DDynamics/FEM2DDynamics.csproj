@@ -107,6 +107,8 @@
     <Compile Include="Structure\DynamicStructure.cs" />
     <Compile Include="Time\ITimeData.cs" />
     <Compile Include="Time\TimeProvider.cs" />
+    <Compile Include="Utils\ProgressMessage.cs" />
+    <Compile Include="Utils\ProgresUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

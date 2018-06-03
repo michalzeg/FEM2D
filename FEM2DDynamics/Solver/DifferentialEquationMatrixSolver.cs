@@ -1,7 +1,9 @@
 ﻿using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
+using FEM2DDynamics.Utils;
 using MathNet.Numerics.LinearAlgebra.Double;
+using System;
 using System.Collections.Concurrent;
 
 namespace FEM2DDynamics.Solver
@@ -10,6 +12,7 @@ namespace FEM2DDynamics.Solver
     {
         private readonly MatrixData matrixData;
         private readonly BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
+        private readonly IProgress<ProgressMessage> progress;
         private readonly ITimeData timeData;
 
         public DifferentialEquationMatrixSolver(ITimeData timeData, MatrixData matrixData, BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads)
