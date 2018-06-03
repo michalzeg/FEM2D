@@ -42,7 +42,7 @@ namespace FEM2DDynamics.Solver
             var loadAggregator = new LoadAggregator(this.nodeFactory);
             var matrixData = new MatrixData(matrixReducer, matrixAggregator, this.elementFactory);
             var naturalFrequencyCalculator = new NaturalFrequencyCalculator(matrixData);
-            var timeProvider = new TimeProvider(this.settings, naturalFrequencyCalculator, this.progress);
+            var timeProvider = new ReportTimeProvider(new TimeProvider(this.settings, naturalFrequencyCalculator), this.progress);
             var dampingCalculator = new RayleightDamping(naturalFrequencyCalculator, settings.DampingRatio);
 
             this.nodalLoadPayloads = new BlockingCollection<NodalForcePayload>();

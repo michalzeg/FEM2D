@@ -5,7 +5,33 @@ using System;
 
 namespace FEM2DDynamics.Time
 {
-    internal class TimeProvider : ITimeData
+    internal class ReportTimeProvider : ITimeProvider, ITimeData
+    {
+        private readonly ITimeProvider timeProvider;
+        private readonly IProgress<ProgressMessage> progress;
+
+        public ReportTimeProvider(ITimeProvider timeProvider, IProgress<ProgressMessage> progress = null)
+        {
+            this.timeProvider = timeProvider;
+            this.progress = progress;
+        }
+
+        public double CurrentTime => this.timeProvider.CurrentTime;
+
+        public double DeltaTime => this.timeProvider.DeltaTime;
+
+        public double EndTime => this.timeProvider.EndTime;
+
+        public bool IsWorking() => this.timeProvider.IsWorking();
+
+        public void Tick()
+        {
+            this.timeProvider.Tick();
+            this.progress?.ReportProgress(this.CurrentTime, this.timeProvider.EndTime);
+        }
+    }
+
+    internal class TimeProvider : ITimeData, ITimeProvider
     {
         private const double periodToDeltaTimeFactor = 0.01;
 
@@ -15,12 +41,12 @@ namespace FEM2DDynamics.Time
 
         public double DeltaTime { get; private set; }
         public double CurrentTime { get; private set; }
+        public double EndTime => this.settings.EndTime;
 
-        public TimeProvider(DynamicSolverSettings settings, INaturalFrequencyCalculator naturalFrequencyCalculator, IProgress<ProgressMessage> progress = null)
+        public TimeProvider(DynamicSolverSettings settings, INaturalFrequencyCalculator naturalFrequencyCalculator)
         {
             this.settings = settings;
             this.naturalFrequencyCalculator = naturalFrequencyCalculator;
-            this.progress = progress;
             this.CurrentTime = settings.StartTime;
             this.CheckDeltaTime();
         }
@@ -34,7 +60,6 @@ namespace FEM2DDynamics.Time
         public void Tick()
         {
             this.CurrentTime += this.DeltaTime;
-            this.progress?.ReportProgress(this.CurrentTime, this.settings.EndTime);
         }
 
         public bool IsWorking() => this.CurrentTime.IsApproximatelyLessOrEqualTo(this.settings.EndTime);

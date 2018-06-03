@@ -8,10 +8,10 @@ namespace FEM2DDynamics.Solver
     internal class NodalForceProducer
     {
         private readonly DynamicLoadFactory loadFactory;
-        private readonly TimeProvider timeProvider;
+        private readonly ITimeProvider timeProvider;
         private BlockingCollection<NodalForcePayload> nodalLoadsPayloads;
 
-        public NodalForceProducer(DynamicLoadFactory loadFactory, TimeProvider timeProvider, BlockingCollection<NodalForcePayload> nodalLoadsPayloads)
+        public NodalForceProducer(DynamicLoadFactory loadFactory, ITimeProvider timeProvider, BlockingCollection<NodalForcePayload> nodalLoadsPayloads)
         {
             this.loadFactory = loadFactory;
             this.timeProvider = timeProvider;
