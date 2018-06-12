@@ -15,23 +15,25 @@ namespace FEM2DDynamics.Utils.Tests
         [Test()]
         public void ReportProgress_IntegerValueProvided_ReportHasBeenCalled()
         {
-            var msg = new ProgressMessage(1, 5);
-            var progress = Substitute.For<IProgress<ProgressMessage>>();
+            var expectedResult = new ProgressMessage(1, 5);
+            ProgressMessage actualResult = null;
+            Action<ProgressMessage> progress = m => actualResult = m;
 
             ProgresUtils.ReportProgress(progress, 1, 5);
 
-            progress.Received().Report(msg);
+            Assert.That(actualResult, Is.EqualTo(expectedResult));
         }
 
         [Test()]
         public void ReportProgress_DoubleValueProvided_ReportHasNOTBeenCalled()
         {
-            var msg = new ProgressMessage(0.1, 5);
-            var progress = Substitute.For<IProgress<ProgressMessage>>();
+            var expectedResult = new ProgressMessage(0.1, 5);
+            ProgressMessage actualResult = null;
+            Action<ProgressMessage> progress = m => actualResult = m;
 
             ProgresUtils.ReportProgress(progress, 0.1, 5);
 
-            progress.DidNotReceive().Report(msg);
+            Assert.That(actualResult, Is.EqualTo(null));
         }
     }
 }

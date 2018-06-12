@@ -8,9 +8,9 @@ namespace FEM2DDynamics.Time
     internal class ReportTimeProvider : ITimeProvider, ITimeData
     {
         private readonly ITimeProvider timeProvider;
-        private readonly IProgress<ProgressMessage> progress;
+        private readonly Action<ProgressMessage> progress;
 
-        public ReportTimeProvider(ITimeProvider timeProvider, IProgress<ProgressMessage> progress = null)
+        public ReportTimeProvider(ITimeProvider timeProvider, Action<ProgressMessage> progress = null)
         {
             this.timeProvider = timeProvider;
             this.progress = progress;

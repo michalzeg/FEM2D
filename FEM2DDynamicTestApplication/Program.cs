@@ -44,12 +44,12 @@ namespace FEM2DDynamicTestApplication
             };
             var guid = Guid.NewGuid().ToString();
             Directory.CreateDirectory(Path.Combine(@"E:", "Files", guid));
-            var progress = new Progress<ProgressMessage>(msg =>
+            Action<ProgressMessage> progress = msg =>
             {
                 var guid2 = Guid.NewGuid().ToString();
                 var path = Path.Combine(@"E:", "Files", guid, $"{msg.Progress.ToString()}_{guid2}.txt");
                 File.WriteAllText(path, msg.Progress.ToString());
-            });
+            };
 
             var timer = new Stopwatch();
             timer.Start();

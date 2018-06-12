@@ -18,7 +18,7 @@ namespace FEM2DDynamics.Solver
         private readonly DynamicElementFactory elementFactory;
         private readonly NodeFactory nodeFactory;
         private readonly DynamicLoadFactory loadFactory;
-        private readonly IProgress<ProgressMessage> progress;
+        private readonly Action<ProgressMessage> progress;
         private BlockingCollection<NodalForcePayload> nodalLoadPayloads;
         private BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
         private NodalForceProducer nodaLoadProducer;
@@ -26,7 +26,7 @@ namespace FEM2DDynamics.Solver
 
         private IEquationOfMotionSolver equationSolver;
 
-        public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory, IProgress<ProgressMessage> progress)
+        public DynamicSolver(DynamicSolverSettings settings, DynamicElementFactory elementFactory, NodeFactory nodeFactory, DynamicLoadFactory loadFactory, Action<ProgressMessage> progress)
         {
             this.settings = settings;
             this.elementFactory = elementFactory;
