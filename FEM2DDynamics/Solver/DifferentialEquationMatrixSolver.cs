@@ -3,6 +3,7 @@ using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
 using FEM2DDynamics.Utils;
 using MathNet.Numerics.LinearAlgebra.Double;
+using NLog;
 using System;
 using System.Collections.Concurrent;
 
@@ -10,6 +11,8 @@ namespace FEM2DDynamics.Solver
 {
     internal class DifferentialEquationMatrixSolver : IEquationOfMotionSolver
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private readonly MatrixData matrixData;
         private readonly BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
         private readonly IProgress<ProgressMessage> progress;
@@ -46,22 +49,29 @@ namespace FEM2DDynamics.Solver
             var ui = u0;
             do
             {
-                var time = payload.Time;
-                var pi_ = pi - a * uiMinus1 - b * ui;
-                var uiPlus1 = K_Inverted * pi_;
+                try
+                {
+                    var time = payload.Time;
+                    var pi_ = pi - a * uiMinus1 - b * ui;
+                    var uiPlus1 = K_Inverted * pi_;
 
-                var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
-                var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
+                    var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
+                    var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
 
 #if DEBUG
                 var res = this.matrixData.StiffnessMatrix * ui + this.matrixData.DampingMatrix * uidot + this.matrixData.MassMatrix * uidot2 - pi;
 #endif
-                Result.AddResult(time, ui, uidot, uidot2);
+                    Result.AddResult(time, ui, uidot, uidot2);
 
-                uiMinus1 = ui;
-                ui = uiPlus1;
-                payload = this.aggregatedLoadPayloads.Take();
-                pi = payload.AggregatedLoad;
+                    uiMinus1 = ui;
+                    ui = uiPlus1;
+                    payload = this.aggregatedLoadPayloads.Take();
+                    pi = payload.AggregatedLoad;
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn(ex, "Solver");
+                }
             } while (!this.aggregatedLoadPayloads.IsCompleted);
         }
     }

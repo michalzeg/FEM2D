@@ -1,5 +1,7 @@
 ﻿using FEM2DDynamics.Loads;
 using FEM2DDynamics.Time;
+using NLog;
+using System;
 using System.Collections.Concurrent;
 using System.Linq;
 
@@ -7,6 +9,8 @@ namespace FEM2DDynamics.Solver
 {
     internal class NodalForceProducer
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private readonly DynamicLoadFactory loadFactory;
         private readonly ITimeProvider timeProvider;
         private BlockingCollection<NodalForcePayload> nodalLoadsPayloads;
@@ -22,15 +26,22 @@ namespace FEM2DDynamics.Solver
         {
             do
             {
-                var loads = this.loadFactory.GetNodalLoads(this.timeProvider.CurrentTime).ToList();
-
-                var result = new NodalForcePayload
+                try
                 {
-                    NodalLoads = loads,
-                    Time = this.timeProvider.CurrentTime
-                };
-                this.nodalLoadsPayloads.Add(result);
-                this.timeProvider.Tick();
+                    var loads = this.loadFactory.GetNodalLoads(this.timeProvider.CurrentTime).ToList();
+
+                    var result = new NodalForcePayload
+                    {
+                        NodalLoads = loads,
+                        Time = this.timeProvider.CurrentTime
+                    };
+                    this.nodalLoadsPayloads.Add(result);
+                    this.timeProvider.Tick();
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn(ex, "Nodal Force Producer");
+                }
             } while (this.timeProvider.IsWorking());
             this.nodalLoadsPayloads.CompleteAdding();
         }
