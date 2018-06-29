@@ -6,6 +6,7 @@ using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
 using FEM2DDynamics.Time;
 using FEM2DDynamics.Utils;
+using NLog;
 using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace FEM2DDynamics.Solver
 {
     internal class DynamicSolver
     {
+        private Logger logger = LogManager.GetCurrentClassLogger();
+
         private readonly DynamicSolverSettings settings;
         private readonly DynamicElementFactory elementFactory;
         private readonly NodeFactory nodeFactory;
@@ -63,7 +66,22 @@ namespace FEM2DDynamics.Solver
             Task.WaitAll(new[] { nodalLoadProducerTask, aggregatedLoadProducerTask, solverTask });
 
             var displacements = this.equationSolver.Result;
+            this.Dispose();
             return new DynamicResultFactory(displacements, loadFactory);
+        }
+
+        private void Dispose()
+        {
+            try
+            {
+                this.aggregatedLoadPayloads.Dispose();
+                this.nodalLoadPayloads.Dispose();
+            }
+            catch (Exception ex)
+            {
+                logger.Warn(ex, "Disposing collections");
+                throw;
+            }
         }
     }
 }
