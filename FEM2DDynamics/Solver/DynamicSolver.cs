@@ -63,7 +63,21 @@ namespace FEM2DDynamics.Solver
             Task.WaitAll(new[] { nodalLoadProducerTask, aggregatedLoadProducerTask, solverTask });
 
             var displacements = this.equationSolver.Result;
+            this.Dispose();
             return new DynamicResultFactory(displacements, loadFactory);
+        }
+
+        private void Dispose()
+        {
+            try
+            {
+                this.aggregatedLoadPayloads.Dispose();
+                this.nodalLoadPayloads.Dispose();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
