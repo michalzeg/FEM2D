@@ -24,7 +24,7 @@ namespace FEM2DDynamics.Solver
 
         public void Execute()
         {
-            do
+            while (!this.nodalLoadPayloads.IsCompleted)
             {
                 try
                 {
@@ -46,7 +46,7 @@ namespace FEM2DDynamics.Solver
                     logger.Warn(ex, "AggregatedLoadProducer");
                 }
             }
-            while (!this.nodalLoadPayloads.IsCompleted);
+
             this.aggregatedLoadPayloads.CompleteAdding();
         }
     }

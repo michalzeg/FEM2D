@@ -24,7 +24,7 @@ namespace FEM2DDynamics.Solver
 
         public void Execute()
         {
-            do
+            while (this.timeProvider.IsWorking())
             {
                 try
                 {
@@ -42,7 +42,7 @@ namespace FEM2DDynamics.Solver
                 {
                     logger.Warn(ex, "Nodal Force Producer");
                 }
-            } while (this.timeProvider.IsWorking());
+            }
             this.nodalLoadsPayloads.CompleteAdding();
         }
     }
