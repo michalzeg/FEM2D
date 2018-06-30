@@ -27,9 +27,11 @@ namespace FEM2DDynamics.Structure
 
         public void Solve(Action<ProgressMessage> progress = null)
         {
-            var solver = new DynamicSolver(settings, this.ElementFactory, this.NodeFactory, this.LoadFactory, progress);
-            solver.Initialize();
-            this.Results = solver.Solve();
+            using (var solver = new DynamicSolver(settings, this.ElementFactory, this.NodeFactory, this.LoadFactory, progress))
+            {
+                solver.Initialize();
+                this.Results = solver.Solve();
+            }
         }
     }
 }

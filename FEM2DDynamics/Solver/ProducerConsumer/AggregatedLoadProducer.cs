@@ -1,10 +1,14 @@
 ﻿using FEM2D.Solvers;
+using NLog;
+using System;
 using System.Collections.Concurrent;
 
 namespace FEM2DDynamics.Solver
 {
     internal class AggregatedLoadProducer
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private readonly ILoadAggregator loadAggregator;
         private readonly IMatrixReducer matrixReducer;
         private BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
@@ -20,22 +24,29 @@ namespace FEM2DDynamics.Solver
 
         public void Execute()
         {
-            do
+            while (!this.nodalLoadPayloads.IsCompleted)
             {
-                var payload = this.nodalLoadPayloads.Take();
-                var loads = payload.NodalLoads;
-
-                var aggregatedLoad = this.loadAggregator.Aggregate(loads);
-                var reducedLoad = this.matrixReducer.ReduceVector(aggregatedLoad);
-
-                var result = new AggregatedLoadPayload
+                try
                 {
-                    AggregatedLoad = reducedLoad,
-                    Time = payload.Time
-                };
-                this.aggregatedLoadPayloads.Add(result);
+                    var payload = this.nodalLoadPayloads.Take();
+                    var loads = payload.NodalLoads;
+
+                    var aggregatedLoad = this.loadAggregator.Aggregate(loads);
+                    var reducedLoad = this.matrixReducer.ReduceVector(aggregatedLoad);
+
+                    var result = new AggregatedLoadPayload
+                    {
+                        AggregatedLoad = reducedLoad,
+                        Time = payload.Time
+                    };
+                    this.aggregatedLoadPayloads.Add(result);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn(ex, "AggregatedLoadProducer");
+                }
             }
-            while (!this.nodalLoadPayloads.IsCompleted);
+
             this.aggregatedLoadPayloads.CompleteAdding();
         }
     }

@@ -22,6 +22,8 @@ namespace FEM2DDynamicTestApplication
     {
         private static void Main(string[] args)
         {
+            Initialize();
+
             DynamicLoadInCentre();
             DynamicLoadInCentre();
             DynamicLoadInCentre();
@@ -29,6 +31,49 @@ namespace FEM2DDynamicTestApplication
             DynamicLoadInCentre();
 
             Console.ReadKey();
+        }
+
+        private static void Initialize()
+        {
+            var dynamicProperties = GetSection();
+
+            var settings = new DynamicSolverSettings
+            {
+                DeltaTime = 0.1,
+                EndTime = 1,
+                StartTime = 0,
+                DampingRatio = 0.003,
+            };
+            var guid = Guid.NewGuid().ToString();
+            Directory.CreateDirectory(Path.Combine(@"E:", "Files", guid));
+            Action<ProgressMessage> progress = msg =>
+            {
+                var guid2 = Guid.NewGuid().ToString();
+                var path = Path.Combine(@"E:", "Files", guid, $"{msg.Progress.ToString()}_{guid2}.txt");
+                File.WriteAllText(path, msg.Progress.ToString());
+            };
+
+            var timer = new Stopwatch();
+            timer.Start();
+            var structure = new DynamicStructure(settings);
+            var node1 = structure.NodeFactory.Create(0, 0);
+            node1.SetPinnedSupport();
+            var node2 = structure.NodeFactory.Create(10, 0);
+            var node3 = structure.NodeFactory.Create(20, 0);
+            node3.SetPinnedSupport();
+
+            var beam1 = structure.ElementFactory.CreateBeam(node1, node2, dynamicProperties);
+            var beam2 = structure.ElementFactory.CreateBeam(node2, node3, dynamicProperties);
+            structure.LoadFactory.AddPointMovingLoad(-1000, 0, 1);
+
+            structure.Solve();
+            var results = structure.Results.BeamResults;
+
+            var beam1Result = results.GetResult(beam1, 1);
+            var beam2Result = results.GetResult(beam2, 1);
+
+            timer.Stop();
+            Console.WriteLine(timer.ElapsedMilliseconds);
         }
 
         private static void DynamicLoadInCentre()
