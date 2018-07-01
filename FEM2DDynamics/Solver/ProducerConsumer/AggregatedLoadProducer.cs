@@ -26,25 +26,19 @@ namespace FEM2DDynamics.Solver
         {
             while (!this.nodalLoadPayloads.IsCompleted)
             {
-                try
-                {
-                    var payload = this.nodalLoadPayloads.Take();
-                    var loads = payload.NodalLoads;
+                if (!this.nodalLoadPayloads.TryTake(out NodalForcePayload payload))
+                    continue;
+                var loads = payload.NodalLoads;
 
-                    var aggregatedLoad = this.loadAggregator.Aggregate(loads);
-                    var reducedLoad = this.matrixReducer.ReduceVector(aggregatedLoad);
+                var aggregatedLoad = this.loadAggregator.Aggregate(loads);
+                var reducedLoad = this.matrixReducer.ReduceVector(aggregatedLoad);
 
-                    var result = new AggregatedLoadPayload
-                    {
-                        AggregatedLoad = reducedLoad,
-                        Time = payload.Time
-                    };
-                    this.aggregatedLoadPayloads.Add(result);
-                }
-                catch (Exception ex)
+                var result = new AggregatedLoadPayload
                 {
-                    logger.Warn(ex, "AggregatedLoadProducer");
-                }
+                    AggregatedLoad = reducedLoad,
+                    Time = payload.Time
+                };
+                this.aggregatedLoadPayloads.Add(result);
             }
 
             this.aggregatedLoadPayloads.CompleteAdding();

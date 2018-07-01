@@ -15,7 +15,6 @@ namespace FEM2DDynamics.Solver
 
         private readonly MatrixData matrixData;
         private readonly BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads;
-        private readonly IProgress<ProgressMessage> progress;
         private readonly ITimeData timeData;
 
         public DifferentialEquationMatrixSolver(ITimeData timeData, MatrixData matrixData, BlockingCollection<AggregatedLoadPayload> aggregatedLoadPayloads)
@@ -47,32 +46,28 @@ namespace FEM2DDynamics.Solver
 
             var pi = p0;
             var ui = u0;
-            do
+            while (!this.aggregatedLoadPayloads.IsCompleted)
             {
-                try
-                {
-                    var time = payload.Time;
-                    var pi_ = pi - a * uiMinus1 - b * ui;
-                    var uiPlus1 = K_Inverted * pi_;
+                if (!this.aggregatedLoadPayloads.TryTake(out payload))
+                    continue;
 
-                    var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
-                    var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
+                var time = payload.Time;
+                var pi_ = pi - a * uiMinus1 - b * ui;
+                var uiPlus1 = K_Inverted * pi_;
+
+                var uidot = (uiPlus1 - uiMinus1) / (2 * deltaT);
+                var uidot2 = (uiPlus1 - 2 * ui + uiMinus1) / (deltaT * deltaT);
 
 #if DEBUG
                 var res = this.matrixData.StiffnessMatrix * ui + this.matrixData.DampingMatrix * uidot + this.matrixData.MassMatrix * uidot2 - pi;
 #endif
-                    Result.AddResult(time, ui, uidot, uidot2);
+                Result.AddResult(time, ui, uidot, uidot2);
 
-                    uiMinus1 = ui;
-                    ui = uiPlus1;
-                    payload = this.aggregatedLoadPayloads.Take();
-                    pi = payload.AggregatedLoad;
-                }
-                catch (Exception ex)
-                {
-                    logger.Warn(ex, "Solver");
-                }
-            } while (!this.aggregatedLoadPayloads.IsCompleted);
+                uiMinus1 = ui;
+                ui = uiPlus1;
+
+                pi = payload.AggregatedLoad;
+            }
         }
     }
 }
