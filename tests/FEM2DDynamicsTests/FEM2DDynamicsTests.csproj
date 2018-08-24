@@ -58,41 +58,12 @@
     <Compile Include="Utils\ProgresUtilsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Common\Common.csproj">
-      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FEM2DCommon\FEM2DCommon.csproj">
-      <Project>{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}</Project>
-      <Name>FEM2DCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FEM2DDynamics\FEM2DDynamics.csproj">
-      <Project>{CC63723E-8C8C-4D10-9C5C-035A7E694EFF}</Project>
-      <Name>FEM2DDynamics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
-      <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
-      <Name>FEM2DStressCalculator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FEM2D\FEM2D.csproj">
-      <Project>{2743B6ED-2F44-4E77-B4FE-0D68D3C58280}</Project>
-      <Name>FEM2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Output\FEM2DOutput.csproj">
-      <Project>{599fbf44-d588-4a46-a73f-b8fca5373707}</Project>
-      <Name>FEM2DOutput</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Triangulation\FEM2DTriangulation.csproj">
-      <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>
-      <Name>FEM2DTriangulation</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MathNet.Numerics.4.5.1\lib\net461\MathNet.Numerics.dll</HintPath>
@@ -107,10 +78,43 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Core\FEM2DCommon\FEM2DCommon.csproj">
+      <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
+      <Name>FEM2DCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core\FEM2DDynamics\FEM2DDynamics.csproj">
+      <Project>{cc63723e-8c8c-4d10-9c5c-035a7e694eff}</Project>
+      <Name>FEM2DDynamics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core\FEM2DOutput\FEM2DOutput.csproj">
+      <Project>{599fbf44-d588-4a46-a73f-b8fca5373707}</Project>
+      <Name>FEM2DOutput</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
+      <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
+      <Name>FEM2DStressCalculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core\FEM2DTriangulation\FEM2DTriangulation.csproj">
+      <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>
+      <Name>FEM2DTriangulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core\FEM2D\FEM2D.csproj">
+      <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
+      <Name>FEM2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Utils\Common\Common.csproj">
+      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

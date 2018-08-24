@@ -37,7 +37,6 @@ namespace FEM2DDynamics.Time
 
         private readonly DynamicSolverSettings settings;
         private readonly INaturalFrequencyCalculator naturalFrequencyCalculator;
-        private readonly IProgress<ProgressMessage> progress;
 
         public double DeltaTime { get; private set; }
         public double CurrentTime { get; private set; }

@@ -34,20 +34,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MathNet.Numerics.4.5.1\lib\net461\MathNet.Numerics.dll</HintPath>
     </Reference>
-    <Reference Include="netDxf, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\netDXF.2.0.2\lib\net45\netDxf.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="netDxf, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\netDXF.2.2.0.1\lib\net45\netDxf.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,7 +54,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Triangle">
-      <HintPath>..\Triangulation\Triangle.net\Triangle.dll</HintPath>
+      <HintPath>..\..\src\Core\FEM2DTriangulation\Triangle.net\Triangle.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,25 +66,33 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Common\Common.csproj">
-      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\FEM2DCommon\FEM2DCommon.csproj">
+    <ProjectReference Include="..\..\src\Core\FEM2DCommon\FEM2DCommon.csproj">
       <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
       <Name>FEM2DCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\FEM2D\FEM2D.csproj">
-      <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
-      <Name>FEM2D</Name>
+    <ProjectReference Include="..\..\src\Core\FEM2DDynamics\FEM2DDynamics.csproj">
+      <Project>{cc63723e-8c8c-4d10-9c5c-035a7e694eff}</Project>
+      <Name>FEM2DDynamics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Output\FEM2DOutput.csproj">
+    <ProjectReference Include="..\..\src\Core\FEM2DOutput\FEM2DOutput.csproj">
       <Project>{599fbf44-d588-4a46-a73f-b8fca5373707}</Project>
       <Name>FEM2DOutput</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Triangulation\FEM2DTriangulation.csproj">
+    <ProjectReference Include="..\..\src\Core\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
+      <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
+      <Name>FEM2DStressCalculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core\FEM2DTriangulation\FEM2DTriangulation.csproj">
       <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>
       <Name>FEM2DTriangulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Core\FEM2D\FEM2D.csproj">
+      <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
+      <Name>FEM2D</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Utils\Common\Common.csproj">
+      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
