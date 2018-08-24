@@ -1,14 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit.3.10.1\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" />
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{639A14F5-3F68-4070-BA6F-05837298A78D}</ProjectGuid>
+    <ProjectGuid>{2480F71C-C188-4267-B0BC-B77CB9259D05}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FEM2DDynamicsTests</RootNamespace>
-    <AssemblyName>FEM2DDynamicsTests</AssemblyName>
+    <RootNamespace>FEM2DTests</RootNamespace>
+    <AssemblyName>FEM2DTests</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -18,8 +17,6 @@
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,26 +36,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.2.0\lib\net45\Castle.Core.dll</HintPath>
+    <Reference Include="MathNet.Numerics, Version=3.19.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.19.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="MathNet.Numerics, Version=4.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MathNet.Numerics.4.4.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.2.0.3\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.7.1\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -66,49 +57,49 @@
         <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
       </ItemGroup>
     </When>
-    <Otherwise />
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+      </ItemGroup>
+    </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Elements\Beam\DynamicBeamElementTests.cs" />
+    <Compile Include="Beams\BeamStressCalculatorTests.cs" />
+    <Compile Include="Elements\TriangleElementTest.cs" />
+    <Compile Include="Integration\Beam_Integration.cs" />
+    <Compile Include="Integration\GetDOFCount_Integration.cs" />
+    <Compile Include="Integration\Membrane_Integration.cs" />
+    <Compile Include="Loads\BeamPointLoadTests.cs" />
+    <Compile Include="Matrix\MatrixCalculatorTest.cs" />
+    <Compile Include="Nodes\NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Solver\NaturalFrequencyCalculatorTests.cs" />
-    <Compile Include="Solver\RayleightDampingTests.cs" />
-    <Compile Include="Structure\DynamicStructureTests.cs" />
-    <Compile Include="Time\TimeProviderTests.cs" />
-    <Compile Include="Utils\ProgresUtilsTests.cs" />
+    <Compile Include="Solvers\CholeskyDescompositionTests.cs" />
+    <Compile Include="Integration\Solver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{C394E565-ED2A-434B-95F5-7B2B924EB9AC}</Project>
+    <ProjectReference Include="..\..\src\Common\Common.csproj">
+      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FEM2DCommon\FEM2DCommon.csproj">
+    <ProjectReference Include="..\..\src\FEM2DCommon\FEM2DCommon.csproj">
       <Project>{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}</Project>
       <Name>FEM2DCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FEM2DDynamics\FEM2DDynamics.csproj">
-      <Project>{CC63723E-8C8C-4D10-9C5C-035A7E694EFF}</Project>
-      <Name>FEM2DDynamics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
+    <ProjectReference Include="..\..\src\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
       <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
       <Name>FEM2DStressCalculator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FEM2D\FEM2D.csproj">
-      <Project>{2743B6ED-2F44-4E77-B4FE-0D68D3C58280}</Project>
+    <ProjectReference Include="..\..\src\FEM2D\FEM2D.csproj">
+      <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
       <Name>FEM2D</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Output\FEM2DOutput.csproj">
-      <Project>{599fbf44-d588-4a46-a73f-b8fca5373707}</Project>
-      <Name>FEM2DOutput</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Triangulation\FEM2DTriangulation.csproj">
-      <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>
-      <Name>FEM2DTriangulation</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Materials\" />
+    <Folder Include="Nodes\Dofs\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
@@ -130,12 +121,6 @@
   </Choose>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NUnit.3.10.1\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.1\build\NUnit.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -3,29 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2D", "FEM2D\FEM2D.csproj", "{2743B6ED-2F44-4E77-B4FE-0D68D3C58280}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2D", "src\FEM2D\FEM2D.csproj", "{2743B6ED-2F44-4E77-B4FE-0D68D3C58280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DCommon", "FEM2DCommon\FEM2DCommon.csproj", "{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DCommon", "src\FEM2DCommon\FEM2DCommon.csproj", "{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C361E3EA-5F2A-4078-B18E-E68F442066EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTests", "FEM2DTests\FEM2DTests.csproj", "{2480F71C-C188-4267-B0BC-B77CB9259D05}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTests", "tests\FEM2DTests\FEM2DTests.csproj", "{2480F71C-C188-4267-B0BC-B77CB9259D05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTriangulation", "Triangulation\FEM2DTriangulation.csproj", "{19986DDB-F154-4C40-8F9C-09EF37D6FE9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTriangulation", "src\Triangulation\FEM2DTriangulation.csproj", "{19986DDB-F154-4C40-8F9C-09EF37D6FE9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTestApplication", "TestApplication\FEM2DTestApplication.csproj", "{762CD3B7-6B99-424C-A6B3-092483B2CB44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTestApplication", "tests\TestApplication\FEM2DTestApplication.csproj", "{762CD3B7-6B99-424C-A6B3-092483B2CB44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DOutput", "Output\FEM2DOutput.csproj", "{599FBF44-D588-4A46-A73F-B8FCA5373707}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DOutput", "src\Output\FEM2DOutput.csproj", "{599FBF44-D588-4A46-A73F-B8FCA5373707}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamics", "FEM2DDynamics\FEM2DDynamics.csproj", "{CC63723E-8C8C-4D10-9C5C-035A7E694EFF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamics", "src\FEM2DDynamics\FEM2DDynamics.csproj", "{CC63723E-8C8C-4D10-9C5C-035A7E694EFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicTestApplication", "FEM2DDynamicTestApplication\FEM2DDynamicTestApplication.csproj", "{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicTestApplication", "tests\FEM2DDynamicTestApplication\FEM2DDynamicTestApplication.csproj", "{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DStressCalculator", "FEM2DStressCalculator\FEM2DStressCalculator.csproj", "{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DStressCalculator", "src\FEM2DStressCalculator\FEM2DStressCalculator.csproj", "{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{C394E565-ED2A-434B-95F5-7B2B924EB9AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "src\Common\Common.csproj", "{C394E565-ED2A-434B-95F5-7B2B924EB9AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicsTests", "FEM2DDynamicsTests\FEM2DDynamicsTests.csproj", "{639A14F5-3F68-4070-BA6F-05837298A78D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicsTests", "tests\FEM2DDynamicsTests\FEM2DDynamicsTests.csproj", "{639A14F5-3F68-4070-BA6F-05837298A78D}"
 EndProject
 Global
 	GlobalSection(Performance) = preSolution
