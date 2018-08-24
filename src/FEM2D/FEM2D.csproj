@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2743B6ED-2F44-4E77-B4FE-0D68D3C58280}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FEM2D</RootNamespace>
+    <AssemblyName>FEM2D</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CuttingEdge.Conditions, Version=1.2.0.11174, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\CuttingEdge.Conditions.1.2.0.0\lib\NET35\CuttingEdge.Conditions.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MathNet.Numerics.4.5.1\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Elements\Beam\BeamElement.cs" />
+    <Compile Include="Elements\Beam\IBeamElement.cs" />
+    <Compile Include="Elements\ElementFactory.cs" />
+    <Compile Include="Elements\IElement.cs" />
+    <Compile Include="Elements\Triangle\ITriangleElement.cs" />
+    <Compile Include="Elements\Triangle\TriangleElement.cs" />
+    <Compile Include="Loads\Beams\BeamLoad.cs" />
+    <Compile Include="Loads\Beams\BeamPointLoad.cs" />
+    <Compile Include="Loads\Beams\BeamUniformLoad.cs" />
+    <Compile Include="Loads\Beams\IBeamLoad.cs" />
+    <Compile Include="Loads\INodalLoad.cs" />
+    <Compile Include="Loads\LoadFactory.cs" />
+    <Compile Include="Loads\NodalLoad.cs" />
+    <Compile Include="Loads\TriangleEdgeLoad.cs" />
+    <Compile Include="Matrix\BeamMatrix.cs" />
+    <Compile Include="Matrix\HashMatrix.cs" />
+    <Compile Include="Matrix\MembraneMatrix.cs" />
+    <Compile Include="Nodes\Dofs\Dof.cs" />
+    <Compile Include="Nodes\Dofs\DofProvider.cs" />
+    <Compile Include="Nodes\Dofs\IDofCountProvider.cs" />
+    <Compile Include="Nodes\Dofs\IDofNumberCalculator.cs" />
+    <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\NodeFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Restraints\Restraint.cs" />
+    <Compile Include="Results\Beams\BeamElementResult.cs" />
+    <Compile Include="Results\Beams\BeamElementResultHelper.cs" />
+    <Compile Include="Results\Beams\BeamElementResults.cs" />
+    <Compile Include="Results\Beams\ForceDistributionCalculators\BeamForceDistributionCalculator.cs" />
+    <Compile Include="Results\Beams\ForceDistributionCalculators\PointLoadDistributionCalculator.cs" />
+    <Compile Include="Results\Beams\ForceDistributionCalculators\IBeamForceDistributionCalculator.cs" />
+    <Compile Include="Results\Beams\ForceDistributionCalculators\UniformLoadDistributionCalculator.cs" />
+    <Compile Include="Results\DofDisplacementMap.cs" />
+    <Compile Include="Results\Membranes\MembraneElementResults.cs" />
+    <Compile Include="Results\Membranes\MembraneNodeResult.cs" />
+    <Compile Include="Results\Nodes\NodeResult.cs" />
+    <Compile Include="Results\Nodes\NodeResults.cs" />
+    <Compile Include="Results\ResultFactory.cs" />
+    <Compile Include="Results\Membranes\MembraneElementResult.cs" />
+    <Compile Include="ShapeFunctions\BeamShapeFunctions.cs" />
+    <Compile Include="Solvers\MatrixReducer.cs" />
+    <Compile Include="Solvers\CholeskyDescomposition.cs" />
+    <Compile Include="Solvers\ILoadAggregator.cs" />
+    <Compile Include="Solvers\IMatrixAggregator.cs" />
+    <Compile Include="Solvers\IMatrixReducer.cs" />
+    <Compile Include="Solvers\IMatrixSolver.cs" />
+    <Compile Include="Solvers\LoadAggregator.cs" />
+    <Compile Include="Solvers\MatrixAggregator.cs" />
+    <Compile Include="Solvers\Solver.cs" />
+    <Compile Include="Structures\Structure.cs" />
+    <Compile Include="Geometries\MembraneCreator.cs" />
+    <Compile Include="Utils\CantorHashFunction.cs" />
+    <Compile Include="Utils\IHashFunction.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2DCommon\FEM2DCommon.csproj">
+      <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
+      <Name>FEM2DCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2DTriangulation\FEM2DTriangulation.csproj">
+      <Project>{19986ddb-f154-4c40-8f9c-09ef37d6fe9e}</Project>
+      <Name>FEM2DTriangulation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

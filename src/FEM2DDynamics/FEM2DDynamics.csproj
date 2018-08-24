@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CC63723E-8C8C-4D10-9C5C-035A7E694EFF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FEM2DDynamics</RootNamespace>
+    <AssemblyName>FEM2DDynamics</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2DCommon\FEM2DCommon.csproj">
+      <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
+      <Name>FEM2DCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2DStressCalculator\FEM2DStressCalculator.csproj">
+      <Project>{a7d0b777-f728-471f-ac2a-76e1a8a91d0b}</Project>
+      <Name>FEM2DStressCalculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2D\FEM2D.csproj">
+      <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
+      <Name>FEM2D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\MathNet.Numerics.4.5.1\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\NLog.4.5.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Elements\Beam\DynamicBeamElement.cs" />
+    <Compile Include="Elements\Beam\IDynamicBeamElement.cs" />
+    <Compile Include="Elements\DynamicElementFactory.cs" />
+    <Compile Include="Elements\IDynamicElement.cs" />
+    <Compile Include="Loads\DynamicLoadFactory.cs" />
+    <Compile Include="Loads\IMovingPointLoad.cs" />
+    <Compile Include="Loads\PointMovingLoad.cs" />
+    <Compile Include="Matrix\DynamicBeamMatrix.cs" />
+    <Compile Include="Matrix\MatrixData.cs" />
+    <Compile Include="Results\Beam\DynamicBeamElementResult.cs" />
+    <Compile Include="Results\DynamicBeamElementResults.cs" />
+    <Compile Include="Results\DynamicDisplacements.cs" />
+    <Compile Include="Results\SimpleDynamicDofDisplacementMap.cs" />
+    <Compile Include="Results\DynamicResultFactory.cs" />
+    <Compile Include="Results\IDynamicDofDisplacementMap.cs" />
+    <Compile Include="Results\TimeDisplacementPair.cs" />
+    <Compile Include="Solver\ProducerConsumer\AggregatedLoadProducer.cs" />
+    <Compile Include="Solver\ProducerConsumer\NodalForceProducer.cs" />
+    <Compile Include="Solver\ProducerConsumer\AggregatedLoadPayload.cs" />
+    <Compile Include="Solver\DynamicMatrixAggregator.cs" />
+    <Compile Include="Solver\DynamicSolver.cs" />
+    <Compile Include="Solver\IDampingFactorCalculator.cs" />
+    <Compile Include="Solver\IDynamicMatrixAggregator.cs" />
+    <Compile Include="Solver\DifferentialEquationMatrixSolver.cs" />
+    <Compile Include="Solver\IEquationOfMotionSolver.cs" />
+    <Compile Include="Solver\DynamicSolverSettings.cs" />
+    <Compile Include="Solver\INaturalFrequencyCalculator.cs" />
+    <Compile Include="Solver\NaturalFrequencyCalculator.cs" />
+    <Compile Include="Solver\ProducerConsumer\NodalForcePayload.cs" />
+    <Compile Include="Solver\RayleightDamping.cs" />
+    <Compile Include="Structure\DynamicStructure.cs" />
+    <Compile Include="Time\ITimeData.cs" />
+    <Compile Include="Time\ITimeProvider.cs" />
+    <Compile Include="Time\TimeProvider.cs" />
+    <Compile Include="Utils\ProgressMessage.cs" />
+    <Compile Include="Utils\ProgresUtils.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
