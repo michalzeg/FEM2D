@@ -40,7 +40,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Utils\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Common.csproj">
       <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
       <Name>Common</Name>
     </ProjectReference>
@@ -56,7 +56,6 @@
       <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
       <Name>FEM2D</Name>
     </ProjectReference>
-
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MathNet.Numerics, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">

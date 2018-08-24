@@ -54,7 +54,7 @@
       <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
       <Name>FEM2DCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Utils\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Common.csproj">
       <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
       <Name>Common</Name>
     </ProjectReference>

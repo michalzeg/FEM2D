@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicTestApplication
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DStressCalculator", "src\Core\FEM2DStressCalculator\FEM2DStressCalculator.csproj", "{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "src\Utils\Common\Common.csproj", "{C394E565-ED2A-434B-95F5-7B2B924EB9AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "src\Core\Common\Common.csproj", "{C394E565-ED2A-434B-95F5-7B2B924EB9AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicsTests", "tests\FEM2DDynamicsTests\FEM2DDynamicsTests.csproj", "{639A14F5-3F68-4070-BA6F-05837298A78D}"
 EndProject

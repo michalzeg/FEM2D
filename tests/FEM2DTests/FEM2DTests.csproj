@@ -93,6 +93,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Core\Common\Common.csproj">
+      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Core\FEM2DCommon\FEM2DCommon.csproj">
       <Project>{6FE8C918-F00A-4E16-89AA-A2AE2EAAD556}</Project>
       <Name>FEM2DCommon</Name>
@@ -104,10 +108,6 @@
     <ProjectReference Include="..\..\src\Core\FEM2D\FEM2D.csproj">
       <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
       <Name>FEM2D</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Utils\Common\Common.csproj">
-      <Project>{c394e565-ed2a-434b-95f5-7b2b924eb9ac}</Project>
-      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
