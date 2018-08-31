@@ -36,6 +36,8 @@ namespace Common.Geometry
 
         public bool Equals(PointD other)
         {
+            if (Object.ReferenceEquals(other, null)) return false;
+            if (Object.ReferenceEquals(this, other)) return true;
             return (this.X.IsApproximatelyEqualTo(other.X)
                 && this.Y.IsApproximatelyEqualTo(other.Y));
         }
