@@ -13,13 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTests", "tests\FEM2DTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DTriangulation", "src\FEM2DTriangulation\FEM2DTriangulation.csproj", "{19986DDB-F154-4C40-8F9C-09EF37D6FE9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DApplication", "utils\FEM2DTestApplication\FEM2DApplication.csproj", "{762CD3B7-6B99-424C-A6B3-092483B2CB44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DApplication", "utils\FEM2DApplication\FEM2DApplication.csproj", "{762CD3B7-6B99-424C-A6B3-092483B2CB44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DOutput", "src\FEM2DOutput\FEM2DOutput.csproj", "{599FBF44-D588-4A46-A73F-B8FCA5373707}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamics", "src\FEM2DDynamics\FEM2DDynamics.csproj", "{CC63723E-8C8C-4D10-9C5C-035A7E694EFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicApplication", "utils\FEM2DDynamicTestApplication\FEM2DDynamicApplication.csproj", "{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DDynamicApplication", "utils\FEM2DDynamicApplication\FEM2DDynamicApplication.csproj", "{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEM2DStressCalculator", "src\FEM2DStressCalculator\FEM2DStressCalculator.csproj", "{A7D0B777-F728-471F-AC2A-76E1A8A91D0B}"
 EndProject
