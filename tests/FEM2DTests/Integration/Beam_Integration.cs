@@ -51,6 +51,8 @@ namespace FEM2DTests.Integration
                 Assert.That(-500, Is.EqualTo(beam2Result.Shear(0)).Within(0.1));
                 Assert.That(-500, Is.EqualTo(beam2Result.Shear(0.5)).Within(0.1));
                 Assert.That(-500, Is.EqualTo(beam2Result.Shear(1)).Within(0.1));
+
+                Assert.Fail();
             });
         }
 
