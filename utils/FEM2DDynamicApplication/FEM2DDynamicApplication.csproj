@@ -53,6 +53,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calculations.cs" />
+    <Compile Include="DataProvider.cs" />
+    <Compile Include="DxfHelper.cs" />
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
