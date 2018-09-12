@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E094CD3E-B4FE-4A15-AD4D-D5327DF20ECA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FEM2DDynamicTestApplication</RootNamespace>
-    <AssemblyName>FEM2DDynamicTestApplication</AssemblyName>
+    <RootNamespace>FEM2DDynamicApplication</RootNamespace>
+    <AssemblyName>FEM2DDynamicApplication</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
