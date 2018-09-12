@@ -55,6 +55,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationTest.cs" />
+    <Compile Include="DxfCantilever.cs" />
+    <Compile Include="DxfHelper.cs" />
+    <Compile Include="DxfMembrane.cs" />
+    <Compile Include="DxMembrane1x1.cs" />
+    <Compile Include="JsonResults.cs" />
+    <Compile Include="MockDataProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
