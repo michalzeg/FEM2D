@@ -62,5 +62,13 @@ namespace Common.Geometry
         {
             return this.Move(new PointD(x, y));
         }
+
+        public double DistanceTo(PointD point)
+        {
+            var dx = this.X - point.X;
+            var dy = this.Y - point.Y;
+            var distance = Math.Sqrt(dx * dx + dy * dy);
+            return distance;
+        }
     }
 }

@@ -54,13 +54,7 @@ namespace FEM2D.Nodes
             return result;
         }
 
-        public double DistanceTo(Node node)
-        {
-            var dx = this.Coordinates.X - node.Coordinates.X;
-            var dy = this.Coordinates.Y - node.Coordinates.Y;
-            var distance = Math.Sqrt(dx * dx + dy * dy);
-            return distance;
-        }
+        public double DistanceTo(Node node) => this.Coordinates.DistanceTo(node.Coordinates);
 
         public void SetFixedSupport()
         {

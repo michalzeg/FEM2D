@@ -55,6 +55,8 @@
     <Compile Include="Elements\IElement.cs" />
     <Compile Include="Elements\Triangle\ITriangleElement.cs" />
     <Compile Include="Elements\Triangle\TriangleElement.cs" />
+    <Compile Include="Elements\Truss\ITrussElement.cs" />
+    <Compile Include="Elements\Truss\TrussElement.cs" />
     <Compile Include="Loads\Beams\BeamLoad.cs" />
     <Compile Include="Loads\Beams\BeamPointLoad.cs" />
     <Compile Include="Loads\Beams\BeamUniformLoad.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Matrix\BeamMatrix.cs" />
     <Compile Include="Matrix\HashMatrix.cs" />
     <Compile Include="Matrix\MembraneMatrix.cs" />
+    <Compile Include="Matrix\TrussMatrix.cs" />
     <Compile Include="Nodes\Dofs\Dof.cs" />
     <Compile Include="Nodes\Dofs\DofProvider.cs" />
     <Compile Include="Nodes\Dofs\IDofCountProvider.cs" />
