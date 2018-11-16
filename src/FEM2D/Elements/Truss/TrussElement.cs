@@ -15,6 +15,7 @@ namespace FEM2D.Elements.Truss
         private readonly TrussMatrix trussMatrix;
         private Matrix<double> stiffnessMatrix;
         private Matrix<double> transformMatrix;
+        private Matrix<double> localStiffnessMatrix;
 
         public Node[] Nodes { get; }
         public int Number { get; }
@@ -42,16 +43,22 @@ namespace FEM2D.Elements.Truss
         public Matrix<double> GetStiffnessMatrix()
         {
             if (this.stiffnessMatrix == null)
-                this.stiffnessMatrix = this.trussMatrix.GetK(this.Length, this.BeamProperties.ModulusOfElasticity, this.BeamProperties.Area);
+                this.stiffnessMatrix = this.transformMatrix.Transpose() * this.localStiffnessMatrix * this.transformMatrix;
             return this.stiffnessMatrix;
+        }
+
+        public Matrix<double> GetLocalStiffnessMatrix()
+        {
+            if (this.localStiffnessMatrix == null)
+                this.localStiffnessMatrix = this.trussMatrix.GetK(this.Length, this.BeamProperties.ModulusOfElasticity, this.BeamProperties.Area);
+            return this.localStiffnessMatrix;
         }
 
         public Matrix<double> GetTransformMatrix()
         {
             if (this.transformMatrix == null)
-            {
                 this.transformMatrix = this.trussMatrix.GetT(this.Nodes[0].Coordinates, this.Nodes[1].Coordinates);
-            }
+
             return this.transformMatrix;
         }
     }

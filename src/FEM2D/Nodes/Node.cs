@@ -30,15 +30,15 @@ namespace FEM2D.Nodes
         {
         }
 
-        public void SetMembraneDofs()
+        public void SetTranslationDofs()
         {
             this.dof.SetUxDof();
             this.dof.SetUyDof();
         }
 
-        public void SetBeamDofs()
+        public void SetRotationDofs()
         {
-            this.SetMembraneDofs();
+            this.SetTranslationDofs();
             this.dof.SetRzDof();
         }
 

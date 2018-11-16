@@ -1,4 +1,5 @@
 ﻿using FEM2D.Elements.Beam;
+using FEM2D.Elements.Truss;
 using FEM2D.Nodes;
 using FEM2D.Nodes.Dofs;
 using FEM2DCommon.DTO;
@@ -22,8 +23,18 @@ namespace FEM2D.Elements
             var element = new BeamElement(node1, node2, beamProperties, this.freeNumber);
             this.elements.Add(element);
             this.freeNumber++;
-            node1.SetBeamDofs();
-            node2.SetBeamDofs();
+            node1.SetRotationDofs();
+            node2.SetRotationDofs();
+            return element;
+        }
+
+        public ITrussElement CreateTruss(Node node1, Node node2, BeamProperties beamProperties)
+        {
+            var element = new TrussElement(node1, node2, beamProperties, this.freeNumber);
+            this.elements.Add(element);
+            this.freeNumber++;
+            node1.SetTranslationDofs();
+            node2.SetTranslationDofs();
             return element;
         }
 
@@ -33,29 +44,18 @@ namespace FEM2D.Elements
             this.elements.Add(element);
             freeNumber++;
 
-            node1.SetMembraneDofs();
-            node2.SetMembraneDofs();
-            node3.SetMembraneDofs();
+            node1.SetTranslationDofs();
+            node2.SetTranslationDofs();
+            node3.SetTranslationDofs();
 
             return element;
         }
 
-        public IEnumerable<IElement> GetAll()
-        {
-            return this.elements;
-        }
+        public IEnumerable<IElement> GetAll() => this.elements;
 
-        public IEnumerable<IBeamElement> GetBeamElements()
-        {
-            var result = this.elements.OfType<IBeamElement>();
-            return result;
-        }
+        public IEnumerable<IBeamElement> GetBeamElements() => this.elements.OfType<IBeamElement>();
 
-        public IEnumerable<ITriangleElement> GetMembraneElements()
-        {
-            var result = this.elements.OfType<ITriangleElement>();
-            return result;
-        }
+        public IEnumerable<ITriangleElement> GetMembraneElements() => this.elements.OfType<ITriangleElement>();
 
         public int GetDOFsCount()
         {

@@ -13,5 +13,7 @@ namespace FEM2D.Elements.Truss
         BeamProperties BeamProperties { get; }
 
         Matrix<double> GetTransformMatrix();
+
+        Matrix<double> GetLocalStiffnessMatrix();
     }
 }
