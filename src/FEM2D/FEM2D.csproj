@@ -91,6 +91,8 @@
     <Compile Include="Results\Nodes\NodeResults.cs" />
     <Compile Include="Results\ResultFactory.cs" />
     <Compile Include="Results\Membranes\MembraneElementResult.cs" />
+    <Compile Include="Results\Trusses\TrussElementResult.cs" />
+    <Compile Include="Results\Trusses\TrussElementResults.cs" />
     <Compile Include="ShapeFunctions\BeamShapeFunctions.cs" />
     <Compile Include="Solvers\MatrixReducer.cs" />
     <Compile Include="Solvers\CholeskyDescomposition.cs" />

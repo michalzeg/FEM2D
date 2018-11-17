@@ -57,6 +57,8 @@ namespace FEM2D.Elements
 
         public IEnumerable<ITriangleElement> GetMembraneElements() => this.elements.OfType<ITriangleElement>();
 
+        public IEnumerable<ITrussElement> GetTrussElements() => this.elements.OfType<ITrussElement>();
+
         public int GetDOFsCount()
         {
             var dofCount = this.elements.Select(e => e.Nodes)
