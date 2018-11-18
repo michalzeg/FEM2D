@@ -18,9 +18,9 @@ namespace FEM2DTests.Integration
             var node3 = nodeFactory.Create(20, 0);
 
             var elementFactory = new ElementFactory();
-            var element1 = elementFactory.CreateBeam(node1, node2, BeamProperties.Default);
+            var element1 = elementFactory.CreateBeam(node1, node2, BarProperties.Default);
             var element2 = elementFactory.CreateTriangle(node1, node2, node3, MembraneProperties.Default);
-            var element3 = elementFactory.CreateBeam(node2, node3, BeamProperties.Default);
+            var element3 = elementFactory.CreateBeam(node2, node3, BarProperties.Default);
 
             var nodeDofCount = nodeFactory.GetDOFsCount();
             var elementDofCount = elementFactory.GetDOFsCount();

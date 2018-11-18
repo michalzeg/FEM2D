@@ -14,7 +14,7 @@ namespace FEM2DTests.Nodes
         private NodeFactory nodeFactory;
         private ElementFactory elementFactory;
         private MembraneProperties membraneProperties;
-        private BeamProperties beamProperties;
+        private BarProperties beamProperties;
 
         private PointD p1;
         private PointD p2;
@@ -26,7 +26,7 @@ namespace FEM2DTests.Nodes
             nodeFactory = new NodeFactory();
             elementFactory = new ElementFactory();
             membraneProperties = MembraneProperties.Default;
-            beamProperties = BeamProperties.Default;
+            beamProperties = BarProperties.Default;
 
             p1 = new PointD(10, 20);
             p2 = new PointD(20, 20);

@@ -1,6 +1,6 @@
 ﻿namespace FEM2DCommon.ElementProperties
 {
-    public interface IBarElementProperties
+    public interface IBarProperties
     {
         double Area { get; }
         double ModulusOfElasticity { get; }

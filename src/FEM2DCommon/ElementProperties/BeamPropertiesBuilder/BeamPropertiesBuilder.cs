@@ -5,11 +5,11 @@ namespace FEM2DCommon.ElementProperties.Builder
 {
     public class BeamPropertiesBuilder : IBeamPropertiesBuilderFinish, IBeamPropertiesBuilderSetMaterial, IBeamPropertiesBuilderSetSection
     {
-        private BeamProperties beamProperties;
+        private BarProperties beamProperties;
 
         internal BeamPropertiesBuilder()
         {
-            this.beamProperties = new BeamProperties();
+            this.beamProperties = new BarProperties();
         }
 
         public static IBeamPropertiesBuilderSetMaterial Create()
@@ -18,7 +18,7 @@ namespace FEM2DCommon.ElementProperties.Builder
             return builder;
         }
 
-        public BeamProperties Build()
+        public BarProperties Build()
         {
             return this.beamProperties;
         }

@@ -46,9 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ElementProperties\BeamProperties.cs" />
     <Compile Include="DTO\Edge.cs" />
     <Compile Include="DTO\MembraneOutputData.cs" />
+    <Compile Include="ElementProperties\BarProperties.cs" />
     <Compile Include="ElementProperties\BeamPropertiesBuilder\BeamPropertiesBuilder.cs" />
     <Compile Include="ElementProperties\BeamPropertiesBuilder\IBeamPropertiesBuilderFinish.cs" />
     <Compile Include="ElementProperties\BeamPropertiesBuilder\IBeamPropertiesBuilderSetMaterial.cs" />
@@ -60,7 +60,7 @@
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetMaterial.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetModulus.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetSection.cs" />
-    <Compile Include="ElementProperties\IBarElementProperties.cs" />
+    <Compile Include="ElementProperties\IBarProperties.cs" />
     <Compile Include="ElementProperties\MembraneProperties.cs" />
     <Compile Include="DTO\MembraneInputData.cs" />
     <Compile Include="DTO\NodeOutput.cs" />

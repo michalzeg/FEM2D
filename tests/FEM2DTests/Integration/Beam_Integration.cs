@@ -16,7 +16,7 @@ namespace FEM2DTests.Integration
         [Test]
         public void Beam_Integration_PointForceInMiddle()
         {
-            var properties = BeamProperties.Default;
+            var properties = BarProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -58,7 +58,7 @@ namespace FEM2DTests.Integration
         [Test]
         public void Beam_Integration_PointMomentInMiddle()
         {
-            var properties = BeamProperties.Default;
+            var properties = BarProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -100,7 +100,7 @@ namespace FEM2DTests.Integration
         [Test]
         public void Beam_Integration_PointForceInQuarter()
         {
-            var properties = BeamProperties.Default;
+            var properties = BarProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -143,7 +143,7 @@ namespace FEM2DTests.Integration
         [Test]
         public void Beam_Integration_UniformLoad()
         {
-            var properties = BeamProperties.Default;
+            var properties = BarProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);
@@ -186,7 +186,7 @@ namespace FEM2DTests.Integration
         [Test]
         public void Beam_Integration_UniformLoadOnHalf()
         {
-            var properties = BeamProperties.Default;
+            var properties = BarProperties.Default;
 
             var structure = new Structure();
             var node1 = structure.NodeFactory.Create(0, 0);

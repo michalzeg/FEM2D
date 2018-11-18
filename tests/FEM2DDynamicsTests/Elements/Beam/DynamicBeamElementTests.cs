@@ -206,9 +206,9 @@ namespace FEM2DDynamicsTests.Elements.Beam
             return new DynamicBeamElement(node1, node2, dynamicBeamProperties, beamNumber);
         }
 
-        private static BeamProperties GetBeamProperties()
+        private static BarProperties GetBeamProperties()
         {
-            return new BeamProperties()
+            return new BarProperties()
             {
                 ModulusOfElasticity = 200000000,
                 Section = Section.FromRectangle(1, 2),

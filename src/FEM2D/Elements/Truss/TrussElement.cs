@@ -20,10 +20,10 @@ namespace FEM2D.Elements.Truss
 
         public Node[] Nodes { get; }
         public int Number { get; }
-        public IBarElementProperties BeamProperties { get; }
+        public IBarProperties BeamProperties { get; }
         public double Length { get; }
 
-        protected internal TrussElement(Node node1, Node node2, IBarElementProperties beamProperties, int number)
+        protected internal TrussElement(Node node1, Node node2, IBarProperties beamProperties, int number)
         {
             this.Nodes = new[] { node1, node2 };
             this.BeamProperties = beamProperties;

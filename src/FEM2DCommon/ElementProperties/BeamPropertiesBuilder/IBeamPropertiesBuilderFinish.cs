@@ -4,6 +4,6 @@ namespace FEM2DCommon.ElementProperties.Builder
 {
     public interface IBeamPropertiesBuilderFinish
     {
-        BeamProperties Build();
+        BarProperties Build();
     }
 }
