@@ -52,6 +52,7 @@
     <Compile Include="Elements\Beam\BeamElement.cs" />
     <Compile Include="Elements\Beam\IBeamElement.cs" />
     <Compile Include="Elements\ElementFactory.cs" />
+    <Compile Include="Elements\IBarElement.cs" />
     <Compile Include="Elements\IElement.cs" />
     <Compile Include="Elements\Triangle\ITriangleElement.cs" />
     <Compile Include="Elements\Triangle\TriangleElement.cs" />

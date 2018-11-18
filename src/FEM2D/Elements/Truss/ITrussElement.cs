@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace FEM2D.Elements.Truss
 {
-    public interface ITrussElement : IElement
+    public interface ITrussElement : IBarElement
     {
-        BeamProperties BeamProperties { get; }
-
         Matrix<double> GetTransformMatrix();
-
-        Matrix<double> GetLocalStiffnessMatrix();
     }
 }

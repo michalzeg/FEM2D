@@ -2,9 +2,7 @@
 
 namespace FEM2D.Elements.Beam
 {
-    public interface IBeamElement : IElement
+    public interface IBeamElement : IBarElement
     {
-        BeamProperties BeamProperties { get; }
-        double Length { get; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace FEM2DCommon.DTO
 {
-    public class BeamProperties
+    public class BeamProperties : IBarElementProperties
     {
         public double ModulusOfElasticity { get; set; }
         public Section Section { get; set; }

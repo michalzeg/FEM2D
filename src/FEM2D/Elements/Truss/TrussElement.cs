@@ -19,10 +19,10 @@ namespace FEM2D.Elements.Truss
 
         public Node[] Nodes { get; }
         public int Number { get; }
-        public BeamProperties BeamProperties { get; }
+        public IBarElementProperties BeamProperties { get; }
         public double Length { get; }
 
-        protected internal TrussElement(Node node1, Node node2, BeamProperties beamProperties, int number)
+        protected internal TrussElement(Node node1, Node node2, IBarElementProperties beamProperties, int number)
         {
             this.Nodes = new[] { node1, node2 };
             this.BeamProperties = beamProperties;
@@ -47,7 +47,7 @@ namespace FEM2D.Elements.Truss
             return this.stiffnessMatrix;
         }
 
-        public Matrix<double> GetLocalStiffnessMatrix()
+        private Matrix<double> GetLocalStiffnessMatrix()
         {
             if (this.localStiffnessMatrix == null)
                 this.localStiffnessMatrix = this.trussMatrix.GetK(this.Length, this.BeamProperties.ModulusOfElasticity, this.BeamProperties.Area);
