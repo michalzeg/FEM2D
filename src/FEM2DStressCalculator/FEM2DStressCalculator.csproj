@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Beams\BeamStressCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Trusses\TrussStressCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\FEM2DCommon\FEM2DCommon.csproj">
       <Project>{6fe8c918-f00a-4e16-89aa-a2ae2eaad556}</Project>
       <Name>FEM2DCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FEM2D\FEM2D.csproj">
+      <Project>{2743b6ed-2f44-4e77-b4fe-0d68d3c58280}</Project>
+      <Name>FEM2D</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
