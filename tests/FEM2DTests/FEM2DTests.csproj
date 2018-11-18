@@ -81,6 +81,7 @@
     <Compile Include="Integration\Beam_Integration.cs" />
     <Compile Include="Integration\GetDOFCount_Integration.cs" />
     <Compile Include="Integration\Membrane_Integration.cs" />
+    <Compile Include="Integration\Truss_Integration.cs" />
     <Compile Include="Loads\BeamPointLoadTests.cs" />
     <Compile Include="Matrix\MatrixCalculatorTest.cs" />
     <Compile Include="Nodes\NodeTests.cs" />

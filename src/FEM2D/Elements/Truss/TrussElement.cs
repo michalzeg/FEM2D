@@ -43,7 +43,7 @@ namespace FEM2D.Elements.Truss
         public Matrix<double> GetStiffnessMatrix()
         {
             if (this.stiffnessMatrix == null)
-                this.stiffnessMatrix = this.transformMatrix.Transpose() * this.localStiffnessMatrix * this.transformMatrix;
+                this.stiffnessMatrix = this.GetTransformMatrix().Transpose() * this.GetLocalStiffnessMatrix() * this.GetTransformMatrix();
             return this.stiffnessMatrix;
         }
 
