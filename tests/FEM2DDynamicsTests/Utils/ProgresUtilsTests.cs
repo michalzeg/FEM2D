@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NSubstitute;
 
-namespace FEM2DDynamics.Utils.Tests
+namespace FEM2DDynamicsTests.Utils
 {
     [TestFixture()]
     public class ProgresUtilsTests

@@ -4,9 +4,9 @@ using FEM2DDynamics.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
-using static FEM2DDynamicTestApplication.DataProvider;
+using static FEM2DDynamicApplication.DataProvider;
 
-namespace FEM2DDynamicTestApplication
+namespace FEM2DDynamicApplication
 {
     public class Calculations
     {

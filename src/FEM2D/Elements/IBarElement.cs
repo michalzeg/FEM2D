@@ -1,4 +1,5 @@
 ﻿using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using System;
 using System.Collections.Generic;
 using System.Linq;

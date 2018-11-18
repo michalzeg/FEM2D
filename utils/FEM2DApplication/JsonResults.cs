@@ -5,12 +5,13 @@ using FEM2D.Restraints;
 using FEM2D.Solvers;
 using FEM2DCommon.DTO;
 using Newtonsoft.Json;
-using Output.OutputCreator;
 using System;
-using static TestApplication.MockDataProvider;
-using static TestApplication.DxfHelper;
+using static FEM2DApplication.MockDataProvider;
+using static FEM2DApplication.DxfHelper;
+using FEM2DCommon.ElementProperties;
+using FEM2DOutput.OutputCreator;
 
-namespace TestApplication
+namespace FEM2DApplication
 {
     public class JsonResults
     {

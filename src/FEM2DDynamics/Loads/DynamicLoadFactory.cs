@@ -1,5 +1,6 @@
 ﻿using Common.Geometry;
 using FEM2D.Loads;
+using FEM2D.Loads.Beams;
 using FEM2D.Nodes;
 using FEM2DDynamics.Elements;
 using FEM2DDynamics.Elements.Beam;

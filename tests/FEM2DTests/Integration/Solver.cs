@@ -4,10 +4,11 @@ using FEM2D.Nodes;
 using FEM2D.Restraints;
 using FEM2D.Solvers;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using NUnit.Framework;
 using System;
 
-namespace FEM2DTests.Solvers
+namespace FEM2DTests.Integration
 {
     [TestFixture]
     public class SolverTest

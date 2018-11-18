@@ -1,6 +1,6 @@
 ﻿using FEM2DCommon.ElementProperties;
 
-namespace FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder
+namespace FEM2DCommon.ElementProperties.Builder
 {
     public interface IDynamicBeamPropertiesBuilderFinish
     {

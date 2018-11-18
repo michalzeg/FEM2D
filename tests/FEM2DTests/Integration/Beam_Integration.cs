@@ -1,5 +1,6 @@
 ﻿using FEM2D.Structures;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using NUnit.Framework;
 
 namespace FEM2DTests.Integration

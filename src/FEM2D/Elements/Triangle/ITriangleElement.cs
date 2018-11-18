@@ -1,7 +1,8 @@
 ﻿using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using MathNet.Numerics.LinearAlgebra;
 
-namespace FEM2D.Elements
+namespace FEM2D.Elements.Triangle
 {
     public interface ITriangleElement : IElement
     {

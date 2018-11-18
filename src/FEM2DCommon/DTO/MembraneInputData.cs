@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using FEM2DCommon.ElementProperties;
+using System.Collections.Generic;
 
 namespace FEM2DCommon.DTO
 {

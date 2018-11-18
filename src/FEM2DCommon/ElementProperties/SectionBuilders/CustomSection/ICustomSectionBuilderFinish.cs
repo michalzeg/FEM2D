@@ -1,6 +1,6 @@
 ﻿using FEM2DCommon.Sections;
 
-namespace FEMCommon.ElementProperties.SectionBuilders.CustomSection
+namespace FEM2DCommon.ElementProperties.SectionBuilders.CustomSection
 {
     public interface ICustomSectionBuilderFinish
     {

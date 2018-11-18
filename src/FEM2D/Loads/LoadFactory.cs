@@ -1,4 +1,5 @@
 ﻿using FEM2D.Elements.Beam;
+using FEM2D.Loads.Beams;
 using FEM2D.Nodes;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace FEM2D.Loads
 
         public IEnumerable<IBeamLoad> GetBeamLoads()
         {
-            return this.nodalLoads.OfType<IBeamLoad>().Cast<IBeamLoad>();
+            return this.nodalLoads.OfType<IBeamLoad>();
         }
     }
 }

@@ -1,6 +1,8 @@
 using FEM2D.Elements.Beam;
 using FEM2D.Loads;
+using FEM2D.Loads.Beams;
 using FEM2D.Nodes;
+using FEM2D.Nodes.Dofs;
 using NSubstitute;
 using NUnit.Framework;
 using System;

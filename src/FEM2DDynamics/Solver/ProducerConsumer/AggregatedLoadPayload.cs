@@ -1,6 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 
-namespace FEM2DDynamics.Solver
+namespace FEM2DDynamics.Solver.ProducerConsumer
 {
     internal class AggregatedLoadPayload
     {

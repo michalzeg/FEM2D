@@ -1,4 +1,4 @@
-﻿namespace FEM2DCommon.DTO
+﻿namespace FEM2DCommon.ElementProperties
 {
     public class MembraneProperties
     {

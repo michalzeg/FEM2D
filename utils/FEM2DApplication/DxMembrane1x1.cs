@@ -3,11 +3,11 @@ using FEM2DCommon.DTO;
 using netDxf;
 using netDxf.Entities;
 using Newtonsoft.Json;
-using Output.OutputCreator;
-using static TestApplication.MockDataProvider;
-using static TestApplication.DxfHelper;
+using static FEM2DApplication.MockDataProvider;
+using static FEM2DApplication.DxfHelper;
+using FEM2DOutput.OutputCreator;
 
-namespace TestApplication
+namespace FEM2DApplication
 {
     public class DxMembrane1x1
     {

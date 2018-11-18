@@ -2,6 +2,7 @@
 using FEM2D.Elements;
 using FEM2D.Nodes;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using NUnit.Framework;
 
 namespace FEM2DTests.Elements

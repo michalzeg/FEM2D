@@ -1,7 +1,7 @@
 ﻿using FEM2D.Elements.Beam;
 using FEM2D.Loads.Beams;
 
-namespace FEM2D.Loads
+namespace FEM2D.Loads.Beams
 {
     public class BeamUniformLoad : BeamLoad, INodalLoad
     {

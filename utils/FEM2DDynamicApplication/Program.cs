@@ -1,7 +1,7 @@
 ﻿using System;
-using static FEM2DDynamicTestApplication.Calculations;
+using static FEM2DDynamicApplication.Calculations;
 
-namespace FEM2DDynamicTestApplication
+namespace FEM2DDynamicApplication
 {
     internal class Program
     {

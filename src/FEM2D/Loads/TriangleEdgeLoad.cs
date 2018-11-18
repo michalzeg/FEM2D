@@ -1,4 +1,5 @@
 ﻿using FEM2D.Elements;
+using FEM2D.Elements.Triangle;
 using FEM2D.Nodes;
 using System;
 using System.Collections.Generic;

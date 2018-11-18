@@ -1,10 +1,10 @@
 ﻿using Common.Geometry;
 using FEM2DCommon.ElementProperties;
+using FEM2DCommon.ElementProperties.Builder;
 using FEM2DCommon.Sections;
-using FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder;
 using System.Collections.Generic;
 
-namespace FEM2DDynamicTestApplication
+namespace FEM2DDynamicApplication
 {
     public class DataProvider
     {

@@ -1,11 +1,12 @@
 ﻿using FEM2D.Structures;
 using netDxf;
 using Newtonsoft.Json;
-using Output.OutputCreator;
-using static TestApplication.MockDataProvider;
-using static TestApplication.DxfHelper;
 
-namespace TestApplication
+using static FEM2DApplication.MockDataProvider;
+using static FEM2DApplication.DxfHelper;
+using FEM2DOutput.OutputCreator;
+
+namespace FEM2DApplication
 {
     public class ApplicationTest
     {

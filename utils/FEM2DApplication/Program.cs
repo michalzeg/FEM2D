@@ -1,6 +1,7 @@
 ﻿using FEM2DCommon.ElementProperties;
+using FEM2DCommon.ElementProperties.Builder;
 
-namespace TestApplication
+namespace FEM2DApplication
 {
     internal class Program
     {

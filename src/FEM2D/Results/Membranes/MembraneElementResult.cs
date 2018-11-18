@@ -1,6 +1,7 @@
 ﻿using FEM2D.Elements;
+using FEM2D.Elements.Triangle;
 
-namespace FEM2D.Results
+namespace FEM2D.Results.Membranes
 {
     public class MembraneElementResult
     {

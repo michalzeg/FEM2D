@@ -1,11 +1,11 @@
 ﻿using FEM2DCommon.DTO;
+using FEM2DTriangulation.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using TriangleNet;
 using TriangleNet.Geometry;
-using Triangulation.Extensions;
 
-namespace Triangulation
+namespace FEM2DTriangulation
 {
     public class MeshCreator
     {

@@ -1,6 +1,7 @@
 ﻿using FEM2D.Results;
 using FEM2D.Structures;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using NUnit.Framework;
 using System.Linq;
 

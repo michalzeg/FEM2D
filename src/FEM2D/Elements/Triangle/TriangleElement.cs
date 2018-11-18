@@ -1,11 +1,12 @@
 ﻿using FEM2D.Matrix;
 using FEM2D.Nodes;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Linq;
 
-namespace FEM2D.Elements
+namespace FEM2D.Elements.Triangle
 {
     public class TriangleElement : ITriangleElement
     {

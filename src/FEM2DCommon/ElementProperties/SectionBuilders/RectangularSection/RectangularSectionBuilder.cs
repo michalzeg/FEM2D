@@ -1,6 +1,6 @@
 ﻿using FEM2DCommon.Sections;
 
-namespace FEMCommon.ElementProperties.SectionBuilders
+namespace FEM2DCommon.ElementProperties.SectionBuilders.RectangularSection
 {
     public class RectangularSectionBuilder : ISectionBuilder, IRectangularSectionBuilderSetHeight, IRectangularSectionBuilderSetWidth, IRectangularSectionBuilderFinish
     {

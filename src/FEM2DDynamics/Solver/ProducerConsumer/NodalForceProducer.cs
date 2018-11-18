@@ -5,7 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Linq;
 
-namespace FEM2DDynamics.Solver
+namespace FEM2DDynamics.Solver.ProducerConsumer
 {
     internal class NodalForceProducer
     {

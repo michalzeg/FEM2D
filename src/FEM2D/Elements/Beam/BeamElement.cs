@@ -1,6 +1,7 @@
 ﻿using FEM2D.Matrix;
 using FEM2D.Nodes;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using MathNet.Numerics.LinearAlgebra;
 using System.Linq;
 

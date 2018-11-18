@@ -1,5 +1,6 @@
 ﻿using FEM2D.Nodes;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using System.Collections.Generic;

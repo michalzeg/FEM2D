@@ -1,5 +1,6 @@
 ﻿using FEM2DDynamics.Matrix;
 using FEM2DDynamics.Results;
+using FEM2DDynamics.Solver.ProducerConsumer;
 using FEM2DDynamics.Time;
 using FEM2DDynamics.Utils;
 using MathNet.Numerics.LinearAlgebra.Double;

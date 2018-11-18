@@ -2,7 +2,7 @@
 using netDxf;
 using netDxf.Entities;
 
-namespace FEM2DDynamicTestApplication
+namespace FEM2DDynamicApplication
 {
     public class DxfHelper
     {

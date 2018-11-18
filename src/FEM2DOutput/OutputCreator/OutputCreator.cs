@@ -1,11 +1,13 @@
 ﻿using FEM2D.Results;
+using FEM2D.Results.Membranes;
+using FEM2D.Results.Nodes;
 using FEM2DCommon.DTO;
 using MathNet.Numerics.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Output.OutputCreator
+namespace FEM2DOutput.OutputCreator
 {
     public class OutputCreator
     {

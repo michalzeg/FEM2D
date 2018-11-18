@@ -1,7 +1,7 @@
 ﻿using FEM2DCommon.Sections;
 using System.Collections.Generic;
 
-namespace FEMCommon.ElementProperties.SectionBuilders.CustomSection
+namespace FEM2DCommon.ElementProperties.SectionBuilders.CustomSection
 {
     public class CustomSectionBuilder : ISectionBuilder, ICustomSectionBuilderAddFirstPerimeter, ICustomSectionBuilderAddOtherPerimeters, ICustomSectionBuilderFinish
     {

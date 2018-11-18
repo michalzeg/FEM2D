@@ -1,4 +1,6 @@
-﻿namespace FEM2D.Results
+﻿using FEM2D.Results.Nodes;
+
+namespace FEM2D.Results.Membranes
 {
     public class MembraneNodeResult : NodeResult
     {

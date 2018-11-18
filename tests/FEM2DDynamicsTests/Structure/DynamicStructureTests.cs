@@ -1,13 +1,14 @@
 ﻿using Common.Geometry;
 using FEM2DCommon.ElementProperties;
+using FEM2DCommon.ElementProperties.Builder;
 using FEM2DCommon.Sections;
 using FEM2DDynamics.Solver;
-using FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder;
+using FEM2DDynamics.Structure;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace FEM2DDynamics.Structure.Tests
+namespace FEM2DDynamicsTests.Structure
 {
     [TestFixture()]
     public class DynamicStructureTests

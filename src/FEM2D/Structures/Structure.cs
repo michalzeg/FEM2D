@@ -1,4 +1,5 @@
 ﻿using FEM2D.Elements;
+using FEM2D.Geometries;
 using FEM2D.Loads;
 using FEM2D.Nodes;
 using FEM2D.Results;

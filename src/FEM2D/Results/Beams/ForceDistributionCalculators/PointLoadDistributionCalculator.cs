@@ -1,8 +1,9 @@
 ﻿using FEM2D.Loads;
+using FEM2D.Loads.Beams;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FEM2D.Results.Beams
+namespace FEM2D.Results.Beams.ForceDistributionCalculators
 {
     internal class PointLoadDistributionCalculator : IBeamForceDistributionCalculator
     {

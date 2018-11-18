@@ -1,4 +1,5 @@
 ﻿using FEM2D.Loads;
+using FEM2D.Loads.Beams;
 using System.Collections.Generic;
 using System.Linq;
 

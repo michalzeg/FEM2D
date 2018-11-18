@@ -1,11 +1,12 @@
 ﻿using FEM2D.Matrix;
 using FEM2D.Nodes;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using FEM2DCommon.Extensions;
 using MathNet.Numerics.LinearAlgebra.Double;
 using NUnit.Framework;
 
-namespace FEM2DTests.MatrixTest
+namespace FEM2DTests.Matrix
 {
     [TestFixture]
     public class MatrixCalculatorTest

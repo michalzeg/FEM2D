@@ -1,8 +1,10 @@
 ﻿using FEM2D.Elements.Beam;
+using FEM2D.Elements.Triangle;
 using FEM2D.Elements.Truss;
 using FEM2D.Nodes;
 using FEM2D.Nodes.Dofs;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using System.Collections.Generic;
 using System.Linq;
 

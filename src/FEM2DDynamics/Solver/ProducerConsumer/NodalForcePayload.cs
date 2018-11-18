@@ -1,7 +1,7 @@
 ﻿using FEM2D.Loads;
 using System.Collections.Generic;
 
-namespace FEM2DDynamics.Solver
+namespace FEM2DDynamics.Solver.ProducerConsumer
 {
     internal class NodalForcePayload
     {

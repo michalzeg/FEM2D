@@ -1,6 +1,6 @@
 ﻿using FEM2DCommon.Sections;
 
-namespace FEM2DCommon.DTO
+namespace FEM2DCommon.ElementProperties
 {
     public class BeamProperties : IBarElementProperties
     {

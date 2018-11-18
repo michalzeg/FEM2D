@@ -1,4 +1,4 @@
-﻿namespace FEMCommon.ElementProperties.SectionBuilders
+﻿namespace FEM2DCommon.ElementProperties.SectionBuilders.RectangularSection
 {
     public interface IRectangularSectionBuilderSetWidth
     {

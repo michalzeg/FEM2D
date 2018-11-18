@@ -1,6 +1,6 @@
 ﻿using FEM2D.Nodes;
 
-namespace FEM2D.Results
+namespace FEM2D.Results.Nodes
 {
     public class NodeResult
     {

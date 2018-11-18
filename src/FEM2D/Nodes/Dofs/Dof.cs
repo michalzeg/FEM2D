@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace FEM2D.Nodes
+namespace FEM2D.Nodes.Dofs
 {
     /// <summary>
     /// class representing degree of freedom of a node

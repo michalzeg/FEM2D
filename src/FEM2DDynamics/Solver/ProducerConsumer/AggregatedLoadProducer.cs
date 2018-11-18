@@ -3,7 +3,7 @@ using NLog;
 using System;
 using System.Collections.Concurrent;
 
-namespace FEM2DDynamics.Solver
+namespace FEM2DDynamics.Solver.ProducerConsumer
 {
     internal class AggregatedLoadProducer
     {

@@ -1,5 +1,6 @@
 ﻿using Common.Geometry;
 using CuttingEdge.Conditions;
+using FEM2D.Nodes.Dofs;
 using FEM2D.Restraints;
 using System;
 

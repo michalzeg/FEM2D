@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace FEM2D.Nodes
+namespace FEM2D.Nodes.Dofs
 {
     internal class DofNumberCalculator : IDofNumberCalculator
     {

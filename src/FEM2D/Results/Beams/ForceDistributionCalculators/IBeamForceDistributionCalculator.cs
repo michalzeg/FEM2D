@@ -1,4 +1,4 @@
-﻿namespace FEM2D.Results.Beams
+﻿namespace FEM2D.Results.Beams.ForceDistributionCalculators
 {
     internal interface IBeamForceDistributionCalculator
     {

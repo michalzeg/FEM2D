@@ -1,6 +1,7 @@
 ﻿using FEM2D.Restraints;
 using FEM2D.Structures;
 using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 using FEM2DCommon.Sections;
 using NUnit.Framework;
 using System;

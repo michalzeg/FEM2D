@@ -1,5 +1,6 @@
 using Common.Geometry;
 using FEM2D.Nodes;
+using FEM2D.Nodes.Dofs;
 using FEM2DCommon.DTO;
 using FEM2DCommon.ElementProperties;
 using FEM2DCommon.Sections;

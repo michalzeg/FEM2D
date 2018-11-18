@@ -1,5 +1,6 @@
 ﻿using FEM2D.Elements.Beam;
 using FEM2D.Loads;
+using FEM2D.Loads.Beams;
 using FEM2D.Results.Beams.ForceDistributionCalculators;
 using FEM2D.ShapeFunctions;
 using FEM2DCommon.Forces;

@@ -4,11 +4,11 @@ using FEM2D.Loads;
 using FEM2D.Nodes;
 using FEM2D.Restraints;
 using FEM2DCommon.DTO;
+using FEM2DTriangulation;
 using System.Collections.Generic;
 using System.Linq;
-using Triangulation;
 
-namespace FEM2D.Structures
+namespace FEM2D.Geometries
 {
     public class MembraneCreator
     {

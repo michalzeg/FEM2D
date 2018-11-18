@@ -2,7 +2,7 @@
 using FEM2DCommon.DTO;
 using TriangleNet.Data;
 
-namespace Triangulation.Extensions
+namespace FEM2DTriangulation.Extensions
 {
     public static class TriangleExtensions
     {

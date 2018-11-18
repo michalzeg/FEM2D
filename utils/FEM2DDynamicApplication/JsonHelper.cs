@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace FEM2DDynamicTestApplication
+namespace FEM2DDynamicApplication
 {
     public class JsonHelper
     {

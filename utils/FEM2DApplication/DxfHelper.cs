@@ -2,10 +2,10 @@
 using netDxf.Entities;
 using System.Collections.Generic;
 using FEM2D.Elements;
-using static TestApplication.MockDataProvider;
-using static TestApplication.DxfHelper;
+using static FEM2DApplication.MockDataProvider;
+using static FEM2DApplication.DxfHelper;
 
-namespace TestApplication
+namespace FEM2DApplication
 {
     public class DxfHelper
     {

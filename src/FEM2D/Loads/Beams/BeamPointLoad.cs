@@ -4,7 +4,7 @@ using FEM2D.Loads.Beams;
 using FEM2D.ShapeFunctions;
 using System;
 
-namespace FEM2D.Loads
+namespace FEM2D.Loads.Beams
 {
     public class BeamPointLoad : BeamLoad, INodalLoad
     {

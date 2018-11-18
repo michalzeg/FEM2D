@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FEM2DDynamicTestApplication
+namespace FEM2DDynamicApplication
 {
     public class ResultData
     {

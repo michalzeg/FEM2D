@@ -1,6 +1,7 @@
 ﻿using FEM2DCommon.DTO;
+using FEM2DCommon.ElementProperties;
 
-namespace TestApplication
+namespace FEM2DApplication
 {
     public class MockDataProvider
     {

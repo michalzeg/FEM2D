@@ -1,7 +1,7 @@
 ﻿using FEM2DCommon.ElementProperties;
 using FEM2DCommon.Sections;
 
-namespace FEMCommon.ElementProperties.DynamicBeamPropertiesBuilder
+namespace FEM2DCommon.ElementProperties.Builder
 {
     public class DynamicBeamPropertiesBuilder : IDynamicBeamPropertiesBuilderFinish, IDynamicBeamPropertiesBuilderSetSection, IDynamicBeamPropertiesBuilderSetModulus, IDynamicBeamPropertiesBuilderSetDensity, IDynamicBeamPropertiesBuilderSetMaterial
     {

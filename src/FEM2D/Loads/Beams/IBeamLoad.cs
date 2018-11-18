@@ -1,6 +1,6 @@
 ﻿using FEM2D.Elements.Beam;
 
-namespace FEM2D.Loads
+namespace FEM2D.Loads.Beams
 {
     public interface IBeamLoad
     {
