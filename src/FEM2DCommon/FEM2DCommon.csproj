@@ -60,7 +60,6 @@
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetMaterial.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetModulus.cs" />
     <Compile Include="ElementProperties\DynamicBeamPropertiesBuilder\IDynamicBeamPropertiesBuilderSetSection.cs" />
-    <Compile Include="ElementProperties\IBarProperties.cs" />
     <Compile Include="ElementProperties\MembraneProperties.cs" />
     <Compile Include="DTO\MembraneInputData.cs" />
     <Compile Include="DTO\NodeOutput.cs" />

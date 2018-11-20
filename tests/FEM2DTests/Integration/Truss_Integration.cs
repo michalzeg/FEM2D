@@ -23,7 +23,7 @@ namespace FEM2DTests.Integration
             var E = 205;
 
             var properties = new BarProperties();
-            properties.Section = Section.FromRectangle(1, 1);
+            properties.SectionProperties = Section.FromRectangle(1, 1).SectionProperties;
             properties.ModulusOfElasticity = E;
 
             var A = properties.Area;
@@ -74,9 +74,11 @@ namespace FEM2DTests.Integration
             var P = 1;
             var E = 1;
 
-            var properties = new BarProperties();
-            properties.Section = Section.FromRectangle(1, 1);
-            properties.ModulusOfElasticity = E;
+            var properties = new BarProperties
+            {
+                SectionProperties = Section.FromRectangle(1, 1).SectionProperties,
+                ModulusOfElasticity = E
+            };
 
             var A = properties.Area;
 

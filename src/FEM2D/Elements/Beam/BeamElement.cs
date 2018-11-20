@@ -14,13 +14,13 @@ namespace FEM2D.Elements.Beam
 
         public Node[] Nodes { get; private set; }
         public int Number { get; private set; }
-        public IBarProperties BeamProperties { get; set; }
+        public BarProperties BarProperties { get; set; }
         public double Length { get; private set; }
 
-        protected internal BeamElement(Node node1, Node node2, IBarProperties beamProperties, int number)
+        protected internal BeamElement(Node node1, Node node2, BarProperties beamProperties, int number)
         {
             this.Nodes = new[] { node1, node2 };
-            this.BeamProperties = beamProperties;
+            this.BarProperties = beamProperties;
             this.Number = number;
             this.Length = node1.DistanceTo(node2);
 
@@ -38,7 +38,7 @@ namespace FEM2D.Elements.Beam
         public Matrix<double> GetStiffnessMatrix()
         {
             if (this.stiffnessMatrix == null)
-                this.stiffnessMatrix = this.beamMatrix.GetK(this.Length, this.BeamProperties.MomentOfInertia, this.BeamProperties.ModulusOfElasticity, this.BeamProperties.Area);
+                this.stiffnessMatrix = this.beamMatrix.GetK(this.Length, this.BarProperties.MomentOfInertia, this.BarProperties.ModulusOfElasticity, this.BarProperties.Area);
             return this.stiffnessMatrix;
         }
     }

@@ -37,13 +37,13 @@ namespace FEM2DCommon.ElementProperties.Builder
 
         public IBeamPropertiesBuilderFinish SetSection(Section section)
         {
-            this.beamProperties.Section = section;
+            this.beamProperties.SectionProperties = section.SectionProperties;
             return this;
         }
 
         public IBeamPropertiesBuilderFinish SetRectangularSection(double width, double height)
         {
-            this.beamProperties.Section = Section.FromRectangle(width, height);
+            this.beamProperties.SectionProperties = Section.FromRectangle(width, height).SectionProperties;
             return this;
         }
     }

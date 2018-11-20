@@ -211,7 +211,7 @@ namespace FEM2DDynamicsTests.Elements.Beam
             return new BarProperties()
             {
                 ModulusOfElasticity = 200000000,
-                Section = Section.FromRectangle(1, 2),
+                SectionProperties = Section.FromRectangle(1, 2).SectionProperties,
             };
         }
     }

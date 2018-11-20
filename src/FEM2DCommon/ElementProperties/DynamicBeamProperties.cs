@@ -4,7 +4,7 @@ namespace FEM2DCommon.ElementProperties
 {
     public class DynamicBeamProperties
     {
-        public BarProperties BeamProperties { get; set; }
+        public BarProperties BeamProperties { get; set; } = new BarProperties();
         public double Density { get; set; }
 
         public static DynamicBeamProperties Default =>

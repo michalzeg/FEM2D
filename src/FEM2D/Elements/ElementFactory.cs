@@ -20,7 +20,7 @@ namespace FEM2D.Elements
             this.elements = new List<IElement>();
         }
 
-        public IBeamElement CreateBeam(Node node1, Node node2, IBarProperties beamProperties)
+        public IBeamElement CreateBeam(Node node1, Node node2, BarProperties beamProperties)
         {
             var element = new BeamElement(node1, node2, beamProperties, this.freeNumber);
             this.elements.Add(element);
@@ -30,7 +30,7 @@ namespace FEM2D.Elements
             return element;
         }
 
-        public ITrussElement CreateTruss(Node node1, Node node2, IBarProperties trussProperties)
+        public ITrussElement CreateTruss(Node node1, Node node2, BarProperties trussProperties)
         {
             var element = new TrussElement(node1, node2, trussProperties, this.freeNumber);
             this.elements.Add(element);

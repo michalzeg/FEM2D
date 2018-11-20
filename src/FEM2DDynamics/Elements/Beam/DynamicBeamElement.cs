@@ -25,7 +25,7 @@ namespace FEM2DDynamics.Elements.Beam
         }
 
         internal DynamicBeamElement(IBeamElement beamElement, DynamicBeamProperties dynamicBeamProeprties)
-            : base(beamElement.Nodes[0], beamElement.Nodes[1], beamElement.BeamProperties, beamElement.Number)
+            : base(beamElement.Nodes[0], beamElement.Nodes[1], beamElement.BarProperties, beamElement.Number)
         {
             this.DynamicBeamProperties = dynamicBeamProeprties;
         }

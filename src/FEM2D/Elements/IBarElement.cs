@@ -10,7 +10,7 @@ namespace FEM2D.Elements
 {
     public interface IBarElement : IElement
     {
-        IBarProperties BeamProperties { get; }
+        BarProperties BarProperties { get; }
         double Length { get; }
     }
 }
