@@ -63,5 +63,10 @@ namespace FEM2D.Nodes
                 node.SetRestraint(restraint);
             }
         }
+
+        public bool GetNodeAt(PointD location, out Node node)
+        {
+            return this.coordinatesNodeMap.TryGetValue(location, out node);
+        }
     }
 }
