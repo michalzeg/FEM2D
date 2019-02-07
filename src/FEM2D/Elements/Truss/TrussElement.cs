@@ -22,6 +22,7 @@ namespace FEM2D.Elements.Truss
         public int Number { get; }
         public BarProperties BarProperties { get; }
         public double Length { get; }
+        public string Tag { get; set; }
 
         protected internal TrussElement(Node node1, Node node2, BarProperties beamProperties, int number)
         {

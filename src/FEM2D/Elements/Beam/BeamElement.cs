@@ -15,6 +15,7 @@ namespace FEM2D.Elements.Beam
         public Node[] Nodes { get; private set; }
         public int Number { get; private set; }
         public BarProperties BarProperties { get; set; }
+        public string Tag { get; set; }
         public double Length { get; private set; }
 
         protected internal BeamElement(Node node1, Node node2, BarProperties beamProperties, int number)
@@ -23,7 +24,6 @@ namespace FEM2D.Elements.Beam
             this.BarProperties = beamProperties;
             this.Number = number;
             this.Length = node1.DistanceTo(node2);
-
             this.beamMatrix = new BeamMatrix();
         }
 

@@ -12,5 +12,7 @@ namespace FEM2D.Elements
         int[] GetDOFs();
 
         int Number { get; }
+
+        string Tag { get; set; }
     }
 }
