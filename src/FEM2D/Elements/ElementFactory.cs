@@ -20,34 +20,31 @@ namespace FEM2D.Elements
             this.elements = new List<IElement>();
         }
 
-        public IBeamElement CreateBeam(Node node1, Node node2, BarProperties beamProperties, string tag = "")
+        public IBeamElement CreateBeam(Node node1, Node node2, BarProperties beamProperties)
         {
             var element = new BeamElement(node1, node2, beamProperties, this.freeNumber);
             this.elements.Add(element);
             this.freeNumber++;
-            element.Tag = tag;
             node1.SetRotationDofs();
             node2.SetRotationDofs();
             return element;
         }
 
-        public ITrussElement CreateTruss(Node node1, Node node2, BarProperties trussProperties, string tag = "")
+        public ITrussElement CreateTruss(Node node1, Node node2, BarProperties trussProperties)
         {
             var element = new TrussElement(node1, node2, trussProperties, this.freeNumber);
             this.elements.Add(element);
             this.freeNumber++;
-            element.Tag = tag;
             node1.SetTranslationDofs();
             node2.SetTranslationDofs();
             return element;
         }
 
-        public ITriangleElement CreateTriangle(Node node1, Node node2, Node node3, MembraneProperties membraneProperties, string tag = "")
+        public ITriangleElement CreateTriangle(Node node1, Node node2, Node node3, MembraneProperties membraneProperties)
         {
             var element = new TriangleElement(node1, node2, node3, membraneProperties, this.freeNumber);
             this.elements.Add(element);
             freeNumber++;
-            element.Tag = tag;
             node1.SetTranslationDofs();
             node2.SetTranslationDofs();
             node3.SetTranslationDofs();

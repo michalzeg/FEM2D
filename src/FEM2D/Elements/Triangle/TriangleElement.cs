@@ -16,7 +16,7 @@ namespace FEM2D.Elements.Triangle
         public double Area { get; private set; }
         public Node[] Nodes { get; private set; }
         public MembraneProperties Properties { get; private set; }
-        public string Tag { get; set; }
+        public object Tag { get; set; }
         private Matrix<double> B;
         private Matrix<double> D;
         private Matrix<double> K;

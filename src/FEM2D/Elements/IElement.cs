@@ -13,6 +13,6 @@ namespace FEM2D.Elements
 
         int Number { get; }
 
-        string Tag { get; set; }
+        object Tag { get; set; }
     }
 }
