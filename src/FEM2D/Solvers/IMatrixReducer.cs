@@ -8,7 +8,7 @@ namespace FEM2D.Solvers
     {
         void Initialize(NodeFactory nodeFactory);
 
-        void Initialize(IEnumerable<Node> nodes, int dofCount);
+        void Initialize(IEnumerable<INode> nodes, int dofCount);
 
         Matrix<double> ReduceMatrix(Matrix<double> matrix);
 

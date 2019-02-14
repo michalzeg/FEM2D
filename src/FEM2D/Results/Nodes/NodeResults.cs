@@ -6,12 +6,12 @@ namespace FEM2D.Results.Nodes
 {
     public class NodeResults
     {
-        private IDictionary<Node, NodeResult> nodeResultMap;
-        private readonly IEnumerable<Node> nodes;
+        private IDictionary<INode, NodeResult> nodeResultMap;
+        private readonly IEnumerable<INode> nodes;
         private readonly DofDisplacementMap dofDisplacementMap;
         private IEnumerable<NodeResult> nodeResults;
 
-        internal NodeResults(DofDisplacementMap dofDisplacementMap, IEnumerable<Node> nodes)
+        internal NodeResults(DofDisplacementMap dofDisplacementMap, IEnumerable<INode> nodes)
         {
             this.nodes = nodes;
             this.dofDisplacementMap = dofDisplacementMap;
@@ -19,13 +19,13 @@ namespace FEM2D.Results.Nodes
             CreateNodeResultMap();
         }
 
-        public NodeResult GetNodeResult(Node node)
+        public NodeResult GetNodeResult(INode node)
         {
             var result = this.nodeResultMap[node];
             return result;
         }
 
-        public IEnumerable<NodeResult> GetNodeResult(IEnumerable<Node> nodes)
+        public IEnumerable<NodeResult> GetNodeResult(IEnumerable<INode> nodes)
         {
             var results = this.nodeResultMap.Keys
                 .Intersect(nodes)
@@ -49,7 +49,7 @@ namespace FEM2D.Results.Nodes
                                .Select(n => this.CalcualteNodeResult(n));
         }
 
-        private NodeResult CalcualteNodeResult(Node node)
+        private NodeResult CalcualteNodeResult(INode node)
         {
             var dofs = node.GetDOF();
 

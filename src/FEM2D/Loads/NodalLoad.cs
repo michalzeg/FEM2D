@@ -6,12 +6,12 @@ namespace FEM2D.Loads
     {
         public NodalLoad[] NodalLoads => new[] { this };
 
-        public Node Node { get; }
+        public INode Node { get; }
         public double ValueX { get; }
         public double ValueY { get; }
         public double ValueM { get; }
 
-        public NodalLoad(Node node, double valueX, double valueY, double valueM = 0)
+        public NodalLoad(INode node, double valueX, double valueY, double valueM = 0)
         {
             this.Node = node;
             this.ValueX = valueX;

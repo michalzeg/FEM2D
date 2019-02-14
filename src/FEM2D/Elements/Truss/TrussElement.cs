@@ -18,13 +18,13 @@ namespace FEM2D.Elements.Truss
         private Matrix<double> transformMatrix;
         private Matrix<double> localStiffnessMatrix;
 
-        public Node[] Nodes { get; }
+        public INode[] Nodes { get; }
         public int Number { get; }
         public BarProperties BarProperties { get; }
         public double Length { get; }
         public object Tag { get; set; }
 
-        protected internal TrussElement(Node node1, Node node2, BarProperties beamProperties, int number)
+        protected internal TrussElement(INode node1, INode node2, BarProperties beamProperties, int number)
         {
             this.Nodes = new[] { node1, node2 };
             this.BarProperties = beamProperties;

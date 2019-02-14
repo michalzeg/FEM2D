@@ -14,7 +14,7 @@ namespace FEM2D.Results.Membranes
         private readonly NodeResults nodeResults;
         private readonly IEnumerable<ITriangleElement> elements;
 
-        private Dictionary<Node, ITriangleElement[]> nodeElementsMap;
+        private Dictionary<INode, ITriangleElement[]> nodeElementsMap;
         private Dictionary<ITriangleElement, MembraneElementResult> triangleResultMap;
 
         internal MembraneElementResults(DofDisplacementMap dofDisplacementMap, NodeResults nodeResults, IEnumerable<ITriangleElement> elements)
@@ -47,7 +47,7 @@ namespace FEM2D.Results.Membranes
             return results;
         }
 
-        public MembraneNodeResult GetNodeResult(Node node)
+        public MembraneNodeResult GetNodeResult(INode node)
         {
             var elements = this.nodeElementsMap[node].Select(e => this.triangleResultMap[e]);
 
@@ -69,7 +69,7 @@ namespace FEM2D.Results.Membranes
             return result;
         }
 
-        public IEnumerable<MembraneNodeResult> GetNodeResult(IEnumerable<Node> nodes)
+        public IEnumerable<MembraneNodeResult> GetNodeResult(IEnumerable<INode> nodes)
         {
             var results = nodes.Select(n => this.GetNodeResult(n)).ToList();
             return results;
@@ -111,14 +111,14 @@ namespace FEM2D.Results.Membranes
         private void CreateNodeTriangleMap()
         {
             var elementNodeMap = this.elements.ToDictionary(e => e, f => f.Nodes);
-            var elementNodeList = new List<KeyValuePair<ITriangleElement, Node>>();
+            var elementNodeList = new List<KeyValuePair<ITriangleElement, INode>>();
 
             foreach (var item in elementNodeMap)
             {
                 var key = item.Key;
                 foreach (var node in item.Value)
                 {
-                    elementNodeList.Add(new KeyValuePair<ITriangleElement, Node>(key, node));
+                    elementNodeList.Add(new KeyValuePair<ITriangleElement, INode>(key, node));
                 }
             }
             this.nodeElementsMap = elementNodeList.ToLookup(e => e.Value, f => f.Key)

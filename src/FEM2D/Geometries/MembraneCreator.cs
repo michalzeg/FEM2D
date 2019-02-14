@@ -20,7 +20,7 @@ namespace FEM2D.Geometries
         private IEnumerable<TriangleGeometry> triangles;
         private MembraneInputData membraneData;
 
-        private Dictionary<PointD, Node> vertexNodeMap;
+        private Dictionary<PointD, INode> vertexNodeMap;
 
         public MembraneCreator(NodeFactory nodeFactory, ElementFactory elementFactory, LoadFactory loadFactory)
         {
@@ -88,9 +88,9 @@ namespace FEM2D.Geometries
                 var point = new PointD(vertex.X, vertex.Y);
                 var node = this.vertexNodeMap[point];
                 if (vertex.SupportX)
-                    node.Restraint |= Restraint.FixedX;
+                    node.AddRestraint(Restraint.FixedX);
                 if (vertex.SupportY)
-                    node.Restraint |= Restraint.FixedY;
+                    node.AddRestraint(Restraint.FixedY);
             }
         }
     }

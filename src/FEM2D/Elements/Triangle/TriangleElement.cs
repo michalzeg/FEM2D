@@ -14,14 +14,14 @@ namespace FEM2D.Elements.Triangle
 
         public int Number { get; private set; }
         public double Area { get; private set; }
-        public Node[] Nodes { get; private set; }
+        public INode[] Nodes { get; private set; }
         public MembraneProperties Properties { get; private set; }
         public object Tag { get; set; }
         private Matrix<double> B;
         private Matrix<double> D;
         private Matrix<double> K;
 
-        internal TriangleElement(Node p1, Node p2, Node p3, MembraneProperties properties, int number)
+        internal TriangleElement(INode p1, INode p2, INode p3, MembraneProperties properties, int number)
         {
             this.Nodes = new[] { p1, p2, p3 };
             this.Properties = properties;

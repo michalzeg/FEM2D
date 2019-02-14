@@ -25,7 +25,7 @@ namespace FEM2D.Matrix
             return D;
         }
 
-        public Matrix<double> GetB(IEnumerable<Node> nodes)
+        public Matrix<double> GetB(IEnumerable<INode> nodes)
         {
             var nodeCoordinates = nodes.Select(e => e.Coordinates).ToArray();
             var p1 = nodeCoordinates[0];

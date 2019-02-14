@@ -8,7 +8,7 @@ namespace FEM2D.Nodes
 {
     public class NodeFactory : IDofCountProvider
     {
-        private readonly IDictionary<PointD, Node> coordinatesNodeMap;
+        private readonly IDictionary<PointD, INode> coordinatesNodeMap;
         private readonly IDofNumberCalculator dofCalculator;
 
         private int freeNumber = 1;
@@ -16,10 +16,10 @@ namespace FEM2D.Nodes
         public NodeFactory()
         {
             this.dofCalculator = new DofNumberCalculator();
-            this.coordinatesNodeMap = new Dictionary<PointD, Node>();
+            this.coordinatesNodeMap = new Dictionary<PointD, INode>();
         }
 
-        public Node Create(PointD coordinates, Restraint restraint = Restraint.Free)
+        public INode Create(PointD coordinates, Restraint restraint = Restraint.Free)
         {
             if (this.coordinatesNodeMap.ContainsKey(coordinates))
             {
@@ -31,12 +31,12 @@ namespace FEM2D.Nodes
             return node;
         }
 
-        public Node Create(double x, double y, Restraint restraint = Restraint.Free)
+        public INode Create(double x, double y, Restraint restraint = Restraint.Free)
         {
             return this.Create(new PointD(x, y), restraint);
         }
 
-        public IEnumerable<Node> GetAll()
+        public IEnumerable<INode> GetAll()
         {
             return this.coordinatesNodeMap.Select(n => n.Value).ToList();
         }
@@ -57,14 +57,14 @@ namespace FEM2D.Nodes
 
         public void SetSupportAt(PointD location, Restraint restraint)
         {
-            Node node;
+            INode node;
             if (this.coordinatesNodeMap.TryGetValue(location, out node))
             {
                 node.SetRestraint(restraint);
             }
         }
 
-        public bool GetNodeAt(PointD location, out Node node)
+        public bool GetNodeAt(PointD location, out INode node)
         {
             return this.coordinatesNodeMap.TryGetValue(location, out node);
         }

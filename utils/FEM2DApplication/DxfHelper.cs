@@ -39,7 +39,7 @@ namespace FEM2DApplication
             }
         }
 
-        public static void ApplyNodesToDocument(DxfDocument document, System.Collections.Generic.IEnumerable<FEM2D.Nodes.Node> nodes)
+        public static void ApplyNodesToDocument(DxfDocument document, System.Collections.Generic.IEnumerable<FEM2D.Nodes.INode> nodes)
         {
             foreach (var node in nodes)
             {

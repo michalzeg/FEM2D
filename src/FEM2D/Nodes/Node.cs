@@ -6,7 +6,7 @@ using System;
 
 namespace FEM2D.Nodes
 {
-    public class Node : IEquatable<Node>
+    public class Node : IEquatable<Node>, INode
     {
         private Dof dof;
 
@@ -55,7 +55,7 @@ namespace FEM2D.Nodes
             return result;
         }
 
-        public double DistanceTo(Node node) => this.Coordinates.DistanceTo(node.Coordinates);
+        public double DistanceTo(INode node) => this.Coordinates.DistanceTo(node.Coordinates);
 
         public void SetFixedSupport()
         {
@@ -77,10 +77,15 @@ namespace FEM2D.Nodes
             this.Restraint = restraint;
         }
 
+        public void AddRestraint(Restraint restraint)
+        {
+            this.Restraint |= restraint;
+        }
+
         public override bool Equals(object obj)
         {
             var other = obj as Node;
-            if (other == null)
+            if (other is null)
                 return false;
             return this.Equals(other);
         }

@@ -14,13 +14,13 @@ namespace FEM2D.Elements.Beam
         private Matrix<double> transformMatrix;
         private Matrix<double> localStiffnessMatrix;
 
-        public Node[] Nodes { get; private set; }
+        public INode[] Nodes { get; private set; }
         public int Number { get; private set; }
         public BarProperties BarProperties { get; set; }
         public object Tag { get; set; }
         public double Length { get; private set; }
 
-        protected internal BeamElement(Node node1, Node node2, BarProperties beamProperties, int number)
+        protected internal BeamElement(INode node1, INode node2, BarProperties beamProperties, int number)
         {
             this.Nodes = new[] { node1, node2 };
             this.BarProperties = beamProperties;

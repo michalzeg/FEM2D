@@ -65,7 +65,7 @@ namespace FEM2DDynamics.Loads
             return beamNodalLoads;
         }
 
-        private static IEnumerable<NodalLoad> GenerateNodeLoads(IEnumerable<Node> nodes, PointD position, double value)
+        private static IEnumerable<NodalLoad> GenerateNodeLoads(IEnumerable<INode> nodes, PointD position, double value)
         {
             var loadedNodes = nodes.Where(e => e.Coordinates == position);
             var nodalLoads = loadedNodes.Select(n => new NodalLoad(n, 0, value));

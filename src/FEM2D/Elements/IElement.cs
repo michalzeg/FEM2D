@@ -5,7 +5,7 @@ namespace FEM2D.Elements
 {
     public interface IElement
     {
-        Node[] Nodes { get; }
+        INode[] Nodes { get; }
 
         Matrix<double> GetStiffnessMatrix();
 

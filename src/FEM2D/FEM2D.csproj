@@ -74,6 +74,7 @@
     <Compile Include="Nodes\Dofs\DofProvider.cs" />
     <Compile Include="Nodes\Dofs\IDofCountProvider.cs" />
     <Compile Include="Nodes\Dofs\IDofNumberCalculator.cs" />
+    <Compile Include="Nodes\INode.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\NodeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

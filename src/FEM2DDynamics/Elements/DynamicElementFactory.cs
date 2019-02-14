@@ -20,7 +20,7 @@ namespace FEM2DDynamics.Elements
             this.elements = new List<IDynamicElement>();
         }
 
-        public IDynamicBeamElement CreateBeam(Node node1, Node node2, DynamicBeamProperties dynamicBeamProperties)
+        public IDynamicBeamElement CreateBeam(INode node1, INode node2, DynamicBeamProperties dynamicBeamProperties)
         {
             var element = this.elementFactory.CreateBeam(node1, node2, dynamicBeamProperties.BeamProperties);
             var dynamicElement = new DynamicBeamElement(element, dynamicBeamProperties);
