@@ -62,6 +62,11 @@ namespace FEM2D.Nodes
             this.SetRestraint(Restraint.Fixed);
         }
 
+        public void SetFixedWithRotationSupport()
+        {
+            this.SetRestraint(Restraint.Fixed | Restraint.FixedR);
+        }
+
         public void SetPinnedSupport()
         {
             this.SetRestraint(Restraint.FixedX | Restraint.FixedY);

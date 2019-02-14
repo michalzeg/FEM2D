@@ -48,6 +48,11 @@ namespace FEM2D.Solvers
                     var dof = dofs[1];
                     this.bundaryVector[dof] = 0;
                 }
+                if (node.Restraint.HasFlag(Restraint.FixedR))
+                {
+                    var dof = dofs[2];
+                    this.bundaryVector[dof] = 0;
+                }
             }
             this.dofsToReduce = this.bundaryVector
                 .Select((e, i) => new { value = e, index = i })

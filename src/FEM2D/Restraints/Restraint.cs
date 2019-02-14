@@ -8,6 +8,7 @@ namespace FEM2D.Restraints
         Free = 0,
         FixedX = 2,
         FixedY = 4,
+        FixedR = 8,
         Fixed = FixedX | FixedY,
     }
 }
