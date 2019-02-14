@@ -1,5 +1,6 @@
 ﻿using FEM2DCommon.DTO;
 using FEM2DCommon.ElementProperties;
+using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace FEM2D.Elements
     {
         BarProperties BarProperties { get; }
         double Length { get; }
+
+        Matrix<double> GetTransformMatrix();
     }
 }

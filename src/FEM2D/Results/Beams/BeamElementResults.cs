@@ -37,9 +37,9 @@ namespace FEM2D.Results.Beams
 
             var equivalentLoads = beamLoads.GetEquivalentNodalForces().ToVector();
 
-            var displacements = this.dofDisplacementMap.GetValue(dofs).ToVector();
+            var displacements = element.GetTransformMatrix() * this.dofDisplacementMap.GetValue(dofs).ToVector();
 
-            var forces = -1 * equivalentLoads + element.GetStiffnessMatrix() * displacements;
+            var forces = -1 * equivalentLoads + element.GetLocalStiffnessMatrix() * displacements;
             var forcesAtStart = BeamForces.FromFEMResult(forces);
 
             var result = new BeamElementResult(forcesAtStart, beamLoads, element, displacements.ToList());

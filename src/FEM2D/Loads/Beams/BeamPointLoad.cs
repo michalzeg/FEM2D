@@ -22,7 +22,7 @@ namespace FEM2D.Loads.Beams
             var node1Load = this.GenerateNode1Load(0, relativePosition, BeamShapeFunctions.N2, BeamShapeFunctions.N3);
             var node2Load = this.GenerateNode1Load(1, relativePosition, BeamShapeFunctions.N5, BeamShapeFunctions.N6);
 
-            this.NodalLoads = new[] { node1Load, node2Load };
+            this.NodalLoads = this.TransformToGlobal(new[] { node1Load, node2Load });
         }
 
         private NodalLoad GenerateNode1Load(int nodeIndex, double relativePosition, Func<double, double, double> shapeFunctionY, Func<double, double, double> shapeFunctionM)

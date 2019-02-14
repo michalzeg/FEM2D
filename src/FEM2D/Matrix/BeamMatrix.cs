@@ -1,4 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra;
+﻿using Common.Geometry;
+using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace FEM2D.Matrix
@@ -21,6 +22,24 @@ namespace FEM2D.Matrix
                 {0       ,-12   , -6*L , 0       , 12  , -6*L   },
                 {0       ,6*L   , 2*L*L, 0       , -6*L, 4*L*L  }
             }) * 3 * E * I / (L * L * L);
+
+            return matrix;
+        }
+
+        public Matrix<double> GetT(PointD startPoint, PointD endPoint)
+        {
+            var length = startPoint.DistanceTo(endPoint);
+            var sina = (endPoint.Y - startPoint.Y) / length;
+            var cosa = (endPoint.X - startPoint.X) / length;
+            var matrix = DenseMatrix.OfArray(new double[,]
+            {
+                {  cosa, sina,     0,    0,    0, 0},
+                { -sina, cosa,     0,    0,    0, 0},
+                {     0,    0,     1,    0,    0, 0},
+                {     0,    0,     0, cosa, sina, 0},
+                {     0,    0,     0,-sina, cosa, 0},
+                {     0,    0,     0,    0,    0, 1}
+            });
 
             return matrix;
         }

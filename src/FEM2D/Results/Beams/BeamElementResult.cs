@@ -53,6 +53,12 @@ namespace FEM2D.Results.Beams
             return result;
         }
 
+        public double Axial()
+        {
+            var result = forcesAtStart.Axial;
+            return result;
+        }
+
         public double GetDisplacement(double relativePosition)
         {
             var result = this.GetGeneralizedDisplacement(relativePosition, this.displacements);

@@ -79,6 +79,7 @@
     <Compile Include="Beams\BeamStressCalculatorTests.cs" />
     <Compile Include="Elements\TriangleElementTest.cs" />
     <Compile Include="Integration\Beam_Integration.cs" />
+    <Compile Include="Integration\Frame_Integration.cs" />
     <Compile Include="Integration\GetDOFCount_Integration.cs" />
     <Compile Include="Integration\Membrane_Integration.cs" />
     <Compile Include="Integration\Truss_Integration.cs" />

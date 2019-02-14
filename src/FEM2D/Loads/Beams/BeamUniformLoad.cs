@@ -15,7 +15,7 @@ namespace FEM2D.Loads.Beams
             var node1Load = this.GenerateNode1Load(0, 1);
             var node2Load = this.GenerateNode1Load(1, -1);
 
-            this.NodalLoads = new[] { node1Load, node2Load };
+            this.NodalLoads = this.TransformToGlobal(new[] { node1Load, node2Load });
         }
 
         private NodalLoad GenerateNode1Load(int nodeIndex, int multiplier)

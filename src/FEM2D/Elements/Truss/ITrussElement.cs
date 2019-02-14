@@ -10,6 +10,5 @@ namespace FEM2D.Elements.Truss
 {
     public interface ITrussElement : IBarElement
     {
-        Matrix<double> GetTransformMatrix();
     }
 }

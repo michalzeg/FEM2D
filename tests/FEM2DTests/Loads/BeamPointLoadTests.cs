@@ -3,6 +3,7 @@ using FEM2D.Loads;
 using FEM2D.Loads.Beams;
 using FEM2D.Nodes;
 using FEM2D.Nodes.Dofs;
+using MathNet.Numerics.LinearAlgebra.Double;
 using NSubstitute;
 using NUnit.Framework;
 using System;
@@ -26,6 +27,7 @@ namespace FEM2DTests.Loads
                 new Node(0,0,1,dofCalculator),
                 new Node(1,1,1,dofCalculator),
             });
+            this.beamElement.GetTransformMatrix().Returns(DenseMatrix.CreateIdentity(6));
         }
 
         [Test]
