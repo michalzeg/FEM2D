@@ -240,3 +240,12 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/MigrationBackup/3b847fce/Tests/FEM2DDynamicsTests/NuGetUpgradeLog.html
+/MigrationBackup/3aac5e9b/utils/FEM2DDynamicApplication/NuGetUpgradeLog.html
+/MigrationBackup/33bee88e/src/FEM2D/NuGetUpgradeLog.html
+/MigrationBackup/4759fbc7/src/FEM2DCommon/NuGetUpgradeLog.html
+/MigrationBackup/61ae553c/src/FEM2DStressCalculator/NuGetUpgradeLog.html
+/MigrationBackup/620a00d9/src/FEM2DOutput/NuGetUpgradeLog.html
+/MigrationBackup/85660f8c/utils/FEM2DApplication/NuGetUpgradeLog.html
+/MigrationBackup/e036fd4e/src/FEM2DDynamics/NuGetUpgradeLog.html
+/MigrationBackup
